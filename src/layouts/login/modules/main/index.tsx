@@ -94,6 +94,7 @@ export const Main: FC = (): ReactElement => {
             disabled={loading}
             onClick={() => {
               setVisibility(false);
+              setInvalidCredentials(false);
               setWithEmail((prev) => !prev);
               reset();
             }}

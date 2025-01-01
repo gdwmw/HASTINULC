@@ -4,39 +4,40 @@ import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { ILoginPayload } from "@/src/types/api";
+import { POSTLogin } from "@/src/utils/api";
 
-const USER_DATA = [
-  {
-    email: "admin@gmail.com",
-    password: "admin",
-    response: {
-      email: "admin@gmail.com",
-      id: "1",
-      image: "image url",
-      name: "Admin",
-      role: "admin",
-      status: "authenticated",
-      token: "123456789",
-      username: "admin",
-    },
-    username: "admin",
-  },
-  {
-    email: "user@gmail.com",
-    password: "user",
-    response: {
-      email: "user@gmail.com",
-      id: "2",
-      image: "image url",
-      name: "User",
-      role: "user",
-      status: "authenticated",
-      token: "987654321",
-      username: "user",
-    },
-    username: "user",
-  },
-];
+// const USER_DATA = [
+//   {
+//     email: "admin@gmail.com",
+//     password: "admin",
+//     response: {
+//       email: "admin@gmail.com",
+//       id: "1",
+//       image: "image url",
+//       name: "Admin",
+//       role: "admin",
+//       status: "authenticated",
+//       token: "123456789",
+//       username: "admin",
+//     },
+//     username: "admin",
+//   },
+//   {
+//     email: "user@gmail.com",
+//     password: "user",
+//     response: {
+//       email: "user@gmail.com",
+//       id: "2",
+//       image: "image url",
+//       name: "User",
+//       role: "user",
+//       status: "authenticated",
+//       token: "987654321",
+//       username: "user",
+//     },
+//     username: "user",
+//   },
+// ];
 
 export const options: NextAuthOptions = {
   callbacks: {
@@ -73,15 +74,20 @@ export const options: NextAuthOptions = {
         try {
           const { identifier, password } = credentials as ILoginPayload;
 
-          // const res = await POSTAuth({ password, identifier });
+          const res = await POSTLogin({ identifier, password });
 
-          const res = USER_DATA.find((user) => (user.username === identifier || user.email === identifier) && user.password === password);
+          // const res = USER_DATA.find((user) => (user.username === identifier || user.email === identifier) && user.password === password);
 
           if (!res) {
             return null;
           }
 
-          return res.response;
+          const mapDataToResponse: User = {
+            ...res,
+            id: res.id.toString(),
+          };
+
+          return mapDataToResponse;
         } catch (error) {
           console.log("An error occurred in the authentication process!");
           throw error;
