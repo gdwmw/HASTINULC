@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 type T = Readonly<PropsWithChildren>;
 
 const RootLayout: FC<T> = (props): ReactElement => (
-  <html lang="en" suppressHydrationWarning>
+  <html className="scroll-smooth" lang="en" suppressHydrationWarning>
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <NextThemesProvider>
         <ReactQueryProvider>
