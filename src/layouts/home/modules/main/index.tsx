@@ -1,8 +1,16 @@
 import { FC, ReactElement } from "react";
 
-export const Main: FC = (): ReactElement => (
-  <main>
-    <section className="h-screen w-screen bg-slate-200" id="home"></section>
-    <section className="h-screen w-screen scroll-mt-[88px] bg-slate-300" id="about"></section>
-  </main>
-);
+import { getAllSession } from "@/src/hooks/session";
+
+import { Home } from "./batches";
+
+export const Main: FC = async (): Promise<ReactElement> => {
+  const session = await getAllSession();
+
+  return (
+    <main>
+      <Home session={session} />
+      <section className="h-screen w-full scroll-mt-[88px] bg-slate-300" id="about"></section>
+    </main>
+  );
+};
