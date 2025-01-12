@@ -10,7 +10,8 @@ import { FC, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronRight, FaPhoneAlt } from "react-icons/fa";
 
-import heroSectionImage from "@/public/assets/images/model/Hero-Section.png";
+import accentDot from "@/public/assets/images/background/Accent-Dot.png";
+import homeImage from "@/public/assets/images/model/Home.png";
 import { ExampleA } from "@/src/components/interfaces/example/A";
 import { ExampleInput, ExampleSelect } from "@/src/components/interfaces/example/C";
 import { BookingSchema, TBookingSchema } from "@/src/schemas/home";
@@ -67,7 +68,8 @@ export const Home: FC<I> = (props): ReactElement => {
       <div className="flex h-[calc(100vh-88px)] flex-col">
         <div className="relative h-full">
           <div className="container mx-auto size-full px-5">
-            <Image alt="Hero Section Image" className="absolute right-0 top-0 h-full w-fit" src={heroSectionImage} />
+            <Image alt="Home Image" className="absolute right-0 top-0 h-full w-fit" src={homeImage} />
+
             <div className="flex size-full flex-col justify-center gap-6">
               <p className="-mb-5 font-semibold tracking-wider text-rose-500">BEAUTIFY</p>
               <h1 className={`max-w-[800px] text-8xl ${montaguSlab.className}`}>Professional Makeup Artist</h1>
@@ -76,9 +78,11 @@ export const Home: FC<I> = (props): ReactElement => {
               </p>
             </div>
           </div>
+
+          <Image alt="Accent Dot" className="absolute -bottom-8 left-36" src={accentDot} />
         </div>
 
-        <div className="h-56 w-full bg-white">
+        <div className="h-56 w-full bg-white shadow-lg">
           <div className="container mx-auto size-full px-5">
             <div className="flex size-full items-center justify-center gap-20">
               <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
