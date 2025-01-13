@@ -21,7 +21,7 @@ export const About: FC = (): ReactElement => {
   const [active, setActive] = useState(false);
 
   return (
-    <section className="flex scroll-mt-[88px] flex-col gap-24 bg-white py-24" id="about">
+    <section className="flex scroll-mt-[88px] flex-col gap-24 bg-white pt-24" id="about">
       <div className="container relative mx-auto flex items-center justify-center gap-20 px-5">
         <Image alt="Accent Circle" className="absolute -top-10 right-36" src={accentCircle} />
 

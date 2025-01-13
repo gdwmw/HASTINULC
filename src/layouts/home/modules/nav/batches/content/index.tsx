@@ -64,11 +64,11 @@ export const Content: FC<I> = (props): ReactElement => {
           </li>
         ))}
 
-        <li className="active:scale-95">
+        <li>
           {props.session?.user?.status ? (
             <Image
               alt="Photo Profile"
-              className="rounded-full border border-black p-0.5"
+              className="cursor-pointer rounded-full border border-black p-0.5 active:scale-95"
               height={40}
               src={props.session?.user?.image ?? ""}
               width={40}

@@ -146,26 +146,22 @@ export const Home: FC<I> = (props): ReactElement => {
               </form>
 
               <div className="flex items-center gap-2">
-                <div className="active:scale-95">
+                <Link
+                  className="flex size-20 items-center justify-center rounded-full bg-rose-200 text-rose-500 hover:bg-rose-300 hover:text-rose-600 active:scale-95 active:bg-rose-100 active:text-rose-400"
+                  href={"https://wa.me/6285762346703"}
+                  target="_blank"
+                >
+                  <FaPhoneAlt size={30} />
+                </Link>
+                <div>
+                  <p className="-mb-1 text-lg italic">Need Help? Contact us</p>
                   <Link
-                    className="flex size-20 items-center justify-center rounded-full bg-rose-200 text-rose-500 hover:bg-rose-300 hover:text-rose-600 active:bg-rose-100 active:text-rose-400"
+                    className="inline-block text-2xl font-semibold text-rose-500 hover:text-rose-600 active:scale-95 active:text-rose-400"
                     href={"https://wa.me/6285762346703"}
                     target="_blank"
                   >
-                    <FaPhoneAlt size={30} />
+                    (085) 7623-4670-3
                   </Link>
-                </div>
-                <div>
-                  <p className="-mb-1 text-lg italic">Need Help? Contact us</p>
-                  <div className="active:scale-95">
-                    <Link
-                      className="text-2xl font-semibold text-rose-500 hover:text-rose-600 active:text-rose-400"
-                      href={"https://wa.me/6285762346703"}
-                      target="_blank"
-                    >
-                      (085) 7623-4670-3
-                    </Link>
-                  </div>
                 </div>
               </div>
             </div>
