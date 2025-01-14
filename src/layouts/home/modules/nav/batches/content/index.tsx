@@ -48,7 +48,9 @@ export const Content: FC<I> = (props): ReactElement => {
   }, []);
 
   return (
-    <nav className="sticky inset-x-0 top-0 z-10 flex h-[88px] items-center justify-between bg-white px-10 text-lg">
+    <nav
+      className={`sticky inset-x-0 top-0 z-10 flex h-[88px] items-center justify-between bg-white px-10 text-lg ${activeSection !== "home" && "shadow-md"}`}
+    >
       <Image alt="Hastinulc Makeup Art" src={logo} width={210} />
 
       <ul className="flex items-center gap-5 font-semibold">
