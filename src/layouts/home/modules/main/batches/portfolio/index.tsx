@@ -22,7 +22,7 @@ export const Portfolio: FC = (): ReactElement => (
         </p>
       </div>
 
-      <Image alt="Portfolio Image" src={portfolioImage} width={1000} />
+      <Image alt="Portfolio Image" loading="lazy" src={portfolioImage} width={1000} />
 
       <Link
         className={ExampleATWM({ className: "w-64 font-semibold", color: "rose", size: "sm", variant: "solid" })}

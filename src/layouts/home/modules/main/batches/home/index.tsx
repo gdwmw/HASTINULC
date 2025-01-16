@@ -68,7 +68,7 @@ export const Home: FC<I> = (props): ReactElement => {
       <div className="flex h-[calc(100vh-88px)] flex-col">
         <div className="relative h-full">
           <div className="container mx-auto size-full px-5">
-            <Image alt="Home Image" className="absolute right-0 top-0 h-full w-fit" src={homeImage} />
+            <Image alt="Home Image" className="absolute right-0 top-0 h-full w-fit" priority src={homeImage} />
 
             <div className="flex size-full flex-col justify-center gap-6">
               <p className="-mb-5 font-semibold tracking-wider text-rose-500">BEAUTIFY</p>
