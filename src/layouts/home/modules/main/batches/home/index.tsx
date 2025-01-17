@@ -8,7 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FC, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FaChevronRight, FaPhoneAlt } from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 import accentDot from "@/public/assets/images/background/Accent-Dot.png";
 import homeImage from "@/public/assets/images/model/Home.png";
@@ -151,7 +152,7 @@ export const Home: FC<I> = (props): ReactElement => {
                   href={"https://wa.me/6285762346703"}
                   target="_blank"
                 >
-                  <FaPhoneAlt size={30} />
+                  <IoLogoWhatsapp size={40} />
                 </Link>
                 <div>
                   <p className="-mb-1 text-lg italic">Need Help? Contact us</p>
