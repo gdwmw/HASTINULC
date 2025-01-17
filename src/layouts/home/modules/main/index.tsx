@@ -2,7 +2,7 @@ import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks/session";
 
-import { About, Home, Packages, Portfolio } from "./batches";
+import { About, Contact, Home, Packages, Portfolio } from "./batches";
 
 export const Main: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
@@ -13,6 +13,7 @@ export const Main: FC = async (): Promise<ReactElement> => {
       <About />
       <Portfolio />
       <Packages session={session} />
+      <Contact />
     </main>
   );
 };
