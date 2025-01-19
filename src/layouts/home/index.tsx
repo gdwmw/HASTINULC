@@ -1,10 +1,9 @@
 import { FC, ReactElement } from "react";
 
-import { ASide, Footer, Header, Main, Nav } from "./modules";
+import { ASide, Footer, Main, Nav } from "./modules";
 
 const HomeLayout: FC = (): ReactElement => (
   <>
-    <Header />
     <Nav />
     <ASide />
     <Main />
