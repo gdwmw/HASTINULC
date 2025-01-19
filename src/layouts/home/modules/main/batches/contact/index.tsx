@@ -26,7 +26,7 @@ export const Contact: FC = (): ReactElement => (
             href={"https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKhbqXwZZlCGblTvnSbqqVScKFDqJfllGdJbTKMLRgGBvTbLsrZdPLRtZDfHVQzxnvVTfTq"}
             target="_blank"
           >
-            <MdEmail size={25} />
+            <MdEmail className="-mr-px" size={25} />
           </Link>
 
           <Link
@@ -44,7 +44,7 @@ export const Contact: FC = (): ReactElement => (
             href={"https://maps.app.goo.gl/ZzjRDTfPCRsXefUi7"}
             target="_blank"
           >
-            <FaLocationDot size={25} />
+            <FaLocationDot className="-mr-px" size={25} />
           </Link>
 
           <Link
@@ -62,7 +62,7 @@ export const Contact: FC = (): ReactElement => (
             href={"https://wa.me/6285762346703"}
             target="_blank"
           >
-            <IoLogoWhatsapp size={25} />
+            <IoLogoWhatsapp className="-mr-px" size={25} />
           </Link>
 
           <Link
