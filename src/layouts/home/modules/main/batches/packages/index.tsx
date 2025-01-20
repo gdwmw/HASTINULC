@@ -140,6 +140,17 @@ export const Packages: FC<I> = (props): ReactElement => {
             ))}
           </div>
 
+          <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
+            {TESTIMONIALS_DATA.map((_, i) => (
+              <button
+                aria-label={`Go to testimonial ${i + 1}`}
+                className={`size-2 rounded-full transition-all ${currentTestimonial === i ? "w-4 bg-rose-500" : "bg-rose-300"}`}
+                key={i}
+                onClick={() => setCurrentTestimonial(i)}
+              />
+            ))}
+          </div>
+
           <div className="absolute bottom-5 right-5 flex gap-3">
             <ExampleA className="min-w-fit rounded-full ring-2" color="rose" onClick={prevTestimonial} size="sm" variant="outline">
               <FaChevronLeft size={16} />
