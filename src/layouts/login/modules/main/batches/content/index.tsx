@@ -88,7 +88,17 @@ export const Content: FC = (): ReactElement => {
 
         <div className="flex justify-center gap-1">
           <span className="text-xs">Don&apos;t have an account yet?</span>
-          <Link className={ExampleATWM({ className: "text-xs", color: "rose", size: "sm", variant: "ghost" })} href={"/register"}>
+          <Link
+            className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
+            href={"/register"}
+            onClick={(e) => {
+              loading && e.preventDefault();
+              !loading && setVisibility(false);
+              !loading && setInvalidCredentials(false);
+              !loading && setWithEmail((prev) => !prev);
+              !loading && reset();
+            }}
+          >
             Register!
           </Link>
         </div>

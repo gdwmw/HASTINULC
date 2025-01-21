@@ -135,10 +135,10 @@ export const Content: FC = (): ReactElement => {
             className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
             href={"/login"}
             onClick={(e) => {
+              loading && e.preventDefault();
               !loading && setVisibility(false);
               !loading && setNotMatch(false);
               !loading && reset();
-              loading && e.preventDefault();
             }}
           >
             Login!
