@@ -152,10 +152,22 @@ export const Packages: FC<I> = (props): ReactElement => {
           </div>
 
           <div className="absolute bottom-5 right-5 flex gap-3">
-            <ExampleA className="min-w-fit rounded-full ring-2" color="rose" onClick={prevTestimonial} size="sm" variant="outline">
+            <ExampleA
+              className="min-w-fit rounded-full ring-2 hover:ring-rose-500 active:ring-rose-600"
+              color="rose"
+              onClick={prevTestimonial}
+              size="sm"
+              variant="outline"
+            >
               <FaChevronLeft size={16} />
             </ExampleA>
-            <ExampleA className="min-w-fit rounded-full ring-2" color="rose" onClick={nextTestimonial} size="sm" variant="outline">
+            <ExampleA
+              className="min-w-fit rounded-full ring-2 hover:ring-rose-500 active:ring-rose-600"
+              color="rose"
+              onClick={nextTestimonial}
+              size="sm"
+              variant="outline"
+            >
               <FaChevronRight size={16} />
             </ExampleA>
           </div>
