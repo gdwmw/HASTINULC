@@ -5,8 +5,8 @@ const errorMessage = {
   string: {
     min: (label: string, min: number) => `Please enter ${label} minimum ${min} characters`,
     max: (label: string, max: number) => `${label} maximum ${max} characters`,
-    email: (label: string) => `${label} must be a valid email address`,
     required: (label: string) => `Please enter ${label}`,
+    email: (label: string) => `${label} must be a valid email address`,
   },
   number: {
     min: (label: string, min: number) => `${label} minimum ${min}`,

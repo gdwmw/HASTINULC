@@ -82,8 +82,8 @@ export const Content: FC = (): ReactElement => {
           {invalidCredentials && (withEmail ? "Invalid Email or Password" : "Invalid Username or Password")}
         </span>
 
-        <ExampleA className={loading ? "cursor-not-allowed" : ""} color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-          {loading ? "Loading..." : "Login"}
+        <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+          {loading ? "Loading..." : "LOGIN"}
         </ExampleA>
 
         <div className="flex justify-center gap-1">
@@ -95,7 +95,6 @@ export const Content: FC = (): ReactElement => {
               loading && e.preventDefault();
               !loading && setVisibility(false);
               !loading && setInvalidCredentials(false);
-              !loading && setWithEmail((prev) => !prev);
               !loading && reset();
             }}
           >

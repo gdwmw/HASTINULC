@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FC, ReactElement, useState } from "react";
+import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
@@ -11,6 +11,71 @@ import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
 import { ExampleInput } from "@/src/components/interfaces/example/C";
 import { RegisterSchema, TRegisterSchema } from "@/src/schemas/auth";
 import { POSTRegister } from "@/src/utils/api";
+
+interface IFormField {
+  id: number;
+  isPassword?: boolean;
+  label: string;
+  maxLength?: number;
+  name: keyof TRegisterSchema;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  type: HTMLInputTypeAttribute;
+}
+
+const FORM_FIELD_DATA: IFormField[] = [
+  {
+    id: 1,
+    label: "Name",
+    maxLength: 50,
+    name: "name",
+    type: "text",
+  },
+  {
+    id: 2,
+    label: "Username",
+    maxLength: 8,
+    name: "username",
+    onKeyDown: (e: KeyboardEvent) => {
+      if (!/^[a-z0-9]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
+        e.preventDefault();
+      }
+    },
+    type: "text",
+  },
+  {
+    id: 3,
+    label: "Email",
+    name: "email",
+    type: "email",
+  },
+  {
+    id: 4,
+    label: "Phone Number",
+    maxLength: 15,
+    name: "phoneNumber",
+    onKeyDown: (e: KeyboardEvent) => {
+      if (!/\d/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
+        e.preventDefault();
+      }
+    },
+    type: "tel",
+  },
+  {
+    id: 5,
+    isPassword: true,
+    label: "Password",
+    maxLength: 72,
+    name: "password",
+    type: "password",
+  },
+  {
+    id: 6,
+    isPassword: true,
+    label: "Confirm Password",
+    name: "confirmPassword",
+    type: "password",
+  },
+];
 
 export const Content: FC = (): ReactElement => {
   const router = useRouter();
@@ -34,18 +99,12 @@ export const Content: FC = (): ReactElement => {
 
     if (getValues("password") === getValues("confirmPassword")) {
       try {
-        const res = await POSTRegister(dt);
-
-        if (!res?.status) {
-          throw new Error("An Error Occurred While Registering!");
-        }
-
+        await POSTRegister(dt);
         console.log("Register Success!");
         router.push("/login");
         router.refresh();
-      } catch (error) {
+      } catch {
         console.log("Register Failed!");
-        console.error("--- Authentication Error Message ---", error);
       } finally {
         setLoading(false);
       }
@@ -58,75 +117,26 @@ export const Content: FC = (): ReactElement => {
   return (
     <main className="flex h-screen flex-col items-center justify-center px-5">
       <form className="flex w-full max-w-96 flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-        <ExampleInput
-          color="rose"
-          disabled={loading}
-          errorMessage={errors.name?.message}
-          label={"Name"}
-          maxLength={50}
-          type="text"
-          {...register("name")}
-        />
-
-        <ExampleInput
-          color="rose"
-          disabled={loading}
-          errorMessage={errors.username?.message}
-          label={"Username"}
-          maxLength={8}
-          onKeyDown={(e) => {
-            if (!/^[a-z0-9]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-              e.preventDefault();
-            }
-          }}
-          type="text"
-          {...register("username")}
-        />
-
-        <ExampleInput color="rose" disabled={loading} errorMessage={errors.email?.message} label={"Email"} type="email" {...register("email")} />
-
-        <ExampleInput
-          color="rose"
-          disabled={loading}
-          errorMessage={errors.phoneNumber?.message}
-          label={"Phone Number"}
-          maxLength={15}
-          onKeyDown={(e) => {
-            if (!/\d/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-              e.preventDefault();
-            }
-          }}
-          type="tel"
-          {...register("phoneNumber")}
-        />
-
-        <ExampleInput
-          color="rose"
-          disabled={loading}
-          errorMessage={errors.password?.message}
-          icon={visibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} />}
-          iconOnClick={() => setVisibility((prev) => !prev)}
-          label="Password"
-          maxLength={72}
-          type={visibility ? "text" : "password"}
-          {...register("password")}
-        />
-
-        <ExampleInput
-          color="rose"
-          disabled={loading}
-          errorMessage={errors.confirmPassword?.message}
-          icon={visibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} />}
-          iconOnClick={() => setVisibility((prev) => !prev)}
-          label="Confirm Password"
-          type={visibility ? "text" : "password"}
-          {...register("confirmPassword")}
-        />
+        {FORM_FIELD_DATA.map((dt) => (
+          <ExampleInput
+            color="rose"
+            disabled={loading}
+            errorMessage={errors[dt.name]?.message}
+            icon={dt.isPassword ? visibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} /> : undefined}
+            iconOnClick={dt.isPassword ? () => setVisibility((prev) => !prev) : undefined}
+            key={dt.id}
+            label={dt.label}
+            maxLength={dt.maxLength}
+            onKeyDown={dt.onKeyDown}
+            type={dt.isPassword ? (visibility ? "text" : "password") : dt.type}
+            {...register(dt.name)}
+          />
+        ))}
 
         <span className="text-center text-sm text-red-600">{notMatch && "Confirm Password does not match Password"}</span>
 
-        <ExampleA className={loading ? "cursor-not-allowed" : ""} color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-          {loading ? "Loading..." : "Register"}
+        <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+          {loading ? "Loading..." : "REGISTER"}
         </ExampleA>
 
         <div className="flex justify-center gap-1">

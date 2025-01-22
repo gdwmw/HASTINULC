@@ -6,39 +6,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { ILoginPayload } from "@/src/types/api";
 import { POSTLogin } from "@/src/utils/api";
 
-// const USER_DATA = [
-//   {
-//     email: "admin@gmail.com",
-//     password: "admin",
-//     response: {
-//       email: "admin@gmail.com",
-//       id: "1",
-//       image: "image url",
-//       name: "Admin",
-//       role: "admin",
-//       status: "authenticated",
-//       token: "123456789",
-//       username: "admin",
-//     },
-//     username: "admin",
-//   },
-//   {
-//     email: "user@gmail.com",
-//     password: "user",
-//     response: {
-//       email: "user@gmail.com",
-//       id: "2",
-//       image: "image url",
-//       name: "User",
-//       role: "user",
-//       status: "authenticated",
-//       token: "987654321",
-//       username: "user",
-//     },
-//     username: "user",
-//   },
-// ];
-
 export const options: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: User }) {
@@ -76,8 +43,6 @@ export const options: NextAuthOptions = {
 
           const res = await POSTLogin({ identifier, password });
 
-          // const res = USER_DATA.find((user) => (user.username === identifier || user.email === identifier) && user.password === password);
-
           if (!res) {
             return null;
           }
@@ -88,9 +53,8 @@ export const options: NextAuthOptions = {
           };
 
           return mapDataToResponse;
-        } catch (error) {
-          console.log("An error occurred in the authentication process!");
-          throw error;
+        } catch {
+          return null;
         }
       },
       credentials: {},
