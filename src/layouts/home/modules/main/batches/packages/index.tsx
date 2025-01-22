@@ -41,7 +41,14 @@ export const Packages: FC<I> = (props): ReactElement => {
           {PACKAGES_DATA.map((dt) => (
             <div className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md" key={dt.id}>
               <p className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</p>
-              <h3 className={`border-b border-rose-500 pb-4 text-4xl ${montaguSlab.className}`}>{dt.price}</h3>
+              <h3 className={`border-b border-rose-500 pb-4 text-4xl ${montaguSlab.className}`}>
+                {new Intl.NumberFormat("id-ID", {
+                  currency: "IDR",
+                  maximumFractionDigits: 0,
+                  minimumFractionDigits: 0,
+                  style: "currency",
+                }).format(parseInt(dt.price))}
+              </h3>
 
               <ul className="space-y-2 text-left">
                 {dt.description.map((ls, i) => (

@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { PACKAGES_DATA } from "@/src/libs/constants";
+
 /* eslint-disable perfectionist/sort-objects */
 const errorMessage = {
   string: {
@@ -21,7 +23,7 @@ const errorMessage = {
 export const BookingSchema = z.object({
   date: z.string().min(1, { message: errorMessage.string.required("Date") }),
   email: z.string().email({ message: errorMessage.string.email("Email") }),
-  event: z.enum(["Wedding", "Pre-Wedding"], {
+  event: z.enum(PACKAGES_DATA.map((dt) => dt.title) as [string, ...string[]], {
     errorMap: () => ({ message: errorMessage.string.enum("Event") }),
   }),
   name: z.string().min(3, { message: errorMessage.string.min("Name", 3) }),

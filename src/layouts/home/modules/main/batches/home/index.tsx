@@ -15,6 +15,7 @@ import accentDot from "@/public/assets/images/background/Accent-Dot.png";
 import homeImage from "@/public/assets/images/model/Home.png";
 import { ExampleA } from "@/src/components/interfaces/example/A";
 import { ExampleInput, ExampleSelect } from "@/src/components/interfaces/example/C";
+import { PACKAGES_DATA } from "@/src/libs/constants";
 import { BookingSchema, TBookingSchema } from "@/src/schemas/home";
 
 const montaguSlab = localFont({ src: "../../../../../../app/fonts/montagu-slab/MontaguSlab-VariableFont_opsz,wght.ttf" });
@@ -137,10 +138,13 @@ export const Home: FC<I> = (props): ReactElement => {
                     errorMessage={errors.event?.message}
                   >
                     <option value="-">-</option>
-                    <option value="Wedding">Wedding</option>
-                    <option value="Pre-Wedding">Pre-Wedding</option>
+                    {PACKAGES_DATA.map((dt) => (
+                      <option key={dt.id} value={dt.title}>
+                        {dt.title}
+                      </option>
+                    ))}
                   </ExampleSelect>
-                  <ExampleA className="mt-2 w-64 font-semibold" color="rose" size="sm" type="submit" variant="solid">
+                  <ExampleA className="mt-2 w-64 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
                     <FaChevronRight size={14} /> BOOKING NOW
                   </ExampleA>
                 </div>

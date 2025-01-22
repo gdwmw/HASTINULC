@@ -23,7 +23,7 @@ export const PACKAGES_DATA = [
       { id: 6, text: "Transportation" },
     ],
     id: 1,
-    price: "Rp 3,500,000",
+    price: "3500000",
     title: "WEDDING A",
   },
   {
@@ -36,7 +36,7 @@ export const PACKAGES_DATA = [
       { id: 6, text: "Transportation" },
     ],
     id: 2,
-    price: "Rp 2,500,000",
+    price: "2500000",
     title: "WEDDING B",
   },
   {
@@ -49,7 +49,7 @@ export const PACKAGES_DATA = [
       { id: 6, text: "Transportation" },
     ],
     id: 3,
-    price: "Rp 1,500,000",
+    price: "1500000",
     title: "WEDDING C",
   },
   {
@@ -59,7 +59,7 @@ export const PACKAGES_DATA = [
       { id: 3, text: "Transportation" },
     ],
     id: 4,
-    price: "Rp 450,000",
+    price: "450000",
     title: "PREWEDDING",
   },
   {
@@ -69,7 +69,7 @@ export const PACKAGES_DATA = [
       { id: 3, text: "Transportation" },
     ],
     id: 5,
-    price: "Rp 350,000",
+    price: "350000",
     title: "ENGAGEMENT",
   },
   {
@@ -79,7 +79,7 @@ export const PACKAGES_DATA = [
       { id: 3, text: "Transportation" },
     ],
     id: 6,
-    price: "Rp 300,000",
+    price: "300000",
     title: "GRADUATION",
   },
   {
@@ -88,7 +88,7 @@ export const PACKAGES_DATA = [
       { id: 2, text: "Transportation" },
     ],
     id: 7,
-    price: "Rp 200,000",
+    price: "200000",
     title: "REGULAR",
   },
 ];
