@@ -28,6 +28,11 @@ const FORM_FIELD_DATA: IFormField[] = [
     label: "Name",
     maxLength: 50,
     name: "name",
+    onKeyDown: (e: KeyboardEvent) => {
+      if (!/^[a-zA-Z\s]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
+        e.preventDefault();
+      }
+    },
     type: "text",
   },
   {
