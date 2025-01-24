@@ -27,7 +27,7 @@ export const BookingSchema = z.object({
     errorMap: () => ({ message: errorMessage.string.enum("Event") }),
   }),
   name: z.string().min(3, { message: errorMessage.string.min("Name", 3) }),
-  time: z.string().min(1, { message: errorMessage.string.required("Time") }),
+  phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone Number", 10) }),
 });
 
 export type TBookingSchema = z.infer<typeof BookingSchema>;

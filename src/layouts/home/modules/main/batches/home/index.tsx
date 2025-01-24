@@ -6,7 +6,7 @@ import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FC, ReactElement, useEffect, useState } from "react";
+import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronRight } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -15,10 +15,68 @@ import accentDot from "@/public/assets/images/background/Accent-Dot.png";
 import homeImage from "@/public/assets/images/model/Home.png";
 import { ExampleA } from "@/src/components/interfaces/example/A";
 import { ExampleInput, ExampleSelect } from "@/src/components/interfaces/example/C";
+import { useGlobalStates } from "@/src/context";
 import { PACKAGES_DATA } from "@/src/libs/constants";
 import { BookingSchema, TBookingSchema } from "@/src/schemas/home";
 
 const montaguSlab = localFont({ src: "../../../../../../app/fonts/montagu-slab/MontaguSlab-VariableFont_opsz,wght.ttf" });
+
+interface IFormField {
+  id: number;
+  isSelect?: boolean;
+  label?: string;
+  maxLength?: number;
+  name: keyof TBookingSchema;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  options?: string[];
+  type?: HTMLInputTypeAttribute;
+}
+
+const FORM_FIELD_DATA: IFormField[] = [
+  {
+    id: 1,
+    label: "Name",
+    maxLength: 50,
+    name: "name",
+    onKeyDown: (e: KeyboardEvent) => {
+      if (!/^[a-zA-Z\s]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
+        e.preventDefault();
+      }
+    },
+    type: "text",
+  },
+  {
+    id: 2,
+    label: "Email",
+    name: "email",
+    type: "email",
+  },
+  {
+    id: 3,
+    label: "Phone Number",
+    maxLength: 15,
+    name: "phoneNumber",
+    onKeyDown: (e: KeyboardEvent) => {
+      if (!/\d/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
+        e.preventDefault();
+      }
+    },
+    type: "tel",
+  },
+  {
+    id: 4,
+    isSelect: true,
+    label: "Event",
+    name: "event",
+    options: PACKAGES_DATA.map((dt) => dt.title),
+  },
+  {
+    id: 5,
+    label: "Date",
+    name: "date",
+    type: "date",
+  },
+];
 
 interface I {
   session: null | Session;
@@ -26,6 +84,7 @@ interface I {
 
 export const Home: FC<I> = (props): ReactElement => {
   const router = useRouter();
+  const { setBooking } = useGlobalStates();
   const [loading, setLoading] = useState(false);
 
   const {
@@ -37,6 +96,7 @@ export const Home: FC<I> = (props): ReactElement => {
     defaultValues: {
       email: props.session?.user?.email ?? "",
       name: props.session?.user?.name ?? "",
+      phoneNumber: props.session?.user?.phoneNumber ?? "",
     },
     resolver: zodResolver(BookingSchema),
   });
@@ -47,7 +107,6 @@ export const Home: FC<I> = (props): ReactElement => {
       if (pendingBooking) {
         const data: TBookingSchema = JSON.parse(pendingBooking);
         setValue("date", data.date ?? "");
-        setValue("time", data.time ?? "");
         setValue("event", data.event ?? "");
         localStorage.removeItem("pendingBooking");
       }
@@ -58,7 +117,8 @@ export const Home: FC<I> = (props): ReactElement => {
   const onSubmit: SubmitHandler<TBookingSchema> = (dt) => {
     setLoading(true);
     if (props.session?.user?.status) {
-      console.log(dt);
+      setBooking(dt);
+      router.push("/booking");
     } else {
       localStorage.setItem("pendingBooking", JSON.stringify(dt));
       router.push("/login");
@@ -89,61 +149,76 @@ export const Home: FC<I> = (props): ReactElement => {
             <div className="flex size-full items-center justify-center gap-20">
               <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex w-full items-center gap-5">
-                  <ExampleInput
-                    color="rose"
-                    containerClassName="w-64"
-                    label="Name"
-                    type="text"
-                    {...register("name")}
-                    disabled={loading}
-                    errorMessage={errors.name?.message}
-                    maxLength={50}
-                  />
-                  <ExampleInput
-                    color="rose"
-                    containerClassName="w-64"
-                    label="Email"
-                    type="email"
-                    {...register("email")}
-                    disabled={loading}
-                    errorMessage={errors.email?.message}
-                  />
-                  <ExampleInput
-                    color="rose"
-                    containerClassName="w-64"
-                    label="Date"
-                    type="date"
-                    {...register("date")}
-                    disabled={loading}
-                    errorMessage={errors.date?.message}
-                  />
+                  {FORM_FIELD_DATA.slice(0, 3).map((dt) =>
+                    !dt.isSelect ? (
+                      <ExampleInput
+                        color="rose"
+                        containerClassName="w-64"
+                        disabled={loading}
+                        errorMessage={errors[dt.name]?.message}
+                        key={dt.id}
+                        label={dt.label}
+                        maxLength={dt.maxLength}
+                        onKeyDown={dt.onKeyDown}
+                        type={dt.type}
+                        {...register(dt.name)}
+                      />
+                    ) : (
+                      <ExampleSelect
+                        color="rose"
+                        containerClassName="w-64"
+                        disabled={loading}
+                        errorMessage={errors[dt.name]?.message}
+                        key={dt.id}
+                        label={dt.label}
+                        {...register(dt.name)}
+                      >
+                        <option value="-">-</option>
+                        {dt.options?.map((opt, i) => (
+                          <option key={i} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </ExampleSelect>
+                    ),
+                  )}
                 </div>
 
                 <div className="flex w-full items-center gap-5">
-                  <ExampleInput
-                    color="rose"
-                    containerClassName="w-64"
-                    label="Time"
-                    type="time"
-                    {...register("time")}
-                    disabled={loading}
-                    errorMessage={errors.time?.message}
-                  />
-                  <ExampleSelect
-                    color="rose"
-                    containerClassName="w-64"
-                    label="Event"
-                    {...register("event")}
-                    disabled={loading}
-                    errorMessage={errors.event?.message}
-                  >
-                    <option value="-">-</option>
-                    {PACKAGES_DATA.map((dt) => (
-                      <option key={dt.id} value={dt.title}>
-                        {dt.title}
-                      </option>
-                    ))}
-                  </ExampleSelect>
+                  {FORM_FIELD_DATA.slice(3).map((dt) =>
+                    !dt.isSelect ? (
+                      <ExampleInput
+                        color="rose"
+                        containerClassName="w-64"
+                        disabled={loading}
+                        errorMessage={errors[dt.name]?.message}
+                        key={dt.id}
+                        label={dt.label}
+                        maxLength={dt.maxLength}
+                        onKeyDown={dt.onKeyDown}
+                        type={dt.type}
+                        {...register(dt.name)}
+                      />
+                    ) : (
+                      <ExampleSelect
+                        color="rose"
+                        containerClassName="w-64"
+                        disabled={loading}
+                        errorMessage={errors[dt.name]?.message}
+                        key={dt.id}
+                        label={dt.label}
+                        {...register(dt.name)}
+                      >
+                        <option value="-">-</option>
+                        {dt.options?.map((opt, i) => (
+                          <option key={i} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </ExampleSelect>
+                    ),
+                  )}
+
                   <ExampleA className="mt-2 w-64 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
                     <FaChevronRight size={14} /> BOOKING NOW
                   </ExampleA>

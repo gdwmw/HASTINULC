@@ -12,7 +12,7 @@ export const Main: FC = async (): Promise<ReactElement> => {
       <Home session={session} />
       <About />
       <Portfolio />
-      <Packages session={session} />
+      <Packages />
       <Contact />
     </main>
   );

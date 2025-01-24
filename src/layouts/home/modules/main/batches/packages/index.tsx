@@ -1,6 +1,5 @@
 "use client";
 
-import { Session } from "next-auth";
 import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,15 +8,13 @@ import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 
 import testimonialsImage from "@/public/assets/images/model/Testimonials-1.jpg";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
+import { useGlobalStates } from "@/src/context";
 import { PACKAGES_DATA, TESTIMONIALS_DATA } from "@/src/libs/constants";
 
 const montaguSlab = localFont({ src: "../../../../../../app/fonts/montagu-slab/MontaguSlab-VariableFont_opsz,wght.ttf" });
 
-interface I {
-  session: null | Session;
-}
-
-export const Packages: FC<I> = (props): ReactElement => {
+export const Packages: FC = (): ReactElement => {
+  const { setBooking } = useGlobalStates();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const nextTestimonial = () => {
@@ -65,8 +62,8 @@ export const Packages: FC<I> = (props): ReactElement => {
                   size: "sm",
                   variant: "solid",
                 })}
-                href={props.session?.user?.status ? "/booking" : "/login"}
-                onClick={() => localStorage.setItem("package", dt.title)}
+                href={"/booking"}
+                onClick={() => setBooking({ event: dt.title })}
               >
                 <FaChevronRight size={14} /> BOOKING NOW
               </Link>
