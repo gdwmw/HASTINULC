@@ -92,10 +92,13 @@ export const Content: FC = (): ReactElement => {
             className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
             href={"/register"}
             onClick={(e) => {
-              loading && e.preventDefault();
-              !loading && setVisibility(false);
-              !loading && setInvalidCredentials(false);
-              !loading && reset();
+              if (loading) {
+                e.preventDefault();
+              } else {
+                setVisibility(false);
+                setInvalidCredentials(false);
+                reset();
+              }
             }}
           >
             Register!
