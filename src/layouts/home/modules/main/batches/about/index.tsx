@@ -95,7 +95,7 @@ export const About: FC = (): ReactElement => {
               >
                 <FaPlay className="-mb-0.5 -mr-1" size={25} />
               </button>
-              <Image alt="About Image" loading="lazy" src={aboutImage7} width={1000} />
+              <Image alt="About Image" className="shadow-md" loading="lazy" src={aboutImage7} width={1000} />
             </div>
           )}
         </div>

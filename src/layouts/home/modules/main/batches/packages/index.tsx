@@ -79,7 +79,7 @@ export const Packages: FC = (): ReactElement => {
             <h2 className={`text-nowrap text-6xl ${montaguSlab.className}`}>Words from Clients</h2>
           </div>
 
-          <div className="flex flex-col gap-5 rounded-lg bg-black p-5 text-white shadow-md">
+          <div className="flex flex-col gap-5 rounded-lg bg-black p-5 text-white">
             <div className="flex items-center gap-2">
               <Image
                 alt="Testimonials Image"

@@ -76,7 +76,7 @@ export const Contact: FC = (): ReactElement => (
       </div>
 
       <iframe
-        className="rounded-lg border-2 border-rose-200"
+        className="rounded-lg border-2 border-rose-200 shadow-md"
         height={500}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
