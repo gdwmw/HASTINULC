@@ -107,7 +107,7 @@ export const Content: FC = (): ReactElement => {
         await POSTRegister(dt);
         console.log("Register Success!");
         router.push("/login");
-        router.refresh();
+        reset();
       } catch {
         console.log("Register Failed!");
       } finally {
