@@ -91,3 +91,60 @@ export interface IDatasResponse {
   phoneNumber: string;
   role: string;
 }
+
+// ----------------------------
+
+export interface IBookingsSchema {
+  data: {
+    current: Date;
+    data: string;
+    date: string;
+    documentId: string;
+    email: string;
+    event: string;
+    googleMapsLink: string;
+    indicator: string;
+    name: string;
+    phoneNumber: string;
+    subTotal: string;
+    tax: string;
+    time: string[];
+    total: string;
+    username: string;
+  };
+}
+export interface IBookingsPayload {
+  current: Date;
+  data: string;
+  date: string;
+  documentId?: string;
+  email: string;
+  event: string;
+  googleMapsLink: string;
+  indicator: string;
+  name: string;
+  phoneNumber: string;
+  subTotal: string;
+  tax: string;
+  time: string[];
+  total: string;
+  username: string;
+}
+
+export interface IBookingsResponse {
+  current: Date;
+  data: string;
+  date: string;
+  documentId: string;
+  email: string;
+  event: string;
+  googleMapsLink: string;
+  indicator: string;
+  name: string;
+  phoneNumber: string;
+  subTotal: string;
+  tax: string;
+  time: string[];
+  total: string;
+  username: string;
+}

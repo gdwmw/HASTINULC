@@ -12,6 +12,15 @@ export const NAVIGATION_DATA = [
   { href: "#contact", id: 5, label: "Contact" },
 ];
 
+export const TIME_SLOTS_DATA = [
+  { id: 1, time: "06:00 - 09:00" },
+  { id: 2, time: "10:00 - 13:00" },
+  { id: 3, time: "14:00 - 17:00" },
+  { id: 4, time: "18:00 - 21:00" },
+  { id: 5, time: "22:00 - 01:00" },
+  { id: 6, time: "02:00 - 05:00" },
+];
+
 export const PACKAGES_DATA = [
   {
     description: [
