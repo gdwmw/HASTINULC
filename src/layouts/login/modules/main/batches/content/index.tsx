@@ -14,8 +14,8 @@ import { LoginSchema, TLoginSchema } from "@/src/schemas/auth";
 
 export const Content: FC = (): ReactElement => {
   const router = useRouter();
-  const [withEmail, setWithEmail] = useState(false);
-  const [visibility, setVisibility] = useState(false);
+  const [loginWithEmail, setLoginWithEmail] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +25,7 @@ export const Content: FC = (): ReactElement => {
     register,
     reset,
   } = useForm<TLoginSchema>({
-    resolver: zodResolver(LoginSchema(withEmail ? "Email" : "Username")),
+    resolver: zodResolver(LoginSchema(loginWithEmail ? "Email" : "Username")),
   });
 
   const onSubmit: SubmitHandler<TLoginSchema> = async (dt) => {
@@ -41,7 +41,7 @@ export const Content: FC = (): ReactElement => {
 
       if (!res?.ok) {
         setInvalidCredentials(true);
-        throw new Error(withEmail ? "Invalid Email or Password" : "Invalid Username or Password");
+        throw new Error(loginWithEmail ? "Invalid Email or Password" : "Invalid Username or Password");
       }
 
       console.log("Login Success!");
@@ -62,7 +62,7 @@ export const Content: FC = (): ReactElement => {
           color="rose"
           disabled={loading}
           errorMessage={errors.identifier?.message}
-          label={withEmail ? "Email" : "Username"}
+          label={loginWithEmail ? "Email" : "Username"}
           type="text"
           {...register("identifier")}
         />
@@ -71,15 +71,15 @@ export const Content: FC = (): ReactElement => {
           color="rose"
           disabled={loading}
           errorMessage={errors.password?.message}
-          icon={visibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} />}
-          iconOnClick={() => setVisibility((prev) => !prev)}
+          icon={passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} />}
+          iconOnClick={() => setPasswordVisibility((prev) => !prev)}
           label="Password"
-          type={visibility ? "text" : "password"}
+          type={passwordVisibility ? "text" : "password"}
           {...register("password")}
         />
 
         <span className="text-center text-sm text-red-600">
-          {invalidCredentials && (withEmail ? "Invalid Email or Password" : "Invalid Username or Password")}
+          {invalidCredentials && (loginWithEmail ? "Invalid Email or Password" : "Invalid Username or Password")}
         </span>
 
         <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
@@ -95,7 +95,7 @@ export const Content: FC = (): ReactElement => {
               if (loading) {
                 e.preventDefault();
               } else {
-                setVisibility(false);
+                setPasswordVisibility(false);
                 setInvalidCredentials(false);
                 reset();
               }
@@ -106,15 +106,15 @@ export const Content: FC = (): ReactElement => {
         </div>
 
         <div className="flex justify-center gap-1">
-          <span className="text-xs">{withEmail ? "Login with username?" : "Login with email?"}</span>
+          <span className="text-xs">{loginWithEmail ? "Login with username?" : "Login with email?"}</span>
           <ExampleA
             className="text-xs"
             color="rose"
             disabled={loading}
             onClick={() => {
-              setVisibility(false);
+              setPasswordVisibility(false);
               setInvalidCredentials(false);
-              setWithEmail((prev) => !prev);
+              setLoginWithEmail((prev) => !prev);
               reset();
             }}
             size="sm"

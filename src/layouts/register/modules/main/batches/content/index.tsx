@@ -84,8 +84,8 @@ const FORM_FIELD_DATA: IFormField[] = [
 
 export const Content: FC = (): ReactElement => {
   const router = useRouter();
-  const [visibility, setVisibility] = useState(false);
-  const [notMatch, setNotMatch] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [passwordNotMatch, setPasswordNotMatch] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -100,7 +100,7 @@ export const Content: FC = (): ReactElement => {
 
   const onSubmit: SubmitHandler<TRegisterSchema> = async (dt) => {
     setLoading(true);
-    setNotMatch(false);
+    setPasswordNotMatch(false);
 
     if (getValues("password") === getValues("confirmPassword")) {
       try {
@@ -115,7 +115,7 @@ export const Content: FC = (): ReactElement => {
       }
     } else {
       setLoading(false);
-      setNotMatch(true);
+      setPasswordNotMatch(true);
     }
   };
 
@@ -127,18 +127,18 @@ export const Content: FC = (): ReactElement => {
             color="rose"
             disabled={loading}
             errorMessage={errors[dt.name]?.message}
-            icon={dt.isPassword ? visibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} /> : undefined}
-            iconOnClick={dt.isPassword ? () => setVisibility((prev) => !prev) : undefined}
+            icon={dt.isPassword ? passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} /> : undefined}
+            iconOnClick={dt.isPassword ? () => setPasswordVisibility((prev) => !prev) : undefined}
             key={dt.id}
             label={dt.label}
             maxLength={dt.maxLength}
             onKeyDown={dt.onKeyDown}
-            type={dt.isPassword ? (visibility ? "text" : "password") : dt.type}
+            type={dt.isPassword ? (passwordVisibility ? "text" : "password") : dt.type}
             {...register(dt.name)}
           />
         ))}
 
-        <span className="text-center text-sm text-red-600">{notMatch && "Confirm Password does not match Password"}</span>
+        <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password does not match Password"}</span>
 
         <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
           {loading ? "Loading..." : "REGISTER"}
@@ -153,8 +153,8 @@ export const Content: FC = (): ReactElement => {
               if (loading) {
                 e.preventDefault();
               } else {
-                setVisibility(false);
-                setNotMatch(false);
+                setPasswordVisibility(false);
+                setPasswordNotMatch(false);
                 reset();
               }
             }}
