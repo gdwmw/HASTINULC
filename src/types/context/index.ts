@@ -1,4 +1,4 @@
-export interface IBookingsPayloadContext {
+export interface IBookingsContextPayload {
   date?: string;
   email?: string;
   event?: string;
