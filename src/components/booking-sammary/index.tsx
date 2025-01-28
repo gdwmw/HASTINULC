@@ -82,7 +82,7 @@ export const BookingSummary: FC<IBookingSummary> = (props): ReactElement => (
         </div>
 
         <div className="flex justify-between">
-          <span className="text-gray-600">Google Maps Link:</span>
+          <span className="text-gray-600">Google Maps:</span>
           <Link
             className={ExampleATWM({ className: "font-semibold underline", color: "rose", size: "sm", variant: "ghost" })}
             href={props.googleMapsLink || "#"}
