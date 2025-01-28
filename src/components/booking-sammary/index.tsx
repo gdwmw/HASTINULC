@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FC, ReactElement } from "react";
 
+import { currencyFormat } from "@/src/hooks/functions";
 import { IBookingsPayload } from "@/src/types/api";
 
 import { ExampleATWM } from "../interfaces/example/A";
@@ -36,9 +37,12 @@ const Status: FC<IStatus> = (props): ReactElement => (
   </span>
 );
 
-interface IBookingSummary extends Omit<IBookingsPayload, "current" | "data" | "indicator" | "username"> {
+interface IBookingSummary extends Omit<IBookingsPayload, "current" | "data" | "indicator" | "subTotal" | "tax" | "total" | "username"> {
   datasDocumentId?: string;
   status?: string | TStatus;
+  subTotal: number | string;
+  tax: number | string;
+  total: number | string;
 }
 
 export const BookingSummary: FC<IBookingSummary> = (props): ReactElement => (
@@ -120,19 +124,19 @@ export const BookingSummary: FC<IBookingSummary> = (props): ReactElement => (
 
         <div className="flex justify-between">
           <span className="text-gray-600">Tax (PPN):</span>
-          <span className="font-medium">{props.tax}</span>
+          <span className="font-medium">{currencyFormat(props.tax, "IDR")}</span>
         </div>
 
         <div className="flex justify-between">
           <span className="text-gray-600">Subtotal:</span>
-          <span className="font-medium">{props.subTotal}</span>
+          <span className="font-medium">{currencyFormat(props.subTotal, "IDR")}</span>
         </div>
 
         <div className="my-2 border-t border-gray-300" />
 
         <div className="flex justify-between">
           <span className="text-lg font-semibold">TOTAL:</span>
-          <span className="text-lg font-bold text-rose-500">{props.total}</span>
+          <span className="text-lg font-bold text-rose-500">{currencyFormat(props.total, "IDR")}</span>
         </div>
       </div>
     </div>
