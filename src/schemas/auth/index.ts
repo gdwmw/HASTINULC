@@ -37,9 +37,9 @@ export const RegisterSchema = z.object({
   password: z
     .string()
     .min(8, { message: errorMessage.string.min("Password", 8) })
-    .regex(/^(?=.*[A-Z])/, { message: "Password harus memiliki minimal 1 huruf besar" })
-    .regex(/^(?=.*\d)/, { message: "Password harus memiliki minimal 1 angka" })
-    .regex(/^(?=.*[!@#$%^&*])/, { message: "Password harus memiliki minimal 1 simbol (!@#$%^&*)" }),
+    .regex(/^(?=.*[A-Z])/, { message: "Password must have at least 1 uppercase letter" })
+    .regex(/^(?=.*\d)/, { message: "Password must have at least 1 number" })
+    .regex(/^(?=.*[!@#$%^&*])/, { message: "Password must have at least 1 symbol (!@#$%^&*)" }),
   phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone Number", 10) }),
   username: z.string().min(4, { message: errorMessage.string.min("Username", 4) }),
 });
