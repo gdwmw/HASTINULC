@@ -6,28 +6,27 @@ if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-const mapDataToResponse = (data: IUsersSchema): IUsersResponse => ({
-  datasDocumentId: data.datasDocumentId,
+const mapDataToResponse = (dt: IUsersSchema): IUsersResponse => ({
+  datasDocumentId: dt.datasDocumentId,
 });
 
-export const PUTUsers = async (data: IUsersPayload): Promise<IUsersResponse> => {
+export const PUTUsers = async (payload: IUsersPayload): Promise<IUsersResponse> => {
   try {
-    const res = await fetch(`${API_URL}/api/users/${data.id}?populate=*`, {
-      body: JSON.stringify({ datasDocumentId: data.datasDocumentId }),
+    const res = await fetch(`${API_URL}/api/users/${payload.id}?populate=*`, {
+      body: JSON.stringify({ datasDocumentId: payload.datasDocumentId }),
       headers: {
         "Content-Type": "application/json",
       },
       method: "PUT",
     });
 
+    const response = await res.json();
+
     if (!res.ok) {
-      const resError = await res.json();
-      throw new Error(`Failed to put: Users with status ${res.status} || ${resError.error.message}`);
+      throw new Error(`Failed to put: Users with status ${res.status} || ${response.error.message}`);
     }
 
-    const resData = await res.json();
-
-    return mapDataToResponse(resData);
+    return mapDataToResponse(response);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;

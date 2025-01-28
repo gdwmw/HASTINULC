@@ -69,6 +69,7 @@ export interface IUsersResponse {
 
 export interface IDatasSchema {
   data: {
+    bookings: IBookingsResponse[];
     documentId: string;
     image: { url: string };
     name: string;
@@ -77,6 +78,7 @@ export interface IDatasSchema {
   };
 }
 export interface IDatasPayload {
+  bookings?: string;
   documentId?: string;
   image?: number;
   name: string;
@@ -85,6 +87,7 @@ export interface IDatasPayload {
 }
 
 export interface IDatasResponse {
+  bookings: IBookingsResponse[];
   documentId: string;
   image: string;
   name: string;

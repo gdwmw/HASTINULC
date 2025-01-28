@@ -12,63 +12,58 @@ if (!API_URL) {
 interface IMapDataToResponse extends IAuthSchema, IDatasResponse {}
 interface IPayload extends IDatasPayload, IRegisterPayload {}
 
-const mapDataToResponse = (data: IMapDataToResponse): IAuthResponse => ({
-  datasDocumentId: data.user.datasDocumentId,
-  email: data.user.email,
-  id: data.user.id,
-  image: data.image,
-  name: data.name,
-  phoneNumber: data.phoneNumber,
-  role: data.role,
+const mapDataToResponse = (dt: IMapDataToResponse): IAuthResponse => ({
+  datasDocumentId: dt.user.datasDocumentId,
+  email: dt.user.email,
+  id: dt.user.id,
+  image: dt.image,
+  name: dt.name,
+  phoneNumber: dt.phoneNumber,
+  role: dt.role,
   status: "authenticated",
-  token: data.jwt,
-  username: data.user.username,
+  token: dt.jwt,
+  username: dt.user.username,
 });
 
-export const POSTRegister = async (data: IPayload): Promise<IAuthResponse> => {
+export const POSTRegister = async (payload: IPayload): Promise<IAuthResponse> => {
   try {
-    const registerPayload: IRegisterPayload = {
-      email: data.email,
-      password: data.password,
-      username: data.username,
-    };
-
-    const registerRes = await fetch(`${API_URL}/api/auth/local/register?populate=*`, {
-      body: JSON.stringify(registerPayload),
+    const res = await fetch(`${API_URL}/api/auth/local/register?populate=*`, {
+      body: JSON.stringify({
+        email: payload.email,
+        password: payload.password,
+        username: payload.username,
+      }),
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
     });
 
-    if (!registerRes.ok) {
-      const registerResError = await registerRes.json();
-      throw new Error(`Failed to post: Register with status ${registerRes.status} || ${registerResError.error.message}`);
+    const response = await res.json();
+
+    if (!res.ok) {
+      throw new Error(`Failed to post: Register with status ${res.status} || ${response.error.message}`);
     }
 
-    const registerResData: IAuthSchema = await registerRes.json();
-
-    const datasPayload: IDatasPayload = {
+    const datasResponse = await POSTDatas({
       image: 1,
-      name: data.name,
-      phoneNumber: data.phoneNumber,
+      name: payload.name,
+      phoneNumber: payload.phoneNumber,
       role: "user",
-    };
+    });
 
-    const datasResData: IDatasResponse = await POSTDatas(datasPayload);
+    const usersResponse = await PUTUsers({ datasDocumentId: datasResponse.documentId, id: response.user.id });
 
-    const resUsers = await PUTUsers({ datasDocumentId: datasResData.documentId, id: registerResData.user.id });
-
-    const mergeData: IMapDataToResponse = {
-      ...registerResData,
-      ...datasResData,
+    const result: IMapDataToResponse = {
+      ...response,
+      ...datasResponse,
       user: {
-        ...registerResData.user,
-        datasDocumentId: resUsers.datasDocumentId,
+        ...response.user,
+        datasDocumentId: usersResponse.datasDocumentId,
       },
     };
 
-    return mapDataToResponse(mergeData);
+    return mapDataToResponse(result);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;

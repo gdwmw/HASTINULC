@@ -10,44 +10,43 @@ if (!API_URL) {
 
 interface IMapDataToResponse extends IAuthSchema, IDatasResponse {}
 
-const mapDataToResponse = (data: IMapDataToResponse): IAuthResponse => ({
-  datasDocumentId: data.user.datasDocumentId,
-  email: data.user.email,
-  id: data.user.id,
-  image: data.image,
-  name: data.name,
-  phoneNumber: data.phoneNumber,
-  role: data.role,
+const mapDataToResponse = (dt: IMapDataToResponse): IAuthResponse => ({
+  datasDocumentId: dt.user.datasDocumentId,
+  email: dt.user.email,
+  id: dt.user.id,
+  image: dt.image,
+  name: dt.name,
+  phoneNumber: dt.phoneNumber,
+  role: dt.role,
   status: "authenticated",
-  token: data.jwt,
-  username: data.user.username,
+  token: dt.jwt,
+  username: dt.user.username,
 });
 
-export const POSTLogin = async (data: ILoginPayload): Promise<IAuthResponse> => {
+export const POSTLogin = async (payload: ILoginPayload): Promise<IAuthResponse> => {
   try {
-    const loginRes = await fetch(`${API_URL}/api/auth/local?populate=*`, {
-      body: JSON.stringify(data),
+    const res = await fetch(`${API_URL}/api/auth/local?populate=*`, {
+      body: JSON.stringify(payload),
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
     });
 
-    if (!loginRes.ok) {
-      const loginResError = await loginRes.json();
-      throw new Error(`Failed to post: Login with status ${loginRes.status} || ${loginResError.error.message}`);
+    const response = await res.json();
+
+    if (!res.ok) {
+      throw new Error(`Failed to post: Login with status ${res.status} || ${response.error.message}`);
     }
 
-    const loginResData: IAuthSchema = await loginRes.json();
+    const datasResponse = await GETDatasByDocumentId(response.user.datasDocumentId);
 
-    const datasResData = await GETDatasByDocumentId(loginResData.user.datasDocumentId);
-
-    const mergedData: IMapDataToResponse = {
-      ...loginResData,
-      ...datasResData,
+    const result: IMapDataToResponse = {
+      ...response,
+      ...datasResponse,
     };
 
-    return mapDataToResponse(mergedData);
+    return mapDataToResponse(result);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
