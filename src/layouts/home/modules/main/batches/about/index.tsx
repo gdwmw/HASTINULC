@@ -14,6 +14,7 @@ import aboutImage4 from "@/public/assets/images/model/About-4.jpg";
 import aboutImage5 from "@/public/assets/images/model/About-5.jpg";
 import aboutImage6 from "@/public/assets/images/model/About-6.jpg";
 import aboutImage7 from "@/public/assets/images/model/About-7.jpg";
+import { SectionHeader } from "@/src/components/section-header";
 
 const montaguSlab = localFont({ src: "../../../../../../app/fonts/montagu-slab/MontaguSlab-VariableFont_opsz,wght.ttf" });
 
@@ -48,26 +49,21 @@ export const About: FC = (): ReactElement => {
           <Image alt="Accent Rectangle" className="absolute -bottom-20 -left-36" src={accentRectangle} />
         </div>
 
-        <div className="w-full max-w-[500px] space-y-5 border-b border-rose-200 pb-8">
-          <p className="-mb-2 font-semibold tracking-wider text-rose-500">WELCOME TO</p>
-          <h2 className={`text-6xl ${montaguSlab.className}`}>Best Professional Makeup Artist</h2>
-          <p>
-            At Hastinulc Makeup Art, we believe every face tells a story, and we&apos;re here to make it shine. With over 15 years of experience, we
-            specialize in enhancing natural beauty and creating unforgettable looks for every special moment. Trust us to bring out your confidence
-            and elegance with our professional makeup services.
-          </p>
-        </div>
+        <SectionHeader
+          containerClassname="max-w-[500px] border-b border-rose-200 pb-8"
+          description="At Hastinulc Makeup Art, we believe every face tells a story, and we're here to make it shine. With over 15 years of experience, we specialize in enhancing natural beauty and creating unforgettable looks for every special moment. Trust us to bring out your confidence and elegance with our professional makeup services."
+          subtitle="WELCOME TO"
+          title="Best Professional Makeup Artist"
+        />
       </div>
 
       <div className="container mx-auto flex justify-between px-5">
-        <div className="w-full max-w-[700px] space-y-5">
-          <p className="-mb-2 font-semibold tracking-wider text-rose-500">SPECIALS</p>
-          <h2 className={`text-6xl ${montaguSlab.className}`}>We’re Here to Make Your Day Memorable</h2>
-          <p>
-            Every moment deserves to be extraordinary, and we are here to make that happen. From weddings to special events, our expert touch ensures
-            you’ll look and feel your absolute best. Let us create memories that last a lifetime with flawless and personalized beauty services.
-          </p>
-        </div>
+        <SectionHeader
+          containerClassname="max-w-[700px]"
+          description="Every moment deserves to be extraordinary, and we are here to make that happen. From weddings to special events, our expert touch ensures you'll look and feel your absolute best. Let us create memories that last a lifetime with flawless and personalized beauty services."
+          subtitle="SPECIALS"
+          title="We're Here to Make Your Day Memorable"
+        />
 
         <div className="flex gap-5">
           <Image alt="About Image" src={aboutImage5} width={350} />
@@ -100,14 +96,12 @@ export const About: FC = (): ReactElement => {
           )}
         </div>
 
-        <div className="z-[1] w-full max-w-[700px] space-y-5 text-center">
-          <p className="-mb-2 font-semibold tracking-wider text-rose-500">WHY US</p>
-          <h2 className={`text-6xl ${montaguSlab.className}`}>Why Choose Us?</h2>
-          <p>
-            Choosing the right makeup artist is key to making your special day unforgettable. We combine skill, passion, and attention to detail to
-            ensure your beauty shines through every moment. Here’s why we stand out.
-          </p>
-        </div>
+        <SectionHeader
+          containerClassname="z-[1] max-w-[700px] text-center"
+          description="Choosing the right makeup artist is key to making your special day unforgettable. We combine skill, passion, and attention to detail to ensure your beauty shines through every moment. Here's why we stand out."
+          subtitle="WHY US"
+          title="Why Choose Us?"
+        />
 
         <div className={`z-[1] flex gap-10 ${montaguSlab.className}`}>
           <div className="space-y-3">

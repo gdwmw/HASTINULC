@@ -57,7 +57,12 @@ export const Content: FC<I> = (props): ReactElement => {
         {NAVIGATION_DATA.map((dt) => (
           <li key={dt.id}>
             <Link
-              className={`${activeSection === dt.href.substring(1) ? "border-b-2 border-rose-500 text-rose-500" : ""}`}
+              className={ExampleATWM({
+                className: `${activeSection === dt.href.substring(1) ? "border-b-2 border-rose-500 text-rose-500" : "text-black"}`,
+                color: "rose",
+                size: "md",
+                variant: "ghost",
+              })}
               href={dt.href}
               onClick={(e) => handleSmoothScroll(e, dt.href)}
             >

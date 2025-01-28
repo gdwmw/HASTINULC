@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Session } from "next-auth";
-import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,11 +14,10 @@ import accentDot from "@/public/assets/images/background/Accent-Dot.png";
 import homeImage from "@/public/assets/images/model/Home.png";
 import { ExampleA } from "@/src/components/interfaces/example/A";
 import { ExampleInput, ExampleSelect } from "@/src/components/interfaces/example/C";
+import { SectionHeader } from "@/src/components/section-header";
 import { useGlobalStates } from "@/src/context";
 import { PACKAGES_DATA } from "@/src/libs/constants";
 import { BookingSchema, TBookingSchema } from "@/src/schemas/home";
-
-const montaguSlab = localFont({ src: "../../../../../../app/fonts/montagu-slab/MontaguSlab-VariableFont_opsz,wght.ttf" });
 
 interface IFormField {
   id: number;
@@ -132,13 +130,15 @@ export const Home: FC<I> = (props): ReactElement => {
           <div className="container mx-auto size-full px-5">
             <Image alt="Home Image" className="absolute right-0 top-0 h-full w-fit" priority src={homeImage} />
 
-            <div className="flex size-full flex-col justify-center gap-6">
-              <p className="-mb-5 font-semibold tracking-wider text-rose-500">BEAUTIFY</p>
-              <h1 className={`max-w-[800px] text-8xl ${montaguSlab.className}`}>Professional Makeup Artist</h1>
-              <p className="max-w-[650px] text-xl">
-                Delivering elegant and professional beauty touches for your special moments. Trust us to bring out your best look.
-              </p>
-            </div>
+            <SectionHeader
+              containerClassname="flex h-full flex-col justify-center gap-6 space-y-0"
+              description="Delivering elegant and professional beauty touches for your special moments. Trust us to bring out your best look."
+              descriptionClassname="max-w-[650px] text-xl"
+              subtitle="BEAUTIFY"
+              subtitleClassname="-mb-5"
+              title="Professional Makeup Artist"
+              titleClassname="max-w-[800px] text-8xl"
+            />
           </div>
 
           <Image alt="Accent Dot" className="absolute -bottom-8 left-36" src={accentDot} />
