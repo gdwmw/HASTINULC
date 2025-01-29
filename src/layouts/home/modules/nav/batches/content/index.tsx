@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC, FormEvent, ReactElement, useEffect, useState } from "react";
 
-import logo from "@/public/assets/images/logos/Black.png";
+import logo from "@/public/assets/images/logos/Black.svg";
 import { ExampleATWM } from "@/src/components/interfaces/example/A";
 import { NAVIGATION_DATA } from "@/src/libs/constants";
 
