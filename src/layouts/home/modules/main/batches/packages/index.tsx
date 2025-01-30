@@ -40,8 +40,8 @@ export const Packages: FC = (): ReactElement => {
         <div className="flex w-fit flex-wrap justify-center gap-5">
           {PACKAGES_DATA.map((dt) => (
             <div className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md" key={dt.id}>
-              <p className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</p>
-              <h3 className={`border-b border-rose-500 pb-4 text-4xl ${montaguSlab.className}`}>{currencyFormat(dt.price, "IDR")}</h3>
+              <span className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</span>
+              <span className={`border-b border-rose-500 pb-4 text-4xl ${montaguSlab.className}`}>{currencyFormat(dt.price, "IDR")}</span>
 
               <ul className="space-y-2 text-left">
                 {dt.description.map((ls, i) => (
@@ -84,8 +84,8 @@ export const Packages: FC = (): ReactElement => {
                 width={64}
               />
               <div>
-                <p className={`text-2xl font-semibold text-rose-500 ${montaguSlab.className}`}>Danielle Jenkins</p>
-                <p className="text-sm font-semibold tracking-wider text-white">SUPER MODEL</p>
+                <span className={`block text-2xl font-semibold text-rose-500 ${montaguSlab.className}`}>Danielle Jenkins</span>
+                <span className="block text-sm font-semibold tracking-wider text-white">SUPER MODEL</span>
               </div>
             </div>
 
@@ -120,8 +120,8 @@ export const Packages: FC = (): ReactElement => {
                       width={64}
                     />
                     <div>
-                      <p className={`text-2xl font-semibold text-rose-500 ${montaguSlab.className}`}>{dt.name}</p>
-                      <p className="text-sm font-semibold tracking-wider">{dt.role}</p>
+                      <span className={`block text-2xl font-semibold text-rose-500 ${montaguSlab.className}`}>{dt.name}</span>
+                      <span className="block text-sm font-semibold tracking-wider">{dt.role}</span>
                     </div>
                   </div>
 

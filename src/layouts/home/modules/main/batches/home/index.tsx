@@ -227,16 +227,16 @@ export const Home: FC<I> = (props): ReactElement => {
 
               <div className="flex items-center gap-2">
                 <Link
-                  className="flex size-20 items-center justify-center rounded-full bg-rose-200 text-rose-500 hover:bg-rose-300 hover:text-rose-600 active:scale-95 active:bg-rose-100 active:text-rose-400"
+                  className="flex size-20 items-center justify-center rounded-full bg-rose-100 text-rose-500 hover:bg-rose-200 active:scale-95 active:bg-rose-100 active:text-rose-400"
                   href={"https://wa.me/6285762346703"}
                   target="_blank"
                 >
                   <IoLogoWhatsapp size={40} />
                 </Link>
                 <div>
-                  <p className="-mb-1 text-lg italic">Need Help? Contact us</p>
+                  <span className="-mb-1 block text-lg italic">Need Help? Contact us</span>
                   <Link
-                    className="inline-block text-2xl font-semibold text-rose-500 hover:text-rose-600 active:scale-95 active:text-rose-400"
+                    className="inline-block text-2xl font-semibold text-rose-500 active:scale-95 active:text-rose-400"
                     href={"https://wa.me/6285762346703"}
                     target="_blank"
                   >

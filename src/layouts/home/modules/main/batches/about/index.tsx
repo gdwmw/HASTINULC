@@ -38,12 +38,12 @@ export const About: FC = (): ReactElement => {
           </div>
 
           <div className="absolute left-1/2 top-1/2 z-[2] flex size-52 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white">
-            <p className={`text-7xl text-rose-500 ${montaguSlab.className}`}>15+</p>
-            <p className={`text-center ${montaguSlab.className}`}>
+            <span className={`text-7xl text-rose-500 ${montaguSlab.className}`}>15+</span>
+            <span className={`text-center ${montaguSlab.className}`}>
               Years of
               <br />
               Experience
-            </p>
+            </span>
           </div>
 
           <Image alt="Accent Rectangle" className="absolute -bottom-20 -left-36" src={accentRectangle} />
@@ -104,35 +104,35 @@ export const About: FC = (): ReactElement => {
         />
 
         <div className={`z-[1] flex gap-10 ${montaguSlab.className}`}>
-          <div className="space-y-3">
-            <div className="flex items-center gap-5">
+          <ul className="space-y-3">
+            <li className="flex items-center gap-5">
               <FaCheck className="text-rose-500" size={20} />
-              <p className="text-2xl">We travel to you, no matter how far</p>
-            </div>
-            <div className="flex items-center gap-5">
+              <span className="text-2xl">We travel to you, no matter how far</span>
+            </li>
+            <li className="flex items-center gap-5">
               <FaCheck className="text-rose-500" size={20} />
-              <p className="text-2xl">We provide full services for you</p>
-            </div>
-            <div className="flex items-center gap-5">
+              <span className="text-2xl">We provide full services for you</span>
+            </li>
+            <li className="flex items-center gap-5">
               <FaCheck className="text-rose-500" size={20} />
-              <p className="text-2xl">We you pick out the perfect makeup</p>
-            </div>
-          </div>
+              <span className="text-2xl">We you pick out the perfect makeup</span>
+            </li>
+          </ul>
 
-          <div className="space-y-3">
-            <div className="flex items-center gap-5">
+          <ul className="space-y-3">
+            <li className="flex items-center gap-5">
               <FaCheck className="text-rose-500" size={20} />
-              <p className="text-2xl">We keep calm & fun on your special day</p>
-            </div>
-            <div className="flex items-center gap-5">
+              <span className="text-2xl">We keep calm & fun on your special day</span>
+            </li>
+            <li className="flex items-center gap-5">
               <FaCheck className="text-rose-500" size={20} />
-              <p className="text-2xl">We are a very professional team</p>
-            </div>
-            <div className="flex items-center gap-5">
+              <span className="text-2xl">We are a very professional team</span>
+            </li>
+            <li className="flex items-center gap-5">
               <FaCheck className="text-rose-500" size={20} />
-              <p className="text-2xl">Quarantee for you who are not satisfied</p>
-            </div>
-          </div>
+              <span className="text-2xl">Quarantee for you who are not satisfied</span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
