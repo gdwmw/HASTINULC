@@ -126,7 +126,7 @@ export const Home: FC<I> = (props): ReactElement => {
   return (
     <section className="bg-rose-200" id="home">
       <div className="flex h-[calc(100vh-88px)] flex-col">
-        <div className="relative h-full">
+        <section className="relative h-full">
           <div className="container mx-auto size-full px-5">
             <Image alt="Home Image" className="absolute right-0 top-0 h-full w-fit" priority src={homeImage} />
 
@@ -142,46 +142,27 @@ export const Home: FC<I> = (props): ReactElement => {
           </div>
 
           <Image alt="Accent Dot" className="absolute -bottom-8 left-36" src={accentDot} />
-        </div>
+        </section>
 
-        <div className="h-56 w-full bg-white shadow-lg">
+        <section className="h-56 w-full bg-white shadow-lg">
           <div className="container mx-auto size-full px-5">
             <div className="flex size-full items-center justify-center gap-20">
               <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex w-full items-center gap-5">
-                  {FORM_FIELD_DATA.slice(0, 3).map((dt) =>
-                    !dt.isSelect ? (
-                      <ExampleInput
-                        color="rose"
-                        containerClassName="w-64"
-                        disabled={loading}
-                        errorMessage={errors[dt.name]?.message}
-                        key={dt.id}
-                        label={dt.label}
-                        maxLength={dt.maxLength}
-                        onKeyDown={dt.onKeyDown}
-                        type={dt.type}
-                        {...register(dt.name)}
-                      />
-                    ) : (
-                      <ExampleSelect
-                        color="rose"
-                        containerClassName="w-64"
-                        disabled={loading}
-                        errorMessage={errors[dt.name]?.message}
-                        key={dt.id}
-                        label={dt.label}
-                        {...register(dt.name)}
-                      >
-                        <option value="-">-</option>
-                        {dt.options?.map((opt, i) => (
-                          <option key={i} value={opt}>
-                            {opt}
-                          </option>
-                        ))}
-                      </ExampleSelect>
-                    ),
-                  )}
+                  {FORM_FIELD_DATA.slice(0, 3).map((dt) => (
+                    <ExampleInput
+                      color="rose"
+                      containerClassName="w-64"
+                      disabled={loading}
+                      errorMessage={errors[dt.name]?.message}
+                      key={dt.id}
+                      label={dt.label}
+                      maxLength={dt.maxLength}
+                      onKeyDown={dt.onKeyDown}
+                      type={dt.type}
+                      {...register(dt.name)}
+                    />
+                  ))}
                 </div>
 
                 <div className="flex w-full items-center gap-5">
@@ -246,7 +227,7 @@ export const Home: FC<I> = (props): ReactElement => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </section>
   );

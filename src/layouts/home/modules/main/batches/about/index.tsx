@@ -23,7 +23,7 @@ export const About: FC = (): ReactElement => {
 
   return (
     <section className="flex scroll-mt-[88px] flex-col gap-24 bg-white pt-24" id="about">
-      <div className="container relative mx-auto flex items-center justify-center gap-20 px-5">
+      <section className="container relative mx-auto flex items-center justify-center gap-20 px-5">
         <Image alt="Accent Circle" className="absolute -top-10 right-36" src={accentCircle} />
 
         <div className="relative flex flex-col gap-5">
@@ -55,9 +55,9 @@ export const About: FC = (): ReactElement => {
           subtitle="WELCOME TO"
           title="Best Professional Makeup Artist"
         />
-      </div>
+      </section>
 
-      <div className="container mx-auto flex justify-between px-5">
+      <section className="container mx-auto flex justify-between px-5">
         <SectionHeader
           containerClassname="max-w-[700px]"
           description="Every moment deserves to be extraordinary, and we are here to make that happen. From weddings to special events, our expert touch ensures you'll look and feel your absolute best. Let us create memories that last a lifetime with flawless and personalized beauty services."
@@ -69,9 +69,9 @@ export const About: FC = (): ReactElement => {
           <Image alt="About Image" src={aboutImage5} width={350} />
           <Image alt="About Image" src={aboutImage6} width={350} />
         </div>
-      </div>
+      </section>
 
-      <div className="container relative mx-auto mt-64 flex flex-col items-center justify-center space-y-16 bg-slate-100 px-5 pb-20 pt-80">
+      <section className="container relative mx-auto mt-64 flex flex-col items-center justify-center space-y-16 bg-slate-100 px-5 pb-20 pt-80">
         <div className="absolute -top-64 z-[1]">
           {active ? (
             <iframe
@@ -134,7 +134,7 @@ export const About: FC = (): ReactElement => {
             </li>
           </ul>
         </div>
-      </div>
+      </section>
     </section>
   );
 };

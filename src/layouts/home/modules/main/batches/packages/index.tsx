@@ -29,7 +29,7 @@ export const Packages: FC = (): ReactElement => {
 
   return (
     <section className="flex scroll-mt-[88px] flex-col gap-24 bg-white pt-24" id="packages">
-      <div className="container mx-auto flex flex-col items-center gap-10 px-5">
+      <section className="container mx-auto flex flex-col items-center gap-10 px-5">
         <SectionHeader
           containerClassname="max-w-[1000px] text-center"
           description="With Hastinulc Makeup Art, You'll not get only your Dream Makeup services but also at affordable price."
@@ -66,9 +66,9 @@ export const Packages: FC = (): ReactElement => {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto flex gap-5 px-5">
+      <section className="container mx-auto flex gap-5 px-5">
         <div className="space-y-5">
           <SectionHeader containerClassname="text-right" subtitle="TESTIMONIALS" title="Words from Clients" titleClassname="text-nowrap" />
 
@@ -172,7 +172,7 @@ export const Packages: FC = (): ReactElement => {
             </ExampleA>
           </div>
         </div>
-      </div>
+      </section>
     </section>
   );
 };
