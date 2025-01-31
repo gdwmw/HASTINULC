@@ -8,19 +8,19 @@ if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-interface IMapDataToResponse extends IAuthSchema, IDatasResponse {}
+interface IRearrange extends IAuthSchema, IDatasResponse {}
 
-const mapDataToResponse = (dt: IMapDataToResponse): IAuthResponse => ({
-  datasDocumentId: dt.user.datasDocumentId,
-  email: dt.user.email,
-  id: dt.user.id,
-  image: dt.image,
-  name: dt.name,
-  phoneNumber: dt.phoneNumber,
-  role: dt.role,
+const rearrange = (response: IRearrange): IAuthResponse => ({
+  datasDocumentId: response.user.datasDocumentId,
+  email: response.user.email,
+  id: response.user.id,
+  image: response.image,
+  name: response.name,
+  phoneNumber: response.phoneNumber,
+  role: response.role,
   status: "authenticated",
-  token: dt.jwt,
-  username: dt.user.username,
+  token: response.jwt,
+  username: response.user.username,
 });
 
 export const POSTLogin = async (payload: ILoginPayload): Promise<IAuthResponse> => {
@@ -41,12 +41,12 @@ export const POSTLogin = async (payload: ILoginPayload): Promise<IAuthResponse> 
 
     const datasResponse = await GETDatasByDocumentId(response.user.datasDocumentId);
 
-    const result: IMapDataToResponse = {
+    const result: IRearrange = {
       ...response,
       ...datasResponse,
     };
 
-    return mapDataToResponse(result);
+    return rearrange(result);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
