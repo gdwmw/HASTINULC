@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FC, ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
@@ -56,75 +57,82 @@ export const Content: FC = (): ReactElement => {
   };
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center px-5">
-      <form className="flex w-full max-w-64 flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-        <ExampleInput
-          color="rose"
-          disabled={loading}
-          errorMessage={errors.identifier?.message}
-          label={loginWithEmail ? "Email" : "Username"}
-          type="text"
-          {...register("identifier")}
-        />
-
-        <ExampleInput
-          color="rose"
-          disabled={loading}
-          errorMessage={errors.password?.message}
-          icon={passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} />}
-          iconOnClick={() => setPasswordVisibility((prev) => !prev)}
-          label="Password"
-          type={passwordVisibility ? "text" : "password"}
-          {...register("password")}
-        />
-
-        <span className="text-center text-sm text-red-600">
-          {invalidCredentials && (loginWithEmail ? "Invalid Email or Password" : "Invalid Username or Password")}
-        </span>
-
-        <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-          {loading ? "Loading..." : "LOGIN"}
-        </ExampleA>
-
-        <div className="flex justify-center gap-1">
-          <span className="text-xs">Don&apos;t have an account yet?</span>
-          <Link
-            className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
-            href={"/register"}
-            onClick={(e) => {
-              if (loading) {
-                e.preventDefault();
-              } else {
-                setPasswordVisibility(false);
-                setInvalidCredentials(false);
-                reset();
-              }
-            }}
-          >
-            Register!
+    <main className="bg-slate-100">
+      <section className="container mx-auto flex h-screen items-center justify-center p-5">
+        <div className="relative flex w-full max-w-[300px] justify-center rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
+          <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
+            <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
-        </div>
+          <form className="flex w-full max-w-64 flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+            <ExampleInput
+              color="rose"
+              disabled={loading}
+              errorMessage={errors.identifier?.message}
+              label={loginWithEmail ? "Email" : "Username"}
+              type="text"
+              {...register("identifier")}
+            />
 
-        <div className="flex justify-center gap-1">
-          <span className="text-xs">{loginWithEmail ? "Login with username?" : "Login with email?"}</span>
-          <ExampleA
-            className="text-xs"
-            color="rose"
-            disabled={loading}
-            onClick={() => {
-              setPasswordVisibility(false);
-              setInvalidCredentials(false);
-              setLoginWithEmail((prev) => !prev);
-              reset();
-            }}
-            size="sm"
-            type="button"
-            variant="ghost"
-          >
-            Click here!
-          </ExampleA>
+            <ExampleInput
+              color="rose"
+              disabled={loading}
+              errorMessage={errors.password?.message}
+              icon={passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} />}
+              iconOnClick={() => setPasswordVisibility((prev) => !prev)}
+              label="Password"
+              type={passwordVisibility ? "text" : "password"}
+              {...register("password")}
+            />
+
+            <span className="text-center text-sm text-red-600">
+              {invalidCredentials && (loginWithEmail ? "Invalid Email or Password" : "Invalid Username or Password")}
+            </span>
+
+            <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+              {loading ? "Loading..." : "LOGIN"}
+            </ExampleA>
+
+            <div className="flex justify-center gap-1">
+              <span className="text-xs">Don&apos;t have an account yet?</span>
+              <Link
+                className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
+                href={"/register"}
+                onClick={(e) => {
+                  if (loading) {
+                    e.preventDefault();
+                  } else {
+                    setPasswordVisibility(false);
+                    setInvalidCredentials(false);
+                    reset();
+                  }
+                }}
+              >
+                Register!
+              </Link>
+            </div>
+
+            <div className="flex justify-center gap-1">
+              <span className="text-xs">{loginWithEmail ? "Login with username?" : "Login with email?"}</span>
+              <ExampleA
+                className="text-xs"
+                color="rose"
+                disabled={loading}
+                onClick={() => {
+                  setPasswordVisibility(false);
+                  setInvalidCredentials(false);
+                  setLoginWithEmail((prev) => !prev);
+                  reset();
+                }}
+                size="sm"
+                type="button"
+                variant="ghost"
+              >
+                Click here!
+              </ExampleA>
+            </div>
+          </form>
         </div>
-      </form>
+      </section>
     </main>
   );
 };
