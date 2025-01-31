@@ -30,7 +30,7 @@ interface IFormField {
   type?: HTMLInputTypeAttribute;
 }
 
-const FORM_FIELD_DATA: IFormField[] = [
+const FORM_FIELDS_DATA: IFormField[] = [
   {
     id: 1,
     label: "Name",
@@ -149,7 +149,7 @@ export const Home: FC<I> = (props): ReactElement => {
             <div className="flex size-full items-center justify-center gap-20">
               <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex w-full items-center gap-5">
-                  {FORM_FIELD_DATA.slice(0, 3).map((dt) => (
+                  {FORM_FIELDS_DATA.slice(0, 3).map((dt) => (
                     <ExampleInput
                       color="rose"
                       containerClassName="w-64"
@@ -166,7 +166,7 @@ export const Home: FC<I> = (props): ReactElement => {
                 </div>
 
                 <div className="flex w-full items-center gap-5">
-                  {FORM_FIELD_DATA.slice(3).map((dt) =>
+                  {FORM_FIELDS_DATA.slice(3).map((dt) =>
                     !dt.isSelect ? (
                       <ExampleInput
                         color="rose"

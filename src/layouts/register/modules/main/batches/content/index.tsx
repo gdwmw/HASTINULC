@@ -22,7 +22,7 @@ interface IFormField {
   type: HTMLInputTypeAttribute;
 }
 
-const FORM_FIELD_DATA: IFormField[] = [
+const FORM_FIELDS_DATA: IFormField[] = [
   {
     id: 1,
     label: "Name",
@@ -122,7 +122,7 @@ export const Content: FC = (): ReactElement => {
   return (
     <main className="flex h-screen flex-col items-center justify-center px-5">
       <form className="flex w-full max-w-96 flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-        {FORM_FIELD_DATA.map((dt) => (
+        {FORM_FIELDS_DATA.map((dt) => (
           <ExampleInput
             color="rose"
             disabled={loading}

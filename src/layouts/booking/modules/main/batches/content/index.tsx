@@ -28,7 +28,7 @@ interface IFormField {
   type?: HTMLInputTypeAttribute;
 }
 
-const FORM_FIELD_DATA: IFormField[] = [
+const FORM_FIELDS_DATA: IFormField[] = [
   {
     id: 1,
     label: "Name",
@@ -154,7 +154,7 @@ export const Content: FC<I> = (props): ReactElement => {
     <main className="flex h-screen flex-col items-center justify-center">
       <div className="container mx-auto flex justify-center gap-5 px-5">
         <form className="flex w-full max-w-96 flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-          {FORM_FIELD_DATA.map((dt) =>
+          {FORM_FIELDS_DATA.map((dt) =>
             !dt.isSelect && dt.type !== "checkbox" ? (
               <Fragment key={dt.id}>
                 <ExampleInput
