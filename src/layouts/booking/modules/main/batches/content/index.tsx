@@ -106,11 +106,11 @@ export const Content: FC<I> = (props): ReactElement => {
     watch,
   } = useForm<TBookingSchema>({
     defaultValues: {
-      date: booking?.date ?? "",
-      email: booking?.email ?? props.session?.user?.email ?? "",
-      event: booking?.event ?? "-",
-      name: booking?.name ?? props.session?.user?.name ?? "",
-      phoneNumber: booking?.phoneNumber ?? props.session?.user?.phoneNumber ?? "",
+      date: booking?.date,
+      email: booking?.email ?? props.session?.user?.email ?? undefined,
+      event: booking?.event,
+      name: booking?.name ?? props.session?.user?.name ?? undefined,
+      phoneNumber: booking?.phoneNumber ?? props.session?.user?.phoneNumber,
     },
     resolver: zodResolver(BookingSchema),
   });
@@ -123,16 +123,6 @@ export const Content: FC<I> = (props): ReactElement => {
     setTotal(price + price * 0.12);
     // eslint-disable-next-line
   }, [watch("event")]);
-
-  const rupiahFormat = (value: number) => {
-    const result = new Intl.NumberFormat("id-ID", {
-      currency: "IDR",
-      maximumFractionDigits: 0,
-      minimumFractionDigits: 0,
-      style: "currency",
-    }).format(value);
-    return result;
-  };
 
   const onSubmit: SubmitHandler<TBookingSchema> = async (dt) => {
     setLoading(true);
@@ -148,12 +138,10 @@ export const Content: FC<I> = (props): ReactElement => {
       username: props.session?.user?.username ?? "",
     };
 
-    console.log(newPayload);
-
     try {
       const res = await POSTBookings(newPayload);
       console.log("Booking Success!");
-      router.push(`/${props.session?.user?.username}/bookings?bid=${res.documentId}`);
+      router.push(`/user/${props.session?.user?.username}/history/${res.documentId}`);
       reset();
     } catch {
       console.log("Booking Failed!");
@@ -183,7 +171,7 @@ export const Content: FC<I> = (props): ReactElement => {
 
                 {dt.type === "url" && (
                   <>
-                    <p className="text-xs italic text-rose-400">*Please share Google Maps location link</p>
+                    <span className="text-xs italic text-rose-400">*Please share Google Maps location link</span>
 
                     <div className="flex justify-center gap-1">
                       <span className="text-xs">Don&apos;t know how to get Google Maps Link?</span>
@@ -236,19 +224,7 @@ export const Content: FC<I> = (props): ReactElement => {
           </ExampleA>
         </form>
 
-        <BookingSummary
-          datasDocumentId={props.session?.user?.datasDocumentId}
-          date={watch("date")}
-          email={watch("email")}
-          event={watch("event")}
-          googleMapsLink={watch("googleMapsLink")}
-          name={watch("name")}
-          phoneNumber={watch("phoneNumber")}
-          subTotal={rupiahFormat(subtotal)}
-          tax={rupiahFormat(tax)}
-          time={watch("time")}
-          total={rupiahFormat(total)}
-        />
+        <BookingSummary {...watch()} datasDocumentId={props.session?.user?.datasDocumentId} subTotal={subtotal} tax={tax} total={total} />
       </div>
     </main>
   );
