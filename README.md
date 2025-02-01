@@ -11,22 +11,64 @@ This boilerplate is a web application built using Next.js, which is a React fram
 Below is the main directory structure of the boilerplate:
 
 ```
-/auth
-/public
-   /assets
-      /animations
-      /images
-/src
-  /app
-  /components
-  /context
-  /hooks
-  /layouts
-  /libs
-  /schemas
-  /types
-  /utils
-  /middleware.ts
+└── 📁auth
+└── 📁public
+    └── 📁assets
+        └── 📁animations
+        └── 📁images
+└── 📁src
+    └── 📁app
+        └── 📁(authed)
+            └── 📁(admin)
+            └── 📁(user)
+        └── 📁api
+            └── 📁auth
+                └── 📁[...nextauth]
+        └── 📁fonts
+    └── 📁components
+        └── 📁interfaces
+            └── 📁example
+                └── 📁A
+                └── 📁B
+                └── 📁C
+        └── README.md
+    └── 📁context
+    └── 📁hooks
+        └── 📁cookies
+        └── 📁functions
+        └── 📁session
+    └── 📁layouts
+        └── 📁example
+            └── 📁modules
+                └── 📁aside
+                └── 📁footer
+                └── 📁header
+                └── 📁main
+                └── 📁nav
+            └── 📁pages
+                └── 📁example
+                    └── 📁modules
+                        └── 📁aside
+                        └── 📁footer
+                        └── 📁header
+                        └── 📁main
+                        └── 📁nav
+    └── 📁libs
+        └── 📁constants
+        └── 📁providers
+            └── 📁next-auth
+            └── 📁next-themes
+            └── 📁react-query
+        └── 📁tailwind-merge
+    └── 📁schemas
+        └── 📁example
+    └── 📁types
+        └── 📁example
+        └── next-auth.d.ts
+    └── 📁utils
+        └── 📁api
+            └── 📁example
+    └── middleware.ts
 ```
 
 ### Structure Explanation 📚
@@ -200,3 +242,91 @@ If you have any questions regarding the boilerplate or its usage, please follow 
 By following these guidelines, you can help ensure that your questions are understood and addressed promptly.
 
 This documentation provides a clear overview of the boilerplate, installation instructions, commit guidelines, and contribution guidelines. If you have any further questions, feel free to ask!
+
+---
+
+# Special AI Instructions for Creating Code Structure Diagrams
+
+1. **Format**:
+
+   - Use Markdown format.
+   - Use headings (`#`, `##`, `###`) for titles and subtitles.
+
+2. **Icons**:
+
+   - Use the following icons to identify components:
+     - 📄 for **Page**.
+     - 📦 for **Main** or **Layout**.
+     - 📝 for **Content** or content components.
+     - 🧭 for **Nav**.
+     - 📐 for **Aside**.
+     - 🦶 for **Footer**.
+
+3. **Structure**:
+
+   - Create a hierarchy using indentation (use `-` for lists).
+   - Each component must have a link to the file path (example: `[📄 HomePage](src/app/page.tsx)`).
+
+4. **Section Titles**:
+
+   - Use section titles for each part (example: `### 🏠 **Home**`).
+
+5. **Important**:
+
+   - Create the structure according to the actual structure in the codebase. This is just an example, so adjust it to the current codebase.
+
+## Example Code Structure Diagram
+
+### 🏠 **Home**
+
+```md
+- [📄 HomePage](src/app/page.tsx)
+  - [📦 HomeLayout](src/layouts/home/index.tsx)
+    - [🧭 Nav](src/layouts/home/modules/nav/index.tsx)
+      - [📝 Nav Content](src/layouts/home/modules/nav/batches/content/index.tsx)
+    - [📐 Aside](src/layouts/home/modules/aside/index.tsx)
+    - [📦 Main](src/layouts/home/modules/main/index.tsx)
+      - [📝 About](src/layouts/home/modules/main/batches/about/index.tsx)
+      - [📝 Contact](src/layouts/home/modules/main/batches/contact/index.tsx)
+      - [📝 Home](src/layouts/home/modules/main/batches/home/index.tsx)
+      - [📝 Packages](src/layouts/home/modules/main/batches/packages/index.tsx)
+      - [📝 Portfolio](src/layouts/home/modules/main/batches/portfolio/index.tsx)
+    - [🦶 Footer](src/layouts/home/modules/footer/index.tsx)
+```
+
+### 🔐 **Login**
+
+```md
+- [📄 LoginPage](src/app/login/page.tsx)
+  - [📦 LoginLayout](src/layouts/login/index.tsx)
+    - [📦 Main](src/layouts/login/modules/main/index.tsx)
+      - [📝 Content](src/layouts/login/modules/main/batches/content/index.tsx)
+```
+
+### 📝 **Register**
+
+```md
+- [📄 RegisterPage](src/app/register/page.tsx)
+  - [📦 RegisterLayout](src/layouts/register/index.tsx)
+    - [📦 Main](src/layouts/register/modules/main/index.tsx)
+      - [📝 Content](src/layouts/register/modules/main/batches/content/index.tsx)
+```
+
+### 📅 **Booking**
+
+```md
+- [📄 BookingPage](<src/app/(authed)/(user)/booking/page.tsx>)
+  - [📦 BookingLayout](src/layouts/booking/index.tsx)
+    - [📦 Main](src/layouts/booking/modules/main/index.tsx)
+      - [📝 Content](src/layouts/booking/modules/main/batches/content/index.tsx)
+```
+
+### 👤 **User**
+
+```md
+- [📄 Layout](<src/app/(authed)/(user)/user/layout.tsx>)
+  - [📦 UserLayout](src/layouts/user/layout/index.tsx)
+    - [📄 Slug](<src/app/(authed)/(user)/user/[...slug]/page.tsx>)
+      - [📦 Main](src/layouts/user/pages/history/modules/main/index.tsx)
+        - [📝 Content](src/layouts/user/pages/history/modules/main/batches/content/index.tsx)
+```
