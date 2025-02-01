@@ -16,6 +16,7 @@ import { ExampleA } from "@/src/components/interfaces/example/A";
 import { ExampleInput, ExampleSelect } from "@/src/components/interfaces/example/C";
 import { SectionHeader } from "@/src/components/section-header";
 import { useGlobalStates } from "@/src/context";
+import { inputValidations } from "@/src/hooks/functions";
 import { PACKAGES_DATA } from "@/src/libs/constants";
 import { BookingSchema, TBookingSchema } from "@/src/schemas/home";
 
@@ -25,7 +26,7 @@ interface IFormField {
   label?: string;
   maxLength?: number;
   name: keyof TBookingSchema;
-  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: KeyboardEvent) => void;
   options?: string[];
   type?: HTMLInputTypeAttribute;
 }
@@ -36,11 +37,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
     label: "Name",
     maxLength: 50,
     name: "name",
-    onKeyDown: (e: KeyboardEvent) => {
-      if (!/^[a-zA-Z\s]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-        e.preventDefault();
-      }
-    },
+    onKeyDown: (e) => inputValidations.name(e),
     type: "text",
   },
   {
@@ -54,11 +51,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
     label: "Phone Number",
     maxLength: 15,
     name: "phoneNumber",
-    onKeyDown: (e: KeyboardEvent) => {
-      if (!/\d/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-        e.preventDefault();
-      }
-    },
+    onKeyDown: (e) => inputValidations.phoneNumber(e),
     type: "tel",
   },
   {

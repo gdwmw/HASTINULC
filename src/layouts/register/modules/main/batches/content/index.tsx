@@ -10,6 +10,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
 import { ExampleInput } from "@/src/components/interfaces/example/C";
+import { inputValidations } from "@/src/hooks/functions";
 import { RegisterSchema, TRegisterSchema } from "@/src/schemas/auth";
 import { POSTRegister } from "@/src/utils/api";
 
@@ -19,7 +20,7 @@ interface IFormField {
   label: string;
   maxLength?: number;
   name: keyof TRegisterSchema;
-  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: KeyboardEvent) => void;
   type: HTMLInputTypeAttribute;
 }
 
@@ -29,11 +30,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
     label: "Name",
     maxLength: 50,
     name: "name",
-    onKeyDown: (e: KeyboardEvent) => {
-      if (!/^[a-zA-Z\s]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-        e.preventDefault();
-      }
-    },
+    onKeyDown: (e) => inputValidations.name(e),
     type: "text",
   },
   {
@@ -41,11 +38,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
     label: "Username",
     maxLength: 8,
     name: "username",
-    onKeyDown: (e: KeyboardEvent) => {
-      if (!/^[a-z0-9]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-        e.preventDefault();
-      }
-    },
+    onKeyDown: (e) => inputValidations.username(e),
     type: "text",
   },
   {
@@ -59,11 +52,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
     label: "Phone Number",
     maxLength: 15,
     name: "phoneNumber",
-    onKeyDown: (e: KeyboardEvent) => {
-      if (!/\d/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-        e.preventDefault();
-      }
-    },
+    onKeyDown: (e) => inputValidations.phoneNumber(e),
     type: "tel",
   },
   {
