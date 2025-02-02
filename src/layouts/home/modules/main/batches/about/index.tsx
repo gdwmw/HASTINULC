@@ -1,6 +1,5 @@
 "use client";
 
-import localFont from "next/font/local";
 import Image from "next/image";
 import { FC, ReactElement, useState } from "react";
 import { FaCheck, FaPlay } from "react-icons/fa";
@@ -15,8 +14,6 @@ import aboutImage5 from "@/public/assets/images/model/About-5.jpg";
 import aboutImage6 from "@/public/assets/images/model/About-6.jpg";
 import aboutImage7 from "@/public/assets/images/model/About-7.jpg";
 import { SectionHeader } from "@/src/components/section-header";
-
-const montaguSlab = localFont({ src: "../../../../../../app/fonts/montagu-slab/MontaguSlab-VariableFont_opsz,wght.ttf" });
 
 export const About: FC = (): ReactElement => {
   const [active, setActive] = useState(false);
@@ -38,8 +35,8 @@ export const About: FC = (): ReactElement => {
           </div>
 
           <div className="absolute left-1/2 top-1/2 z-[2] flex size-52 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white">
-            <span className={`text-7xl text-rose-500 ${montaguSlab.className}`}>15+</span>
-            <span className={`text-center ${montaguSlab.className}`}>
+            <span className="font-montaguSlab text-7xl text-rose-500">15+</span>
+            <span className="text-center font-montaguSlab">
               Years of
               <br />
               Experience
@@ -103,7 +100,7 @@ export const About: FC = (): ReactElement => {
           title="Why Choose Us?"
         />
 
-        <div className={`z-[1] flex gap-10 ${montaguSlab.className}`}>
+        <div className="z-[1] flex gap-10 font-montaguSlab">
           <ul className="space-y-3">
             <li className="flex items-center gap-5">
               <FaCheck className="text-rose-500" size={20} />

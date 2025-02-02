@@ -1,6 +1,5 @@
 "use client";
 
-import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, ReactElement, useState } from "react";
@@ -12,8 +11,6 @@ import { SectionHeader } from "@/src/components/section-header";
 import { useGlobalStates } from "@/src/context";
 import { currencyFormat } from "@/src/hooks/functions";
 import { PACKAGES_DATA, TESTIMONIALS_DATA } from "@/src/libs/constants";
-
-const montaguSlab = localFont({ src: "../../../../../../app/fonts/montagu-slab/MontaguSlab-VariableFont_opsz,wght.ttf" });
 
 export const Packages: FC = (): ReactElement => {
   const { setBooking } = useGlobalStates();
@@ -41,7 +38,7 @@ export const Packages: FC = (): ReactElement => {
           {PACKAGES_DATA.map((dt) => (
             <div className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md" key={dt.id}>
               <span className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</span>
-              <span className={`border-b border-rose-500 pb-4 text-4xl ${montaguSlab.className}`}>{currencyFormat(dt.price, "IDR")}</span>
+              <span className="border-b border-rose-500 pb-4 font-montaguSlab text-4xl">{currencyFormat(dt.price, "IDR")}</span>
 
               <ul className="space-y-2 text-left">
                 {dt.description.map((ls, i) => (
@@ -84,7 +81,7 @@ export const Packages: FC = (): ReactElement => {
                 width={64}
               />
               <div>
-                <span className={`block text-2xl font-semibold text-rose-500 ${montaguSlab.className}`}>Danielle Jenkins</span>
+                <span className="block font-montaguSlab text-2xl font-semibold text-rose-500">Danielle Jenkins</span>
                 <span className="block text-sm font-semibold tracking-wider text-white">SUPER MODEL</span>
               </div>
             </div>
@@ -120,7 +117,7 @@ export const Packages: FC = (): ReactElement => {
                       width={64}
                     />
                     <div>
-                      <span className={`block text-2xl font-semibold text-rose-500 ${montaguSlab.className}`}>{dt.name}</span>
+                      <span className="block font-montaguSlab text-2xl font-semibold text-rose-500">{dt.name}</span>
                       <span className="block text-sm font-semibold tracking-wider">{dt.role}</span>
                     </div>
                   </div>

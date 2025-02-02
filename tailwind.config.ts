@@ -12,7 +12,13 @@ const config: Config = {
     }),
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        geistMono: ["var(--font-geist-sans)"],
+        geistSans: ["var(--font-geist-mono)"],
+        montaguSlab: ["var(--font-montagu-slab)"],
+      },
+    },
   },
 };
 
