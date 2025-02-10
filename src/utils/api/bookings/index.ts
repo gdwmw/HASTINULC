@@ -24,6 +24,7 @@ const FIELDS_DATA: TFields[] = [
   "time",
   "total",
   "username",
+  "rating",
 ];
 
 // eslint-disable-next-line

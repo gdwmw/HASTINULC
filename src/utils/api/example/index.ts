@@ -43,9 +43,9 @@ const createExampleResponse = (source: any): IExampleResponse =>
     {},
   ) as IExampleResponse;
 
-const rearrangeAll = (dt: IExampleResponse): IExampleResponse => createExampleResponse(dt);
+const rearrangeAll = (response: IExampleResponse): IExampleResponse => createExampleResponse(response);
 
-const rearrange = (dt: IExampleSchema): IExampleResponse => createExampleResponse(dt.data);
+const rearrange = (response: IExampleSchema): IExampleResponse => createExampleResponse(response.data);
 
 export const GETExample = async (query?: string): Promise<IExampleResponse[]> => {
   try {

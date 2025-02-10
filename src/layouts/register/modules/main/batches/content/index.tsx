@@ -116,6 +116,7 @@ export const Content: FC = (): ReactElement => {
           <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
             <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
+
           <form className="flex w-full max-w-96 flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
             {FORM_FIELDS_DATA.map((dt) => (
               <ExampleInput
