@@ -144,3 +144,21 @@ export const TESTIMONIALS_DATA = [
     text: "As a photographer, I was amazed by how flawless the makeup looked on camera. Highly recommend this service!",
   },
 ];
+
+export const SUGGESTIONS_DATA = [
+  "Professional Service",
+  "Excellent Makeup Skills",
+  "Highly Recommended",
+  "Friendly and Attentive",
+  "On Time and Punctual",
+  "Affordable Pricing",
+  "Clean & Hygienic Tools",
+  "Creative and Trendy Styles",
+  "Perfect Color Matching",
+  "Long-lasting Makeup",
+  "Comfortable Application",
+  "Attention to Detail",
+  "Customized Look",
+  "Patient and Understanding",
+  "Skilled Makeup Artist",
+];
