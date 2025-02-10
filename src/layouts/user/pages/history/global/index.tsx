@@ -5,8 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, ReactElement, ReactNode, useEffect } from "react";
 import { FaCalendarAlt, FaChevronLeft, FaChevronRight, FaClock } from "react-icons/fa";
+import { IoStar } from "react-icons/io5";
 
 import { ExampleATWM } from "@/src/components/interfaces/example/A";
+import { useGlobalStates } from "@/src/context";
 import { IBookingsResponse } from "@/src/types/api";
 
 interface I {
@@ -15,8 +17,9 @@ interface I {
   session: null | Session;
 }
 
-export const UserLayout: FC<I> = (props): ReactElement => {
+export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
   const pathname = usePathname();
+  const { setOpen } = useGlobalStates();
 
   useEffect(() => {
     const pathSegments = pathname.split("/");
@@ -35,6 +38,7 @@ export const UserLayout: FC<I> = (props): ReactElement => {
           <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
             <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
+
           <section className="size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5">
             {props.response.map((dt) => (
               <div
@@ -91,14 +95,41 @@ export const UserLayout: FC<I> = (props): ReactElement => {
                   </div>
 
                   <div className="space-y-3 text-sm">
-                    <div className="flex items-center gap-3">
-                      <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
-                        <FaCalendarAlt className="text-rose-500" />
+                    <div className="flex justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
+                          <FaCalendarAlt className="text-rose-500" />
+                        </div>
+                        <div>
+                          <span className="block text-gray-500">Event</span>
+                          <span className="block font-medium text-gray-900">{dt.event || "-"}</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="block text-gray-500">Event</span>
-                        <span className="block font-medium text-gray-900">{dt.event || "-"}</span>
-                      </div>
+
+                      {dt.rating?.rating && (
+                        <div className="flex items-center gap-3">
+                          <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
+                            <IoStar className="text-rose-500" />
+                          </div>
+                          <div>
+                            <span className="block text-gray-500">Rating</span>
+                            {dt.indicator === "Success" && dt.rating && (
+                              <div className="flex items-center">
+                                {Array.from({ length: 5 }, (_, i) => {
+                                  const ratingValue = i + 1;
+                                  return (
+                                    <IoStar
+                                      className={ratingValue <= (dt.rating?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}
+                                      key={i}
+                                      size={15}
+                                    />
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex items-center gap-3">
@@ -113,10 +144,30 @@ export const UserLayout: FC<I> = (props): ReactElement => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-end border-t border-gray-300 p-3">
+                <div className="flex items-center justify-end gap-3 border-t border-gray-300 p-3">
+                  {dt.indicator === "Success" && !dt.rating && (
+                    <Link
+                      className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
+                      href={`/user/review/${props.session?.user?.username}/${dt.documentId}`}
+                    >
+                      Give Review
+                    </Link>
+                  )}
+
+                  {dt.indicator === "Success" && dt.rating && (
+                    <Link
+                      className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
+                      href={`/user/history/${props.session?.user?.username}/${dt.documentId}`}
+                      onClick={() => setOpen({ bookingSummary: false })}
+                    >
+                      View Review
+                    </Link>
+                  )}
+
                   <Link
                     className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
-                    href={`/user/${props.session?.user?.username}/history/${dt.documentId}`}
+                    href={`/user/history/${props.session?.user?.username}/${dt.documentId}`}
+                    onClick={() => setOpen({ bookingSummary: true })}
                   >
                     View Details <FaChevronRight className="ml-1" size={12} />
                   </Link>
@@ -126,7 +177,7 @@ export const UserLayout: FC<I> = (props): ReactElement => {
           </section>
 
           <div className="flex grow items-start overflow-y-auto h-min-[845px]:items-center">
-            <div className="flex w-full justify-center h-max-[845px]:my-auto">{props.children}</div>
+            <div className="flex w-full justify-center p-2 h-max-[845px]:my-auto">{props.children}</div>
           </div>
         </div>
       </section>
