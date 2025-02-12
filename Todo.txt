@@ -1,0 +1,4 @@
+TODO: Ubah README folder struktur, tambahin folder Global untuk component GlobalLayout
+TODO: Ubah README folder struktur, tambahin folder Global untuk component GlobalLayout di Next.js Boilerplate
+TODO: Tambahin file Todo.txt ke Next.js Boilerplate
+TODO: Cek lagi untuk kode Review dan Quis karna banyak gak fokusnya
