@@ -148,7 +148,7 @@ export interface IReviewsPayload {
   booking?: string;
   description: string;
   documentId?: string;
-  image: File[] | number;
+  image?: File[] | number;
   rating: number;
 }
 
