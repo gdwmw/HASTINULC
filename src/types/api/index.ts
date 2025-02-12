@@ -178,3 +178,34 @@ export interface IRatingsResponse {
   documentId: string;
   rating: number;
 }
+
+// ----------------------------
+
+export interface IQuestionnairesSchema {
+  data: {
+    current: Date;
+    data: string;
+    documentId: string;
+    name: string;
+    responses: object[];
+    username: string;
+  };
+}
+
+export interface IQuestionnairesPayload {
+  current: Date;
+  data: string;
+  documentId?: string;
+  name: string;
+  responses: object[];
+  username: string;
+}
+
+export interface IQuestionnairesResponse {
+  current: Date;
+  data: string;
+  documentId: string;
+  name: string;
+  responses: object[];
+  username: string;
+}

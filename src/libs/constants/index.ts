@@ -162,3 +162,77 @@ export const SUGGESTIONS_DATA = [
   "Patient and Understanding",
   "Skilled Makeup Artist",
 ];
+
+const options = {
+  A: ["SS", "S", "N", "TS", "ST"],
+  B: ["Selalu", "Sering", "Kadang-kadang", "Jarang", "Tidak pernah"],
+};
+
+export const QUESTIONS_DATA = [
+  {
+    id: 1,
+    options: options.A,
+    question: "Apakah informasi yang disediakan di website kami mudah dipahami dan diakses?",
+  },
+  {
+    id: 2,
+    options: options.A,
+    question: "Seberapa baik penampilan fisik tempat layanan makeup kami?",
+  },
+  {
+    id: 3,
+    options: options.B,
+    question: "Seberapa sering Anda mendapatkan layanan yang sesuai dengan deskripsi yang diberikan?",
+  },
+  {
+    id: 4,
+    options: options.A,
+    question: "Apakah Anda merasa bahwa kami memenuhi janji waktu yang telah ditentukan untuk layanan?",
+  },
+  {
+    id: 5,
+    options: options.A,
+    question: "Seberapa baik tim kami dalam memberikan informasi yang Anda butuhkan sebelum layanan?",
+  },
+  {
+    id: 6,
+    options: options.A,
+    question: "Apakah Anda merasa bahwa kami memberikan solusi yang memadai untuk masalah atau keluhan yang Anda ajukan?",
+  },
+  {
+    id: 7,
+    options: options.A,
+    question:
+      "Seberapa baik Anda merasa bahwa staf kami memiliki pengetahuan dan keterampilan yang diperlukan untuk memberikan layanan yang berkualitas?",
+  },
+  {
+    id: 8,
+    options: options.A,
+    question: "Apakah Anda merasa bahwa kami menjaga privasi dan kerahasiaan informasi Anda selama menggunakan layanan kami?",
+  },
+  {
+    id: 9,
+    options: options.A,
+    question: "Seberapa baik tim kami mendengarkan dan memahami kekhawatiran Anda selama proses makeup?",
+  },
+  {
+    id: 10,
+    options: options.A,
+    question: "Apakah Anda merasa bahwa kami memberikan layanan yang dipersonalisasi sesuai dengan preferensi Anda?",
+  },
+  {
+    id: 11,
+    options: options.A,
+    question: "Seberapa puas Anda dengan harga yang Anda bayar untuk layanan yang Anda terima?",
+  },
+  {
+    id: 12,
+    options: options.A,
+    question: "Apakah Anda akan merekomendasikan layanan kami kepada teman atau keluarga?",
+  },
+  {
+    id: 13,
+    options: "textarea",
+    question: "Apa yang dapat kami lakukan untuk meningkatkan pengalaman Anda di masa mendatang?",
+  },
+];
