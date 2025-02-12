@@ -1,4 +1,4 @@
-import { IQuestionnairesPayload, IQuestionnairesResponse, IQuestionnairesSchema } from "@/src/types/api";
+import { IQuestionnairesPayload, IQuestionnairesResponse } from "@/src/types/api";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -20,9 +20,7 @@ const createQuestionnairesResponse = (source: any): IQuestionnairesResponse =>
     {},
   ) as IQuestionnairesResponse;
 
-const rearrangeAll = (response: IQuestionnairesResponse): IQuestionnairesResponse => createQuestionnairesResponse(response);
-
-const rearrange = (response: IQuestionnairesSchema): IQuestionnairesResponse => createQuestionnairesResponse(response.data);
+const rearrange = (response: IQuestionnairesResponse): IQuestionnairesResponse => createQuestionnairesResponse(response);
 
 export const GETQuestionnaires = async (query?: string): Promise<IQuestionnairesResponse[]> => {
   try {
@@ -34,7 +32,7 @@ export const GETQuestionnaires = async (query?: string): Promise<IQuestionnaires
       throw new Error(`Failed to get: Questionnaires with status ${res.status} || ${response.error.message}`);
     }
 
-    return response.data.map(rearrangeAll);
+    return response.data.map(rearrange);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -51,7 +49,7 @@ export const GETQuestionnairesByDocumentId = async (documentId: string): Promise
       throw new Error(`Failed to get: Questionnaires By Document ID with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return rearrange(response.data);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -74,7 +72,7 @@ export const POSTQuestionnaires = async (payload: IQuestionnairesPayload): Promi
       throw new Error(`Failed to post: Questionnaires with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return rearrange(response.data);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -97,7 +95,7 @@ export const PUTQuestionnaires = async (payload: IQuestionnairesPayload): Promis
       throw new Error(`Failed to put: Questionnaires with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return rearrange(response.data);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -116,7 +114,7 @@ export const DELETEQuestionnaires = async (documentId: string): Promise<IQuestio
       throw new Error(`Failed to delete: Questionnaires with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return rearrange(response.data);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;

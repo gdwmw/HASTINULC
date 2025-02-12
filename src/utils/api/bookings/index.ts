@@ -1,6 +1,6 @@
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-import { IBookingsPayload, IBookingsResponse, IBookingsSchema } from "@/src/types/api";
+import { IBookingsPayload, IBookingsResponse } from "@/src/types/api";
 
 if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
@@ -37,9 +37,7 @@ const createBookingResponse = (source: any): IBookingsResponse =>
     {},
   ) as IBookingsResponse;
 
-const rearrangeAll = (response: IBookingsResponse): IBookingsResponse => createBookingResponse(response);
-
-const rearrange = (response: IBookingsSchema): IBookingsResponse => createBookingResponse(response.data);
+const rearrange = (response: IBookingsResponse): IBookingsResponse => createBookingResponse(response);
 
 export const GETBookings = async (query?: string): Promise<IBookingsResponse[]> => {
   try {
@@ -51,7 +49,7 @@ export const GETBookings = async (query?: string): Promise<IBookingsResponse[]> 
       throw new Error(`Failed to get: Bookings with status ${res.status} || ${response.error.message}`);
     }
 
-    return response.data.map(rearrangeAll);
+    return response.data.map(rearrange);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -68,7 +66,7 @@ export const GETBookingsByDocumentId = async (documentId: string): Promise<IBook
       throw new Error(`Failed to get: Bookings By Document ID with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return rearrange(response.data);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -91,7 +89,7 @@ export const POSTBookings = async (payload: IBookingsPayload): Promise<IBookings
       throw new Error(`Failed to post: Bookings with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return rearrange(response.data);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -114,7 +112,7 @@ export const PUTBookings = async (payload: IBookingsPayload): Promise<IBookingsR
       throw new Error(`Failed to put: Bookings with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return rearrange(response.data);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -133,7 +131,7 @@ export const DELETEBookings = async (documentId: string): Promise<IBookingsRespo
       throw new Error(`Failed to delete: Bookings with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return rearrange(response.data);
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;

@@ -67,20 +67,27 @@ export interface IUsersResponse {
 
 // ----------------------------
 
-export interface IDatasSchema {
-  data: {
-    bookings: IBookingsResponse[];
-    documentId: string;
-    image: { url: string };
-    name: string;
-    phoneNumber: string;
-    role: string;
-  };
+export interface IUploadPayload {
+  field?: string;
+  files: File[];
+  ref?: string;
+  refId?: string;
 }
+
+export interface IUploadResponse {
+  documentId: string;
+  id: string;
+  name: string;
+  thumbnail: { name: string; url: string }[] | null;
+  url: string;
+}
+
+// ----------------------------
+
 export interface IDatasPayload {
   bookings?: string;
   documentId?: string;
-  image?: number;
+  image?: File | number;
   name: string;
   phoneNumber: string;
   role?: string;
@@ -97,26 +104,6 @@ export interface IDatasResponse {
 
 // ----------------------------
 
-export interface IBookingsSchema {
-  data: {
-    current: Date;
-    data: string;
-    date: string;
-    documentId: string;
-    email: string;
-    event: string;
-    googleMapsLink: string;
-    indicator: string;
-    name: string;
-    phoneNumber: string;
-    review?: IReviewsResponse;
-    subTotal: string;
-    tax: string;
-    time: string[];
-    total: string;
-    username: string;
-  };
-}
 export interface IBookingsPayload {
   current: Date;
   data: string;
@@ -157,18 +144,11 @@ export interface IBookingsResponse {
 
 // ----------------------------
 
-export interface IReviewsSchema {
-  data: {
-    booking?: IBookingsResponse;
-    description: string;
-    documentId: string;
-    rating: number;
-  };
-}
 export interface IReviewsPayload {
   booking?: string;
   description: string;
   documentId?: string;
+  image: File[] | number;
   rating: number;
 }
 
@@ -176,21 +156,11 @@ export interface IReviewsResponse {
   booking?: IBookingsResponse;
   description: string;
   documentId: string;
+  image: string[];
   rating: number;
 }
 
 // ----------------------------
-
-export interface IQuestionnairesSchema {
-  data: {
-    current: Date;
-    data: string;
-    documentId: string;
-    name: string;
-    responses: object[];
-    username: string;
-  };
-}
 
 export interface IQuestionnairesPayload {
   current: Date;
