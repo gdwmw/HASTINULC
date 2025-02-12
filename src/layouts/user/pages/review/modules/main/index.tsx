@@ -16,7 +16,7 @@ export const Main: FC<I> = async (props): Promise<ReactElement> => {
   const response = await GETBookings(`sort[0]=current:desc&filters[data][documentId][$eq]=${session?.user?.datasDocumentId}`);
   const selectedBookingSummary = response.find((dt) => dt.documentId === slug[1]);
 
-  if (selectedBookingSummary?.rating?.rating) {
+  if (selectedBookingSummary?.review?.rating) {
     redirect(`/user/history/${session?.user?.username}/${slug[1]}`);
   }
 

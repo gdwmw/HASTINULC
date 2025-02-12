@@ -19,7 +19,7 @@ const errorMessage = {
 
 // -----------------------------------------------------------------------------
 
-export const RatingSchema = z.object({
+export const ReviewSchema = z.object({
   description: z
     .string()
     .min(100, { message: errorMessage.string.min("Description", 100) })
@@ -27,4 +27,4 @@ export const RatingSchema = z.object({
   rating: z.number().min(1, { message: errorMessage.number.min("Rating", 1) }),
 });
 
-export type TRatingSchema = z.infer<typeof RatingSchema>;
+export type TReviewSchema = z.infer<typeof ReviewSchema>;

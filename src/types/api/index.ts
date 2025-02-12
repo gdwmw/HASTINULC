@@ -109,7 +109,7 @@ export interface IBookingsSchema {
     indicator: string;
     name: string;
     phoneNumber: string;
-    rating?: IRatingsResponse;
+    review?: IReviewsResponse;
     subTotal: string;
     tax: string;
     time: string[];
@@ -128,7 +128,7 @@ export interface IBookingsPayload {
   indicator: string;
   name: string;
   phoneNumber: string;
-  rating?: string;
+  review?: string;
   subTotal: string;
   tax: string;
   time: string[];
@@ -147,7 +147,7 @@ export interface IBookingsResponse {
   indicator: string;
   name: string;
   phoneNumber: string;
-  rating?: IRatingsResponse;
+  review?: IReviewsResponse;
   subTotal: string;
   tax: string;
   time: string[];
@@ -157,7 +157,7 @@ export interface IBookingsResponse {
 
 // ----------------------------
 
-export interface IRatingsSchema {
+export interface IReviewsSchema {
   data: {
     booking?: IBookingsResponse;
     description: string;
@@ -165,14 +165,14 @@ export interface IRatingsSchema {
     rating: number;
   };
 }
-export interface IRatingsPayload {
+export interface IReviewsPayload {
   booking?: string;
   description: string;
   documentId?: string;
   rating: number;
 }
 
-export interface IRatingsResponse {
+export interface IReviewsResponse {
   booking?: IBookingsResponse;
   description: string;
   documentId: string;

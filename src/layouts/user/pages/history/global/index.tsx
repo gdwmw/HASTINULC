@@ -106,20 +106,20 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                         </div>
                       </div>
 
-                      {dt.rating?.rating && (
+                      {dt.review?.rating && (
                         <div className="flex items-center gap-3">
                           <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
                             <IoStar className="text-rose-500" />
                           </div>
                           <div>
                             <span className="block text-gray-500">Rating</span>
-                            {dt.indicator === "Success" && dt.rating && (
+                            {dt.indicator === "Success" && dt.review && (
                               <div className="flex items-center">
                                 {Array.from({ length: 5 }, (_, i) => {
                                   const ratingValue = i + 1;
                                   return (
                                     <IoStar
-                                      className={ratingValue <= (dt.rating?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}
+                                      className={ratingValue <= (dt.review?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}
                                       key={i}
                                       size={15}
                                     />
@@ -145,7 +145,7 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                 </div>
 
                 <div className="flex items-center justify-end gap-3 border-t border-gray-300 p-3">
-                  {dt.indicator === "Success" && !dt.rating && (
+                  {dt.indicator === "Success" && !dt.review && (
                     <Link
                       className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
                       href={`/user/review/${props.session?.user?.username}/${dt.documentId}`}
@@ -154,7 +154,7 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                     </Link>
                   )}
 
-                  {dt.indicator === "Success" && dt.rating && (
+                  {dt.indicator === "Success" && dt.review && (
                     <Link
                       className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
                       href={`/user/history/${props.session?.user?.username}/${dt.documentId}`}

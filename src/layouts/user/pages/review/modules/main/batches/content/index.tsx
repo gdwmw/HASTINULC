@@ -13,9 +13,9 @@ import { BookingSummary } from "@/src/components/booking-sammary";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
 import { ExampleTextArea } from "@/src/components/interfaces/example/C";
 import { SUGGESTIONS_DATA } from "@/src/libs/constants";
-import { RatingSchema, TRatingSchema } from "@/src/schemas/rating";
-import { IBookingsResponse, IRatingsPayload } from "@/src/types/api";
-import { POSTRatings } from "@/src/utils/api/ratings";
+import { ReviewSchema, TReviewSchema } from "@/src/schemas/review";
+import { IBookingsResponse, IReviewsPayload } from "@/src/types/api";
+import { POSTReviews } from "@/src/utils/api/reviews";
 
 interface I {
   response: IBookingsResponse[];
@@ -37,12 +37,12 @@ export const Content: FC<I> = (props): ReactElement => {
     reset,
     setValue,
     watch,
-  } = useForm<TRatingSchema>({
+  } = useForm<TReviewSchema>({
     defaultValues: {
       description: "",
       rating: 0,
     },
-    resolver: zodResolver(RatingSchema),
+    resolver: zodResolver(ReviewSchema),
   });
 
   const handleSuggestionClick = (dt: string) => {
@@ -51,21 +51,21 @@ export const Content: FC<I> = (props): ReactElement => {
     setValue("description", newSuggestions.join(", "));
   };
 
-  const onSubmit: SubmitHandler<TRatingSchema> = async (dt) => {
+  const onSubmit: SubmitHandler<TReviewSchema> = async (dt) => {
     setLoading(true);
 
-    const newPayload: IRatingsPayload = {
+    const newPayload: IReviewsPayload = {
       ...dt,
       booking: props.slug[1],
     };
 
     try {
-      await POSTRatings(newPayload);
-      console.log("Give Rating Success!");
+      await POSTReviews(newPayload);
+      console.log("Review Success!");
       router.push(`/user/history/${props.session?.user?.username}/${props.slug[1]}`);
       reset();
     } catch {
-      console.log("Give Rating Failed!");
+      console.log("Review Failed!");
     } finally {
       setLoading(false);
     }
@@ -83,6 +83,8 @@ export const Content: FC<I> = (props): ReactElement => {
           </Link>
 
           <form className="flex w-full max-w-[600px] flex-col items-center justify-center gap-5" onSubmit={handleSubmit(onSubmit)}>
+            <h1 className="text-center text-2xl font-bold text-rose-500">How Was Your Experience?</h1>
+
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) => {
                 const ratingValue = i + 1;
@@ -129,7 +131,7 @@ export const Content: FC<I> = (props): ReactElement => {
             </div>
 
             <ExampleA className="w-64 font-semibold" color="rose" disabled={loading || watch("rating") === 0} size="sm" type="submit" variant="solid">
-              SUBMIT
+              {loading ? "Loading..." : "SUBMIT"}
             </ExampleA>
           </form>
 

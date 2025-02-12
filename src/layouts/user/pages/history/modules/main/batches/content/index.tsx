@@ -42,7 +42,7 @@ export const Content: FC<I> = (props): ReactElement => {
                   const ratingValue = i + 1;
                   return (
                     <IoStar
-                      className={ratingValue <= (props.selectedBookingSummary?.rating?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}
+                      className={ratingValue <= (props.selectedBookingSummary?.review?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}
                       key={i}
                       size={25}
                     />
@@ -54,7 +54,7 @@ export const Content: FC<I> = (props): ReactElement => {
             <div className="flex gap-5">
               <span className="text-gray-600">Description:</span>
               <div className="rounded-lg border border-gray-200 p-2">
-                <p>{props.selectedBookingSummary?.rating?.description ?? "< EMPTY >"}</p>
+                <p>{props.selectedBookingSummary?.review?.description ?? "< EMPTY >"}</p>
               </div>
             </div>
           </div>
