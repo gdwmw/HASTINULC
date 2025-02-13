@@ -209,9 +209,9 @@ export const Home: FC<I> = (props): ReactElement => {
                   <IoLogoWhatsapp size={40} />
                 </Link>
                 <div>
-                  <span className="-mb-1 block text-lg not-italic">Need Help? Contact us</span>
+                  <span className="-mb-1 block text-lg">Need Help? Contact us</span>
                   <Link
-                    className="inline-block text-2xl font-semibold text-rose-500 active:scale-95 active:text-rose-400"
+                    className="inline-block text-2xl font-semibold not-italic text-rose-500 active:scale-95 active:text-rose-400"
                     href={"https://wa.me/6285762346703"}
                     target="_blank"
                   >

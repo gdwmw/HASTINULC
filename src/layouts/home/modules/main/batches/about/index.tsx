@@ -62,14 +62,14 @@ export const About: FC = (): ReactElement => {
           title="We're Here to Make Your Day Memorable"
         />
 
-        <figure className="flex gap-5">
+        <div className="flex gap-5">
           <Image alt="About Image" src={aboutImage5} width={350} />
           <Image alt="About Image" src={aboutImage6} width={350} />
-        </figure>
+        </div>
       </section>
 
       <section className="container relative mx-auto mt-64 flex flex-col items-center justify-center space-y-16 bg-slate-100 px-5 pb-20 pt-80">
-        <figure className="absolute -top-64 z-[1]">
+        <div className="absolute -top-64 z-[1]">
           {active ? (
             <iframe
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -91,7 +91,7 @@ export const About: FC = (): ReactElement => {
               <Image alt="About Image" className="shadow-md" loading="lazy" src={aboutImage7} width={1000} />
             </div>
           )}
-        </figure>
+        </div>
 
         <SectionHeader
           containerClassname="z-[1] max-w-[700px] text-center"
