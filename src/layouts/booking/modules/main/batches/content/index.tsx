@@ -147,7 +147,7 @@ export const Content: FC<I> = (props): ReactElement => {
   return (
     <main className="bg-slate-100">
       <section className="container mx-auto flex h-screen items-center justify-center p-5">
-        <div className="relative flex w-full max-w-[800px] justify-center gap-5 rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
+        <div className="relative flex w-full max-w-[900px] justify-center gap-5 rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
           <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
             <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
@@ -223,7 +223,11 @@ export const Content: FC<I> = (props): ReactElement => {
             </ExampleA>
           </form>
 
-          <BookingSummary {...watch()} datasDocumentId={props.session?.user?.datasDocumentId} subTotal={subtotal} tax={tax} total={total} />
+          <aside className="flex grow items-start overflow-y-auto h-min-[845px]:items-center">
+            <div className="flex w-full justify-center p-2 h-max-[845px]:my-auto">
+              <BookingSummary {...watch()} datasDocumentId={props.session?.user?.datasDocumentId} subTotal={subtotal} tax={tax} total={total} />
+            </div>
+          </aside>
         </div>
       </section>
     </main>

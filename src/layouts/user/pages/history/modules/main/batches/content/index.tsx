@@ -30,14 +30,15 @@ export const Content: FC<I> = (props): ReactElement => {
         />
       ) : (
         <section className="w-full max-w-lg rounded-lg border border-gray-200 bg-white p-5 shadow-md">
-          <h2 className="mb-4 text-center text-lg font-bold tracking-widest text-rose-500">-- YOUR REVIEW --</h2>
+          <header>
+            <h1 className="mb-4 text-center text-lg font-bold tracking-widest text-rose-500">-- YOUR REVIEW --</h1>
+            <div className="my-2 border-t border-gray-300" />
+          </header>
 
-          <div className="my-2 border-t border-gray-300" />
-
-          <div className="space-y-3">
+          <dl className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-gray-600">Rating:</span>
-              <div className="flex items-center">
+              <dt className="text-gray-600">Rating:</dt>
+              <dd className="flex items-center">
                 {Array.from({ length: 5 }, (_, i) => {
                   const ratingValue = i + 1;
                   return (
@@ -48,16 +49,16 @@ export const Content: FC<I> = (props): ReactElement => {
                     />
                   );
                 })}
-              </div>
+              </dd>
             </div>
 
             <div className="flex gap-5">
-              <span className="text-gray-600">Description:</span>
-              <div className="rounded-lg border border-gray-200 p-2">
-                <p>{props.selectedBookingSummary?.review?.description ?? "< EMPTY >"}</p>
-              </div>
+              <dt className="text-gray-600">Description:</dt>
+              <dd className="rounded-lg border border-gray-200 p-2">
+                <p>{props.selectedBookingSummary?.review?.description ?? ""}</p>
+              </dd>
             </div>
-          </div>
+          </dl>
         </section>
       )}
     </>

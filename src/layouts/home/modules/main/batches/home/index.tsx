@@ -199,16 +199,17 @@ export const Home: FC<I> = (props): ReactElement => {
                 </div>
               </form>
 
-              <div className="flex items-center gap-2">
+              <address className="flex items-center gap-2">
                 <Link
                   className="flex size-20 items-center justify-center rounded-full bg-rose-100 text-rose-500 hover:bg-rose-200 active:scale-95 active:bg-rose-100 active:text-rose-400"
                   href={"https://wa.me/6285762346703"}
+                  prefetch={false}
                   target="_blank"
                 >
                   <IoLogoWhatsapp size={40} />
                 </Link>
                 <div>
-                  <span className="-mb-1 block text-lg italic">Need Help? Contact us</span>
+                  <span className="-mb-1 block text-lg not-italic">Need Help? Contact us</span>
                   <Link
                     className="inline-block text-2xl font-semibold text-rose-500 active:scale-95 active:text-rose-400"
                     href={"https://wa.me/6285762346703"}
@@ -217,7 +218,7 @@ export const Home: FC<I> = (props): ReactElement => {
                     (085) 7623-4670-3
                   </Link>
                 </div>
-              </div>
+              </address>
             </div>
           </div>
         </section>

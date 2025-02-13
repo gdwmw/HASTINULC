@@ -10,13 +10,19 @@ export const Footer: FC = (): ReactElement => (
     <section>
       <ul className="flex gap-5">
         <li>
-          <Link href={""}>Terms of Service</Link>
+          <Link href={""} prefetch={false}>
+            Terms of Service
+          </Link>
         </li>
         <li>
-          <Link href={""}>Privacy Policy</Link>
+          <Link href={""} prefetch={false}>
+            Privacy Policy
+          </Link>
         </li>
         <li>
-          <Link href={""}>Manage Cookies</Link>
+          <Link href={""} prefetch={false}>
+            Manage Cookies
+          </Link>
         </li>
       </ul>
     </section>

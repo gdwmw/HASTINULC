@@ -2,12 +2,13 @@
 
 import { Session } from "next-auth";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FC, ReactElement, ReactNode, useEffect } from "react";
-import { FaCalendarAlt, FaChevronLeft, FaChevronRight, FaClock } from "react-icons/fa";
+import { BiSolidDetail } from "react-icons/bi";
+import { FaCalendarAlt, FaChevronLeft, FaChevronRight, FaClock, FaEdit } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 
-import { ExampleATWM } from "@/src/components/interfaces/example/A";
+import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
 import { useGlobalStates } from "@/src/context";
 import { IBookingsResponse } from "@/src/types/api";
 
@@ -19,6 +20,7 @@ interface I {
 
 export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
   const pathname = usePathname();
+  const router = useRouter();
   const { setOpen } = useGlobalStates();
 
   useEffect(() => {
@@ -39,15 +41,15 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
             <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
 
-          <section className="size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5">
+          <div className="size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5">
             {props.response.map((dt) => (
-              <div
+              <section
                 className="relative flex w-full max-w-[360px] flex-col justify-between overflow-hidden rounded-lg border border-gray-300 bg-white"
                 id={dt.documentId}
                 key={dt.documentId}
               >
                 <div
-                  className={`absolute inset-x-0 top-0 h-1 ${(() => {
+                  className={`absolute inset-x-0 top-0 m-0 h-1 border-none ${(() => {
                     switch (dt.indicator) {
                       case "Canceled":
                         return "bg-red-400";
@@ -68,9 +70,9 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                 />
 
                 <div className="flex flex-col gap-4 p-5">
-                  <div className="flex items-center justify-between">
-                    <h3 className="line-clamp-1 text-lg font-semibold text-gray-900">{dt.name || "-"}</h3>
-                    <span
+                  <header className="flex items-center justify-between">
+                    <h1 className="line-clamp-1 text-lg font-semibold text-gray-900">{dt.name || "-"}</h1>
+                    <strong
                       className={`flex h-6 w-full max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${(() => {
                         switch (dt.indicator) {
                           case "Canceled":
@@ -91,28 +93,28 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                       })()}`}
                     >
                       {dt.indicator}
-                    </span>
-                  </div>
+                    </strong>
+                  </header>
 
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between gap-3">
-                      <div className="flex items-center gap-3">
+                      <figure className="flex items-center gap-3">
                         <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
                           <FaCalendarAlt className="text-rose-500" />
                         </div>
-                        <div>
-                          <span className="block text-gray-500">Event</span>
-                          <span className="block font-medium text-gray-900">{dt.event || "-"}</span>
-                        </div>
-                      </div>
+                        <figcaption>
+                          <h2 className="block text-gray-500">Event</h2>
+                          <span className="block font-semibold text-gray-900">{dt.event || "-"}</span>
+                        </figcaption>
+                      </figure>
 
                       {dt.review?.rating && (
-                        <div className="flex items-center gap-3">
+                        <figure className="flex items-center gap-3">
                           <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
                             <IoStar className="text-rose-500" />
                           </div>
-                          <div>
-                            <span className="block text-gray-500">Rating</span>
+                          <figcaption>
+                            <h2 className="block text-gray-500">Rating</h2>
                             {dt.indicator === "Success" && dt.review && (
                               <div className="flex items-center">
                                 {Array.from({ length: 5 }, (_, i) => {
@@ -127,58 +129,76 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                                 })}
                               </div>
                             )}
-                          </div>
-                        </div>
+                          </figcaption>
+                        </figure>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <figure className="flex items-center gap-3">
                       <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
                         <FaClock className="text-rose-500" />
                       </div>
-                      <div>
-                        <span className="block text-gray-500">Date</span>
-                        <span className="block font-medium text-gray-900">{dt.date || "-"}</span>
-                      </div>
-                    </div>
+                      <figcaption>
+                        <h2 className="block text-gray-500">Date</h2>
+                        <span className="block font-semibold text-gray-900">{dt.date || "-"}</span>
+                      </figcaption>
+                    </figure>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-end gap-3 border-t border-gray-300 p-3">
+                <footer className="flex items-center justify-end gap-3 border-t border-gray-300 p-3">
                   {dt.indicator === "Success" && !dt.review && (
-                    <Link
-                      className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
-                      href={`/user/review/${props.session?.user?.username}/${dt.documentId}`}
-                    >
-                      Give Review
-                    </Link>
+                    <>
+                      <Link
+                        className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
+                        href={`/user/review/${props.session?.user?.username}/${dt.documentId}`}
+                      >
+                        <FaEdit size={18} />
+                      </Link>
+
+                      <span className="h-5 w-px bg-rose-400" />
+                    </>
                   )}
 
                   {dt.indicator === "Success" && dt.review && (
-                    <Link
-                      className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
-                      href={`/user/history/${props.session?.user?.username}/${dt.documentId}`}
-                      onClick={() => setOpen({ bookingSummary: false })}
-                    >
-                      View Review
-                    </Link>
+                    <>
+                      <ExampleA
+                        className="text-sm font-semibold"
+                        color="rose"
+                        onClick={() => {
+                          setOpen({ bookingSummary: false });
+                          router.replace(`/user/history/${props.session?.user?.username}/${dt.documentId}`);
+                        }}
+                        size="sm"
+                        variant="ghost"
+                      >
+                        <BiSolidDetail size={20} />
+                      </ExampleA>
+
+                      <span className="h-5 w-px bg-rose-400" />
+                    </>
                   )}
 
-                  <Link
-                    className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
-                    href={`/user/history/${props.session?.user?.username}/${dt.documentId}`}
-                    onClick={() => setOpen({ bookingSummary: true })}
+                  <ExampleA
+                    className="text-sm font-semibold"
+                    color="rose"
+                    onClick={() => {
+                      setOpen({ bookingSummary: true });
+                      router.replace(`/user/history/${props.session?.user?.username}/${dt.documentId}`);
+                    }}
+                    size="sm"
+                    variant="ghost"
                   >
                     View Details <FaChevronRight className="ml-1" size={12} />
-                  </Link>
-                </div>
-              </div>
+                  </ExampleA>
+                </footer>
+              </section>
             ))}
-          </section>
-
-          <div className="flex grow items-start overflow-y-auto h-min-[845px]:items-center">
-            <div className="flex w-full justify-center p-2 h-max-[845px]:my-auto">{props.children}</div>
           </div>
+
+          <aside className="flex grow items-start overflow-y-auto h-min-[845px]:items-center">
+            <div className="flex w-full justify-center p-2 h-max-[845px]:my-auto">{props.children}</div>
+          </aside>
         </div>
       </section>
     </main>

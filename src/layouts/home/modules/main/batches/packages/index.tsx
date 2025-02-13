@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC, ReactElement, useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { IoStar } from "react-icons/io5";
 
 import testimonialsImage from "@/public/assets/images/model/Testimonials-1.jpg";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
@@ -69,8 +70,8 @@ export const Packages: FC = (): ReactElement => {
         <div className="space-y-5">
           <SectionHeader containerClassname="text-right" subtitle="TESTIMONIALS" title="Words from Clients" titleClassname="text-nowrap" />
 
-          <div className="flex flex-col gap-5 rounded-lg bg-black p-5 text-white">
-            <div className="flex items-center gap-2">
+          <blockquote className="flex flex-col gap-5 rounded-lg bg-black p-5 text-white">
+            <figure className="flex items-center gap-4">
               <Image
                 alt="Testimonials Image"
                 className="rounded-full border-2 border-rose-500"
@@ -80,33 +81,31 @@ export const Packages: FC = (): ReactElement => {
                 src={testimonialsImage}
                 width={64}
               />
-              <div>
+              <figcaption>
                 <span className="block font-montaguSlab text-2xl font-semibold text-rose-500">Danielle Jenkins</span>
                 <span className="block text-sm font-semibold tracking-wider text-white">SUPER MODEL</span>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
 
             <div className="-mb-4 flex text-amber-400">
-              <FaStar size={24} />
-              <FaStar size={24} />
-              <FaStar size={24} />
-              <FaStar size={24} />
-              <FaStar size={24} />
+              {[...Array(5)].map((_, i) => (
+                <IoStar key={i} size={24} />
+              ))}
             </div>
 
             <p className="text-lg">
               I am beyond impressed with the makeup artistry! The attention to detail and professionalism exceeded all my expectations. The look was
               flawless and lasted all day. Highly recommended!
             </p>
-          </div>
+          </blockquote>
         </div>
 
         <div className="relative w-full overflow-hidden rounded-lg border border-rose-500 bg-white py-8 shadow-md">
           <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentTestimonialIndex * 100}%)` }}>
             {TESTIMONIALS_DATA.map((dt) => (
-              <div className="flex w-full shrink-0 items-center justify-center px-8" key={dt.id}>
+              <blockquote className="flex w-full shrink-0 items-center justify-center px-8" key={dt.id}>
                 <div className="flex flex-col gap-5">
-                  <div className="flex items-center gap-4">
+                  <figure className="flex items-center gap-4">
                     <Image
                       alt="Testimonials Image"
                       className="rounded-full border-2 border-rose-500"
@@ -116,21 +115,21 @@ export const Packages: FC = (): ReactElement => {
                       src={dt.image}
                       width={64}
                     />
-                    <div>
+                    <figcaption>
                       <span className="block font-montaguSlab text-2xl font-semibold text-rose-500">{dt.name}</span>
                       <span className="block text-sm font-semibold tracking-wider">{dt.role}</span>
-                    </div>
-                  </div>
+                    </figcaption>
+                  </figure>
 
                   <div className="-mb-4 flex text-amber-400">
                     {[...Array(dt.rating)].map((_, i) => (
-                      <FaStar key={i} size={24} />
+                      <IoStar key={i} size={24} />
                     ))}
                   </div>
 
                   <p className="text-lg">{dt.text}</p>
                 </div>
-              </div>
+              </blockquote>
             ))}
           </div>
 
@@ -139,7 +138,6 @@ export const Packages: FC = (): ReactElement => {
           <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
             {TESTIMONIALS_DATA.map((_, i) => (
               <button
-                aria-label={`Go to testimonial ${i + 1}`}
                 className={`size-2 rounded-full transition-all ${currentTestimonialIndex === i ? "w-4 bg-rose-500" : "bg-rose-300"}`}
                 key={i}
                 onClick={() => setCurrentTestimonialIndex(i)}

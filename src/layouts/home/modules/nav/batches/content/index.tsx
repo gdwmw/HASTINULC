@@ -48,9 +48,7 @@ export const Content: FC<I> = (props): ReactElement => {
   }, []);
 
   return (
-    <nav
-      className={`sticky inset-x-0 top-0 z-10 flex h-[88px] items-center justify-between bg-white px-10 text-lg ${activeSection !== "home" && "shadow-md"}`}
-    >
+    <nav className={`flex h-[88px] items-center justify-between bg-white px-10 text-lg ${activeSection !== "home" && "shadow-md"}`}>
       <Image alt="Hastinulc Makeup Art" src={logo} width={210} />
 
       <ul className="flex items-center gap-5 font-semibold">
@@ -65,6 +63,7 @@ export const Content: FC<I> = (props): ReactElement => {
               })}
               href={dt.href}
               onClick={(e) => handleSmoothScroll(e, dt.href)}
+              prefetch={false}
             >
               {dt.label}
             </Link>

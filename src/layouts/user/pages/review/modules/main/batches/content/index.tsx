@@ -12,6 +12,7 @@ import { IoStar } from "react-icons/io5";
 import { BookingSummary } from "@/src/components/booking-sammary";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
 import { ExampleTextArea } from "@/src/components/interfaces/example/C";
+import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs/constants";
 import { ReviewSchema, TReviewSchema } from "@/src/schemas/review";
 import { IBookingsResponse, IReviewsPayload } from "@/src/types/api";
@@ -26,6 +27,7 @@ interface I {
 
 export const Content: FC<I> = (props): ReactElement => {
   const router = useRouter();
+  const { setOpen } = useGlobalStates();
   const [ratingHover, setRatingHover] = useState(0);
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -62,7 +64,9 @@ export const Content: FC<I> = (props): ReactElement => {
     try {
       await POSTReviews(newPayload);
       console.log("Review Success!");
+      setOpen({ bookingSummary: false });
       router.push(`/user/history/${props.session?.user?.username}/${props.slug[1]}`);
+      router.refresh();
       reset();
     } catch {
       console.log("Review Failed!");
@@ -78,6 +82,7 @@ export const Content: FC<I> = (props): ReactElement => {
           <Link
             className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })}
             href={`/user/history/${props.session?.user?.username}/${props.slug[1]}`}
+            onClick={() => setOpen({ bookingSummary: true })}
           >
             <FaChevronLeft className="ml-1" size={12} /> Back
           </Link>
@@ -135,7 +140,7 @@ export const Content: FC<I> = (props): ReactElement => {
             </ExampleA>
           </form>
 
-          <div className="flex grow items-start overflow-y-auto h-min-[845px]:items-center">
+          <aside className="flex grow items-start overflow-y-auto h-min-[845px]:items-center">
             <div className="flex w-full justify-center p-2 h-max-[845px]:my-auto">
               <BookingSummary
                 {...props.selectedBookingSummary}
@@ -144,7 +149,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 status={props.selectedBookingSummary?.indicator}
               />
             </div>
-          </div>
+          </aside>
         </div>
       </section>
     </main>

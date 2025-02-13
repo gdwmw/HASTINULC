@@ -23,7 +23,7 @@ export const About: FC = (): ReactElement => {
       <section className="container relative mx-auto flex items-center justify-center gap-20 px-5">
         <Image alt="Accent Circle" className="absolute -top-10 right-36" src={accentCircle} />
 
-        <div className="relative flex flex-col gap-5">
+        <figure className="relative flex flex-col gap-5">
           <div className="z-[1] flex gap-5">
             <Image alt="About Image" className="rounded-3xl" quality={30} src={aboutImage1} width={200} />
             <Image alt="About Image" className="rounded-3xl" quality={30} src={aboutImage2} width={200} />
@@ -34,17 +34,17 @@ export const About: FC = (): ReactElement => {
             <Image alt="About Image" className="rounded-3xl" quality={30} src={aboutImage4} width={200} />
           </div>
 
-          <div className="absolute left-1/2 top-1/2 z-[2] flex size-52 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white">
+          <figcaption className="absolute left-1/2 top-1/2 z-[2] flex size-52 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white">
             <span className="font-montaguSlab text-7xl text-rose-500">15+</span>
             <span className="text-center font-montaguSlab">
               Years of
               <br />
               Experience
             </span>
-          </div>
+          </figcaption>
 
           <Image alt="Accent Rectangle" className="absolute -bottom-20 -left-36" src={accentRectangle} />
-        </div>
+        </figure>
 
         <SectionHeader
           containerClassname="max-w-[500px] border-b border-rose-200 pb-8"
@@ -62,14 +62,14 @@ export const About: FC = (): ReactElement => {
           title="We're Here to Make Your Day Memorable"
         />
 
-        <div className="flex gap-5">
+        <figure className="flex gap-5">
           <Image alt="About Image" src={aboutImage5} width={350} />
           <Image alt="About Image" src={aboutImage6} width={350} />
-        </div>
+        </figure>
       </section>
 
       <section className="container relative mx-auto mt-64 flex flex-col items-center justify-center space-y-16 bg-slate-100 px-5 pb-20 pt-80">
-        <div className="absolute -top-64 z-[1]">
+        <figure className="absolute -top-64 z-[1]">
           {active ? (
             <iframe
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -91,7 +91,7 @@ export const About: FC = (): ReactElement => {
               <Image alt="About Image" className="shadow-md" loading="lazy" src={aboutImage7} width={1000} />
             </div>
           )}
-        </div>
+        </figure>
 
         <SectionHeader
           containerClassname="z-[1] max-w-[700px] text-center"
@@ -100,7 +100,7 @@ export const About: FC = (): ReactElement => {
           title="Why Choose Us?"
         />
 
-        <div className="z-[1] flex gap-10 font-montaguSlab">
+        <footer className="z-[1] flex gap-10 font-montaguSlab">
           <ul className="space-y-3">
             <li className="flex items-center gap-5">
               <FaCheck className="text-rose-500" size={20} />
@@ -130,7 +130,7 @@ export const About: FC = (): ReactElement => {
               <span className="text-2xl">Quarantee for you who are not satisfied</span>
             </li>
           </ul>
-        </div>
+        </footer>
       </section>
     </section>
   );

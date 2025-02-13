@@ -17,19 +17,21 @@ export const Contact: FC = (): ReactElement => (
           title="Get in touch"
         />
 
-        <ContactButton
-          icon={<FaLocationDot className="-mr-px" size={25} />}
-          label="Padang, Padang City, West Sumatra"
-          url="https://maps.app.goo.gl/ZzjRDTfPCRsXefUi7"
-        />
+        <address className="space-y-5">
+          <ContactButton
+            icon={<FaLocationDot className="-mr-px" size={25} />}
+            label="Padang, Padang City, West Sumatra"
+            url="https://maps.app.goo.gl/ZzjRDTfPCRsXefUi7"
+          />
 
-        <ContactButton
-          icon={<MdEmail className="-mr-px" size={25} />}
-          label="hastinulcmakeupart@gmail.com"
-          url="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKhbqXwZZlCGblTvnSbqqVScKFDqJfllGdJbTKMLRgGBvTbLsrZdPLRtZDfHVQzxnvVTfTq"
-        />
+          <ContactButton
+            icon={<MdEmail className="-mr-px" size={25} />}
+            label="hastinulcmakeupart@gmail.com"
+            url="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKhbqXwZZlCGblTvnSbqqVScKFDqJfllGdJbTKMLRgGBvTbLsrZdPLRtZDfHVQzxnvVTfTq"
+          />
 
-        <ContactButton icon={<IoLogoWhatsapp className="-mr-px" size={25} />} label="(085) 7623-4670-3" url="https://wa.me/6285762346703" />
+          <ContactButton icon={<IoLogoWhatsapp className="-mr-px" size={25} />} label="(085) 7623-4670-3" url="https://wa.me/6285762346703" />
+        </address>
       </div>
 
       <iframe
