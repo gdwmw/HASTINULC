@@ -12,6 +12,6 @@ export const metadata: Metadata = {
   title: "Home (Example)",
 };
 
-const DeniedPage: FC = (): ReactElement => <Main />;
+const HomePage: FC = (): ReactElement => <Main />;
 
-export default DeniedPage;
+export default HomePage;

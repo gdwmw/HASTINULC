@@ -1,10 +1,3 @@
-export interface IExample {
-  id: string;
-  title: string;
-}
-
-// ----------------------------
-
 export interface IAuthSchema {
   jwt: string;
   user: IUsersSchema;
@@ -87,7 +80,7 @@ export interface IUploadResponse {
 export interface IDatasPayload {
   bookings?: string;
   documentId?: string;
-  image?: File | number;
+  image?: number;
   name: string;
   phoneNumber: string;
   role?: string;

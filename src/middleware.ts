@@ -21,4 +21,4 @@ export default withAuth(function middleware(request: NextRequestWithAuth) {
   }
 });
 
-export const config = { matcher: ["/admin/:path*", "/user/:path*", "/booking/:path*"] };
+export const config = { matcher: ["/admin-example/:path*", "/user-example/:path*", "/admin/:path*", "/user/:path*", "/booking/:path*"] };

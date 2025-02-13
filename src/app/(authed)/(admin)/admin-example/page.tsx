@@ -9,10 +9,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "User (Example)",
+  title: "Admin (Example)",
 };
 
-const UserPage: FC = async (): Promise<ReactElement> => {
+const AdminPage: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
 
   return (
@@ -20,7 +20,7 @@ const UserPage: FC = async (): Promise<ReactElement> => {
       <section className="flex h-screen items-center justify-center p-5">
         <div className="flex flex-col items-center justify-center gap-3 rounded-xl bg-white p-5 shadow-lg">
           <h1 className="text-2xl font-semibold">
-            This is <span className="text-rose-400">User</span> page
+            This is <span className="text-rose-400">Admin</span> page
           </h1>
           <pre className="rounded-lg border border-gray-300 bg-white p-2 text-sm">session: {JSON.stringify(session, null, 2)}</pre>
         </div>
@@ -29,4 +29,4 @@ const UserPage: FC = async (): Promise<ReactElement> => {
   );
 };
 
-export default UserPage;
+export default AdminPage;

@@ -9,17 +9,23 @@ export const Main: FC = async (): Promise<ReactElement> => {
   const session = await getSession("status");
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center gap-3">
-      <p className="text-2xl font-semibold">This is the home page.</p>
-      <div className="flex gap-3">
-        <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/user"}>
-          User
-        </Link>
-        <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/admin"}>
-          Admin
-        </Link>
-        {session && <Logout />}
-      </div>
+    <main className="bg-slate-100">
+      <section className="flex h-screen items-center justify-center p-5">
+        <div className="flex flex-col items-center justify-center gap-3 rounded-xl bg-white p-5 shadow-lg">
+          <h1 className="text-2xl font-semibold">
+            This is <span className="text-rose-400">Home</span> page
+          </h1>
+          <div className="flex gap-3">
+            <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/user-example"}>
+              User
+            </Link>
+            <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/admin-example"}>
+              Admin
+            </Link>
+            {session && <Logout />}
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
