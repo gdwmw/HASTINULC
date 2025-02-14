@@ -9,6 +9,7 @@ import { FaHistory, FaSignOutAlt, FaUser } from "react-icons/fa";
 
 import logo from "@/public/assets/images/logos/Black.svg";
 import { ExampleATWM } from "@/src/components/interfaces/example/A";
+import { useGlobalStates } from "@/src/context";
 import { NAVIGATION_DATA } from "@/src/libs/constants";
 
 interface I {
@@ -16,6 +17,7 @@ interface I {
 }
 
 export const Content: FC<I> = (props): ReactElement => {
+  const { setOpen } = useGlobalStates();
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -108,7 +110,10 @@ export const Content: FC<I> = (props): ReactElement => {
                   <Link
                     className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
                     href={`/user/history/${props.session?.user?.username}`}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setOpen({ bookingSummary: true });
+                    }}
                   >
                     <FaHistory className="text-base" />
                     History

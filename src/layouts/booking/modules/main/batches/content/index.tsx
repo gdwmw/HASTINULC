@@ -86,7 +86,7 @@ interface I {
 
 export const Content: FC<I> = (props): ReactElement => {
   const router = useRouter();
-  const { booking } = useGlobalStates();
+  const { booking, setOpen } = useGlobalStates();
   const [tax, setTax] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
@@ -135,6 +135,7 @@ export const Content: FC<I> = (props): ReactElement => {
     try {
       const res = await POSTBookings(newPayload);
       console.log("Booking Success!");
+      setOpen({ bookingSummary: true });
       router.push(`/user/history/${props.session?.user?.username}/${res.documentId}`);
       reset();
     } catch {
