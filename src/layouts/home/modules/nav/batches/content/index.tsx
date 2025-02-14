@@ -1,9 +1,11 @@
 "use client";
 
 import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, FormEvent, ReactElement, useEffect, useState } from "react";
+import { FaHistory, FaSignOutAlt, FaUser } from "react-icons/fa";
 
 import logo from "@/public/assets/images/logos/Black.svg";
 import { ExampleATWM } from "@/src/components/interfaces/example/A";
@@ -15,6 +17,7 @@ interface I {
 
 export const Content: FC<I> = (props): ReactElement => {
   const [activeSection, setActiveSection] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSmoothScroll = (e: FormEvent, href: string) => {
     e.preventDefault();
@@ -47,6 +50,17 @@ export const Content: FC<I> = (props): ReactElement => {
     return () => window.removeEventListener("scroll", handleActiveSection);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuOpen && !(e.target as HTMLElement).closest("#profile-menu")) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [menuOpen]);
+
   return (
     <nav className={`flex h-[88px] items-center justify-between bg-white px-10 text-lg ${activeSection !== "home" && "shadow-md"}`}>
       <Image alt="Hastinulc Makeup Art" src={logo} width={210} />
@@ -70,15 +84,45 @@ export const Content: FC<I> = (props): ReactElement => {
           </li>
         ))}
 
-        <li>
+        <li className="relative">
           {props.session?.user?.status ? (
-            <Image
-              alt="Photo Profile"
-              className="cursor-pointer rounded-full border border-black p-0.5 active:scale-95"
-              height={40}
-              src={props.session?.user?.image ?? ""}
-              width={40}
-            />
+            <div id="profile-menu">
+              <Image
+                alt="Photo Profile"
+                className="cursor-pointer rounded-full border border-black p-0.5 active:scale-95"
+                height={40}
+                onClick={() => setMenuOpen(!menuOpen)}
+                src={props.session?.user?.image ?? ""}
+                width={40}
+              />
+              {menuOpen && (
+                <div className="absolute right-0 mt-2 w-48 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md">
+                  <Link
+                    className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
+                    href={`/user/profile/${props.session?.user?.username}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaUser className="text-base" />
+                    Profile
+                  </Link>
+                  <Link
+                    className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
+                    href={`/user/history/${props.session?.user?.username}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaHistory className="text-base" />
+                    History
+                  </Link>
+                  <button
+                    className="flex w-full items-center justify-center gap-2 border-t border-gray-200 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
+                    onClick={() => signOut()}
+                  >
+                    <FaSignOutAlt className="text-base" />
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/login"}>
               LOGIN
