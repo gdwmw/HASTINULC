@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks/session";
-import { GETBookings } from "@/src/utils/api";
+import { GETBookings, GETReviewsByDocumentId } from "@/src/utils/api";
 
 import { Content } from "./batches";
 
@@ -14,6 +14,7 @@ export const Main: FC<I> = async (props): Promise<ReactElement> => {
   const session = await getAllSession();
   const response = await GETBookings(`sort[0]=current:desc&filters[data][documentId][$eq]=${session?.user?.datasDocumentId}`);
   const selectedBookingSummary = response.find((dt) => dt.documentId === slug[1]);
+  const selectedReview = await GETReviewsByDocumentId(selectedBookingSummary?.review?.documentId ?? "");
 
-  return <Content response={response} selectedBookingSummary={selectedBookingSummary} session={session} slug={slug} />;
+  return <Content selectedBookingSummary={selectedBookingSummary} selectedReview={selectedReview} session={session} slug={slug} />;
 };

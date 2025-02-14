@@ -196,8 +196,8 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
             ))}
           </div>
 
-          <aside className="flex grow items-start overflow-y-auto h-min-[845px]:items-center">
-            <div className="flex w-full justify-center p-2 h-max-[845px]:my-auto">{props.children}</div>
+          <aside className="flex min-w-fit grow items-start overflow-y-auto">
+            <div className="my-auto flex w-full justify-center p-2">{props.children}</div>
           </aside>
         </div>
       </section>

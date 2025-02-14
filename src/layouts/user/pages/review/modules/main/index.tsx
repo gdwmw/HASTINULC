@@ -20,5 +20,5 @@ export const Main: FC<I> = async (props): Promise<ReactElement> => {
     redirect(`/user/history/${session?.user?.username}/${slug[1]}`);
   }
 
-  return <Content response={response} selectedBookingSummary={selectedBookingSummary} session={session} slug={slug} />;
+  return <Content selectedBookingSummary={selectedBookingSummary} session={session} slug={slug} />;
 };

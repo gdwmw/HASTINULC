@@ -8,14 +8,14 @@ if (!API_URL) {
 
 type TFields = keyof IReviewsResponse;
 
-const FIELDS_DATA: TFields[] = ["documentId", "description", "rating", "booking", "image"];
+const FIELDS_DATA: TFields[] = ["documentId", "description", "rating", "booking", "images", "current", "name", "username", "id"];
 
 // eslint-disable-next-line
 const createReviewsResponse = (source: any): IReviewsResponse =>
   FIELDS_DATA.reduce(
     (result, field) => ({
       ...result,
-      [field]: field === "image" ? source[field]?.map((img: { url: string }) => (img.url ? API_URL + img.url : null)) : source[field],
+      [field]: field === "images" ? source[field]?.map((img: { url: string }) => (img.url ? API_URL + img.url : null)) : source[field],
     }),
     {},
   ) as IReviewsResponse;

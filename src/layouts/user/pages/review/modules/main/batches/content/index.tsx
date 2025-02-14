@@ -11,15 +11,15 @@ import { IoStar } from "react-icons/io5";
 
 import { BookingSummary } from "@/src/components/booking-sammary";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { ExampleTextArea } from "@/src/components/interfaces/example/C";
+import { ExampleInput, ExampleTextArea } from "@/src/components/interfaces/example/C";
 import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs/constants";
 import { ReviewSchema, TReviewSchema } from "@/src/schemas/review";
 import { IBookingsResponse, IReviewsPayload } from "@/src/types/api";
 import { POSTReviews } from "@/src/utils/api/reviews";
+import { POSTUpload } from "@/src/utils/api/upload";
 
 interface I {
-  response: IBookingsResponse[];
   selectedBookingSummary: IBookingsResponse | undefined;
   session: null | Session;
   slug: string[];
@@ -59,10 +59,16 @@ export const Content: FC<I> = (props): ReactElement => {
     const newPayload: IReviewsPayload = {
       ...dt,
       booking: props.slug[1],
+      current: new Date(),
+      name: props.session?.user?.name ?? "",
+      username: props.session?.user?.username ?? "",
     };
 
     try {
-      await POSTReviews(newPayload);
+      const res = await POSTReviews(newPayload);
+      if (dt.images && res.id) {
+        await POSTUpload({ field: "images", files: dt.images, ref: "api::review.review", refId: res.id.toString() });
+      }
       console.log("Review Success!");
       setOpen({ bookingSummary: false });
       router.push(`/user/history/${props.session?.user?.username}/${props.slug[1]}`);
@@ -78,7 +84,7 @@ export const Content: FC<I> = (props): ReactElement => {
   return (
     <main className="bg-slate-100">
       <section className="container mx-auto flex h-screen items-center justify-center p-5">
-        <div className="relative flex w-full max-w-[1100px] gap-5 rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
+        <div className="relative flex size-full max-h-[821px] max-w-[1100px] gap-5 rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
           <Link
             className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })}
             href={`/user/history/${props.session?.user?.username}/${props.slug[1]}`}
@@ -87,61 +93,81 @@ export const Content: FC<I> = (props): ReactElement => {
             <FaChevronLeft className="ml-1" size={12} /> Back
           </Link>
 
-          <form className="flex w-full max-w-[600px] flex-col items-center justify-center gap-5" onSubmit={handleSubmit(onSubmit)}>
-            <h1 className="text-center text-2xl font-bold text-rose-500">How Was Your Experience?</h1>
+          <form className="flex w-full max-w-[600px] items-start overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
+            <div className="my-auto flex w-full flex-col items-center justify-center gap-5">
+              <h1 className="text-center text-2xl font-bold text-rose-500">How Was Your Experience?</h1>
 
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => {
-                const ratingValue = i + 1;
-                return (
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => {
+                  const ratingValue = i + 1;
+                  return (
+                    <button
+                      className={`text-4xl ${ratingValue <= (ratingHover || watch("rating")) ? "text-yellow-400" : "text-gray-300"}`}
+                      disabled={loading}
+                      key={i}
+                      onClick={() => setValue("rating", ratingValue)}
+                      onMouseEnter={() => setRatingHover(ratingValue)}
+                      onMouseLeave={() => setRatingHover(0)}
+                      type="button"
+                    >
+                      <IoStar />
+                    </button>
+                  );
+                })}
+              </div>
+
+              <ExampleInput
+                accept="image/*"
+                className="pt-1"
+                color="rose"
+                errorMessage={errors.images?.message}
+                label="Images"
+                multiple
+                type="file"
+                {...register("images")}
+              />
+
+              <ExampleTextArea
+                color="rose"
+                containerClassName="w-full"
+                disabled={loading}
+                errorMessage={errors.description?.message}
+                label="Description"
+                maxLength={1000}
+                {...register("description")}
+              />
+
+              <div className="flex w-full flex-wrap justify-center gap-2">
+                {SUGGESTIONS_DATA.map((dt, i) => (
                   <button
-                    className={`text-4xl ${ratingValue <= (ratingHover || watch("rating")) ? "text-yellow-400" : "text-gray-300"}`}
+                    className={`rounded-full px-4 py-2 text-sm font-semibold ${
+                      selectedSuggestions.includes(dt) ? "bg-rose-500 text-white" : "bg-gray-100 text-gray-700 hover:bg-rose-400 hover:text-white"
+                    }`}
                     disabled={loading}
                     key={i}
-                    onClick={() => setValue("rating", ratingValue)}
-                    onMouseEnter={() => setRatingHover(ratingValue)}
-                    onMouseLeave={() => setRatingHover(0)}
+                    onClick={() => handleSuggestionClick(dt)}
                     type="button"
                   >
-                    <IoStar />
+                    {dt}
                   </button>
-                );
-              })}
+                ))}
+              </div>
+
+              <ExampleA
+                className="w-64 font-semibold"
+                color="rose"
+                disabled={loading || watch("rating") === 0}
+                size="sm"
+                type="submit"
+                variant="solid"
+              >
+                {loading ? "Loading..." : "SUBMIT"}
+              </ExampleA>
             </div>
-
-            <ExampleTextArea
-              color="rose"
-              containerClassName="w-full"
-              disabled={loading}
-              errorMessage={errors.description?.message}
-              label="Description"
-              maxLength={1000}
-              {...register("description")}
-            />
-
-            <div className="flex w-full flex-wrap justify-center gap-2">
-              {SUGGESTIONS_DATA.map((dt, i) => (
-                <button
-                  className={`rounded-full px-4 py-2 text-sm font-semibold ${
-                    selectedSuggestions.includes(dt) ? "bg-rose-500 text-white" : "bg-gray-100 text-gray-700 hover:bg-rose-400 hover:text-white"
-                  }`}
-                  disabled={loading}
-                  key={i}
-                  onClick={() => handleSuggestionClick(dt)}
-                  type="button"
-                >
-                  {dt}
-                </button>
-              ))}
-            </div>
-
-            <ExampleA className="w-64 font-semibold" color="rose" disabled={loading || watch("rating") === 0} size="sm" type="submit" variant="solid">
-              {loading ? "Loading..." : "SUBMIT"}
-            </ExampleA>
           </form>
 
-          <aside className="flex grow items-start overflow-y-auto h-min-[845px]:items-center">
-            <div className="flex w-full justify-center p-2 h-max-[845px]:my-auto">
+          <aside className="flex min-w-fit grow items-start overflow-y-auto">
+            <div className="my-auto flex w-full justify-center p-2">
               <BookingSummary
                 {...props.selectedBookingSummary}
                 datasDocumentId={props.session?.user?.datasDocumentId}

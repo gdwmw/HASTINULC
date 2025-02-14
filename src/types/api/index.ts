@@ -62,7 +62,7 @@ export interface IUsersResponse {
 
 export interface IUploadPayload {
   field?: string;
-  files: File[];
+  files: FileList;
   ref?: string;
   refId?: string;
 }
@@ -139,18 +139,25 @@ export interface IBookingsResponse {
 
 export interface IReviewsPayload {
   booking?: string;
+  current: Date;
   description: string;
   documentId?: string;
-  image?: File[] | number;
+  images?: FileList | number;
+  name: string;
   rating: number;
+  username: string;
 }
 
 export interface IReviewsResponse {
   booking?: IBookingsResponse;
+  current: Date;
   description: string;
   documentId: string;
-  image: string[];
+  id: number;
+  images: string[];
+  name: string;
   rating: number;
+  username: string;
 }
 
 // ----------------------------
