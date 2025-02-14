@@ -94,7 +94,7 @@ export const Content: FC<I> = (props): ReactElement => {
           </Link>
 
           <form className="flex w-full max-w-[600px] items-start overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
-            <div className="my-auto flex w-full flex-col items-center justify-center gap-5">
+            <div className="my-auto flex w-full flex-col items-center justify-center gap-4">
               <h1 className="text-center text-2xl font-bold text-rose-500">How Was Your Experience?</h1>
 
               <div className="flex items-center gap-1">
@@ -102,7 +102,7 @@ export const Content: FC<I> = (props): ReactElement => {
                   const ratingValue = i + 1;
                   return (
                     <button
-                      className={`text-4xl ${ratingValue <= (ratingHover || watch("rating")) ? "text-yellow-400" : "text-gray-300"}`}
+                      className={`text-4xl hover:scale-110 ${ratingValue <= (ratingHover || watch("rating")) ? "text-yellow-400" : "text-gray-300"}`}
                       disabled={loading}
                       key={i}
                       onClick={() => setValue("rating", ratingValue)}
@@ -120,6 +120,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 accept="image/*"
                 className="pt-1"
                 color="rose"
+                containerClassName="w-full"
                 errorMessage={errors.images?.message}
                 label="Images"
                 multiple

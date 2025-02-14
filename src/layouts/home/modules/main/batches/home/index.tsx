@@ -175,6 +175,7 @@ export const Home: FC<I> = (props): ReactElement => {
                       />
                     ) : (
                       <ExampleSelect
+                        className="h-[26px]"
                         color="rose"
                         containerClassName="w-64"
                         disabled={loading}

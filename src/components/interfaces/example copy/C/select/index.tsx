@@ -20,11 +20,7 @@ type TExampleSelect = {
 /* eslint-enable perfectionist/sort-union-types */
 
 const ExampleSelectTWM = ({ className, disabled }: TExampleSelect) =>
-  twm(
-    "w-full rounded-lg bg-transparent px-1 outline-none disabled:cursor-not-allowed",
-    disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
-    className,
-  );
+  twm("w-full rounded-sm bg-transparent px-1 outline-none disabled:cursor-not-allowed", disabled && "text-gray-400", className);
 
 export const ExampleSelect: FC<TExampleSelect> = forwardRef<HTMLSelectElement, TExampleSelect>(
   ({ className, color, containerClassName, disabled, errorMessage, fieldsetClassName, label, legendClassName, ...props }, ref): ReactElement => (

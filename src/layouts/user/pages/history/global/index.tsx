@@ -44,53 +44,37 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
           <div className="size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5">
             {props.response.map((dt) => (
               <section
-                className="relative flex w-full max-w-[360px] flex-col justify-between overflow-hidden rounded-lg border border-gray-300 bg-white"
+                className="relative flex w-full max-w-[360px] flex-col justify-between overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md"
                 id={dt.documentId}
                 key={dt.documentId}
               >
                 <div
-                  className={`absolute inset-x-0 top-0 m-0 h-1 border-none ${(() => {
-                    switch (dt.indicator) {
-                      case "Canceled":
-                        return "bg-red-400";
-                      case "On Going":
-                        return "bg-blue-400";
-                      case "Payment":
-                        return "bg-orange-400";
-                      case "Rejected":
-                        return "bg-red-400";
-                      case "Success":
-                        return "bg-green-400";
-                      case "Waiting":
-                        return "bg-yellow-400";
-                      default:
-                        return "bg-gray-200";
-                    }
-                  })()}`}
+                  className={`absolute inset-x-0 top-0 m-0 h-1.5 border-none ${
+                    {
+                      Canceled: "bg-red-400",
+                      "On Going": "bg-blue-400",
+                      Payment: "bg-orange-400",
+                      Rejected: "bg-red-400",
+                      Success: "bg-green-400",
+                      Waiting: "bg-yellow-400",
+                    }[dt.indicator] ?? "bg-gray-200"
+                  }`}
                 />
 
                 <div className="flex flex-col gap-4 p-5">
                   <header className="flex items-center justify-between">
                     <h1 className="line-clamp-1 text-lg font-semibold text-gray-900">{dt.name || "-"}</h1>
                     <strong
-                      className={`flex h-6 w-full max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${(() => {
-                        switch (dt.indicator) {
-                          case "Canceled":
-                            return "bg-red-400";
-                          case "On Going":
-                            return "bg-blue-400";
-                          case "Payment":
-                            return "bg-orange-400";
-                          case "Rejected":
-                            return "bg-red-400";
-                          case "Success":
-                            return "bg-green-400";
-                          case "Waiting":
-                            return "bg-yellow-400";
-                          default:
-                            return "";
-                        }
-                      })()}`}
+                      className={`flex h-6 w-full max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${
+                        {
+                          Canceled: "bg-red-400",
+                          "On Going": "bg-blue-400",
+                          Payment: "bg-orange-400",
+                          Rejected: "bg-red-400",
+                          Success: "bg-green-400",
+                          Waiting: "bg-yellow-400",
+                        }[dt.indicator] ?? "bg-gray-400"
+                      }`}
                     >
                       {dt.indicator}
                     </strong>
@@ -146,7 +130,7 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                   </div>
                 </div>
 
-                <footer className="flex items-center justify-end gap-3 border-t border-gray-300 p-3">
+                <footer className="flex items-center justify-end gap-3 border-t border-gray-200 p-3">
                   {dt.indicator === "Success" && !dt.review && (
                     <>
                       <Link
@@ -155,8 +139,7 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                       >
                         <FaEdit size={18} />
                       </Link>
-
-                      <span className="h-5 w-px bg-rose-400" />
+                      <span className="h-5 w-px bg-rose-200" />
                     </>
                   )}
 
@@ -174,8 +157,7 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
                       >
                         <BiSolidDetail size={20} />
                       </ExampleA>
-
-                      <span className="h-5 w-px bg-rose-400" />
+                      <span className="h-5 w-px bg-rose-200" />
                     </>
                   )}
 

@@ -101,7 +101,7 @@ export const Packages: FC = (): ReactElement => {
         </div>
 
         <div className="relative w-full overflow-hidden rounded-lg border border-rose-500 bg-white py-8 shadow-md">
-          <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentTestimonialIndex * 100}%)` }}>
+          <div className="flex" style={{ transform: `translateX(-${currentTestimonialIndex * 100}%)` }}>
             {TESTIMONIALS_DATA.map((dt) => (
               <blockquote className="flex w-full shrink-0 items-center justify-center px-8" key={dt.id}>
                 <div className="flex flex-col gap-5">
@@ -138,7 +138,7 @@ export const Packages: FC = (): ReactElement => {
           <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
             {TESTIMONIALS_DATA.map((_, i) => (
               <button
-                className={`size-2 rounded-full transition-all ${currentTestimonialIndex === i ? "w-4 bg-rose-500" : "bg-rose-300"}`}
+                className={`size-2 rounded-full ${currentTestimonialIndex === i ? "w-4 bg-rose-500" : "bg-rose-300"}`}
                 key={i}
                 onClick={() => setCurrentTestimonialIndex(i)}
               />

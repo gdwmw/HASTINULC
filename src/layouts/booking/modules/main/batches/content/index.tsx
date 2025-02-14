@@ -153,7 +153,7 @@ export const Content: FC<I> = (props): ReactElement => {
           </Link>
 
           <form className="flex w-full max-w-[500px] items-start overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
-            <div className="my-auto flex w-full flex-col justify-center gap-5">
+            <div className="my-auto flex w-full flex-col justify-center gap-4">
               {FORM_FIELDS_DATA.map((dt) =>
                 !dt.isSelect && dt.type !== "checkbox" ? (
                   <Fragment key={dt.id}>
@@ -203,12 +203,12 @@ export const Content: FC<I> = (props): ReactElement => {
                     ))}
                   </ExampleSelect>
                 ) : (
-                  <div className="space-y-1" key={dt.id}>
-                    <div className="grid grid-cols-2 gap-2">
+                  <div className="space-y-2" key={dt.id}>
+                    <div className="grid grid-cols-2 gap-3">
                       {dt.options?.map((opt, i) => (
-                        <label className="relative cursor-pointer" key={i}>
+                        <label className="group relative cursor-pointer" key={i}>
                           <input className="peer absolute opacity-0" disabled={loading} type="checkbox" value={opt} {...register(dt.name)} />
-                          <div className="flex select-none items-center justify-center rounded-lg border-2 border-black bg-white p-3 text-sm font-semibold hover:border-rose-300 hover:bg-rose-300 hover:text-white peer-checked:border-rose-400 peer-checked:bg-rose-400 peer-checked:text-white peer-disabled:cursor-not-allowed peer-disabled:border-gray-400 peer-disabled:bg-white peer-disabled:text-gray-400">
+                          <div className="flex select-none items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-3 text-sm font-semibold text-gray-700 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 peer-checked:border-rose-400 peer-checked:bg-rose-400 peer-checked:text-white peer-disabled:cursor-not-allowed peer-disabled:border-gray-200 peer-disabled:bg-gray-100 peer-disabled:text-gray-400">
                             {opt}
                           </div>
                         </label>
