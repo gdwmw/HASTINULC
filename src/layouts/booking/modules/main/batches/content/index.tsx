@@ -10,8 +10,8 @@ import { FaChevronLeft } from "react-icons/fa";
 
 import { BookingSummary } from "@/src/components/booking-sammary";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { ExampleInput, ExampleSelect } from "@/src/components/interfaces/example/C";
-import { ErrorMessage } from "@/src/components/interfaces/example/C/elements";
+import { Input, Select } from "@/src/components/interfaces/inputs";
+import { ErrorMessage } from "@/src/components/interfaces/inputs/elements";
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks/functions";
 import { PACKAGES_DATA, TIME_SLOTS_DATA } from "@/src/libs/constants";
@@ -157,7 +157,7 @@ export const Content: FC<I> = (props): ReactElement => {
               {FORM_FIELDS_DATA.map((dt) =>
                 !dt.isSelect && dt.type !== "checkbox" ? (
                   <Fragment key={dt.id}>
-                    <ExampleInput
+                    <Input
                       color="rose"
                       disabled={loading}
                       errorMessage={errors[dt.name]?.message}
@@ -187,21 +187,14 @@ export const Content: FC<I> = (props): ReactElement => {
                     )}
                   </Fragment>
                 ) : dt.isSelect && dt.type !== "checkbox" ? (
-                  <ExampleSelect
-                    color="rose"
-                    disabled={loading}
-                    errorMessage={errors[dt.name]?.message}
-                    key={dt.id}
-                    label={dt.label}
-                    {...register(dt.name)}
-                  >
+                  <Select color="rose" disabled={loading} errorMessage={errors[dt.name]?.message} key={dt.id} label={dt.label} {...register(dt.name)}>
                     <option value="-">-</option>
                     {dt.options?.map((opt, i) => (
                       <option key={i} value={opt}>
                         {opt}
                       </option>
                     ))}
-                  </ExampleSelect>
+                  </Select>
                 ) : (
                   <div className="space-y-2" key={dt.id}>
                     <div className="grid grid-cols-2 gap-3">

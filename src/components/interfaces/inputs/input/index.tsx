@@ -4,11 +4,11 @@ import { DetailedHTMLProps, FC, forwardRef, InputHTMLAttributes, ReactElement, R
 
 import { twm } from "@/src/libs/tailwind-merge";
 
-import { ExampleA } from "../../A";
+import { ExampleA } from "../../example/A";
 import { ErrorMessage, InputsContainer, Label } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
-type TExampleInput = {
+type TInput = {
   className?: string;
   color?: "rose" | "emerald";
   containerClassName?: string;
@@ -22,10 +22,14 @@ type TExampleInput = {
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 /* eslint-enable perfectionist/sort-union-types */
 
-const ExampleInputTWM = ({ className, disabled }: TExampleInput) =>
-  twm("w-full rounded-sm bg-transparent px-1 outline-none disabled:cursor-not-allowed", disabled && "text-gray-400", className);
+const InputTWM = ({ className, disabled }: TInput) =>
+  twm(
+    "w-full rounded-lg bg-transparent px-2 outline-none disabled:cursor-not-allowed",
+    disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
+    className,
+  );
 
-export const ExampleInput: FC<TExampleInput> = forwardRef<HTMLInputElement, TExampleInput>(
+export const Input: FC<TInput> = forwardRef<HTMLInputElement, TInput>(
   (
     { className, color, containerClassName, disabled, errorMessage, fieldsetClassName, icon, iconOnClick, label, legendClassName, ...props },
     ref,
@@ -39,7 +43,7 @@ export const ExampleInput: FC<TExampleInput> = forwardRef<HTMLInputElement, TExa
         label={label}
         legendClassName={legendClassName}
       >
-        <input className={ExampleInputTWM({ className, disabled })} data-testid="example-input" disabled={disabled} ref={ref} {...props} />
+        <input className={InputTWM({ className, disabled })} data-testid="input" disabled={disabled} ref={ref} {...props} />
 
         {icon && (
           <ExampleA
@@ -61,4 +65,4 @@ export const ExampleInput: FC<TExampleInput> = forwardRef<HTMLInputElement, TExa
   ),
 );
 
-ExampleInput.displayName = "ExampleInput";
+Input.displayName = "Input";

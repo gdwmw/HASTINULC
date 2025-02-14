@@ -9,8 +9,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { ExampleTextArea } from "@/src/components/interfaces/example/C";
-import { ErrorMessage } from "@/src/components/interfaces/example/C/elements";
+import { TextArea } from "@/src/components/interfaces/inputs";
+import { ErrorMessage } from "@/src/components/interfaces/inputs/elements";
 import { QUESTIONS_DATA } from "@/src/libs/constants";
 import { QuestionnaireSchema, TQuestionnaireSchema } from "@/src/schemas/questionnaire";
 import { POSTQuestionnaires } from "@/src/utils/api/questionnaires";
@@ -100,7 +100,7 @@ export const Content: FC<I> = (props): ReactElement => {
                     <span className="font-bold text-rose-500">{i + 1}.</span>
                     <span>{dt.question}</span>
                   </label>
-                  <ExampleTextArea
+                  <TextArea
                     color="rose"
                     fieldsetClassName="py-1 border"
                     id={`question${i + 1}`}

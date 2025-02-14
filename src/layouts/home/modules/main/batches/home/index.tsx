@@ -13,7 +13,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import accentDot from "@/public/assets/images/background/Accent-Dot.png";
 import homeImage from "@/public/assets/images/model/Home.png";
 import { ExampleA } from "@/src/components/interfaces/example/A";
-import { ExampleInput, ExampleSelect } from "@/src/components/interfaces/example/C";
+import { Input, Select } from "@/src/components/interfaces/inputs";
 import { SectionHeader } from "@/src/components/section-header";
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks/functions";
@@ -143,7 +143,7 @@ export const Home: FC<I> = (props): ReactElement => {
               <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex w-full items-center gap-5">
                   {FORM_FIELDS_DATA.slice(0, 3).map((dt) => (
-                    <ExampleInput
+                    <Input
                       color="rose"
                       containerClassName="w-64"
                       disabled={loading}
@@ -161,7 +161,7 @@ export const Home: FC<I> = (props): ReactElement => {
                 <div className="flex w-full items-center gap-5">
                   {FORM_FIELDS_DATA.slice(3).map((dt) =>
                     !dt.isSelect ? (
-                      <ExampleInput
+                      <Input
                         color="rose"
                         containerClassName="w-64"
                         disabled={loading}
@@ -174,7 +174,7 @@ export const Home: FC<I> = (props): ReactElement => {
                         {...register(dt.name)}
                       />
                     ) : (
-                      <ExampleSelect
+                      <Select
                         className="h-[26px]"
                         color="rose"
                         containerClassName="w-64"
@@ -190,7 +190,7 @@ export const Home: FC<I> = (props): ReactElement => {
                             {opt}
                           </option>
                         ))}
-                      </ExampleSelect>
+                      </Select>
                     ),
                   )}
 

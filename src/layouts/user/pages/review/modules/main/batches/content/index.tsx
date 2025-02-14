@@ -11,7 +11,7 @@ import { IoStar } from "react-icons/io5";
 
 import { BookingSummary } from "@/src/components/booking-sammary";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { ExampleInput, ExampleTextArea } from "@/src/components/interfaces/example/C";
+import { Input, TextArea } from "@/src/components/interfaces/inputs";
 import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs/constants";
 import { ReviewSchema, TReviewSchema } from "@/src/schemas/review";
@@ -116,7 +116,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 })}
               </div>
 
-              <ExampleInput
+              <Input
                 accept="image/*"
                 className="pt-1"
                 color="rose"
@@ -128,7 +128,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 {...register("images")}
               />
 
-              <ExampleTextArea
+              <TextArea
                 color="rose"
                 containerClassName="w-full"
                 disabled={loading}

@@ -10,7 +10,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { ExampleInput } from "@/src/components/interfaces/example/C";
+import { Input } from "@/src/components/interfaces/inputs";
 import { LoginSchema, TLoginSchema } from "@/src/schemas/auth";
 
 export const Content: FC = (): ReactElement => {
@@ -65,7 +65,7 @@ export const Content: FC = (): ReactElement => {
           </Link>
 
           <form className="flex w-full max-w-64 flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-            <ExampleInput
+            <Input
               color="rose"
               disabled={loading}
               errorMessage={errors.identifier?.message}
@@ -74,7 +74,7 @@ export const Content: FC = (): ReactElement => {
               {...register("identifier")}
             />
 
-            <ExampleInput
+            <Input
               color="rose"
               disabled={loading}
               errorMessage={errors.password?.message}

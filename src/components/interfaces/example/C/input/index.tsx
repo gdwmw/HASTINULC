@@ -23,11 +23,7 @@ type TExampleInput = {
 /* eslint-enable perfectionist/sort-union-types */
 
 const ExampleInputTWM = ({ className, disabled }: TExampleInput) =>
-  twm(
-    "w-full rounded-lg bg-transparent px-2 outline-none disabled:cursor-not-allowed",
-    disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
-    className,
-  );
+  twm("w-full rounded-sm bg-transparent px-1 outline-none disabled:cursor-not-allowed", disabled && "text-gray-400", className);
 
 export const ExampleInput: FC<TExampleInput> = forwardRef<HTMLInputElement, TExampleInput>(
   (

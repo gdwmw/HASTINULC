@@ -5,7 +5,7 @@ import { twm } from "@/src/libs/tailwind-merge";
 import { ErrorMessage, InputsContainer, Label } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
-type TExampleTextArea = {
+type TTextArea = {
   className?: string;
   color?: "rose" | "emerald";
   containerClassName?: string;
@@ -18,14 +18,14 @@ type TExampleTextArea = {
 } & DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
 /* eslint-enable perfectionist/sort-union-types */
 
-const ExampleTextAreaTWM = ({ className, disabled }: TExampleTextArea) =>
+const TextAreaTWM = ({ className, disabled }: TTextArea) =>
   twm(
-    "max-h-[200px] min-h-[120px] w-full rounded-sm bg-transparent px-1 outline-none disabled:cursor-not-allowed",
-    disabled && "text-gray-400",
+    "max-h-[200px] min-h-[120px] w-full rounded-lg bg-transparent px-2 outline-none disabled:cursor-not-allowed",
+    disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
     className,
   );
 
-export const ExampleTextArea: FC<TExampleTextArea> = forwardRef<HTMLTextAreaElement, TExampleTextArea>(
+export const TextArea: FC<TTextArea> = forwardRef<HTMLTextAreaElement, TTextArea>(
   (
     { className, color, containerClassName, disabled, errorMessage, fieldsetClassName, label, legendClassName, rows, ...props },
     ref,
@@ -39,14 +39,7 @@ export const ExampleTextArea: FC<TExampleTextArea> = forwardRef<HTMLTextAreaElem
         label={label}
         legendClassName={legendClassName}
       >
-        <textarea
-          className={ExampleTextAreaTWM({ className, disabled })}
-          data-testid="example-textarea"
-          disabled={disabled}
-          ref={ref}
-          rows={rows ?? 5}
-          {...props}
-        />
+        <textarea className={TextAreaTWM({ className, disabled })} data-testid="textarea" disabled={disabled} ref={ref} rows={rows ?? 5} {...props} />
       </Label>
 
       {errorMessage && !disabled && <ErrorMessage errorMessage={errorMessage} />}
@@ -54,4 +47,4 @@ export const ExampleTextArea: FC<TExampleTextArea> = forwardRef<HTMLTextAreaElem
   ),
 );
 
-ExampleTextArea.displayName = "ExampleTextArea";
+TextArea.displayName = "TextArea";

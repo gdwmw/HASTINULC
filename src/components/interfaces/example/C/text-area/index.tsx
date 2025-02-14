@@ -20,8 +20,8 @@ type TExampleTextArea = {
 
 const ExampleTextAreaTWM = ({ className, disabled }: TExampleTextArea) =>
   twm(
-    "max-h-[200px] min-h-[120px] w-full rounded-lg bg-transparent px-2 outline-none disabled:cursor-not-allowed",
-    disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
+    "max-h-[200px] min-h-[120px] w-full rounded-sm bg-transparent px-1 outline-none disabled:cursor-not-allowed",
+    disabled && "text-gray-400",
     className,
   );
 

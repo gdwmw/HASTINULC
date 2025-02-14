@@ -6,4 +6,4 @@ type T = {
   className?: string;
 } & Readonly<PropsWithChildren>;
 
-export const InputsContainer: FC<T> = (props): ReactElement => <section className={twm("space-y-1", props.className)}>{props.children}</section>;
+export const InputsContainer: FC<T> = (props): ReactElement => <section className={twm("space-y-2", props.className)}>{props.children}</section>;

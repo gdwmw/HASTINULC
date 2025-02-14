@@ -9,7 +9,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { ExampleInput } from "@/src/components/interfaces/example/C";
+import { Input } from "@/src/components/interfaces/inputs";
 import { inputValidations } from "@/src/hooks/functions";
 import { RegisterSchema, TRegisterSchema } from "@/src/schemas/auth";
 import { POSTRegister } from "@/src/utils/api";
@@ -119,7 +119,7 @@ export const Content: FC = (): ReactElement => {
 
           <form className="flex w-full max-w-96 flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
             {FORM_FIELDS_DATA.map((dt) => (
-              <ExampleInput
+              <Input
                 color="rose"
                 disabled={loading}
                 errorMessage={errors[dt.name]?.message}

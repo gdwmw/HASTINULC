@@ -7,7 +7,7 @@ import { twm } from "@/src/libs/tailwind-merge";
 import { ErrorMessage, InputsContainer, Label } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
-type TExampleSelect = {
+type TSelect = {
   className?: string;
   color?: "rose" | "emerald";
   containerClassName?: string;
@@ -19,10 +19,14 @@ type TExampleSelect = {
 } & DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
 /* eslint-enable perfectionist/sort-union-types */
 
-const ExampleSelectTWM = ({ className, disabled }: TExampleSelect) =>
-  twm("w-full rounded-sm bg-transparent px-1 outline-none disabled:cursor-not-allowed", disabled && "text-gray-400", className);
+const SelectTWM = ({ className, disabled }: TSelect) =>
+  twm(
+    "w-full rounded-lg bg-transparent px-1 outline-none disabled:cursor-not-allowed",
+    disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
+    className,
+  );
 
-export const ExampleSelect: FC<TExampleSelect> = forwardRef<HTMLSelectElement, TExampleSelect>(
+export const Select: FC<TSelect> = forwardRef<HTMLSelectElement, TSelect>(
   ({ className, color, containerClassName, disabled, errorMessage, fieldsetClassName, label, legendClassName, ...props }, ref): ReactElement => (
     <InputsContainer className={containerClassName}>
       <Label
@@ -33,7 +37,7 @@ export const ExampleSelect: FC<TExampleSelect> = forwardRef<HTMLSelectElement, T
         label={label}
         legendClassName={legendClassName}
       >
-        <select className={ExampleSelectTWM({ className, disabled })} data-testid="example-select" disabled={disabled} ref={ref} {...props}>
+        <select className={SelectTWM({ className, disabled })} data-testid="select" disabled={disabled} ref={ref} {...props}>
           {props.children}
         </select>
       </Label>
@@ -43,4 +47,4 @@ export const ExampleSelect: FC<TExampleSelect> = forwardRef<HTMLSelectElement, T
   ),
 );
 
-ExampleSelect.displayName = "ExampleSelect";
+Select.displayName = "Select";
