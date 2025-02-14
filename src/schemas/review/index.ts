@@ -25,7 +25,8 @@ export const ReviewSchema = z.object({
     .min(100, { message: errorMessage.string.min("Description", 100) })
     .max(1000, { message: errorMessage.string.max("Description", 1000) }),
   images: z
-    .instanceof(FileList)
+    .any()
+    .refine((files) => files instanceof FileList, "Invalid file list")
     .refine((files) => files.length <= 4, "Maximum 4 files")
     .refine((files) => Array.from(files).every((file) => file.size <= 5 * 1024 * 1024), "Maximum file size 5 MB")
     .optional(),
