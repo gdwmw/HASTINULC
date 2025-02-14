@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FC, PropsWithChildren, ReactElement } from "react";
 
 import { NextAuthProvider, NextThemesProvider, ReactQueryProvider } from "@/src/libs/providers";
@@ -26,7 +28,11 @@ const RootLayout: FC<T> = (props): ReactElement => (
     <body className={`${geistSans.variable} ${geistMono.variable} ${montaguSlab.variable} antialiased`}>
       <NextThemesProvider>
         <ReactQueryProvider>
-          <NextAuthProvider>{props.children}</NextAuthProvider>
+          <NextAuthProvider>
+            {props.children}
+            <Analytics />
+            <SpeedInsights />
+          </NextAuthProvider>
         </ReactQueryProvider>
       </NextThemesProvider>
     </body>
