@@ -9,7 +9,7 @@ interface I {
   slug: Promise<{ slug: string[] }>;
 }
 
-export const Main: FC<I> = async (props): Promise<ReactElement> => {
+export const ASide: FC<I> = async (props): Promise<ReactElement> => {
   const slug = (await props.slug).slug;
   const session = await getAllSession();
   const response = await GETBookings(`sort[0]=current:desc&filters[data][documentId][$eq]=${session?.user?.datasDocumentId}`);
