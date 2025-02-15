@@ -13,15 +13,17 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import accentDot from "@/public/assets/images/background/Accent-Dot.png";
 import homeImage from "@/public/assets/images/model/Home.png";
 import { ExampleA } from "@/src/components/interfaces/example/A";
-import { Input, Select } from "@/src/components/interfaces/inputs";
+import { DatePickerInput, Input, Select } from "@/src/components/interfaces/inputs";
 import { SectionHeader } from "@/src/components/section-header";
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks/functions";
 import { PACKAGES_DATA } from "@/src/libs/constants";
 import { BookingSchema, TBookingSchema } from "@/src/schemas/home";
+import { IBookingsResponse } from "@/src/types/api";
 
 interface IFormField {
   id: number;
+  isDatePicker?: boolean;
   isSelect?: boolean;
   label?: string;
   maxLength?: number;
@@ -63,20 +65,26 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 5,
+    isDatePicker: true,
     label: "Date",
     name: "date",
-    type: "date",
   },
 ];
 
 interface I {
+  response: IBookingsResponse[];
   session: null | Session;
 }
 
 export const Home: FC<I> = (props): ReactElement => {
   const router = useRouter();
   const { setBooking } = useGlobalStates();
+  const [date, setDate] = useState<Date | undefined>();
   const [loading, setLoading] = useState(false);
+
+  const bookedDates = props.response
+    .map((dt) => (dt.indicator === "On Going" || dt.indicator === "Success" ? new Date(dt.date) : null))
+    .filter((date): date is Date => date !== null);
 
   const {
     formState: { errors },
@@ -97,13 +105,26 @@ export const Home: FC<I> = (props): ReactElement => {
       const pendingBooking = localStorage.getItem("pendingBooking");
       if (pendingBooking) {
         const data: TBookingSchema = JSON.parse(pendingBooking);
-        setValue("date", data.date ?? "");
+        setDate(new Date(data.date));
         setValue("event", data.event ?? "");
         localStorage.removeItem("pendingBooking");
       }
     }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (date) {
+      setValue(
+        "date",
+        `${date.getFullYear().toString()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`,
+        { shouldValidate: true },
+      );
+    } else {
+      setValue("date", "");
+    }
+    // eslint-disable-next-line
+  }, [date]);
 
   const onSubmit: SubmitHandler<TBookingSchema> = (dt) => {
     setLoading(true);
@@ -159,8 +180,48 @@ export const Home: FC<I> = (props): ReactElement => {
                 </div>
 
                 <div className="flex w-full items-center gap-5">
-                  {FORM_FIELDS_DATA.slice(3).map((dt) =>
-                    !dt.isSelect ? (
+                  {FORM_FIELDS_DATA.slice(3).map((dt) => {
+                    if (dt.isSelect) {
+                      return (
+                        <Select
+                          className="h-[26px]"
+                          color="rose"
+                          containerClassName="w-64"
+                          disabled={loading}
+                          errorMessage={errors[dt.name]?.message}
+                          key={dt.id}
+                          label={dt.label}
+                          {...register(dt.name)}
+                        >
+                          <option value="-">-</option>
+                          {dt.options?.map((opt, i) => (
+                            <option key={i} value={opt}>
+                              {opt}
+                            </option>
+                          ))}
+                        </Select>
+                      );
+                    }
+
+                    if (dt.isDatePicker) {
+                      return (
+                        <DatePickerInput
+                          color="rose"
+                          containerClassName="w-64"
+                          dateFormat="yyyy/MM/dd"
+                          disabled={loading}
+                          errorMessage={errors[dt.name]?.message}
+                          excludeDates={bookedDates}
+                          key={dt.id}
+                          label={dt.label}
+                          minDate={new Date()}
+                          onChange={(value) => value && setDate(value)}
+                          selected={date}
+                        />
+                      );
+                    }
+
+                    return (
                       <Input
                         color="rose"
                         containerClassName="w-64"
@@ -173,26 +234,8 @@ export const Home: FC<I> = (props): ReactElement => {
                         type={dt.type}
                         {...register(dt.name)}
                       />
-                    ) : (
-                      <Select
-                        className="h-[26px]"
-                        color="rose"
-                        containerClassName="w-64"
-                        disabled={loading}
-                        errorMessage={errors[dt.name]?.message}
-                        key={dt.id}
-                        label={dt.label}
-                        {...register(dt.name)}
-                      >
-                        <option value="-">-</option>
-                        {dt.options?.map((opt, i) => (
-                          <option key={i} value={opt}>
-                            {opt}
-                          </option>
-                        ))}
-                      </Select>
-                    ),
-                  )}
+                    );
+                  })}
 
                   <ExampleA className="mt-2 w-64 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
                     <FaChevronRight size={14} /> BOOKING NOW

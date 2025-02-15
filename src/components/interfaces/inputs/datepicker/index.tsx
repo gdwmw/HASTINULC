@@ -7,7 +7,7 @@ import { twm } from "@/src/libs/tailwind-merge";
 
 import { ErrorMessage, InputsContainer, Label } from "../elements";
 
-import "react-datepicker/dist/react-datepicker.css";
+import "@/src/styles/datepicker.css";
 
 /* eslint-disable perfectionist/sort-union-types */
 type TDatePicker = {
