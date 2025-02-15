@@ -7,11 +7,19 @@ import { About, Contact, Home, Packages, Portfolio } from "./batches";
 
 export const Main: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
-  const response = await GETBookings();
+  const fetchBookings = async () => {
+    try {
+      const response = await GETBookings();
+      return response;
+    } catch {
+      console.log("GETBookings Failed, Bypassed!");
+      return null;
+    }
+  };
 
   return (
     <main>
-      <Home response={response} session={session} />
+      <Home response={await fetchBookings()} session={session} />
       <About />
       <Portfolio />
       <Packages />

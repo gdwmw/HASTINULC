@@ -72,7 +72,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
 ];
 
 interface I {
-  response: IBookingsResponse[];
+  response: IBookingsResponse[] | null | undefined;
   session: null | Session;
 }
 
@@ -83,8 +83,10 @@ export const Home: FC<I> = (props): ReactElement => {
   const [loading, setLoading] = useState(false);
 
   const bookedDates = props.response
-    .map((dt) => (dt.indicator === "On Going" || dt.indicator === "Success" ? new Date(dt.date) : null))
-    .filter((date): date is Date => date !== null);
+    ? props.response
+        .map((dt) => (dt.indicator === "On Going" || dt.indicator === "Success" ? new Date(dt.date) : null))
+        .filter((date): date is Date => date !== null)
+    : [];
 
   const {
     formState: { errors },
