@@ -7,27 +7,27 @@ import { IoStar } from "react-icons/io5";
 
 import { BookingSummary } from "@/src/components/booking-sammary";
 import { useGlobalStates } from "@/src/context";
-import { IBookingsResponse, IReviewsResponse } from "@/src/types/api";
 
 interface I {
-  selectedBookingSummary: IBookingsResponse | undefined;
-  selectedReview: IReviewsResponse | undefined;
   session: null | Session;
   slug: string[];
 }
 
 /* eslint-disable react/jsx-no-useless-fragment */
 export const Content: FC<I> = (props): ReactElement => {
-  const { open } = useGlobalStates();
+  const { open, response } = useGlobalStates();
+
+  const selectedBookingSummary = response?.bookings.find((dt) => dt.documentId === props.slug[1]);
+  const selectedReview = response?.reviews.find((dt) => dt.documentId === selectedBookingSummary?.review?.documentId);
 
   return (
     <>
       {open?.bookingSummary ? (
         <BookingSummary
-          {...props.selectedBookingSummary}
+          {...selectedBookingSummary}
           datasDocumentId={props.session?.user?.datasDocumentId}
           documentId={props.slug[1]}
-          status={props.selectedBookingSummary?.indicator}
+          status={selectedBookingSummary?.indicator}
         />
       ) : (
         <section className="w-full max-w-[400px] rounded-lg border border-gray-200 bg-white p-6 shadow-md">
@@ -42,9 +42,7 @@ export const Content: FC<I> = (props): ReactElement => {
               <dd className="flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, i) => {
                   const ratingValue = i + 1;
-                  return (
-                    <IoStar className={ratingValue <= (props.selectedReview?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"} key={i} size={28} />
-                  );
+                  return <IoStar className={ratingValue <= (selectedReview?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"} key={i} size={28} />;
                 })}
               </dd>
             </div>
@@ -52,15 +50,15 @@ export const Content: FC<I> = (props): ReactElement => {
             <div className="flex flex-col gap-3">
               <dt className="font-medium text-gray-600">Description:</dt>
               <dd className="rounded-lg border border-gray-200 bg-gray-50 p-3">
-                <p className="leading-relaxed text-gray-700">{props.selectedReview?.description ?? "Loading..."}</p>
+                <p className="leading-relaxed text-gray-700">{selectedReview?.description ?? "Loading..."}</p>
               </dd>
             </div>
 
             <div className="flex flex-col gap-3">
               <dt className="font-medium text-gray-600">Images:</dt>
               <dd className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                {props.selectedReview?.images ? (
-                  props.selectedReview?.images.map((dt, i) => (
+                {selectedReview?.images ? (
+                  selectedReview?.images.map((dt, i) => (
                     <div className="relative aspect-square overflow-hidden rounded-lg border border-gray-200" key={i}>
                       <Image alt="Review Image" className="object-cover" fill quality={75} src={dt} />
                     </div>

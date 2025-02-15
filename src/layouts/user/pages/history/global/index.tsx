@@ -10,18 +10,27 @@ import { IoStar } from "react-icons/io5";
 
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
 import { useGlobalStates } from "@/src/context";
-import { IBookingsResponse } from "@/src/types/api";
+import { IBookingsResponse, IReviewsResponse } from "@/src/types/api";
 
 interface I {
+  bookingsResponse: IBookingsResponse[];
   children: ReactNode;
-  response: IBookingsResponse[];
+  reviewsResponse: IReviewsResponse[];
   session: null | Session;
 }
 
 export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
   const pathname = usePathname();
   const router = useRouter();
-  const { setOpen } = useGlobalStates();
+  const { setOpen, setResponse } = useGlobalStates();
+
+  useEffect(() => {
+    setResponse({
+      bookings: props.bookingsResponse,
+      reviews: props.reviewsResponse,
+    });
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     const pathSegments = pathname.split("/");
@@ -42,7 +51,7 @@ export const GlobalHistoryLayout: FC<I> = (props): ReactElement => {
           </Link>
 
           <div className="size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5">
-            {props.response.map((dt) => (
+            {props.bookingsResponse.map((dt) => (
               <section
                 className="relative flex w-full max-w-[360px] flex-col justify-between overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md"
                 id={dt.documentId}

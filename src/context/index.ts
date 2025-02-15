@@ -1,25 +1,24 @@
 import { create } from "zustand";
 
-import { IBookingsContextPayload } from "../types/context";
-
-interface IOpen {
-  bookingSummary: boolean;
-}
+import { IBookingsContext, IOpenContext, IResponseContext } from "../types/context";
 
 interface IStates {
-  booking?: IBookingsContextPayload;
-  open?: IOpen;
+  booking?: IBookingsContext;
+  open?: IOpenContext;
+  response?: IResponseContext;
 }
 
 interface IActions {
-  setBooking: (param: IBookingsContextPayload) => void;
-  setOpen: (param: IOpen) => void;
+  setBooking: (param: IBookingsContext) => void;
+  setOpen: (param: IOpenContext) => void;
+  setResponse: (param: IResponseContext) => void;
 }
 
 export const useGlobalStates = create<IActions & IStates>((set) => ({
   open: {
     bookingSummary: true,
   },
-  setBooking: (booking: IBookingsContextPayload) => set({ booking }),
-  setOpen: (open: IOpen) => set({ open }),
+  setBooking: (booking: IBookingsContext) => set({ booking }),
+  setOpen: (open: IOpenContext) => set({ open }),
+  setResponse: (response: IResponseContext) => set({ response }),
 }));
