@@ -89,19 +89,21 @@ export const Content: FC<I> = (props): ReactElement => {
         <li className="relative">
           {props.session?.user?.status ? (
             <div id="profile-menu">
-              <Image
-                alt="Photo Profile"
-                className="cursor-pointer rounded-full border border-black p-0.5 active:scale-95"
-                height={40}
-                onClick={() => setMenuOpen(!menuOpen)}
-                src={props.session?.user?.image ?? ""}
-                width={40}
-              />
+              <div className="relative aspect-square size-[45px] overflow-hidden rounded-full border border-gray-200 active:scale-95">
+                <Image
+                  alt="Review Image"
+                  className="cursor-pointer object-cover"
+                  fill
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  quality={30}
+                  src={props.session?.user?.image ?? ""}
+                />
+              </div>
               {menuOpen && (
                 <div className="absolute right-0 mt-2 w-48 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md">
                   <Link
                     className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
-                    href={`/user/profile/${props.session?.user?.username}`}
+                    href={`/user/profile`}
                     onClick={() => setMenuOpen(false)}
                   >
                     <FaUser className="text-base" />

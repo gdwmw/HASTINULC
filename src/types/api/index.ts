@@ -1,6 +1,6 @@
 export interface IAuthSchema {
   jwt: string;
-  user: IUsersSchema;
+  user: IUsersResponse;
 }
 
 export interface IRegisterPayload {
@@ -16,6 +16,7 @@ export interface ILoginPayload {
 
 export interface IAuthResponse {
   datasDocumentId: string;
+  datasId: string;
   email: string;
   id: number;
   image?: null | string;
@@ -29,6 +30,7 @@ export interface IAuthResponse {
 
 export interface INextAuthResponse {
   datasDocumentId: string;
+  datasId: string;
   email?: null | string;
   id: string;
   image?: null | string;
@@ -42,20 +44,18 @@ export interface INextAuthResponse {
 
 // ----------------------------
 
-export interface IUsersSchema {
-  datasDocumentId: string;
-  email: string;
-  id: number;
-  username: string;
-}
-
 export interface IUsersPayload {
-  datasDocumentId: string;
-  id: number;
+  datasDocumentId?: string;
+  email?: string;
+  id?: number;
+  username?: string;
 }
 
 export interface IUsersResponse {
   datasDocumentId: string;
+  email: string;
+  id: number;
+  username: string;
 }
 
 // ----------------------------
@@ -69,7 +69,7 @@ export interface IUploadPayload {
 
 export interface IUploadResponse {
   documentId: string;
-  id: string;
+  id: number;
   name: string;
   thumbnail: { name: string; url: string }[] | null;
   url: string;
@@ -80,7 +80,8 @@ export interface IUploadResponse {
 export interface IDatasPayload {
   bookings?: string;
   documentId?: string;
-  image?: number;
+  id?: number;
+  image?: FileList | number;
   name: string;
   phoneNumber: string;
   role?: string;
@@ -89,7 +90,11 @@ export interface IDatasPayload {
 export interface IDatasResponse {
   bookings: IBookingsResponse[];
   documentId: string;
-  image: string;
+  id: number;
+  image: {
+    id: number;
+    url: string;
+  };
   name: string;
   phoneNumber: string;
   role: string;

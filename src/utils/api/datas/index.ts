@@ -8,14 +8,20 @@ if (!API_URL) {
 
 type TFields = keyof IDatasResponse;
 
-const FIELDS_DATA: TFields[] = ["bookings", "documentId", "image", "name", "phoneNumber", "role"];
+const FIELDS_DATA: TFields[] = ["bookings", "documentId", "image", "name", "phoneNumber", "role", "id"];
 
 // eslint-disable-next-line
 const createDataResponse = (source: any): IDatasResponse =>
   FIELDS_DATA.reduce(
     (result, field) => ({
       ...result,
-      [field]: field === "image" ? (source[field]?.url ? API_URL + source[field].url : null) : source[field],
+      [field]:
+        field === "image"
+          ? {
+              id: source[field]?.id || 0,
+              url: source[field]?.url ? API_URL + source[field].url : null,
+            }
+          : source[field],
     }),
     {},
   ) as IDatasResponse;
@@ -80,9 +86,10 @@ export const POSTDatas = async (payload: IDatasPayload): Promise<IDatasResponse>
 };
 
 export const PUTDatas = async (payload: IDatasPayload): Promise<IDatasResponse> => {
+  const { documentId, ...payloadWithoutDocumentId } = payload;
   try {
-    const res = await fetch(`${API_URL}/api/datas/${payload.documentId}?populate=*`, {
-      body: JSON.stringify({ data: payload }),
+    const res = await fetch(`${API_URL}/api/datas/${documentId}?populate=*`, {
+      body: JSON.stringify({ data: payloadWithoutDocumentId }),
       headers: {
         "Content-Type": "application/json",
       },

@@ -92,12 +92,13 @@ export const Home: FC<I> = (props): ReactElement => {
     formState: { errors },
     handleSubmit,
     register,
+    reset,
     setValue,
   } = useForm<TBookingSchema>({
     defaultValues: {
-      email: props.session?.user?.email ?? "",
-      name: props.session?.user?.name ?? "",
-      phoneNumber: props.session?.user?.phoneNumber ?? "",
+      email: props.session?.user?.email ?? undefined,
+      name: props.session?.user?.name ?? undefined,
+      phoneNumber: props.session?.user?.phoneNumber,
     },
     resolver: zodResolver(BookingSchema),
   });
@@ -130,9 +131,11 @@ export const Home: FC<I> = (props): ReactElement => {
 
   const onSubmit: SubmitHandler<TBookingSchema> = (dt) => {
     setLoading(true);
+
     if (props.session?.user?.status) {
       setBooking(dt);
       router.push("/booking");
+      reset();
     } else {
       localStorage.setItem("pendingBooking", JSON.stringify(dt));
       router.push("/login");

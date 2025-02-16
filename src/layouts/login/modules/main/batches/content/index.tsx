@@ -48,6 +48,7 @@ export const Content: FC = (): ReactElement => {
       console.log("Login Success!");
       router.push("/");
       router.refresh();
+      reset();
     } catch (error) {
       console.log("Login Failed!");
       console.error("--- Authentication Error Message ---", error);
