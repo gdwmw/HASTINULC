@@ -70,8 +70,8 @@ interface I {
 }
 
 export const Content: FC<I> = (props): ReactElement => {
-  const [loading, setLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState<null | string>(null);
+  const [loading, setLoading] = useState(false);
 
   const {
     formState: { errors },

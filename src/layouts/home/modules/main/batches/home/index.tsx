@@ -243,7 +243,7 @@ export const Home: FC<I> = (props): ReactElement => {
                   })}
 
                   <ExampleA className="mt-2 w-64 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-                    <FaChevronRight size={14} /> BOOKING NOW
+                    <FaChevronRight size={14} /> {loading ? "Loading..." : "BOOKING NOW"}
                   </ExampleA>
                 </div>
               </form>

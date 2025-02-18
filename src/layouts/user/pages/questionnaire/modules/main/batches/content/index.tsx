@@ -90,7 +90,7 @@ export const Content: FC<I> = (props): ReactElement => {
                         {Array.isArray(dt.options) &&
                           dt.options.map((opt) => (
                             <label className="flex items-center gap-1" key={opt}>
-                              <input className="accent-rose-500" type="radio" value={opt} {...register(`question${i + 1}`)} />
+                              <input className="accent-rose-500" disabled={loading} type="radio" value={opt} {...register(`question${i + 1}`)} />
                               <span>{opt}</span>
                             </label>
                           ))}
@@ -106,6 +106,7 @@ export const Content: FC<I> = (props): ReactElement => {
                       </label>
                       <TextArea
                         color="rose"
+                        disabled={loading}
                         fieldsetClassName="py-1 border"
                         id={`question${i + 1}`}
                         legendClassName="px-0 ml-0"

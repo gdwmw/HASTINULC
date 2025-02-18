@@ -103,7 +103,7 @@ export const Content: FC<I> = (props): ReactElement => {
                   const ratingValue = i + 1;
                   return (
                     <button
-                      className={`text-4xl hover:scale-110 ${ratingValue <= (ratingHover || watch("rating")) ? "text-yellow-400" : "text-gray-300"}`}
+                      className={`text-4xl ${!loading && "hover:scale-110"} ${loading ? "text-gray-300" : ratingValue <= (ratingHover || watch("rating")) ? "text-yellow-400" : "text-gray-300"}`}
                       disabled={loading}
                       key={i}
                       onClick={() => setValue("rating", ratingValue)}
@@ -122,6 +122,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 className="pt-1"
                 color="rose"
                 containerClassName="w-full"
+                disabled={loading}
                 errorMessage={errors.images?.message}
                 label="Images"
                 multiple
@@ -143,7 +144,11 @@ export const Content: FC<I> = (props): ReactElement => {
                 {SUGGESTIONS_DATA.map((dt, i) => (
                   <button
                     className={`rounded-full px-4 py-2 text-sm font-semibold ${
-                      selectedSuggestions.includes(dt) ? "bg-rose-500 text-white" : "bg-gray-100 text-gray-700 hover:bg-rose-400 hover:text-white"
+                      loading
+                        ? "bg-gray-100 text-gray-700"
+                        : selectedSuggestions.includes(dt)
+                          ? "bg-rose-500 text-white"
+                          : "bg-gray-100 text-gray-700 hover:bg-rose-400 hover:text-white"
                     }`}
                     disabled={loading}
                     key={i}
