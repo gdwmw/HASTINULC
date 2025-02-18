@@ -60,6 +60,7 @@ export const Content: FC<I> = (props): ReactElement => {
       ...dt,
       booking: props.slug[1],
       current: new Date(),
+      data: props.session?.user?.datasDocumentId,
       name: props.session?.user?.name ?? "",
       username: props.session?.user?.username ?? "",
     };

@@ -8,7 +8,7 @@ if (!API_URL) {
 
 type TFields = keyof IReviewsResponse;
 
-const FIELDS_DATA: TFields[] = ["documentId", "description", "rating", "booking", "images", "current", "name", "username", "id"];
+const FIELDS_DATA: TFields[] = ["documentId", "description", "rating", "booking", "images", "current", "name", "username", "id", "data"];
 
 // eslint-disable-next-line
 const createReviewsResponse = (source: any): IReviewsResponse =>

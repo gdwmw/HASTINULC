@@ -68,48 +68,54 @@ export const Content: FC<I> = (props): ReactElement => {
           <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
             <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
-
-          <h1 className="text-center text-2xl font-bold text-rose-500">Customer Satisfaction Questionnaire</h1>
+          <div>
+            <h1 className="text-center text-2xl font-bold text-rose-500">Customer Satisfaction Questionnaire</h1>
+            <p className="text-center text-gray-600">We value your feedback to improve our services</p>
+          </div>
 
           <form className="flex flex-col gap-5 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
-            {QUESTIONS_DATA.map((dt, i) =>
-              dt.options !== "textarea" ? (
-                <div className="space-y-2" key={dt.id}>
-                  <div className="flex gap-1">
-                    <span className="font-bold text-rose-500">{i + 1}.</span>
-                    <span>
-                      {dt.question}
-                      <span className="font-bold text-rose-500"> *</span>
-                    </span>
-                  </div>
-                  <div className="ml-8 flex gap-3">
-                    {Array.isArray(dt.options) &&
-                      dt.options.map((opt) => (
-                        <label className="flex items-center gap-1" key={opt}>
-                          <input className="accent-rose-500" type="radio" value={opt} {...register(`question${i + 1}`)} />
-                          <span>{opt}</span>
-                        </label>
-                      ))}
-                  </div>
+            {QUESTIONS_DATA.map((dt, i) => (
+              <div className="space-y-4" key={dt.id}>
+                <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
+                  {dt.options !== "textarea" ? (
+                    <div className="space-y-2">
+                      <div className="flex gap-1">
+                        <span className="font-bold text-rose-500">{i + 1}.</span>
+                        <span>
+                          {dt.question}
+                          <span className="font-bold text-rose-500"> *</span>
+                        </span>
+                      </div>
+                      <div className="ml-8 flex gap-3">
+                        {Array.isArray(dt.options) &&
+                          dt.options.map((opt) => (
+                            <label className="flex items-center gap-1" key={opt}>
+                              <input className="accent-rose-500" type="radio" value={opt} {...register(`question${i + 1}`)} />
+                              <span>{opt}</span>
+                            </label>
+                          ))}
+                      </div>
 
-                  {errors[`question${i + 1}`]?.message && <ErrorMessage errorMessage={String(errors[`question${i + 1}`]?.message)} />}
+                      {errors[`question${i + 1}`]?.message && <ErrorMessage errorMessage={String(errors[`question${i + 1}`]?.message)} />}
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <label className="flex gap-1" htmlFor={`question${i + 1}`}>
+                        <span className="font-bold text-rose-500">{i + 1}.</span>
+                        <span>{dt.question}</span>
+                      </label>
+                      <TextArea
+                        color="rose"
+                        fieldsetClassName="py-1 border"
+                        id={`question${i + 1}`}
+                        legendClassName="px-0 ml-0"
+                        {...register(`question${i + 1}`)}
+                      />
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <div className="space-y-4" key={dt.id}>
-                  <label className="flex gap-1" htmlFor={`question${i + 1}`}>
-                    <span className="font-bold text-rose-500">{i + 1}.</span>
-                    <span>{dt.question}</span>
-                  </label>
-                  <TextArea
-                    color="rose"
-                    fieldsetClassName="py-1 border"
-                    id={`question${i + 1}`}
-                    legendClassName="px-0 ml-0"
-                    {...register(`question${i + 1}`)}
-                  />
-                </div>
-              ),
-            )}
+              </div>
+            ))}
 
             <ExampleA className="mx-auto min-h-10 w-64 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
               {loading ? "Loading..." : "SUBMIT"}

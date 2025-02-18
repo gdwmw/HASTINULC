@@ -84,6 +84,8 @@ export interface IDatasPayload {
   image?: FileList | number;
   name: string;
   phoneNumber: string;
+  questionnaires?: string;
+  reviews?: string;
   role?: string;
 }
 
@@ -97,6 +99,8 @@ export interface IDatasResponse {
   };
   name: string;
   phoneNumber: string;
+  questionnaires: IQuestionnairesResponse[];
+  reviews: IReviewsResponse[];
   role: string;
 }
 
@@ -145,6 +149,7 @@ export interface IBookingsResponse {
 export interface IReviewsPayload {
   booking?: string;
   current: Date;
+  data?: string;
   description: string;
   documentId?: string;
   images?: FileList | number;
@@ -156,6 +161,7 @@ export interface IReviewsPayload {
 export interface IReviewsResponse {
   booking?: IBookingsResponse;
   current: Date;
+  data?: IDatasResponse;
   description: string;
   documentId: string;
   id: number;

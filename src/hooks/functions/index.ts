@@ -1,5 +1,7 @@
 import { KeyboardEvent } from "react";
 
+import { IDatasResponse } from "@/src/types/api";
+
 export const currencyFormat = (amount: number | string, currency: "IDR" | "USD") => {
   const locale = currency === "IDR" ? "id-ID" : "en-US";
   const result = new Intl.NumberFormat(locale, {
@@ -28,4 +30,14 @@ export const inputValidations = {
       e.preventDefault();
     }
   },
+};
+
+export const questionnairesConditions = (data: IDatasResponse | null | undefined) => {
+  const questionnairesLength = data?.questionnaires.length ?? 0;
+  return (
+    (data?.reviews.length ?? 0) > 0 &&
+    (questionnairesLength === 0 ||
+      (data?.questionnaires[questionnairesLength - 1].current &&
+        new Date().getTime() - new Date(data?.questionnaires[questionnairesLength - 1].current).getTime() > 30 * 24 * 60 * 60 * 1000))
+  );
 };

@@ -8,7 +8,7 @@ if (!API_URL) {
 
 type TFields = keyof IDatasResponse;
 
-const FIELDS_DATA: TFields[] = ["bookings", "documentId", "image", "name", "phoneNumber", "role", "id"];
+const FIELDS_DATA: TFields[] = ["bookings", "documentId", "image", "name", "phoneNumber", "role", "id", "questionnaires", "reviews"];
 
 // eslint-disable-next-line
 const createDataResponse = (source: any): IDatasResponse =>
