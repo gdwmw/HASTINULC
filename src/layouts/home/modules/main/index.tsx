@@ -9,8 +9,8 @@ export const Main: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
   const fetchBookings = async () => {
     try {
-      const response = await GETBookings();
-      return response;
+      const res = await GETBookings();
+      return res;
     } catch {
       console.log("GETBookings Failed, Bypassed!");
       return null;
