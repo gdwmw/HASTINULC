@@ -94,7 +94,7 @@ export const Content: FC<I> = (props): ReactElement => {
         <li className="relative">
           {props.session?.user?.status ? (
             <div id="profile-menu">
-              <div className="relative">
+              <div className="relative active:scale-95">
                 {questionnairesConditions && (
                   <div className="absolute -bottom-px -right-px z-[1] flex size-4 items-center justify-center rounded-full bg-white">
                     <div className="relative flex size-2">
@@ -103,7 +103,7 @@ export const Content: FC<I> = (props): ReactElement => {
                     </div>
                   </div>
                 )}
-                <div className="relative aspect-square size-[45px] overflow-hidden rounded-full border border-gray-200 active:scale-95">
+                <div className="relative aspect-square size-[45px] overflow-hidden rounded-full border border-gray-200">
                   <Image
                     alt="Review Image"
                     className="cursor-pointer object-cover"
