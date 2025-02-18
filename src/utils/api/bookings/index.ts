@@ -97,9 +97,10 @@ export const POSTBookings = async (payload: IBookingsPayload): Promise<IBookings
 };
 
 export const PUTBookings = async (payload: IBookingsPayload): Promise<IBookingsResponse> => {
+  const { documentId, ...payloadWithoutDocumentId } = payload;
   try {
-    const res = await fetch(`${API_URL}/api/bookings/${payload.documentId}?populate=*`, {
-      body: JSON.stringify({ data: payload }),
+    const res = await fetch(`${API_URL}/api/bookings/${documentId}?populate=*`, {
+      body: JSON.stringify({ data: payloadWithoutDocumentId }),
       headers: {
         "Content-Type": "application/json",
       },

@@ -80,9 +80,10 @@ export const POSTReviews = async (payload: IReviewsPayload): Promise<IReviewsRes
 };
 
 export const PUTReviews = async (payload: IReviewsPayload): Promise<IReviewsResponse> => {
+  const { documentId, ...payloadWithoutDocumentId } = payload;
   try {
-    const res = await fetch(`${API_URL}/api/reviews/${payload.documentId}?populate=*`, {
-      body: JSON.stringify({ data: payload }),
+    const res = await fetch(`${API_URL}/api/reviews/${documentId}?populate=*`, {
+      body: JSON.stringify({ data: payloadWithoutDocumentId }),
       headers: {
         "Content-Type": "application/json",
       },

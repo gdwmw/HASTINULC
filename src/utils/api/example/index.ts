@@ -80,9 +80,10 @@ export const POSTExample = async (payload: IExamplePayload): Promise<IExampleRes
 };
 
 export const PUTExample = async (payload: IExamplePayload): Promise<IExampleResponse> => {
+  const { documentId, ...payloadWithoutDocumentId } = payload;
   try {
-    const res = await fetch(`${API_URL}/api/example/${payload.documentId}?populate=*`, {
-      body: JSON.stringify({ data: payload }),
+    const res = await fetch(`${API_URL}/api/example/${documentId}?populate=*`, {
+      body: JSON.stringify({ data: payloadWithoutDocumentId }),
       headers: {
         "Content-Type": "application/json",
       },

@@ -80,9 +80,10 @@ export const POSTQuestionnaires = async (payload: IQuestionnairesPayload): Promi
 };
 
 export const PUTQuestionnaires = async (payload: IQuestionnairesPayload): Promise<IQuestionnairesResponse> => {
+  const { documentId, ...payloadWithoutDocumentId } = payload;
   try {
-    const res = await fetch(`${API_URL}/api/questionnaires/${payload.documentId}?populate=*`, {
-      body: JSON.stringify({ data: payload }),
+    const res = await fetch(`${API_URL}/api/questionnaires/${documentId}?populate=*`, {
+      body: JSON.stringify({ data: payloadWithoutDocumentId }),
       headers: {
         "Content-Type": "application/json",
       },
