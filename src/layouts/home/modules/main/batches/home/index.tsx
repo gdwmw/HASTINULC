@@ -212,7 +212,7 @@ export const Home: FC<I> = (props): ReactElement => {
                       return (
                         <DatePickerInput
                           color="rose"
-                          containerClassName="w-64"
+                          containerClassName="w-64 z-[2]"
                           dateFormat="yyyy/MM/dd"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
