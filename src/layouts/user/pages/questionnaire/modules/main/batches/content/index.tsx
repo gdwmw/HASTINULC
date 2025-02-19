@@ -68,10 +68,11 @@ export const Content: FC<I> = (props): ReactElement => {
           <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
             <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
-          <div>
+
+          <header>
             <h1 className="text-center text-2xl font-bold text-rose-500">Customer Satisfaction Questionnaire</h1>
             <p className="text-center text-gray-600">We value your feedback to improve our services</p>
-          </div>
+          </header>
 
           <form className="flex flex-col gap-5 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
             {QUESTIONS_DATA.map((dt, i) => (
