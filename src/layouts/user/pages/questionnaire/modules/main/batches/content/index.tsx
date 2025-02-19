@@ -80,13 +80,13 @@ export const Content: FC<I> = (props): ReactElement => {
                 <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
                   {dt.options !== "textarea" ? (
                     <div className="space-y-2">
-                      <div className="flex gap-1">
+                      <h2 className="flex gap-1">
                         <span className="font-bold text-rose-500">{i + 1}.</span>
                         <span>
                           {dt.question}
                           <span className="font-bold text-rose-500"> *</span>
                         </span>
-                      </div>
+                      </h2>
                       <div className="ml-8 flex gap-3">
                         {Array.isArray(dt.options) &&
                           dt.options.map((opt) => (
@@ -101,15 +101,14 @@ export const Content: FC<I> = (props): ReactElement => {
                     </div>
                   ) : (
                     <div className="space-y-4">
-                      <label className="flex gap-1" htmlFor={`question${i + 1}`}>
+                      <h2 className="flex gap-1">
                         <span className="font-bold text-rose-500">{i + 1}.</span>
                         <span>{dt.question}</span>
-                      </label>
+                      </h2>
                       <TextArea
                         color="rose"
                         disabled={loading}
                         fieldsetClassName="py-1 border"
-                        id={`question${i + 1}`}
                         legendClassName="px-0 ml-0"
                         {...register(`question${i + 1}`)}
                       />

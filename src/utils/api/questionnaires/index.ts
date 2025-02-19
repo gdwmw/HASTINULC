@@ -1,4 +1,4 @@
-import { IQuestionnairesPayload, IQuestionnairesResponse } from "@/src/types/api";
+import { IDatasResponse, IQuestionnairesPayload, IQuestionnairesResponse } from "@/src/types/api";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -6,21 +6,25 @@ if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-type TFields = keyof IQuestionnairesResponse;
+const DUMMY_OBJECTS_DATA: IQuestionnairesResponse = {
+  current: new Date(),
+  data: {} as IDatasResponse,
+  documentId: "",
+  name: "",
+  responses: [],
+  username: "",
+};
 
-const FIELDS_DATA: TFields[] = ["name", "username", "data", "responses", "documentId", "current"];
-
-// eslint-disable-next-line
-const createQuestionnairesResponse = (source: any): IQuestionnairesResponse =>
-  FIELDS_DATA.reduce(
+const create = (response: IQuestionnairesResponse): IQuestionnairesResponse =>
+  Object.keys(DUMMY_OBJECTS_DATA).reduce(
     (result, field) => ({
       ...result,
-      [field]: source[field],
+      [field]: response[field as keyof IQuestionnairesResponse],
     }),
     {},
   ) as IQuestionnairesResponse;
 
-const rearrange = (response: IQuestionnairesResponse): IQuestionnairesResponse => createQuestionnairesResponse(response);
+const rearrange = (response: IQuestionnairesResponse): IQuestionnairesResponse => create(response);
 
 export const GETQuestionnaires = async (query?: string): Promise<IQuestionnairesResponse[]> => {
   try {

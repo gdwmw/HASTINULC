@@ -1,43 +1,40 @@
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-import { IBookingsPayload, IBookingsResponse } from "@/src/types/api";
+import { IBookingsPayload, IBookingsResponse, IDatasResponse } from "@/src/types/api";
 
 if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-type TFields = keyof IBookingsResponse;
+const DUMMY_OBJECTS_DATA: IBookingsResponse = {
+  current: new Date(),
+  data: {} as IDatasResponse,
+  date: "",
+  documentId: "",
+  email: "",
+  event: "",
+  googleMapsLink: "",
+  indicator: "",
+  name: "",
+  phoneNumber: "",
+  review: undefined,
+  subTotal: "",
+  tax: "",
+  time: [],
+  total: "",
+  username: "",
+};
 
-const FIELDS_DATA: TFields[] = [
-  "current",
-  "data",
-  "date",
-  "documentId",
-  "email",
-  "event",
-  "googleMapsLink",
-  "indicator",
-  "name",
-  "phoneNumber",
-  "subTotal",
-  "tax",
-  "time",
-  "total",
-  "username",
-  "review",
-];
-
-// eslint-disable-next-line
-const createBookingResponse = (source: any): IBookingsResponse =>
-  FIELDS_DATA.reduce(
+const create = (response: IBookingsResponse): IBookingsResponse =>
+  Object.keys(DUMMY_OBJECTS_DATA).reduce(
     (result, field) => ({
       ...result,
-      [field]: source[field],
+      [field]: response[field as keyof IBookingsResponse],
     }),
     {},
   ) as IBookingsResponse;
 
-const rearrange = (response: IBookingsResponse): IBookingsResponse => createBookingResponse(response);
+const rearrange = (response: IBookingsResponse): IBookingsResponse => create(response);
 
 export const GETBookings = async (query?: string): Promise<IBookingsResponse[]> => {
   try {

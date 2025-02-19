@@ -4,9 +4,9 @@ export interface IAuthSchema {
 }
 
 export interface IRegisterPayload {
+  username: string;
   email: string;
   password: string;
-  username: string;
 }
 
 export interface ILoginPayload {
@@ -15,178 +15,186 @@ export interface ILoginPayload {
 }
 
 export interface IAuthResponse {
-  datasDocumentId: string;
-  datasId: string;
-  email: string;
   id: number;
-  image?: null | string;
+  datasId: string;
+  datasDocumentId: string;
+  username: string;
   name: string;
+  email: string;
   phoneNumber: string;
+  image?: null | string;
   role: string;
   status: string;
   token: string;
-  username: string;
 }
 
 export interface INextAuthResponse {
-  datasDocumentId: string;
-  datasId: string;
-  email?: null | string;
   id: string;
-  image?: null | string;
+  datasId: string;
+  datasDocumentId: string;
+  username: string;
   name?: null | string;
+  email?: null | string;
   phoneNumber: string;
+  image?: null | string;
   role: string;
   status: string;
   token: string;
-  username: string;
 }
 
 // ----------------------------
 
 export interface IUsersPayload {
-  datasDocumentId?: string;
-  email?: string;
   id?: number;
   username?: string;
+  email?: string;
+  datasDocumentId?: string;
 }
 
 export interface IUsersResponse {
-  datasDocumentId: string;
-  email: string;
   id: number;
   username: string;
+  email: string;
+  datasDocumentId?: string;
 }
 
 // ----------------------------
 
 export interface IUploadPayload {
-  field?: string;
   files: FileList;
   ref?: string;
   refId?: string;
+  field?: string;
 }
 
 export interface IUploadResponse {
-  documentId: string;
   id: number;
+  documentId: string;
   name: string;
-  thumbnail: { name: string; url: string }[] | null;
   url: string;
+  formats: { thumbnail: { url: string } } | null;
 }
 
 // ----------------------------
 
 export interface IDatasPayload {
-  bookings?: string;
-  documentId?: string;
   id?: number;
-  image?: FileList | number;
+  documentId?: string;
   name: string;
   phoneNumber: string;
-  questionnaires?: string;
-  reviews?: string;
+  image?: FileList | number;
   role?: string;
+  bookings?: string;
+  reviews?: string;
+  questionnaires?: string;
 }
 
 export interface IDatasResponse {
-  bookings: IBookingsResponse[];
-  documentId: string;
   id: number;
+  documentId: string;
+  name: string;
+  phoneNumber: string;
   image: {
     id: number;
     url: string;
-  };
-  name: string;
-  phoneNumber: string;
-  questionnaires: IQuestionnairesResponse[];
-  reviews: IReviewsResponse[];
+  } | null;
   role: string;
+  bookings?: IBookingsResponse[];
+  reviews?: IReviewsResponse[];
+  questionnaires?: IQuestionnairesResponse[];
 }
 
 // ----------------------------
 
 export interface IBookingsPayload {
+  documentId?: string;
+  username: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  event: string;
+  date: string;
+  time: string[];
+  googleMapsLink: string;
+  tax: string;
+  subTotal: string;
+  total: string;
+  indicator: string;
   current: Date;
   data: string;
-  date: string;
-  documentId?: string;
-  email: string;
-  event: string;
-  googleMapsLink: string;
-  indicator: string;
-  name: string;
-  phoneNumber: string;
   review?: string;
-  subTotal: string;
-  tax: string;
-  time: string[];
-  total: string;
-  username: string;
 }
 
 export interface IBookingsResponse {
-  current: Date;
-  data: string;
-  date: string;
   documentId: string;
-  email: string;
-  event: string;
-  googleMapsLink: string;
-  indicator: string;
-  name: string;
-  phoneNumber: string;
-  review?: IReviewsResponse;
-  subTotal: string;
-  tax: string;
-  time: string[];
-  total: string;
   username: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  event: string;
+  date: string;
+  time: string[];
+  googleMapsLink: string;
+  tax: string;
+  subTotal: string;
+  total: string;
+  indicator: string;
+  current: Date;
+  data: IDatasResponse;
+  review?: IReviewsResponse;
 }
 
 // ----------------------------
 
 export interface IReviewsPayload {
-  booking?: string;
-  current: Date;
-  data?: string;
-  description: string;
   documentId?: string;
-  images?: FileList | number;
+  username: string;
   name: string;
   rating: number;
-  username: string;
+  description: string;
+  images?: FileList | number[];
+  current: Date;
+  data?: string;
+  booking?: string;
 }
 
 export interface IReviewsResponse {
-  booking?: IBookingsResponse;
-  current: Date;
-  data?: IDatasResponse;
-  description: string;
-  documentId: string;
   id: number;
-  images: string[];
+  documentId: string;
+  username: string;
   name: string;
   rating: number;
-  username: string;
+  description: string;
+  images: { url: string }[] | null;
+  current: Date;
+  data: IDatasResponse;
+  booking: IBookingsResponse;
 }
 
 // ----------------------------
 
 export interface IQuestionnairesPayload {
-  current: Date;
-  data: string;
   documentId?: string;
-  name: string;
-  responses: object[];
   username: string;
+  name: string;
+  responses: {
+    id: number;
+    question: string;
+    answer: string;
+  }[];
+  current: Date;
+  data?: string;
 }
 
 export interface IQuestionnairesResponse {
-  current: Date;
-  data: string;
   documentId: string;
-  name: string;
-  responses: object[];
   username: string;
+  name: string;
+  responses: {
+    id: number;
+    question: string;
+    answer: string;
+  }[];
+  current: Date;
+  data: IDatasResponse;
 }

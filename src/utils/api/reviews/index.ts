@@ -1,4 +1,4 @@
-import { IReviewsPayload, IReviewsResponse } from "@/src/types/api";
+import { IBookingsResponse, IDatasResponse, IReviewsPayload, IReviewsResponse } from "@/src/types/api";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -6,21 +6,34 @@ if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-type TFields = keyof IReviewsResponse;
+const DUMMY_OBJECTS_DATA: IReviewsResponse = {
+  booking: {} as IBookingsResponse,
+  current: new Date(),
+  data: {} as IDatasResponse,
+  description: "",
+  documentId: "",
+  id: 0,
+  images: null,
+  name: "",
+  rating: 0,
+  username: "",
+};
 
-const FIELDS_DATA: TFields[] = ["documentId", "description", "rating", "booking", "images", "current", "name", "username", "id", "data"];
-
-// eslint-disable-next-line
-const createReviewsResponse = (source: any): IReviewsResponse =>
-  FIELDS_DATA.reduce(
+const create = (response: IReviewsResponse): IReviewsResponse =>
+  Object.keys(DUMMY_OBJECTS_DATA).reduce(
     (result, field) => ({
       ...result,
-      [field]: field === "images" ? source[field]?.map((img: { url: string }) => (img.url ? API_URL + img.url : null)) : source[field],
+      [field]:
+        field === "images"
+          ? response[field]
+            ? response[field].map((dt) => `${API_URL + dt.url}`)
+            : null
+          : response[field as keyof IReviewsResponse],
     }),
     {},
   ) as IReviewsResponse;
 
-const rearrange = (response: IReviewsResponse): IReviewsResponse => createReviewsResponse(response);
+const rearrange = (response: IReviewsResponse): IReviewsResponse => create(response);
 
 export const GETReviews = async (query?: string): Promise<IReviewsResponse[]> => {
   try {

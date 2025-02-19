@@ -33,11 +33,11 @@ export const inputValidations = {
 };
 
 export const questionnairesConditions = (data: IDatasResponse | null | undefined) => {
-  const questionnairesLength = data?.questionnaires.length ?? 0;
+  const questionnairesLength = data?.questionnaires?.length ?? 0;
   return (
-    (data?.reviews.length ?? 0) > 0 &&
+    (data?.reviews?.length ?? 0) > 0 &&
     (questionnairesLength === 0 ||
-      (data?.questionnaires[questionnairesLength - 1].current &&
+      (data?.questionnaires?.[questionnairesLength - 1].current &&
         new Date().getTime() - new Date(data?.questionnaires[questionnairesLength - 1].current).getTime() > 30 * 24 * 60 * 60 * 1000))
   );
 };

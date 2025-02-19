@@ -13,11 +13,11 @@ interface IRearrange extends IAuthSchema, IDatasResponse {}
 interface IPayload extends IDatasPayload, IRegisterPayload {}
 
 const rearrange = (response: IRearrange): IAuthResponse => ({
-  datasDocumentId: response.user.datasDocumentId,
+  datasDocumentId: response.user.datasDocumentId ?? "",
   datasId: response.id.toString(),
   email: response.user.email,
   id: response.user.id,
-  image: response.image.url,
+  image: response.image?.url,
   name: response.name,
   phoneNumber: response.phoneNumber,
   role: response.role,

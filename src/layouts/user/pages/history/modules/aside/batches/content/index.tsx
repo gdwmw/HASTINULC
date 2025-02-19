@@ -60,7 +60,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 {selectedReview?.images ? (
                   selectedReview?.images.map((dt, i) => (
                     <div className="relative aspect-square overflow-hidden rounded-lg border border-gray-200" key={i}>
-                      <Image alt="Review Image" className="object-cover" fill quality={50} src={dt} />
+                      <Image alt="Review Image" className="object-cover" fill quality={50} src={dt.url} />
                     </div>
                   ))
                 ) : (

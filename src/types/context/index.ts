@@ -1,11 +1,11 @@
 import { IBookingsResponse, IReviewsResponse } from "../api";
 
 export interface IBookingsContext {
-  date?: string;
-  email?: string;
-  event?: string;
   name?: string;
+  email?: string;
   phoneNumber?: string;
+  event?: string;
+  date?: string;
 }
 
 export interface IOpenContext {

@@ -122,8 +122,8 @@ export const Content: FC<I> = (props): ReactElement => {
       if (dt.image && dt.image.length > 0) {
         const res = await GETDatasByDocumentId(props.session?.user?.datasDocumentId ?? "");
 
-        if (res.image.id !== 1) {
-          await DELETEUpload(res.image.id);
+        if (res.image?.id !== 1) {
+          await DELETEUpload(res.image?.id ?? 0);
         }
 
         await POSTUpload({

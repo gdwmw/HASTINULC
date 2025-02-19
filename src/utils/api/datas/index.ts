@@ -6,27 +6,36 @@ if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-type TFields = keyof IDatasResponse;
+const DUMMY_OBJECTS_DATA: IDatasResponse = {
+  bookings: undefined,
+  documentId: "",
+  id: 0,
+  image: null,
+  name: "",
+  phoneNumber: "",
+  questionnaires: undefined,
+  reviews: undefined,
+  role: "",
+};
 
-const FIELDS_DATA: TFields[] = ["bookings", "documentId", "image", "name", "phoneNumber", "role", "id", "questionnaires", "reviews"];
-
-// eslint-disable-next-line
-const createDataResponse = (source: any): IDatasResponse =>
-  FIELDS_DATA.reduce(
+const create = (response: IDatasResponse): IDatasResponse =>
+  Object.keys(DUMMY_OBJECTS_DATA).reduce(
     (result, field) => ({
       ...result,
       [field]:
         field === "image"
-          ? {
-              id: source[field]?.id || 0,
-              url: source[field]?.url ? API_URL + source[field].url : null,
-            }
-          : source[field],
+          ? response[field]
+            ? {
+                id: response[field]?.id ?? 0,
+                url: response[field]?.url ? API_URL + response[field].url : "",
+              }
+            : null
+          : response[field as keyof IDatasResponse],
     }),
     {},
   ) as IDatasResponse;
 
-const rearrange = (response: IDatasResponse): IDatasResponse => createDataResponse(response);
+const rearrange = (response: IDatasResponse): IDatasResponse => create(response);
 
 export const GETDatas = async (query?: string): Promise<IDatasResponse[]> => {
   try {
