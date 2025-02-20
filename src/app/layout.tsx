@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   publisher: "Gede Dewo Wahyu M.W",
   referrer: "strict-origin-when-cross-origin",
   title: {
-    default: "Next.js | Home",
-    template: "Next.js | %s",
+    default: "Hastinulc | Home",
+    template: "Hastinulc | %s",
   },
 };
 

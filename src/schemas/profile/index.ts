@@ -28,7 +28,7 @@ export const ProfileSchema = z.object({
     .refine((files) => Array.from(files).every((file) => file.size <= 5 * 1024 * 1024), "Maximum file size 5 MB")
     .optional(),
   name: z.string().min(3, { message: errorMessage.string.min("Name", 3) }),
-  phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone Number", 10) }),
+  phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone", 10) }),
   username: z.string().min(4, { message: errorMessage.string.min("Username", 4) }),
 });
 

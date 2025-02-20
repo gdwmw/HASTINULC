@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FC, ReactElement, ReactNode, useEffect } from "react";
 import { BiSolidDetail } from "react-icons/bi";
-import { FaCalendarAlt, FaChevronLeft, FaChevronRight, FaClock, FaEdit } from "react-icons/fa";
+import { FaBox, FaChevronLeft, FaChevronRight, FaClock, FaEdit } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
@@ -93,11 +93,11 @@ export const Content: FC<I> = (props): ReactElement => {
                     <div className="flex justify-between gap-3">
                       <figure className="flex items-center gap-3">
                         <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
-                          <FaCalendarAlt className="text-rose-500" />
+                          <FaBox className="text-rose-500" />
                         </div>
                         <figcaption>
-                          <h2 className="block text-gray-500">Event</h2>
-                          <span className="block font-semibold text-gray-900">{dt.event || "-"}</span>
+                          <h2 className="block text-gray-500">Package</h2>
+                          <span className="block font-semibold text-gray-900">{dt.package || "-"}</span>
                         </figcaption>
                       </figure>
 

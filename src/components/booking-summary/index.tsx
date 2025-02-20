@@ -14,9 +14,9 @@ interface I {
   date?: string;
   documentId?: string;
   email?: string;
-  event?: string;
   googleMapsLink?: string;
   name?: string;
+  package?: string;
   phoneNumber?: string;
   status?: string | TStatus;
   subTotal?: number | string;
@@ -41,8 +41,8 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
           </div>
 
           <div className="flex justify-between">
-            <dt className="font-medium text-gray-600">Event:</dt>
-            <dd className="font-semibold text-gray-800">{props.event || "-"}</dd>
+            <dt className="font-medium text-gray-600">Package:</dt>
+            <dd className="font-semibold text-gray-800">{props.package || "-"}</dd>
           </div>
 
           <div className="flex justify-between">

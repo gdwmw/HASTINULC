@@ -50,7 +50,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 3,
-    label: "Phone Number",
+    label: "Phone",
     maxLength: 15,
     name: "phoneNumber",
     onKeyDown: (e) => inputValidations.phoneNumber(e),
@@ -59,8 +59,8 @@ const FORM_FIELDS_DATA: IFormField[] = [
   {
     id: 4,
     isSelect: true,
-    label: "Event",
-    name: "event",
+    label: "Package",
+    name: "package",
     options: PACKAGES_DATA.map((dt) => dt.title),
   },
   {
@@ -109,7 +109,7 @@ export const Home: FC<I> = (props): ReactElement => {
       if (pendingBooking) {
         const data: TBookingSchema = JSON.parse(pendingBooking);
         setDate(new Date(data.date));
-        setValue("event", data.event ?? "");
+        setValue("package", data.package ?? "");
         localStorage.removeItem("pendingBooking");
       }
     }

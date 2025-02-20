@@ -48,7 +48,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 3,
-    label: "Phone Number",
+    label: "Phone",
     maxLength: 15,
     name: "phoneNumber",
     onKeyDown: (e) => inputValidations.phoneNumber(e),
@@ -57,8 +57,8 @@ const FORM_FIELDS_DATA: IFormField[] = [
   {
     id: 4,
     isSelect: true,
-    label: "Event",
-    name: "event",
+    label: "Package",
+    name: "package",
     options: PACKAGES_DATA.map((dt) => dt.title),
   },
   {
@@ -109,8 +109,8 @@ export const Content: FC<I> = (props): ReactElement => {
   } = useForm<TBookingSchema>({
     defaultValues: {
       email: booking?.email ?? props.session?.user?.email ?? undefined,
-      event: booking?.event,
       name: booking?.name ?? props.session?.user?.name ?? undefined,
+      package: booking?.package,
       phoneNumber: booking?.phoneNumber ?? props.session?.user?.phoneNumber,
     },
     resolver: zodResolver(BookingSchema),
@@ -130,13 +130,13 @@ export const Content: FC<I> = (props): ReactElement => {
   }, [date]);
 
   useEffect(() => {
-    const selectedPackage = PACKAGES_DATA.find((dt) => dt.title === watch("event"));
+    const selectedPackage = PACKAGES_DATA.find((dt) => dt.title === watch("package"));
     const price = parseInt(selectedPackage?.price ?? "0");
     setTax(price * 0.12);
     setSubtotal(price);
     setTotal(price + price * 0.12);
     // eslint-disable-next-line
-  }, [watch("event")]);
+  }, [watch("package")]);
 
   const onSubmit: SubmitHandler<TBookingSchema> = async (dt) => {
     setLoading(true);
@@ -155,6 +155,31 @@ export const Content: FC<I> = (props): ReactElement => {
     try {
       const res = await POSTBookings(newPayload);
       console.log("Booking Success!");
+
+      const whatsappMessage = `*Hastinulc Makeup Art Booking Details*
+
+- *Booking ID:* ${res.documentId}
+- *Name:* ${dt.name}
+- *Email:* ${dt.email}
+- *Phone:* ${dt.phoneNumber}
+
+- *Package:* ${dt.package}
+- *Date:* ${dt.date}
+- *Time:* ${dt.time}
+- *Location:* ${dt.googleMapsLink}
+
+- *Status:* Waiting
+
+- *Subtotal:* Rp${subtotal.toLocaleString()}
+- *Tax (PPN):* Rp${tax.toLocaleString()}
+- *TOTAL:* Rp${total.toLocaleString()}
+
+I'm looking forward to your *confirmation*. Thank you!`;
+
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+
+      window.open(`https://wa.me/6285762346703?text=${encodedMessage}`, "_blank");
+
       setOpen({ bookingSummary: true });
       router.push(`/user/history/${props.session?.user?.username}/${res.documentId}`);
       reset();

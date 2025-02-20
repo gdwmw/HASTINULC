@@ -60,7 +60,7 @@ export const Packages: FC = (): ReactElement => {
                   variant: "solid",
                 })}
                 href={"/booking"}
-                onClick={() => setBooking({ event: dt.title })}
+                onClick={() => setBooking({ package: dt.title })}
               >
                 <FaChevronRight size={14} /> BOOKING NOW
               </Link>

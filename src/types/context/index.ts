@@ -4,7 +4,7 @@ export interface IBookingsContext {
   name?: string;
   email?: string;
   phoneNumber?: string;
-  event?: string;
+  package?: string;
   date?: string;
 }
 

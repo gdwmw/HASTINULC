@@ -112,7 +112,7 @@ export interface IBookingsPayload {
   name: string;
   email: string;
   phoneNumber: string;
-  event: string;
+  package: string;
   date: string;
   time: string[];
   googleMapsLink: string;
@@ -131,7 +131,7 @@ export interface IBookingsResponse {
   name: string;
   email: string;
   phoneNumber: string;
-  event: string;
+  package: string;
   date: string;
   time: string[];
   googleMapsLink: string;

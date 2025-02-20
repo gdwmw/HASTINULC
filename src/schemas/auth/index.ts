@@ -42,7 +42,7 @@ export const RegisterSchema = z.object({
     .regex(/^(?=.*[A-Z])/, { message: "Password must have at least 1 uppercase letter" })
     .regex(/^(?=.*\d)/, { message: "Password must have at least 1 number" })
     .regex(/^(?=.*[!@#$%^&*])/, { message: "Password must have at least 1 symbol (!@#$%^&*)" }),
-  phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone Number", 10) }),
+  phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone", 10) }),
   username: z.string().min(4, { message: errorMessage.string.min("Username", 4) }),
 });
 

@@ -49,7 +49,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 4,
-    label: "Phone Number",
+    label: "Phone",
     maxLength: 15,
     name: "phoneNumber",
     onKeyDown: (e) => inputValidations.phoneNumber(e),
