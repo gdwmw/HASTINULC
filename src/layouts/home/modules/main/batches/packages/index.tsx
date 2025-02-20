@@ -37,7 +37,10 @@ export const Packages: FC = (): ReactElement => {
 
         <div className="flex w-fit flex-wrap justify-center gap-5">
           {PACKAGES_DATA.map((dt) => (
-            <div className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md" key={dt.id}>
+            <div
+              className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md transition-transform hover:scale-105 hover:shadow-lg"
+              key={dt.id}
+            >
               <span className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</span>
               <span className="border-b border-rose-500 pb-4 font-montaguSlab text-4xl">{currencyFormat(dt.price, "IDR")}</span>
 
