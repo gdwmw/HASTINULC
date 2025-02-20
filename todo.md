@@ -1,2 +1,8 @@
-ganti semua boiler yang sudah di update di feat profile
-perbaiki put di example boiler
+update semua yang ada di boilerplate
+
+update snippet
+
+buat fitur payment gateway
+buat fitur reset password
+buat fitur delete account
+responsive
