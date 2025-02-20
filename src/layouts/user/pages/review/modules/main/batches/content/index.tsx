@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 
-import { BookingSummary } from "@/src/components/booking-sammary";
+import { BookingSummary } from "@/src/components/booking-summary";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
 import { Input, TextArea } from "@/src/components/interfaces/inputs";
 import { useGlobalStates } from "@/src/context";

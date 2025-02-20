@@ -8,7 +8,7 @@ import { FC, Fragment, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useE
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 
-import { BookingSummary } from "@/src/components/booking-sammary";
+import { BookingSummary } from "@/src/components/booking-summary";
 import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
 import { DatePickerInput, Input, Select } from "@/src/components/interfaces/inputs";
 import { ErrorMessage } from "@/src/components/interfaces/inputs/elements";

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FC, ReactElement } from "react";
 import { IoStar } from "react-icons/io5";
 
-import { BookingSummary } from "@/src/components/booking-sammary";
+import { BookingSummary } from "@/src/components/booking-summary";
 import { useGlobalStates } from "@/src/context";
 
 interface I {
