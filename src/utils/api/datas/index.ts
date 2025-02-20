@@ -26,8 +26,8 @@ const create = (response: IDatasResponse): IDatasResponse =>
         field === "image"
           ? response[field]
             ? {
-                id: response[field]?.id ?? 0,
-                url: response[field]?.url ? API_URL + response[field].url : "",
+                id: response[field].id,
+                url: API_URL + response[field].url,
               }
             : null
           : response[field as keyof IDatasResponse],

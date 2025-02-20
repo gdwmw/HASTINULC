@@ -20,10 +20,12 @@ const create = (response: IUploadResponse): IUploadResponse =>
       ...result,
       [field]:
         field === "formats"
-          ? response.formats
-            ? { thumbnail: { url: response.formats.thumbnail.url } }
+          ? response[field]
+            ? { thumbnail: { url: API_URL + response[field].thumbnail.url } }
             : null
-          : response[field as keyof IUploadResponse],
+          : field === "url"
+            ? API_URL + response[field]
+            : response[field as keyof IUploadResponse],
     }),
     {} as IUploadResponse,
   );

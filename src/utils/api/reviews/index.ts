@@ -27,7 +27,7 @@ const create = (response: IReviewsResponse): IReviewsResponse =>
         field === "images"
           ? response[field]
             ? response[field].map((dt) => ({
-                url: `${API_URL + dt.url}`,
+                url: API_URL + dt.url,
               }))
             : null
           : response[field as keyof IReviewsResponse],
