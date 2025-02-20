@@ -2,9 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
@@ -70,6 +71,8 @@ interface I {
 }
 
 export const Content: FC<I> = (props): ReactElement => {
+  const session = useSession();
+  const router = useRouter();
   const [previewImage, setPreviewImage] = useState<null | string>(null);
   const [loading, setLoading] = useState(false);
 
@@ -77,7 +80,6 @@ export const Content: FC<I> = (props): ReactElement => {
     formState: { errors },
     handleSubmit,
     register,
-    reset,
     watch,
   } = useForm<TProfileSchema>({
     defaultValues: {
@@ -107,36 +109,50 @@ export const Content: FC<I> = (props): ReactElement => {
     setLoading(true);
 
     try {
-      await PUTUsers({
+      const usersResponse = await PUTUsers({
         email: dt.email,
         id: Number(props.session?.user?.id),
         username: dt.username,
       });
 
-      await PUTDatas({
+      const datasResponse = await PUTDatas({
         documentId: props.session?.user?.datasDocumentId ?? "",
         name: dt.name,
         phoneNumber: dt.phoneNumber,
       });
 
-      if (dt.image && dt.image.length > 0) {
-        const res = await GETDatasByDocumentId(props.session?.user?.datasDocumentId ?? "");
+      let imageUrl = props.session?.user?.image;
 
-        if (res.image?.id !== 1) {
-          await DELETEUpload(res.image?.id ?? 0);
+      if (dt.image && dt.image.length > 0) {
+        const datasByDocumentIdResponse = await GETDatasByDocumentId(props.session?.user?.datasDocumentId ?? "");
+
+        if (datasByDocumentIdResponse.image?.id !== 1) {
+          await DELETEUpload(datasByDocumentIdResponse.image?.id ?? 0);
         }
 
-        await POSTUpload({
+        const uploadResponse = await POSTUpload({
           field: "image",
           files: dt.image,
           ref: "api::data.data",
           refId: props.session?.user?.datasId ?? "",
         });
+
+        imageUrl = uploadResponse[0].url;
       }
 
+      await session.update({
+        user: {
+          ...session.data?.user,
+          email: usersResponse.email,
+          image: imageUrl,
+          name: datasResponse.name,
+          phoneNumber: datasResponse.phoneNumber,
+          username: usersResponse.username,
+        },
+      });
+
       console.log("Profile Success!");
-      signOut();
-      reset();
+      router.refresh();
     } catch {
       console.log("Profile Failed!");
     } finally {

@@ -8,11 +8,11 @@ import { POSTLogin } from "@/src/utils/api";
 
 export const options: NextAuthOptions = {
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user: User }) {
-      if (user) {
-        token = { ...token, ...user };
+    async jwt({ session, token, trigger, user }: { session?: Session; token: JWT; trigger?: "signIn" | "signUp" | "update"; user: User }) {
+      if (trigger === "update" && session?.user) {
+        return { ...token, ...session.user };
       }
-      return token;
+      return { ...token, ...user };
     },
 
     async redirect({ baseUrl }) {
@@ -20,9 +20,7 @@ export const options: NextAuthOptions = {
     },
 
     async session({ session, token }: { session: Session; token: JWT }) {
-      if (session.user) {
-        session.user = { ...session.user, ...token };
-      }
+      session.user = { ...session.user, ...token };
       return session;
     },
   },
