@@ -86,7 +86,7 @@ export const Content: FC = (): ReactElement => {
         <div className="relative w-full max-w-[350px] rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
           <Link
             className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })}
-            href={"/user/profile"}
+            href={"/profile"}
           >
             <FaChevronLeft className="ml-1" size={12} /> Back
           </Link>

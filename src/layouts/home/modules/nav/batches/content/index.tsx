@@ -119,7 +119,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 <div className="absolute right-0 mt-2 w-48 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md">
                   <Link
                     className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
-                    href={`/user/profile`}
+                    href={`/profile`}
                     onClick={() => setMenuOpen(false)}
                   >
                     <FaUser className="text-base" />
@@ -127,7 +127,7 @@ export const Content: FC<I> = (props): ReactElement => {
                   </Link>
                   <Link
                     className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
-                    href={`/user/history/${props.session?.user?.username}`}
+                    href={`/history/${props.session?.user?.username}`}
                     onClick={() => {
                       setMenuOpen(false);
                       setOpen({ bookingSummary: true });
@@ -138,7 +138,7 @@ export const Content: FC<I> = (props): ReactElement => {
                   </Link>
                   <Link
                     className={`group flex items-center justify-between gap-2 px-4 py-2 text-sm ${questionnairesConditions ? "hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white" : "cursor-not-allowed text-gray-400"}`}
-                    href={`/user/questionnaire`}
+                    href={`/questionnaire`}
                     onClick={(e) => {
                       if (!questionnairesConditions) {
                         e.preventDefault();
@@ -169,7 +169,7 @@ export const Content: FC<I> = (props): ReactElement => {
               )}
             </div>
           ) : (
-            <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/login"}>
+            <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/authentication/login"}>
               LOGIN
             </Link>
           )}

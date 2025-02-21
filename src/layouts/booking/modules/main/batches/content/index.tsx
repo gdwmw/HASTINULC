@@ -181,7 +181,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
       window.open(`https://wa.me/6285762346703?text=${encodedMessage}`, "_blank");
 
       setOpen({ bookingSummary: true });
-      router.push(`/user/history/${props.session?.user?.username}/${res.documentId}`);
+      router.push(`/history/${props.session?.user?.username}/${res.documentId}`);
       reset();
     } catch {
       console.log("Booking Failed!");

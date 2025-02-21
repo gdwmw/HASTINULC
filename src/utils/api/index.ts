@@ -1,4 +1,4 @@
-export * from "./auth";
+export * from "./authentication";
 export * from "./bookings";
 export * from "./datas";
 export * from "./example";

@@ -138,7 +138,7 @@ export const Home: FC<I> = (props): ReactElement => {
       reset();
     } else {
       localStorage.setItem("pendingBooking", JSON.stringify(dt));
-      router.push("/login");
+      router.push("/authentication/login");
     }
   };
 
