@@ -26,7 +26,7 @@ describe("ExampleB Component Testing", () => {
 
   it("Should have text", () => {
     const { getByTestId } = render(component);
-    expect(getByTestId("text-example-b")).toHaveTextContent("This is testing text");
+    expect(getByTestId("example-b-text")).toHaveTextContent("This is testing text");
   });
 
   it("Should have a class name testing-class", () => {
