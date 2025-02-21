@@ -4,7 +4,7 @@ import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { ILoginPayload } from "@/src/types";
-import { POSTLogin } from "@/src/utils/api";
+import { POSTLogin } from "@/src/utils";
 
 export const options: NextAuthOptions = {
   callbacks: {

@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
-import { GETBookings } from "@/src/utils/api";
+import { GETBookings } from "@/src/utils";
 
 import { About, Contact, Home, Packages, Portfolio } from "./batches";
 

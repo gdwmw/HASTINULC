@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
-import { GETBookings } from "@/src/utils/api";
+import { GETBookings } from "@/src/utils";
 
 import { Content } from "./batches";
 

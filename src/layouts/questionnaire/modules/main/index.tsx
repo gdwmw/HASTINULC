@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { FC, ReactElement } from "react";
 
 import { getAllSession, questionnairesConditions } from "@/src/hooks";
-import { GETDatasByDocumentId } from "@/src/utils/api";
+import { GETDatasByDocumentId } from "@/src/utils";
 
 import { Content } from "./batches";
 

@@ -10,7 +10,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { ExampleA, ExampleATWM, Input } from "@/src/components";
 import { ChangePasswordSchema, TChangePasswordSchema } from "@/src/schemas";
-import { POSTChangePassword } from "@/src/utils/api";
+import { POSTChangePassword } from "@/src/utils";
 
 interface IFormField {
   id: number;

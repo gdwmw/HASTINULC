@@ -14,7 +14,7 @@ import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs";
 import { ReviewSchema, TReviewSchema } from "@/src/schemas";
 import { IBookingsResponse, IReviewsPayload } from "@/src/types";
-import { POSTReviews, POSTUpload } from "@/src/utils/api";
+import { POSTReviews, POSTUpload } from "@/src/utils";
 
 interface I {
   selectedBookingSummary: IBookingsResponse | undefined;

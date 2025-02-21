@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
-import { GETDatasByDocumentId } from "@/src/utils/api";
+import { GETDatasByDocumentId } from "@/src/utils";
 
 import { Content } from "./batches";
 

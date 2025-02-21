@@ -13,7 +13,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { ExampleA, ExampleATWM, Input } from "@/src/components";
 import { inputValidations } from "@/src/hooks";
 import { ProfileSchema, TProfileSchema } from "@/src/schemas";
-import { DELETEUpload, GETDatasByDocumentId, POSTUpload, PUTDatas, PUTUsers } from "@/src/utils/api";
+import { DELETEUpload, GETDatasByDocumentId, POSTUpload, PUTDatas, PUTUsers } from "@/src/utils";
 
 interface IFormField {
   id: number;

@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
-import { GETBookings, GETReviews } from "@/src/utils/api";
+import { GETBookings, GETReviews } from "@/src/utils";
 
 import { Content } from "./batches";
 
