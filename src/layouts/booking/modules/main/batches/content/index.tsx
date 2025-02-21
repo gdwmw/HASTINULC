@@ -13,7 +13,7 @@ import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA, TIME_SLOTS_DATA } from "@/src/libs";
 import { BookingSchema, TBookingSchema } from "@/src/schemas";
-import { IBookingsPayload, IBookingsResponse } from "@/src/types/api";
+import { IBookingsPayload, IBookingsResponse } from "@/src/types";
 import { POSTBookings } from "@/src/utils/api";
 
 interface IFormField {

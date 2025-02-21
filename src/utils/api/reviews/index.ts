@@ -1,4 +1,4 @@
-import { IBookingsResponse, IDatasResponse, IReviewsPayload, IReviewsResponse } from "@/src/types/api";
+import { IBookingsResponse, IDatasResponse, IReviewsPayload, IReviewsResponse } from "@/src/types";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 

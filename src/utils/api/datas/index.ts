@@ -1,4 +1,4 @@
-import { IDatasPayload, IDatasResponse } from "@/src/types/api";
+import { IDatasPayload, IDatasResponse } from "@/src/types";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 

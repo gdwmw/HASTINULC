@@ -10,7 +10,7 @@ import { IoStar } from "react-icons/io5";
 
 import { ExampleA, ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
-import { IBookingsResponse, IReviewsResponse } from "@/src/types/api";
+import { IBookingsResponse, IReviewsResponse } from "@/src/types";
 
 interface I {
   bookingsResponse: IBookingsResponse[];

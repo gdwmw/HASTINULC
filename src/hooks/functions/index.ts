@@ -1,6 +1,6 @@
 import { KeyboardEvent } from "react";
 
-import { IDatasResponse } from "@/src/types/api";
+import { IDatasResponse } from "@/src/types";
 
 export const currencyFormat = (amount: number | string, currency: "IDR" | "USD") => {
   const locale = currency === "IDR" ? "id-ID" : "en-US";

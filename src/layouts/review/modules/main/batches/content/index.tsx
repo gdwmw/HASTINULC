@@ -13,7 +13,7 @@ import { BookingSummary, ExampleA, ExampleATWM, Input, TextArea } from "@/src/co
 import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs";
 import { ReviewSchema, TReviewSchema } from "@/src/schemas";
-import { IBookingsResponse, IReviewsPayload } from "@/src/types/api";
+import { IBookingsResponse, IReviewsPayload } from "@/src/types";
 import { POSTReviews, POSTUpload } from "@/src/utils/api";
 
 interface I {

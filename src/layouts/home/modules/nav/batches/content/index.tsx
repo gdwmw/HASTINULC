@@ -12,7 +12,7 @@ import { ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { questionnairesConditions as conditions } from "@/src/hooks";
 import { NAVIGATION_DATA } from "@/src/libs";
-import { IDatasResponse } from "@/src/types/api";
+import { IDatasResponse } from "@/src/types";
 
 interface I {
   response: IDatasResponse | null | undefined;

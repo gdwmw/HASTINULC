@@ -1,4 +1,4 @@
-import { IAuthResponse, IAuthSchema, IDatasResponse, ILoginPayload } from "@/src/types/api";
+import { IAuthResponse, IAuthSchema, IDatasResponse, ILoginPayload } from "@/src/types";
 
 import { GETDatasByDocumentId } from "../../datas";
 

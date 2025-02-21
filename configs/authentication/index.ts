@@ -3,7 +3,7 @@ import type { NextAuthOptions, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { ILoginPayload } from "@/src/types/api";
+import { ILoginPayload } from "@/src/types";
 import { POSTLogin } from "@/src/utils/api";
 
 export const options: NextAuthOptions = {

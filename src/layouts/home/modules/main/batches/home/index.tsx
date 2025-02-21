@@ -17,7 +17,7 @@ import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA } from "@/src/libs";
 import { HomeBookingSchema, THomeBookingSchema } from "@/src/schemas";
-import { IBookingsResponse } from "@/src/types/api";
+import { IBookingsResponse } from "@/src/types";
 
 interface IFormField {
   id: number;

@@ -1,4 +1,4 @@
-import { IAuthResponse, IAuthSchema, IDatasPayload, IDatasResponse, IRegisterPayload } from "@/src/types/api";
+import { IAuthResponse, IAuthSchema, IDatasPayload, IDatasResponse, IRegisterPayload } from "@/src/types";
 
 import { POSTDatas } from "../../datas";
 import { PUTUsers } from "../../users";

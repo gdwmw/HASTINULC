@@ -1,4 +1,4 @@
-import { IExamplePayload, IExampleResponse } from "@/src/types/example";
+import { IExamplePayload, IExampleResponse } from "@/src/types";
 
 const API_URL = process.env.NEXT_PUBLIC_EXAMPLE_URL;
 

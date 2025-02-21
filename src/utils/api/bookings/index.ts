@@ -1,6 +1,6 @@
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-import { IBookingsPayload, IBookingsResponse, IDatasResponse } from "@/src/types/api";
+import { IBookingsPayload, IBookingsResponse, IDatasResponse } from "@/src/types";
 
 if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
