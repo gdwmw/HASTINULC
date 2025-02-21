@@ -64,7 +64,7 @@ export const Content: FC<I> = (props): ReactElement => {
 
     try {
       const res = await POSTReviews(newPayload);
-      if (dt.images && res.id) {
+      if (dt.images && dt.images?.length > 0 && res.id) {
         await POSTUpload({ field: "images", files: dt.images, ref: "api::review.review", refId: res.id.toString() });
       }
       console.log("Review Success!");

@@ -64,7 +64,7 @@ export const Content: FC<I> = (props): ReactElement => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-500">No Images Available</p>
+                  <p className="text-gray-500">-</p>
                 )}
               </dd>
             </div>

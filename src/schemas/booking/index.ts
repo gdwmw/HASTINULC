@@ -32,7 +32,7 @@ export const BookingSchema = z.object({
     }),
   name: z.string().min(3, { message: errorMessage.string.min("Name", 3) }),
   package: z.enum(PACKAGES_DATA.map((dt) => dt.title) as [string, ...string[]], {
-    errorMap: () => ({ message: errorMessage.string.enum("package") }),
+    errorMap: () => ({ message: errorMessage.string.enum("Package") }),
   }),
   phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone", 10) }),
   time: z

@@ -111,7 +111,7 @@ export const Content: FC = (): ReactElement => {
   return (
     <main className="bg-slate-100">
       <section className="container mx-auto flex h-screen items-center justify-center p-5">
-        <div className="relative size-full max-h-[556px] max-w-[450px] rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
+        <div className="relative flex size-full max-h-[556px] max-w-[450px] rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
           <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
             <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
