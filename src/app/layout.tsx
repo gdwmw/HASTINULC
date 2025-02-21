@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FC, PropsWithChildren, ReactElement } from "react";
 
-import { NextAuthProvider, NextThemesProvider, ReactQueryProvider } from "@/src/libs/providers";
+import { NextAuthProvider, NextThemesProvider, ReactQueryProvider } from "@/src/libs";
 
 import { geistMono, geistSans, montaguSlab } from "./fonts";
 import "./globals.css";

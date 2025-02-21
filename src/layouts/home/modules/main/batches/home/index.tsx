@@ -15,7 +15,7 @@ import homeImage from "@/public/assets/images/model/Home.png";
 import { DatePickerInput, ExampleA, Input, SectionHeader, Select } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
-import { PACKAGES_DATA } from "@/src/libs/constants";
+import { PACKAGES_DATA } from "@/src/libs";
 import { HomeBookingSchema, THomeBookingSchema } from "@/src/schemas/home";
 import { IBookingsResponse } from "@/src/types/api";
 

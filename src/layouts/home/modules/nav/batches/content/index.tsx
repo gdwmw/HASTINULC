@@ -11,7 +11,7 @@ import logo from "@/public/assets/images/logos/Black.svg";
 import { ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { questionnairesConditions as conditions } from "@/src/hooks";
-import { NAVIGATION_DATA } from "@/src/libs/constants";
+import { NAVIGATION_DATA } from "@/src/libs";
 import { IDatasResponse } from "@/src/types/api";
 
 interface I {

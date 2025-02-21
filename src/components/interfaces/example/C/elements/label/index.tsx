@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, ReactElement } from "react";
 import { MdError } from "react-icons/md";
 
-import { twm } from "@/src/libs/tailwind-merge";
+import { twm } from "@/src/libs";
 
 /* eslint-disable perfectionist/sort-union-types */
 type T = {

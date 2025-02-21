@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, FC, HTMLAttributes, ReactElement } from "react";
 
-import { twm } from "@/src/libs/tailwind-merge";
+import { twm } from "@/src/libs";
 
 type TExampleBContainer = { className?: string } & DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
 type TExampleBIcon = { className?: string } & DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;

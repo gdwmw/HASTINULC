@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 
 import { ErrorMessage, ExampleA, ExampleATWM, TextArea } from "@/src/components";
-import { QUESTIONS_DATA } from "@/src/libs/constants";
+import { QUESTIONS_DATA } from "@/src/libs";
 import { QuestionnaireSchema, TQuestionnaireSchema } from "@/src/schemas/questionnaire";
 import { POSTQuestionnaires } from "@/src/utils/api";
 

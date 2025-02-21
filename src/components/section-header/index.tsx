@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react";
 
-import { twm } from "@/src/libs/tailwind-merge";
+import { twm } from "@/src/libs";
 
 interface I {
   containerClassname?: string;

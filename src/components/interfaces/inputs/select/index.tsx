@@ -2,7 +2,7 @@
 
 import { DetailedHTMLProps, FC, forwardRef, ReactElement, SelectHTMLAttributes } from "react";
 
-import { twm } from "@/src/libs/tailwind-merge";
+import { twm } from "@/src/libs";
 
 import { ErrorMessage, InputsContainer, Label } from "../elements";
 

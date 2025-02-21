@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { PACKAGES_DATA } from "@/src/libs/constants";
+import { PACKAGES_DATA } from "@/src/libs";
 
 /* eslint-disable perfectionist/sort-objects */
 const errorMessage = {
