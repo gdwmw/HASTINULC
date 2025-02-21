@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation";
 import { FC, ReactElement } from "react";
 
-import { questionnairesConditions } from "@/src/hooks/functions";
-import { getAllSession } from "@/src/hooks/session";
+import { getAllSession, questionnairesConditions } from "@/src/hooks";
 import { GETDatasByDocumentId } from "@/src/utils/api";
 
 import { Content } from "./batches";

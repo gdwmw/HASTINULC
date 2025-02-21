@@ -11,7 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 
 import { ExampleA, ExampleATWM, Input } from "@/src/components";
-import { inputValidations } from "@/src/hooks/functions";
+import { inputValidations } from "@/src/hooks";
 import { ProfileSchema, TProfileSchema } from "@/src/schemas/profile";
 import { DELETEUpload, GETDatasByDocumentId, POSTUpload, PUTDatas, PUTUsers } from "@/src/utils/api";
 

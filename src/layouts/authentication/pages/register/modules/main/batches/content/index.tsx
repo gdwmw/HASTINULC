@@ -9,7 +9,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { ExampleA, ExampleATWM, Input } from "@/src/components";
-import { inputValidations } from "@/src/hooks/functions";
+import { inputValidations } from "@/src/hooks";
 import { RegisterSchema, TRegisterSchema } from "@/src/schemas/authentication";
 import { POSTRegister } from "@/src/utils/api";
 

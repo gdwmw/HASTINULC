@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { FC, ReactElement } from "react";
 
-import { currencyFormat } from "@/src/hooks/functions";
+import { currencyFormat } from "@/src/hooks";
 
 import { ExampleATWM } from "../interfaces/example/A";
 

@@ -9,7 +9,7 @@ import { IoStar } from "react-icons/io5";
 import testimonialsImage from "@/public/assets/images/model/Testimonials-1.jpg";
 import { ExampleA, ExampleATWM, SectionHeader } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
-import { currencyFormat } from "@/src/hooks/functions";
+import { currencyFormat } from "@/src/hooks";
 import { PACKAGES_DATA, TESTIMONIALS_DATA } from "@/src/libs/constants";
 
 export const Packages: FC = (): ReactElement => {

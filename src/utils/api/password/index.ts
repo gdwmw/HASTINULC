@@ -1,4 +1,4 @@
-import { getAllSession } from "@/src/hooks/session";
+import { getAllSession } from "@/src/hooks";
 import { IAuthSchema, IPasswordPayload, IPasswordResponse } from "@/src/types/api";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;

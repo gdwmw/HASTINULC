@@ -1,7 +1,7 @@
 import { Metadata, Viewport } from "next";
 import { FC, ReactElement } from "react";
 
-import { getAllSession } from "@/src/hooks/session";
+import { getAllSession } from "@/src/hooks";
 
 export const viewport: Viewport = {
   initialScale: 1.0,

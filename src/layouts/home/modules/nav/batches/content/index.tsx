@@ -10,7 +10,7 @@ import { FaClipboardList, FaHistory, FaSignOutAlt, FaUser } from "react-icons/fa
 import logo from "@/public/assets/images/logos/Black.svg";
 import { ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
-import { questionnairesConditions as conditions } from "@/src/hooks/functions";
+import { questionnairesConditions as conditions } from "@/src/hooks";
 import { NAVIGATION_DATA } from "@/src/libs/constants";
 import { IDatasResponse } from "@/src/types/api";
 

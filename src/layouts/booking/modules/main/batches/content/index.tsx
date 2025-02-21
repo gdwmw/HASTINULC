@@ -10,7 +10,7 @@ import { FaChevronLeft } from "react-icons/fa";
 
 import { BookingSummary, DatePickerInput, ErrorMessage, ExampleA, ExampleATWM, Input, Select } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
-import { inputValidations } from "@/src/hooks/functions";
+import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA, TIME_SLOTS_DATA } from "@/src/libs/constants";
 import { BookingSchema, TBookingSchema } from "@/src/schemas/booking";
 import { IBookingsPayload, IBookingsResponse } from "@/src/types/api";
