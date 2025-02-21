@@ -9,15 +9,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 
-import { BookingSummary } from "@/src/components/booking-summary";
-import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { Input, TextArea } from "@/src/components/interfaces/inputs";
+import { BookingSummary, ExampleA, ExampleATWM, Input, TextArea } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs/constants";
 import { ReviewSchema, TReviewSchema } from "@/src/schemas/review";
 import { IBookingsResponse, IReviewsPayload } from "@/src/types/api";
-import { POSTReviews } from "@/src/utils/api/reviews";
-import { POSTUpload } from "@/src/utils/api/upload";
+import { POSTReviews, POSTUpload } from "@/src/utils/api";
 
 interface I {
   selectedBookingSummary: IBookingsResponse | undefined;

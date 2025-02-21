@@ -21,7 +21,7 @@ const errorMessage = {
 
 // -----------------------------------------------------------------------------
 
-export const BookingSchema = z.object({
+export const HomeBookingSchema = z.object({
   date: z.string().min(1, { message: errorMessage.string.required("Date") }),
   email: z.string().email({ message: errorMessage.string.email("Email") }),
   name: z.string().min(3, { message: errorMessage.string.min("Name", 3) }),
@@ -31,4 +31,4 @@ export const BookingSchema = z.object({
   phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone", 10) }),
 });
 
-export type TBookingSchema = z.infer<typeof BookingSchema>;
+export type THomeBookingSchema = z.infer<typeof HomeBookingSchema>;

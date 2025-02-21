@@ -1,6 +1,6 @@
 import { FC, ReactElement, ReactNode } from "react";
 
-import { ContainerExampleB, IconExampleB, TextExampleB } from "..";
+import { ExampleBContainer, ExampleBIcon, ExampleBText } from "..";
 
 interface ILayout {
   icon: ReactNode;
@@ -10,10 +10,10 @@ interface ILayout {
 }
 
 const Layout: FC<ILayout> = (props): ReactElement => (
-  <ContainerExampleB>
-    <IconExampleB style={{ color: props.iconColor }}>{props.icon}</IconExampleB>
-    <TextExampleB style={{ color: props.textColor }}>{props.text}</TextExampleB>
-  </ContainerExampleB>
+  <ExampleBContainer>
+    <ExampleBIcon style={{ color: props.iconColor }}>{props.icon}</ExampleBIcon>
+    <ExampleBText style={{ color: props.textColor }}>{props.text}</ExampleBText>
+  </ExampleBContainer>
 );
 
 export default Layout;

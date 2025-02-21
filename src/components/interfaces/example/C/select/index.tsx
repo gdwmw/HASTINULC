@@ -4,7 +4,7 @@ import { DetailedHTMLProps, FC, forwardRef, ReactElement, SelectHTMLAttributes }
 
 import { twm } from "@/src/libs/tailwind-merge";
 
-import { ErrorMessage, InputsContainer, Label } from "../elements";
+import { ExampleErrorMessage, ExampleInputsContainer, ExampleLabel } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
 type TExampleSelect = {
@@ -24,8 +24,8 @@ const ExampleSelectTWM = ({ className, disabled }: TExampleSelect) =>
 
 export const ExampleSelect: FC<TExampleSelect> = forwardRef<HTMLSelectElement, TExampleSelect>(
   ({ className, color, containerClassName, disabled, errorMessage, fieldsetClassName, label, legendClassName, ...props }, ref): ReactElement => (
-    <InputsContainer className={containerClassName}>
-      <Label
+    <ExampleInputsContainer className={containerClassName}>
+      <ExampleLabel
         color={color}
         disabled={disabled}
         errorMessage={errorMessage}
@@ -36,10 +36,10 @@ export const ExampleSelect: FC<TExampleSelect> = forwardRef<HTMLSelectElement, T
         <select className={ExampleSelectTWM({ className, disabled })} data-testid="example-select" disabled={disabled} ref={ref} {...props}>
           {props.children}
         </select>
-      </Label>
+      </ExampleLabel>
 
-      {errorMessage && !disabled && <ErrorMessage errorMessage={errorMessage} />}
-    </InputsContainer>
+      {errorMessage && !disabled && <ExampleErrorMessage errorMessage={errorMessage} />}
+    </ExampleInputsContainer>
   ),
 );
 

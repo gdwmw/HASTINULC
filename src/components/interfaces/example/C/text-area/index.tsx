@@ -2,7 +2,7 @@ import { DetailedHTMLProps, FC, forwardRef, ReactElement, TextareaHTMLAttributes
 
 import { twm } from "@/src/libs/tailwind-merge";
 
-import { ErrorMessage, InputsContainer, Label } from "../elements";
+import { ExampleErrorMessage, ExampleInputsContainer, ExampleLabel } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
 type TExampleTextArea = {
@@ -30,8 +30,8 @@ export const ExampleTextArea: FC<TExampleTextArea> = forwardRef<HTMLTextAreaElem
     { className, color, containerClassName, disabled, errorMessage, fieldsetClassName, label, legendClassName, rows, ...props },
     ref,
   ): ReactElement => (
-    <InputsContainer className={containerClassName}>
-      <Label
+    <ExampleInputsContainer className={containerClassName}>
+      <ExampleLabel
         color={color}
         disabled={disabled}
         errorMessage={errorMessage}
@@ -47,10 +47,10 @@ export const ExampleTextArea: FC<TExampleTextArea> = forwardRef<HTMLTextAreaElem
           rows={rows ?? 5}
           {...props}
         />
-      </Label>
+      </ExampleLabel>
 
-      {errorMessage && !disabled && <ErrorMessage errorMessage={errorMessage} />}
-    </InputsContainer>
+      {errorMessage && !disabled && <ExampleErrorMessage errorMessage={errorMessage} />}
+    </ExampleInputsContainer>
   ),
 );
 

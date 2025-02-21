@@ -3,8 +3,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 
-import { ContactButton } from "@/src/components/contact-button";
-import { SectionHeader } from "@/src/components/section-header";
+import { ContactButton, SectionHeader } from "@/src/components";
 
 export const Contact: FC = (): ReactElement => (
   <section className="scroll-mt-[88px] bg-white pt-24" id="contact">

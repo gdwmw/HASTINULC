@@ -8,7 +8,7 @@ import { FC, FormEvent, ReactElement, useEffect, useState } from "react";
 import { FaClipboardList, FaHistory, FaSignOutAlt, FaUser } from "react-icons/fa";
 
 import logo from "@/public/assets/images/logos/Black.svg";
-import { ExampleATWM } from "@/src/components/interfaces/example/A";
+import { ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { questionnairesConditions as conditions } from "@/src/hooks/functions";
 import { NAVIGATION_DATA } from "@/src/libs/constants";

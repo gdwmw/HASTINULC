@@ -4,8 +4,7 @@ import { FC, ReactElement } from "react";
 import { FaChevronRight } from "react-icons/fa";
 
 import portfolioImage from "@/public/assets/images/model/Portfolio.jpg";
-import { ExampleATWM } from "@/src/components/interfaces/example/A";
-import { SectionHeader } from "@/src/components/section-header";
+import { ExampleATWM, SectionHeader } from "@/src/components";
 
 export const Portfolio: FC = (): ReactElement => (
   <section className="scroll-mt-[88px] bg-white pt-24" id="portfolio">

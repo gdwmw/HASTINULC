@@ -9,8 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { Input } from "@/src/components/interfaces/inputs";
+import { ExampleA, ExampleATWM, Input } from "@/src/components";
 import { LoginSchema, TLoginSchema } from "@/src/schemas/authentication";
 
 export const Content: FC = (): ReactElement => {

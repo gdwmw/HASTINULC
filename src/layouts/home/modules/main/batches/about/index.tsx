@@ -13,7 +13,7 @@ import aboutImage4 from "@/public/assets/images/model/About-4.jpg";
 import aboutImage5 from "@/public/assets/images/model/About-5.jpg";
 import aboutImage6 from "@/public/assets/images/model/About-6.jpg";
 import aboutImage7 from "@/public/assets/images/model/About-7.jpg";
-import { SectionHeader } from "@/src/components/section-header";
+import { SectionHeader } from "@/src/components";
 
 export const About: FC = (): ReactElement => {
   const [active, setActive] = useState(false);

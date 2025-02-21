@@ -7,8 +7,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 
 import testimonialsImage from "@/public/assets/images/model/Testimonials-1.jpg";
-import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { SectionHeader } from "@/src/components/section-header";
+import { ExampleA, ExampleATWM, SectionHeader } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { currencyFormat } from "@/src/hooks/functions";
 import { PACKAGES_DATA, TESTIMONIALS_DATA } from "@/src/libs/constants";

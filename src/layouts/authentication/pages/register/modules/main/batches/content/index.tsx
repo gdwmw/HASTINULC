@@ -8,8 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { Input } from "@/src/components/interfaces/inputs";
+import { ExampleA, ExampleATWM, Input } from "@/src/components";
 import { inputValidations } from "@/src/hooks/functions";
 import { RegisterSchema, TRegisterSchema } from "@/src/schemas/authentication";
 import { POSTRegister } from "@/src/utils/api";

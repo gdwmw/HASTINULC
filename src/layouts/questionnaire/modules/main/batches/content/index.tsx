@@ -8,12 +8,10 @@ import { FC, ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 
-import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { TextArea } from "@/src/components/interfaces/inputs";
-import { ErrorMessage } from "@/src/components/interfaces/inputs/elements";
+import { ErrorMessage, ExampleA, ExampleATWM, TextArea } from "@/src/components";
 import { QUESTIONS_DATA } from "@/src/libs/constants";
 import { QuestionnaireSchema, TQuestionnaireSchema } from "@/src/schemas/questionnaire";
-import { POSTQuestionnaires } from "@/src/utils/api/questionnaires";
+import { POSTQuestionnaires } from "@/src/utils/api";
 
 interface I {
   session: null | Session;

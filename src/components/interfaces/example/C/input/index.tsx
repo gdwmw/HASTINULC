@@ -5,7 +5,7 @@ import { DetailedHTMLProps, FC, forwardRef, InputHTMLAttributes, ReactElement, R
 import { twm } from "@/src/libs/tailwind-merge";
 
 import { ExampleA } from "../../A";
-import { ErrorMessage, InputsContainer, Label } from "../elements";
+import { ExampleErrorMessage, ExampleInputsContainer, ExampleLabel } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
 type TExampleInput = {
@@ -30,8 +30,8 @@ export const ExampleInput: FC<TExampleInput> = forwardRef<HTMLInputElement, TExa
     { className, color, containerClassName, disabled, errorMessage, fieldsetClassName, icon, iconOnClick, label, legendClassName, ...props },
     ref,
   ): ReactElement => (
-    <InputsContainer className={containerClassName}>
-      <Label
+    <ExampleInputsContainer className={containerClassName}>
+      <ExampleLabel
         color={color}
         disabled={disabled}
         errorMessage={errorMessage}
@@ -54,10 +54,10 @@ export const ExampleInput: FC<TExampleInput> = forwardRef<HTMLInputElement, TExa
             {icon}
           </ExampleA>
         )}
-      </Label>
+      </ExampleLabel>
 
-      {errorMessage && !disabled && <ErrorMessage errorMessage={errorMessage} />}
-    </InputsContainer>
+      {errorMessage && !disabled && <ExampleErrorMessage errorMessage={errorMessage} />}
+    </ExampleInputsContainer>
   ),
 );
 

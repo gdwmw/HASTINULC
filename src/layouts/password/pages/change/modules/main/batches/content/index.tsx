@@ -8,10 +8,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { Input } from "@/src/components/interfaces/inputs";
+import { ExampleA, ExampleATWM, Input } from "@/src/components";
 import { ChangePasswordSchema, TChangePasswordSchema } from "@/src/schemas/password";
-import { POSTChangePassword } from "@/src/utils/api/password";
+import { POSTChangePassword } from "@/src/utils/api";
 
 interface IFormField {
   id: number;

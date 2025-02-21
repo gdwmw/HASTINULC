@@ -8,7 +8,7 @@ import { BiSolidDetail } from "react-icons/bi";
 import { FaBox, FaChevronLeft, FaChevronRight, FaClock, FaEdit } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 
-import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
+import { ExampleA, ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { IBookingsResponse, IReviewsResponse } from "@/src/types/api";
 

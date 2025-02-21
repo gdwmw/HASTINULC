@@ -10,13 +10,10 @@ import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, use
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronLeft } from "react-icons/fa";
 
-import { ExampleA, ExampleATWM } from "@/src/components/interfaces/example/A";
-import { Input } from "@/src/components/interfaces/inputs";
+import { ExampleA, ExampleATWM, Input } from "@/src/components";
 import { inputValidations } from "@/src/hooks/functions";
 import { ProfileSchema, TProfileSchema } from "@/src/schemas/profile";
-import { GETDatasByDocumentId, PUTDatas } from "@/src/utils/api/datas";
-import { DELETEUpload, POSTUpload } from "@/src/utils/api/upload";
-import { PUTUsers } from "@/src/utils/api/users";
+import { DELETEUpload, GETDatasByDocumentId, POSTUpload, PUTDatas, PUTUsers } from "@/src/utils/api";
 
 interface IFormField {
   id: number;

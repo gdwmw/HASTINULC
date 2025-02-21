@@ -12,13 +12,11 @@ import { IoLogoWhatsapp } from "react-icons/io";
 
 import accentDot from "@/public/assets/images/background/Accent-Dot.png";
 import homeImage from "@/public/assets/images/model/Home.png";
-import { ExampleA } from "@/src/components/interfaces/example/A";
-import { DatePickerInput, Input, Select } from "@/src/components/interfaces/inputs";
-import { SectionHeader } from "@/src/components/section-header";
+import { DatePickerInput, ExampleA, Input, SectionHeader, Select } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks/functions";
 import { PACKAGES_DATA } from "@/src/libs/constants";
-import { BookingSchema, TBookingSchema } from "@/src/schemas/home";
+import { HomeBookingSchema, THomeBookingSchema } from "@/src/schemas/home";
 import { IBookingsResponse } from "@/src/types/api";
 
 interface IFormField {
@@ -27,7 +25,7 @@ interface IFormField {
   isSelect?: boolean;
   label?: string;
   maxLength?: number;
-  name: keyof TBookingSchema;
+  name: keyof THomeBookingSchema;
   onKeyDown?: (e: KeyboardEvent) => void;
   options?: string[];
   type?: HTMLInputTypeAttribute;
@@ -94,20 +92,20 @@ export const Home: FC<I> = (props): ReactElement => {
     register,
     reset,
     setValue,
-  } = useForm<TBookingSchema>({
+  } = useForm<THomeBookingSchema>({
     defaultValues: {
       email: props.session?.user?.email ?? undefined,
       name: props.session?.user?.name ?? undefined,
       phoneNumber: props.session?.user?.phoneNumber,
     },
-    resolver: zodResolver(BookingSchema),
+    resolver: zodResolver(HomeBookingSchema),
   });
 
   useEffect(() => {
     if (props.session?.user?.status) {
       const pendingBooking = localStorage.getItem("pendingBooking");
       if (pendingBooking) {
-        const data: TBookingSchema = JSON.parse(pendingBooking);
+        const data: THomeBookingSchema = JSON.parse(pendingBooking);
         setDate(new Date(data.date));
         setValue("package", data.package ?? "");
         localStorage.removeItem("pendingBooking");
@@ -129,7 +127,7 @@ export const Home: FC<I> = (props): ReactElement => {
     // eslint-disable-next-line
   }, [date]);
 
-  const onSubmit: SubmitHandler<TBookingSchema> = (dt) => {
+  const onSubmit: SubmitHandler<THomeBookingSchema> = (dt) => {
     setLoading(true);
 
     if (props.session?.user?.status) {

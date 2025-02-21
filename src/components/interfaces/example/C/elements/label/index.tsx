@@ -34,7 +34,7 @@ const LegendTWM = ({ color, disabled, errorMessage, legendClassName }: T) =>
     legendClassName,
   );
 
-export const Label: FC<T> = ({ color, disabled, errorMessage, fieldsetClassName, label, legendClassName, ...props }): ReactElement => (
+export const ExampleLabel: FC<T> = ({ color, disabled, errorMessage, fieldsetClassName, label, legendClassName, ...props }): ReactElement => (
   <fieldset className={FieldsetTWM({ color, disabled, errorMessage, fieldsetClassName })} data-testid="example-label-fieldset">
     <legend className={LegendTWM({ color, disabled, errorMessage, legendClassName })} data-testid="example-label-legend">
       {label}

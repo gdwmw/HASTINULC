@@ -2,5 +2,8 @@ export * from "./authentication";
 export * from "./bookings";
 export * from "./datas";
 export * from "./example";
+export * from "./password";
+export * from "./questionnaires";
 export * from "./reviews";
+export * from "./upload";
 export * from "./users";

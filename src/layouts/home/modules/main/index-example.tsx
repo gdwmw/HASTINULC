@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { FC, ReactElement } from "react";
 
-import { ExampleATWM } from "@/src/components/interfaces/example/A";
-import { Logout } from "@/src/components/logout";
+import { ExampleATWM, Logout } from "@/src/components";
 import { getSession } from "@/src/hooks/session";
 
 export const Main: FC = async (): Promise<ReactElement> => {
