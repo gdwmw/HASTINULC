@@ -1,9 +1,12 @@
 update semua yang ada di boilerplate
+update form register dan login
+update struktur
+update dokumentasi
 
 update snippet
 
-perbaiki email yang salalu terkirim dua kali
-buat fitur payment gateway
+buat fitur payment gateway (pake whatsapp dulu)
 buat fitur reset password
 buat fitur delete account
 responsive
+update dokumentasi
