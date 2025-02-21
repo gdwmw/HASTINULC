@@ -16,7 +16,7 @@ import { DatePickerInput, ExampleA, Input, SectionHeader, Select } from "@/src/c
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA } from "@/src/libs";
-import { HomeBookingSchema, THomeBookingSchema } from "@/src/schemas/home";
+import { HomeBookingSchema, THomeBookingSchema } from "@/src/schemas";
 import { IBookingsResponse } from "@/src/types/api";
 
 interface IFormField {

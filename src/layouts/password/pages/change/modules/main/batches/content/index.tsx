@@ -9,7 +9,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { ExampleA, ExampleATWM, Input } from "@/src/components";
-import { ChangePasswordSchema, TChangePasswordSchema } from "@/src/schemas/password";
+import { ChangePasswordSchema, TChangePasswordSchema } from "@/src/schemas";
 import { POSTChangePassword } from "@/src/utils/api";
 
 interface IFormField {

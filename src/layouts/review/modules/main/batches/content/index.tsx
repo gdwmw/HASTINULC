@@ -12,7 +12,7 @@ import { IoStar } from "react-icons/io5";
 import { BookingSummary, ExampleA, ExampleATWM, Input, TextArea } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs";
-import { ReviewSchema, TReviewSchema } from "@/src/schemas/review";
+import { ReviewSchema, TReviewSchema } from "@/src/schemas";
 import { IBookingsResponse, IReviewsPayload } from "@/src/types/api";
 import { POSTReviews, POSTUpload } from "@/src/utils/api";
 

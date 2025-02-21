@@ -10,7 +10,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { ExampleA, ExampleATWM, Input } from "@/src/components";
-import { LoginSchema, TLoginSchema } from "@/src/schemas/authentication";
+import { LoginSchema, TLoginSchema } from "@/src/schemas";
 
 export const Content: FC = (): ReactElement => {
   const router = useRouter();
