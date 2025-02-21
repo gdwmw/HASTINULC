@@ -163,7 +163,7 @@ export const Content: FC<I> = (props): ReactElement => {
   return (
     <main className="bg-slate-100">
       <section className="container mx-auto flex h-screen items-center justify-center p-5">
-        <div className="relative flex size-full max-h-[596px] max-w-[450px] justify-center rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
+        <div className="relative size-full max-h-[624px] max-w-[450px] rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
           <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
             <FaChevronLeft className="ml-1" size={12} /> Home
           </Link>
@@ -186,6 +186,21 @@ export const Content: FC<I> = (props): ReactElement => {
                 {...register(dt.name)}
               />
             ))}
+
+            <div className="flex justify-center gap-1">
+              <span className="text-xs">Do you want to change your password?</span>
+              <Link
+                className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
+                href={"/password/change"}
+                onClick={(e) => {
+                  if (loading) {
+                    e.preventDefault();
+                  }
+                }}
+              >
+                Click Here!
+              </Link>
+            </div>
 
             <ExampleA className="w-full font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
               {loading ? "Loading..." : "UPDATE"}

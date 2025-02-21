@@ -1,8 +1,3 @@
-export interface IAuthSchema {
-  jwt: string;
-  user: IUsersResponse;
-}
-
 export interface IRegisterPayload {
   username: string;
   email: string;
@@ -12,6 +7,11 @@ export interface IRegisterPayload {
 export interface ILoginPayload {
   identifier: string;
   password: string;
+}
+
+export interface IAuthSchema {
+  jwt: string;
+  user: IUsersResponse;
 }
 
 export interface IAuthResponse {
@@ -39,6 +39,20 @@ export interface INextAuthResponse {
   image?: null | string;
   role: string;
   status: string;
+  token: string;
+}
+
+// ----------------------------
+
+export interface IPasswordPayload {
+  email?: string;
+  code?: string;
+  currentPassword?: string;
+  password?: string;
+  passwordConfirmation?: string;
+}
+
+export interface IPasswordResponse extends IUsersResponse {
   token: string;
 }
 
