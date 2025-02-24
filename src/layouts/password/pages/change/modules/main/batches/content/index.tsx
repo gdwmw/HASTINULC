@@ -2,13 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-import { ExampleA, ExampleATWM, Input } from "@/src/components";
+import { ExampleA, FormContainer, Input } from "@/src/components";
 import { ChangePasswordSchema, TChangePasswordSchema } from "@/src/schemas";
 import { POSTChangePassword } from "@/src/utils";
 
@@ -81,40 +79,31 @@ export const Content: FC = (): ReactElement => {
 
   return (
     <main className="bg-slate-100">
-      <section className="container mx-auto flex h-screen items-center justify-center p-5">
-        <div className="relative w-full max-w-[350px] rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
-          <Link
-            className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })}
-            href={"/profile"}
-          >
-            <FaChevronLeft className="ml-1" size={12} /> Back
-          </Link>
+      <FormContainer href={"/profile"} innerContainerClassName="w-full max-w-[350px]" label={"Back"}>
+        <form className="flex w-full flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+          {FORM_FIELDS_DATA.map((dt) => (
+            <Input
+              color="rose"
+              disabled={loading}
+              errorMessage={errors[dt.name]?.message}
+              icon={passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} />}
+              iconOnClick={() => setPasswordVisibility((prev) => !prev)}
+              key={dt.id}
+              label={dt.label}
+              maxLength={dt.maxLength}
+              onKeyDown={dt.onKeyDown}
+              type={passwordVisibility ? "text" : "password"}
+              {...register(dt.name)}
+            />
+          ))}
 
-          <form className="flex w-full flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-            {FORM_FIELDS_DATA.map((dt) => (
-              <Input
-                color="rose"
-                disabled={loading}
-                errorMessage={errors[dt.name]?.message}
-                icon={passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} />}
-                iconOnClick={() => setPasswordVisibility((prev) => !prev)}
-                key={dt.id}
-                label={dt.label}
-                maxLength={dt.maxLength}
-                onKeyDown={dt.onKeyDown}
-                type={passwordVisibility ? "text" : "password"}
-                {...register(dt.name)}
-              />
-            ))}
+          <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password does not match Password"}</span>
 
-            <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password does not match Password"}</span>
-
-            <ExampleA className="w-full font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-              {loading ? "Loading..." : "UPDATE"}
-            </ExampleA>
-          </form>
-        </div>
-      </section>
+          <ExampleA className="w-full font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+            {loading ? "Loading..." : "UPDATE"}
+          </ExampleA>
+        </form>
+      </FormContainer>
     </main>
   );
 };

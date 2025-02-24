@@ -5,10 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FaChevronLeft } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-import { ExampleA, ExampleATWM, Input } from "@/src/components";
+import { ExampleA, ExampleATWM, FormContainer, Input } from "@/src/components";
 import { inputValidations } from "@/src/hooks";
 import { RegisterSchema, TRegisterSchema } from "@/src/schemas";
 import { POSTRegister } from "@/src/utils";
@@ -110,56 +109,50 @@ export const Content: FC = (): ReactElement => {
 
   return (
     <main className="bg-slate-100">
-      <section className="container mx-auto flex h-screen items-center justify-center p-5">
-        <div className="relative flex size-full max-h-[556px] max-w-[450px] rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
-          <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
-            <FaChevronLeft className="ml-1" size={12} /> Home
-          </Link>
+      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[556px] max-w-[450px]" label={"Home"}>
+        <form className="flex w-full flex-col gap-3 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
+          {FORM_FIELDS_DATA.map((dt) => (
+            <Input
+              color="rose"
+              disabled={loading}
+              errorMessage={errors[dt.name]?.message}
+              icon={dt.isPassword ? passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} /> : undefined}
+              iconOnClick={dt.isPassword ? () => setPasswordVisibility((prev) => !prev) : undefined}
+              key={dt.id}
+              label={dt.label}
+              maxLength={dt.maxLength}
+              onKeyDown={dt.onKeyDown}
+              type={dt.isPassword ? (passwordVisibility ? "text" : "password") : dt.type}
+              {...register(dt.name)}
+            />
+          ))}
 
-          <form className="flex w-full flex-col gap-3 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
-            {FORM_FIELDS_DATA.map((dt) => (
-              <Input
-                color="rose"
-                disabled={loading}
-                errorMessage={errors[dt.name]?.message}
-                icon={dt.isPassword ? passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} /> : undefined}
-                iconOnClick={dt.isPassword ? () => setPasswordVisibility((prev) => !prev) : undefined}
-                key={dt.id}
-                label={dt.label}
-                maxLength={dt.maxLength}
-                onKeyDown={dt.onKeyDown}
-                type={dt.isPassword ? (passwordVisibility ? "text" : "password") : dt.type}
-                {...register(dt.name)}
-              />
-            ))}
+          <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password does not match Password"}</span>
 
-            <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password does not match Password"}</span>
+          <ExampleA className="min-h-10 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+            {loading ? "Loading..." : "REGISTER"}
+          </ExampleA>
 
-            <ExampleA className="min-h-10 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-              {loading ? "Loading..." : "REGISTER"}
-            </ExampleA>
-
-            <div className="flex justify-center gap-1">
-              <span className="text-xs">Already have an account?</span>
-              <Link
-                className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
-                href={"/authentication/login"}
-                onClick={(e) => {
-                  if (loading) {
-                    e.preventDefault();
-                  } else {
-                    setPasswordVisibility(false);
-                    setPasswordNotMatch(false);
-                    reset();
-                  }
-                }}
-              >
-                Login!
-              </Link>
-            </div>
-          </form>
-        </div>
-      </section>
+          <div className="flex justify-center gap-1">
+            <span className="text-xs">Already have an account?</span>
+            <Link
+              className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
+              href={"/authentication/login"}
+              onClick={(e) => {
+                if (loading) {
+                  e.preventDefault();
+                } else {
+                  setPasswordVisibility(false);
+                  setPasswordNotMatch(false);
+                  reset();
+                }
+              }}
+            >
+              Login!
+            </Link>
+          </div>
+        </form>
+      </FormContainer>
     </main>
   );
 };

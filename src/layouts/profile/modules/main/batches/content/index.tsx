@@ -8,9 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FaChevronLeft } from "react-icons/fa";
 
-import { ExampleA, ExampleATWM, Input } from "@/src/components";
+import { ExampleA, ExampleATWM, FormContainer, Input } from "@/src/components";
 import { inputValidations } from "@/src/hooks";
 import { ProfileSchema, TProfileSchema } from "@/src/schemas";
 import { DELETEUpload, GETDatasByDocumentId, POSTUpload, PUTDatas, PUTUsers } from "@/src/utils";
@@ -159,52 +158,46 @@ export const Content: FC<I> = (props): ReactElement => {
 
   return (
     <main className="bg-slate-100">
-      <section className="container mx-auto flex h-screen items-center justify-center p-5">
-        <div className="relative flex size-full max-h-[624px] max-w-[450px] rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
-          <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
-            <FaChevronLeft className="ml-1" size={12} /> Home
-          </Link>
+      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[624px] max-w-[450px]" label={"Home"}>
+        <form className="w-full space-y-3 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
+          <div className="relative mx-auto aspect-square size-32 overflow-hidden rounded-full border border-gray-200">
+            <Image alt="Review Image" className="object-cover" fill quality={50} src={previewImage ?? props.session?.user?.image ?? ""} />
+          </div>
 
-          <form className="w-full space-y-3 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
-            <div className="relative mx-auto aspect-square size-32 overflow-hidden rounded-full border border-gray-200">
-              <Image alt="Review Image" className="object-cover" fill quality={50} src={previewImage ?? props.session?.user?.image ?? ""} />
-            </div>
+          {FORM_FIELDS_DATA.map((dt) => (
+            <Input
+              color="rose"
+              disabled={loading}
+              errorMessage={errors[dt.name]?.message}
+              key={dt.id}
+              label={dt.label}
+              maxLength={dt.maxLength}
+              onKeyDown={dt.onKeyDown}
+              type={dt.type}
+              {...register(dt.name)}
+            />
+          ))}
 
-            {FORM_FIELDS_DATA.map((dt) => (
-              <Input
-                color="rose"
-                disabled={loading}
-                errorMessage={errors[dt.name]?.message}
-                key={dt.id}
-                label={dt.label}
-                maxLength={dt.maxLength}
-                onKeyDown={dt.onKeyDown}
-                type={dt.type}
-                {...register(dt.name)}
-              />
-            ))}
+          <div className="flex justify-center gap-1">
+            <span className="text-xs">Do you want to change your password?</span>
+            <Link
+              className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
+              href={"/password/change"}
+              onClick={(e) => {
+                if (loading) {
+                  e.preventDefault();
+                }
+              }}
+            >
+              Click Here!
+            </Link>
+          </div>
 
-            <div className="flex justify-center gap-1">
-              <span className="text-xs">Do you want to change your password?</span>
-              <Link
-                className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
-                href={"/password/change"}
-                onClick={(e) => {
-                  if (loading) {
-                    e.preventDefault();
-                  }
-                }}
-              >
-                Click Here!
-              </Link>
-            </div>
-
-            <ExampleA className="w-full font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-              {loading ? "Loading..." : "UPDATE"}
-            </ExampleA>
-          </form>
-        </div>
-      </section>
+          <ExampleA className="w-full font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+            {loading ? "Loading..." : "UPDATE"}
+          </ExampleA>
+        </form>
+      </FormContainer>
     </main>
   );
 };

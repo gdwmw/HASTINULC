@@ -6,9 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FC, Fragment, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FaChevronLeft } from "react-icons/fa";
 
-import { BookingSummary, DatePickerInput, ErrorMessage, ExampleA, ExampleATWM, Input, Select } from "@/src/components";
+import { BookingSummary, DatePickerInput, ErrorMessage, ExampleA, ExampleATWM, FormContainer, Input, Select } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA, TIME_SLOTS_DATA } from "@/src/libs";
@@ -189,116 +188,103 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
   return (
     <main className="bg-slate-100">
-      <section className="container mx-auto flex h-screen items-center justify-center p-5">
-        <div className="relative flex size-full max-h-[821px] max-w-[1000px] gap-5 rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg">
-          <Link className={ExampleATWM({ className: "absolute left-5 top-5 font-semibold", color: "rose", size: "sm", variant: "ghost" })} href={"/"}>
-            <FaChevronLeft className="ml-1" size={12} /> Home
-          </Link>
-
-          <form className="flex w-full max-w-[500px] items-start overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
-            <div className="my-auto flex w-full flex-col justify-center gap-4">
-              {FORM_FIELDS_DATA.map((dt) => {
-                if (dt.isDatePicker) {
-                  return (
-                    <DatePickerInput
-                      color="rose"
-                      dateFormat="yyyy/MM/dd"
-                      disabled={loading}
-                      errorMessage={errors[dt.name]?.message}
-                      excludeDates={bookedDates}
-                      key={dt.id}
-                      label={dt.label}
-                      minDate={new Date()}
-                      onChange={(value) => value && setDate(value)}
-                      selected={date}
-                    />
-                  );
-                }
-
-                if (dt.isSelect) {
-                  return (
-                    <Select
-                      color="rose"
-                      disabled={loading}
-                      errorMessage={errors[dt.name]?.message}
-                      key={dt.id}
-                      label={dt.label}
-                      {...register(dt.name)}
-                    >
-                      <option value="-">-</option>
-                      {dt.options?.map((opt, i) => (
-                        <option key={i} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </Select>
-                  );
-                }
-
-                if (dt.type === "checkbox") {
-                  return (
-                    <div className="space-y-2" key={dt.id}>
-                      <div className="grid grid-cols-2 gap-3">
-                        {dt.options?.map((opt, i) => (
-                          <label className="group relative cursor-pointer" key={i}>
-                            <input className="peer absolute opacity-0" disabled={loading} type="checkbox" value={opt} {...register(dt.name)} />
-                            <div className="flex select-none items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-3 text-sm font-semibold text-gray-700 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 peer-checked:border-rose-400 peer-checked:bg-rose-400 peer-checked:text-white peer-disabled:cursor-not-allowed peer-disabled:border-gray-200 peer-disabled:bg-gray-100 peer-disabled:text-gray-400">
-                              {opt}
-                            </div>
-                          </label>
-                        ))}
-                      </div>
-                      {errors[dt.name] && <ErrorMessage errorMessage={errors[dt.name]?.message ?? ""} />}
-                    </div>
-                  );
-                }
-
+      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[1000px] gap-5" label={"Home"}>
+        <form className="flex w-full max-w-[500px] items-start overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
+          <div className="my-auto flex w-full flex-col justify-center gap-4">
+            {FORM_FIELDS_DATA.map((dt) => {
+              if (dt.isDatePicker) {
                 return (
-                  <Fragment key={dt.id}>
-                    <Input
-                      color="rose"
-                      disabled={loading}
-                      errorMessage={errors[dt.name]?.message}
-                      key={dt.id}
-                      label={dt.label}
-                      maxLength={dt.maxLength}
-                      onKeyDown={dt.onKeyDown}
-                      type={dt.type}
-                      {...register(dt.name)}
-                    />
-                    {dt.type === "url" && (
-                      <>
-                        <span className="text-xs italic text-rose-400">*Please share Google Maps location link</span>
-                        <div className="flex justify-center gap-1">
-                          <span className="text-xs">Don&apos;t know how to get Google Maps Link?</span>
-                          <Link
-                            className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
-                            href={"https://drive.google.com/drive/folders/1czzvGaymg_aEkVhRe00CBz-X_PR2hoxA?usp=sharing"}
-                            onClick={(e) => loading && e.preventDefault()}
-                            target="_blank"
-                          >
-                            Click here!
-                          </Link>
-                        </div>
-                      </>
-                    )}
-                  </Fragment>
+                  <DatePickerInput
+                    color="rose"
+                    dateFormat="yyyy/MM/dd"
+                    disabled={loading}
+                    errorMessage={errors[dt.name]?.message}
+                    excludeDates={bookedDates}
+                    key={dt.id}
+                    label={dt.label}
+                    minDate={new Date()}
+                    onChange={(value) => value && setDate(value)}
+                    selected={date}
+                  />
                 );
-              })}
+              }
 
-              <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-                {loading ? "Loading..." : "BOOKING NOW"}
-              </ExampleA>
-            </div>
-          </form>
+              if (dt.isSelect) {
+                return (
+                  <Select color="rose" disabled={loading} errorMessage={errors[dt.name]?.message} key={dt.id} label={dt.label} {...register(dt.name)}>
+                    <option value="-">-</option>
+                    {dt.options?.map((opt, i) => (
+                      <option key={i} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </Select>
+                );
+              }
 
-          <aside className="flex min-w-fit grow items-start overflow-y-auto">
-            <div className="my-auto flex w-full justify-center p-2">
-              <BookingSummary {...watch()} datasDocumentId={props.session?.user?.datasDocumentId} subTotal={subtotal} tax={tax} total={total} />
-            </div>
-          </aside>
-        </div>
-      </section>
+              if (dt.type === "checkbox") {
+                return (
+                  <div className="space-y-2" key={dt.id}>
+                    <div className="grid grid-cols-2 gap-3">
+                      {dt.options?.map((opt, i) => (
+                        <label className="group relative cursor-pointer" key={i}>
+                          <input className="peer absolute opacity-0" disabled={loading} type="checkbox" value={opt} {...register(dt.name)} />
+                          <div className="flex select-none items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-3 text-sm font-semibold text-gray-700 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 peer-checked:border-rose-400 peer-checked:bg-rose-400 peer-checked:text-white peer-disabled:cursor-not-allowed peer-disabled:border-gray-200 peer-disabled:bg-gray-100 peer-disabled:text-gray-400">
+                            {opt}
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                    {errors[dt.name] && <ErrorMessage errorMessage={errors[dt.name]?.message ?? ""} />}
+                  </div>
+                );
+              }
+
+              return (
+                <Fragment key={dt.id}>
+                  <Input
+                    color="rose"
+                    disabled={loading}
+                    errorMessage={errors[dt.name]?.message}
+                    key={dt.id}
+                    label={dt.label}
+                    maxLength={dt.maxLength}
+                    onKeyDown={dt.onKeyDown}
+                    type={dt.type}
+                    {...register(dt.name)}
+                  />
+                  {dt.type === "url" && (
+                    <>
+                      <span className="text-xs italic text-rose-400">*Please share Google Maps location link</span>
+                      <div className="flex justify-center gap-1">
+                        <span className="text-xs">Don&apos;t know how to get Google Maps Link?</span>
+                        <Link
+                          className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
+                          href={"https://drive.google.com/drive/folders/1czzvGaymg_aEkVhRe00CBz-X_PR2hoxA?usp=sharing"}
+                          onClick={(e) => loading && e.preventDefault()}
+                          target="_blank"
+                        >
+                          Click here!
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                </Fragment>
+              );
+            })}
+
+            <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+              {loading ? "Loading..." : "BOOKING NOW"}
+            </ExampleA>
+          </div>
+        </form>
+
+        <aside className="flex min-w-fit grow items-start overflow-y-auto">
+          <div className="my-auto flex w-full justify-center p-2">
+            <BookingSummary {...watch()} datasDocumentId={props.session?.user?.datasDocumentId} subTotal={subtotal} tax={tax} total={total} />
+          </div>
+        </aside>
+      </FormContainer>
     </main>
   );
 };

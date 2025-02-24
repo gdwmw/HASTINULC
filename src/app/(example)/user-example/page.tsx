@@ -1,6 +1,7 @@
 import { Metadata, Viewport } from "next";
 import { FC, ReactElement } from "react";
 
+import { FormContainer } from "@/src/components";
 import { getAllSession } from "@/src/hooks";
 
 export const viewport: Viewport = {
@@ -17,16 +18,14 @@ const UserPage: FC = async (): Promise<ReactElement> => {
 
   return (
     <main className="bg-slate-100">
-      <section className="flex h-screen items-center justify-center p-5">
-        <div className="flex flex-col items-center justify-center gap-3 rounded-xl bg-white p-5 shadow-lg">
-          <header>
-            <h1 className="text-2xl font-semibold">
-              This is <span className="text-rose-400">User</span> page
-            </h1>
-          </header>
-          <pre className="rounded-lg border border-gray-300 bg-white p-2 text-sm">session: {JSON.stringify(session, null, 2)}</pre>
-        </div>
-      </section>
+      <FormContainer innerContainerClassName="flex-col gap-3 items-center">
+        <header>
+          <h1 className="text-2xl font-semibold">
+            This is <span className="text-rose-400">User</span> page
+          </h1>
+        </header>
+        <pre className="rounded-lg border border-gray-300 bg-white p-2 text-sm">session: {JSON.stringify(session, null, 2)}</pre>
+      </FormContainer>
     </main>
   );
 };
