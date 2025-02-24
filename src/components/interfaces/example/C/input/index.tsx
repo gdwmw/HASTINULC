@@ -8,7 +8,7 @@ import { ExampleA } from "../../A";
 import { ExampleErrorMessage, ExampleInputsContainer, ExampleLabel } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
-type TExampleInput = {
+interface I extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   className?: string;
   color?: "rose" | "emerald";
   containerClassName?: string;
@@ -19,13 +19,13 @@ type TExampleInput = {
   iconOnClick?: () => void;
   label?: string;
   legendClassName?: string;
-} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+}
 /* eslint-enable perfectionist/sort-union-types */
 
-const ExampleInputTWM = ({ className, disabled }: TExampleInput) =>
+const ExampleInputTWM = ({ className, disabled }: I) =>
   twm("w-full rounded-sm bg-transparent px-1 outline-none disabled:cursor-not-allowed", disabled && "text-gray-400", className);
 
-export const ExampleInput: FC<TExampleInput> = forwardRef<HTMLInputElement, TExampleInput>(
+export const ExampleInput: FC<I> = forwardRef<HTMLInputElement, I>(
   (
     { className, color, containerClassName, disabled, errorMessage, fieldsetClassName, icon, iconOnClick, label, legendClassName, ...props },
     ref,

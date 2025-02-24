@@ -5,7 +5,7 @@ import { twm } from "@/src/libs";
 import { ExampleErrorMessage, ExampleInputsContainer, ExampleLabel } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
-type TExampleTextArea = {
+interface I extends DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
   className?: string;
   color?: "rose" | "emerald";
   containerClassName?: string;
@@ -15,17 +15,17 @@ type TExampleTextArea = {
   label?: string;
   legendClassName?: string;
   rows?: number;
-} & DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
+}
 /* eslint-enable perfectionist/sort-union-types */
 
-const ExampleTextAreaTWM = ({ className, disabled }: TExampleTextArea) =>
+const ExampleTextAreaTWM = ({ className, disabled }: I) =>
   twm(
     "max-h-[200px] min-h-[120px] w-full rounded-sm bg-transparent px-1 outline-none disabled:cursor-not-allowed",
     disabled && "text-gray-400",
     className,
   );
 
-export const ExampleTextArea: FC<TExampleTextArea> = forwardRef<HTMLTextAreaElement, TExampleTextArea>(
+export const ExampleTextArea: FC<I> = forwardRef<HTMLTextAreaElement, I>(
   (
     { className, color, containerClassName, disabled, errorMessage, fieldsetClassName, label, legendClassName, rows, ...props },
     ref,

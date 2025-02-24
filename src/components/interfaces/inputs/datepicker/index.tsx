@@ -10,7 +10,7 @@ import { ErrorMessage, InputsContainer, Label } from "../elements";
 import "@/src/styles/datepicker.css";
 
 /* eslint-disable perfectionist/sort-union-types */
-type TDatePicker = {
+type T = {
   className?: string;
   color?: "rose" | "emerald";
   containerClassName?: string;
@@ -22,14 +22,14 @@ type TDatePicker = {
 } & DatePickerProps;
 /* eslint-enable perfectionist/sort-union-types */
 
-const DatePickerTWM = ({ className, disabled }: TDatePicker) =>
+const DatePickerTWM = ({ className, disabled }: T) =>
   twm(
     "w-full rounded-lg bg-transparent px-2 outline-none disabled:cursor-not-allowed",
     disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
     className,
   );
 
-export const DatePickerInput: FC<TDatePicker> = ({
+export const DatePickerInput: FC<T> = ({
   className,
   color,
   containerClassName,

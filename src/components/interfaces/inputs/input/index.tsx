@@ -8,7 +8,7 @@ import { ExampleA } from "../../example/A";
 import { ErrorMessage, InputsContainer, Label } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
-type TInput = {
+interface I extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   className?: string;
   color?: "rose" | "emerald";
   containerClassName?: string;
@@ -19,17 +19,17 @@ type TInput = {
   iconOnClick?: () => void;
   label?: string;
   legendClassName?: string;
-} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+}
 /* eslint-enable perfectionist/sort-union-types */
 
-const InputTWM = ({ className, disabled }: TInput) =>
+const InputTWM = ({ className, disabled }: I) =>
   twm(
     "w-full rounded-lg bg-transparent px-2 outline-none disabled:cursor-not-allowed",
     disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
     className,
   );
 
-export const Input: FC<TInput> = forwardRef<HTMLInputElement, TInput>(
+export const Input: FC<I> = forwardRef<HTMLInputElement, I>(
   (
     { className, color, containerClassName, disabled, errorMessage, fieldsetClassName, icon, iconOnClick, label, legendClassName, ...props },
     ref,

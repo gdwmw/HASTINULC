@@ -7,7 +7,7 @@ import { twm } from "@/src/libs";
 import { ErrorMessage, InputsContainer, Label } from "../elements";
 
 /* eslint-disable perfectionist/sort-union-types */
-type TSelect = {
+interface I extends DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
   className?: string;
   color?: "rose" | "emerald";
   containerClassName?: string;
@@ -16,17 +16,17 @@ type TSelect = {
   fieldsetClassName?: string;
   label?: string;
   legendClassName?: string;
-} & DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>;
+}
 /* eslint-enable perfectionist/sort-union-types */
 
-const SelectTWM = ({ className, disabled }: TSelect) =>
+const SelectTWM = ({ className, disabled }: I) =>
   twm(
     "w-full rounded-lg bg-transparent px-1 outline-none disabled:cursor-not-allowed",
     disabled ? "text-gray-400" : "text-gray-800 hover:bg-gray-50 focus:bg-gray-50",
     className,
   );
 
-export const Select: FC<TSelect> = forwardRef<HTMLSelectElement, TSelect>(
+export const Select: FC<I> = forwardRef<HTMLSelectElement, I>(
   ({ className, color, containerClassName, disabled, errorMessage, fieldsetClassName, label, legendClassName, ...props }, ref): ReactElement => (
     <InputsContainer className={containerClassName}>
       <Label
