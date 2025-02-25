@@ -45,12 +45,7 @@ export const options: NextAuthOptions = {
             return null;
           }
 
-          const mapDataToResponse: User = {
-            ...res,
-            id: res.id.toString(),
-          };
-
-          return mapDataToResponse;
+          return res;
         } catch {
           return null;
         }

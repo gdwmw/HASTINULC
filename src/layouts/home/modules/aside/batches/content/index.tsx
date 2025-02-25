@@ -75,9 +75,15 @@ export const Content: FC<I> = (props): ReactElement => {
       <section className="flex items-center justify-between">
         {props.session?.user?.status ? (
           <figure className="flex items-center gap-2">
-            <div className="relative aspect-square size-[50px] overflow-hidden rounded-full border border-gray-200">
-              <Image alt="Profile Image" className="object-cover" fill quality={30} src={props.session?.user?.image ?? ""} />
-            </div>
+            {props.session?.user?.image ? (
+              <div className="relative aspect-square size-[50px] overflow-hidden rounded-full border border-gray-200">
+                <Image alt="Profile Image" className="object-cover" fill quality={30} src={props.session?.user?.image ?? ""} />
+              </div>
+            ) : (
+              <div className="flex aspect-square size-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
+                <FaUser className="text-gray-400" size={25} />
+              </div>
+            )}
             <figcaption>
               <span className="-mb-1.5 mt-[-5px] block max-w-[200px] truncate text-lg">{props.session?.user?.name}</span>
               <span className="block text-xs text-rose-500">{props.session?.user?.username}</span>
@@ -86,7 +92,7 @@ export const Content: FC<I> = (props): ReactElement => {
         ) : (
           <figure className="flex items-center gap-2">
             <div className="flex aspect-square size-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
-              <FaUser className="text-gray-400" size={24} />
+              <FaUser className="text-gray-400" size={25} />
             </div>
             <figcaption>
               <span className="-mb-1.5 mt-[-5px] block max-w-[200px] truncate text-lg">Guest</span>

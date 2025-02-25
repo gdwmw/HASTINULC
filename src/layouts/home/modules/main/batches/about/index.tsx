@@ -4,8 +4,8 @@ import Image from "next/image";
 import { FC, ReactElement, useState } from "react";
 import { FaCheck, FaPlay } from "react-icons/fa";
 
-import accentCircle from "@/public/assets/images/background/Accent-Circle.png";
-import accentRectangle from "@/public/assets/images/background/Accent-Rectangle.png";
+import accentCircle from "@/public/assets/images/background/Accent-Circle.svg";
+import accentRectangle from "@/public/assets/images/background/Accent-Rectangle.svg";
 import aboutImage1 from "@/public/assets/images/model/About-1.jpg";
 import aboutImage2 from "@/public/assets/images/model/About-2.jpg";
 import aboutImage3 from "@/public/assets/images/model/About-3.jpg";
@@ -21,24 +21,24 @@ export const About: FC = (): ReactElement => {
   return (
     <section className="flex scroll-mt-[88px] flex-col gap-24 bg-white pt-24" id="about">
       <section className="container relative mx-auto flex items-center justify-center gap-10 px-5 max-lg:flex-col xl:gap-20">
-        <Image alt="Accent Circle" className="absolute -top-10 right-36" src={accentCircle} />
+        <Image alt="Accent Circle" className="absolute -top-10 right-5 sm:right-36" src={accentCircle} width={96} />
 
         <figure className="relative flex flex-col gap-3 max-lg:order-last sm:gap-5">
           <div className="z-[1] flex gap-3 sm:gap-5">
             <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-3xl">
-              <Image alt="About Image" className="object-cover" quality={30} src={aboutImage1} width={230} />
+              <Image alt="About Image" className="object-cover" src={aboutImage1} width={230} />
             </div>
             <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-3xl">
-              <Image alt="About Image" className="object-cover" quality={30} src={aboutImage2} width={230} />
+              <Image alt="About Image" className="object-cover" src={aboutImage2} width={230} />
             </div>
           </div>
 
           <div className="z-[1] flex gap-3 sm:gap-5">
             <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-3xl">
-              <Image alt="About Image" className="object-cover" quality={30} src={aboutImage4} width={230} />
+              <Image alt="About Image" className="object-cover" src={aboutImage4} width={230} />
             </div>
             <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-3xl">
-              <Image alt="About Image" className="object-cover" quality={30} src={aboutImage3} width={230} />
+              <Image alt="About Image" className="object-cover" src={aboutImage3} width={230} />
             </div>
           </div>
 
@@ -51,7 +51,7 @@ export const About: FC = (): ReactElement => {
             </span>
           </figcaption>
 
-          <Image alt="Accent Rectangle" className="absolute -bottom-20 -left-36" src={accentRectangle} />
+          <Image alt="Accent Rectangle" className="absolute -bottom-20 -left-36" src={accentRectangle} width={420} />
         </figure>
 
         <SectionHeader

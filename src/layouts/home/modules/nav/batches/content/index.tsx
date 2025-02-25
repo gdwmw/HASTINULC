@@ -69,7 +69,7 @@ export const Content: FC<I> = (props): ReactElement => {
     <nav
       className={`flex h-[88px] items-center justify-between gap-5 bg-white px-5 text-lg min-[850px]:px-10 ${activeSection !== "home" && "shadow-md"}`}
     >
-      <Image alt="Hastinulc Makeup Art" src={logo} width={200} />
+      <Image alt="Hastinulc Makeup Art" priority src={logo} width={200} />
 
       <ul className="hidden items-center gap-5 font-semibold min-[850px]:flex">
         {NAVIGATION_DATA.map((dt) => (
@@ -102,16 +102,26 @@ export const Content: FC<I> = (props): ReactElement => {
                     </div>
                   </div>
                 )}
-                <div className="relative aspect-square size-[45px] overflow-hidden rounded-full border border-gray-200">
-                  <Image
-                    alt="Profile Image"
-                    className="cursor-pointer object-cover"
-                    fill
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    quality={30}
-                    src={props.session?.user?.image ?? ""}
-                  />
-                </div>
+                {props.session?.user?.image ? (
+                  <div className="relative aspect-square size-[45px] overflow-hidden rounded-full border border-gray-200">
+                    <Image
+                      alt="Profile Image"
+                      className="cursor-pointer object-cover"
+                      fill
+                      onClick={() => setMenuOpen((prev) => !prev)}
+                      quality={30}
+                      src={props.session?.user?.image ?? ""}
+                    />
+                  </div>
+                ) : (
+                  <button
+                    className="flex aspect-square size-[45px] items-center justify-center rounded-full border border-gray-200 bg-gray-100"
+                    onClick={() => setMenuOpen((prev) => !prev)}
+                    type="button"
+                  >
+                    <FaUser className="text-gray-400" size={25} />
+                  </button>
+                )}
               </div>
 
               {menuOpen && (

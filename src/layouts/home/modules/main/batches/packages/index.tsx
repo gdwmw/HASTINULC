@@ -85,7 +85,6 @@ export const Packages: FC = (): ReactElement => {
                 className="rounded-full border-2 border-rose-500"
                 height={64}
                 loading="lazy"
-                quality={10}
                 src={testimonialsImage}
                 width={64}
               />
@@ -119,7 +118,6 @@ export const Packages: FC = (): ReactElement => {
                       className="rounded-full border-2 border-rose-500"
                       height={64}
                       loading="lazy"
-                      quality={10}
                       src={dt.image}
                       width={64}
                     />

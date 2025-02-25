@@ -10,7 +10,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FaChevronRight } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 
-import accentDot from "@/public/assets/images/background/Accent-Dot.png";
+import accentDot from "@/public/assets/images/background/Accent-Dot.svg";
 import homeImage from "@/public/assets/images/model/Home.png";
 import { DatePickerInput, ExampleA, Input, SectionHeader, Select } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
@@ -159,6 +159,7 @@ export const Home: FC<I> = (props): ReactElement => {
             className="absolute right-[-450px] top-0 h-full min-w-fit max-w-[863.641px] md:-right-80 lg:-right-36 xl:right-0"
             priority
             src={homeImage}
+            unoptimized
           />
 
           <div className="container mx-auto size-full px-5">
@@ -175,7 +176,7 @@ export const Home: FC<I> = (props): ReactElement => {
         </section>
 
         <section className="relative h-56 w-full bg-white shadow-lg">
-          <Image alt="Accent Dot" className="absolute -top-8 left-36" src={accentDot} />
+          <Image alt="Accent Dot" className="absolute -top-8 left-16 sm:left-36" src={accentDot} width={64} />
 
           <div className="container mx-auto size-full px-5">
             <div className="flex size-full items-center justify-center gap-20">

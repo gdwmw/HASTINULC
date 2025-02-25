@@ -105,11 +105,11 @@ export const PACKAGES_DATA = [
 export const TESTIMONIALS_DATA = [
   {
     id: 1,
-    image: testimonialsImage1,
-    name: "Sarah Anderson",
+    image: testimonialsImage3,
+    name: "Emily Carter",
     rating: 5,
-    role: "BRIDE",
-    text: "Amazing makeup service! The results were very natural and long-lasting. Highly professional and punctual.",
+    role: "ACTRESS",
+    text: "The makeup was done with great attention to detail and provided a flawless look for every scene. Very satisfying!",
   },
   {
     id: 2,
@@ -121,11 +121,11 @@ export const TESTIMONIALS_DATA = [
   },
   {
     id: 3,
-    image: testimonialsImage3,
-    name: "Emily Carter",
+    image: testimonialsImage1,
+    name: "Sarah Anderson",
     rating: 5,
-    role: "ACTRESS",
-    text: "The makeup was done with great attention to detail and provided a flawless look for every scene. Very satisfying!",
+    role: "BRIDE",
+    text: "Amazing makeup service! The results were very natural and long-lasting. Highly professional and punctual.",
   },
   {
     id: 4,
