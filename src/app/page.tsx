@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
     siteName: "Next.js",
-    title: "Next.js | Home",
+    title: "Hastinulc | Home",
     type: "website",
     url: "https://website-name.com/",
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     creator: "@gdwmw",
     description: "Boilerplate by Gede Dewo Wahyu M.W",
     images: ["https://website-name.com/assets/images/logos/logo-name.png"], // Must be an absolute URL and PNG format
-    title: "Next.js | Home",
+    title: "Hastinulc | Home",
   },
 };
 
