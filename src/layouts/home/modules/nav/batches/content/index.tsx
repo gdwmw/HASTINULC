@@ -66,8 +66,10 @@ export const Content: FC<I> = (props): ReactElement => {
   }, [menuOpen]);
 
   return (
-    <nav className={`flex h-[88px] items-center justify-between gap-5 bg-white px-10 text-lg ${activeSection !== "home" && "shadow-md"}`}>
-      <Image alt="Hastinulc Makeup Art" src={logo} width={210} />
+    <nav
+      className={`flex h-[88px] items-center justify-between gap-5 bg-white px-5 text-lg min-[850px]:px-10 ${activeSection !== "home" && "shadow-md"}`}
+    >
+      <Image alt="Hastinulc Makeup Art" src={logo} width={200} />
 
       <ul className="hidden items-center gap-5 font-semibold min-[850px]:flex">
         {NAVIGATION_DATA.map((dt) => (
@@ -194,7 +196,7 @@ export const Content: FC<I> = (props): ReactElement => {
           </div>
         )}
         <ExampleA className="flex active:scale-100" color="rose" onClick={() => setOpen({ aside: true })} size="sm" variant="ghost">
-          <HiOutlineBars3 size={40} />
+          <HiOutlineBars3 size={30} />
         </ExampleA>
       </div>
     </nav>

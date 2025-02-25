@@ -72,7 +72,7 @@ export const About: FC = (): ReactElement => {
           titleClassname="text-4xl sm:text-5xl md:text-6xl"
         />
 
-        <div className="flex gap-5">
+        <div className="flex gap-5 max-lg:justify-center">
           <div>
             <Image alt="About Image" src={aboutImage5} />
           </div>
@@ -85,7 +85,7 @@ export const About: FC = (): ReactElement => {
       <section className="container relative mx-auto flex flex-col items-center justify-center space-y-16 bg-slate-100 px-5 py-20 sm:mt-36 sm:pt-48 md:mt-48 md:pt-64 lg:mt-64 lg:pt-80">
         <div className="max-sm:w-full sm:absolute sm:inset-x-0 sm:-top-36 sm:z-[1] md:-top-48 lg:-top-64">
           {active ? (
-            <div className="px-5">
+            <div className="sm:px-5">
               <iframe
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
@@ -96,7 +96,7 @@ export const About: FC = (): ReactElement => {
               />
             </div>
           ) : (
-            <div className="relative px-5">
+            <div className="relative sm:px-5">
               <button
                 className="absolute left-1/2 top-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white text-white hover:border-rose-400 hover:text-rose-400 active:scale-95 active:border-rose-300 active:text-rose-300"
                 onClick={() => setActive((prev) => !prev)}

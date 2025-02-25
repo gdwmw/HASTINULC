@@ -76,7 +76,7 @@ export const Content: FC<I> = (props): ReactElement => {
         {props.session?.user?.status ? (
           <figure className="flex items-center gap-2">
             <div className="relative aspect-square size-[50px] overflow-hidden rounded-full border border-gray-200">
-              <Image alt="Profile Image" className="cursor-pointer object-cover" fill quality={30} src={props.session?.user?.image ?? ""} />
+              <Image alt="Profile Image" className="object-cover" fill quality={30} src={props.session?.user?.image ?? ""} />
             </div>
             <figcaption>
               <span className="-mb-1.5 mt-[-5px] block max-w-[200px] truncate text-lg">{props.session?.user?.name}</span>

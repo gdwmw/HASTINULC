@@ -172,11 +172,11 @@ export const Home: FC<I> = (props): ReactElement => {
               titleClassname="max-w-[500px] text-5xl sm:max-w-[600px] sm:text-6xl md:max-w-[700px] md:text-7xl z-[1] lg:max-w-[800px] lg:text-8xl"
             />
           </div>
-
-          <Image alt="Accent Dot" className="absolute -bottom-8 left-36" src={accentDot} />
         </section>
 
-        <section className="h-56 w-full bg-white shadow-lg">
+        <section className="relative h-56 w-full bg-white shadow-lg">
+          <Image alt="Accent Dot" className="absolute -top-8 left-36" src={accentDot} />
+
           <div className="container mx-auto size-full px-5">
             <div className="flex size-full items-center justify-center gap-20">
               <form className="flex w-full flex-col items-center justify-center lg:w-fit" onSubmit={handleSubmit(onSubmit)}>
