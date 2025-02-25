@@ -1,0 +1,36 @@
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [calcImage, setCalcImage] = useState({
+    marginTop: 0,
+    top: 0,
+  });
+  const [calcIFrame, setCalcIFrame] = useState({
+    marginTop: 0,
+    top: 0,
+  });
+  const imageRef = useRef<HTMLImageElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+
+      if (imageRef.current) {
+        console.log(imageRef.current.offsetHeight ?? 0);
+        console.log(338 - (imageRef.current.offsetHeight ?? 0));
+        setCalcImage({
+          marginTop: Math.max(144 - (338 - (imageRef.current.offsetHeight ?? 0)), 0),
+          top: (144 - (338 - (imageRef.current.offsetHeight ?? 0))) * -1,
+        });
+      }
+
+      if (iframeRef.current) {
+        setCalcIFrame({
+          marginTop: Math.max(144 - (338 - (iframeRef.current.offsetHeight ?? 0)), 0),
+          top: (144 - (338 - (iframeRef.current.offsetHeight ?? 0))) * -1,
+        });
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [active]);

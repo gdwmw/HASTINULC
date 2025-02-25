@@ -9,7 +9,8 @@ export interface IBookingsContext {
 }
 
 export interface IOpenContext {
-  bookingSummary: boolean;
+  bookingSummary?: boolean;
+  aside?: boolean;
 }
 
 export interface IResponseContext {

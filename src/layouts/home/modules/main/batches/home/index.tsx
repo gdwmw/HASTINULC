@@ -77,6 +77,7 @@ interface I {
 export const Home: FC<I> = (props): ReactElement => {
   const router = useRouter();
   const { setBooking } = useGlobalStates();
+  const [screenWidth, setScreenWidth] = useState(0);
   const [date, setDate] = useState<Date | undefined>();
   const [loading, setLoading] = useState(false);
 
@@ -98,8 +99,17 @@ export const Home: FC<I> = (props): ReactElement => {
       name: props.session?.user?.name ?? undefined,
       phoneNumber: props.session?.user?.phoneNumber,
     },
-    resolver: zodResolver(HomeBookingSchema),
+    resolver: zodResolver(HomeBookingSchema(screenWidth)),
   });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [setValue]);
 
   useEffect(() => {
     if (props.session?.user?.status) {
@@ -142,19 +152,24 @@ export const Home: FC<I> = (props): ReactElement => {
 
   return (
     <section className="bg-rose-200" id="home">
-      <div className="flex h-[calc(100vh-88px)] flex-col">
-        <section className="relative h-full">
-          <div className="container mx-auto size-full px-5">
-            <Image alt="Home Image" className="absolute right-0 top-0 h-full w-fit" priority src={homeImage} />
+      <div className="flex h-[857px] flex-col">
+        <section className="relative h-full overflow-hidden">
+          <Image
+            alt="Home Image"
+            className="absolute right-[-450px] top-0 h-full min-w-fit max-w-[863.641px] md:-right-80 lg:-right-36 xl:right-0"
+            priority
+            src={homeImage}
+          />
 
+          <div className="container mx-auto size-full px-5">
             <SectionHeader
               containerClassname="flex h-full flex-col justify-center gap-6 space-y-0"
               description="Delivering elegant and professional beauty touches for your special moments. Trust us to bring out your best look."
-              descriptionClassname="max-w-[650px] text-xl"
+              descriptionClassname="max-w-[450px] text-base md:max-w-[550px] z-[1] md:text-lg lg:max-w-[650] lg:text-xl"
               subtitle="BEAUTIFY"
-              subtitleClassname="-mb-5"
+              subtitleClassname="-mb-5 z-[1]"
               title="Professional Makeup Artist"
-              titleClassname="max-w-[800px] text-8xl"
+              titleClassname="max-w-[500px] text-5xl sm:max-w-[600px] sm:text-6xl md:max-w-[700px] md:text-7xl z-[1] lg:max-w-[800px] lg:text-8xl"
             />
           </div>
 
@@ -164,8 +179,8 @@ export const Home: FC<I> = (props): ReactElement => {
         <section className="h-56 w-full bg-white shadow-lg">
           <div className="container mx-auto size-full px-5">
             <div className="flex size-full items-center justify-center gap-20">
-              <form className="flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex w-full items-center gap-5">
+              <form className="flex w-full flex-col items-center justify-center lg:w-fit" onSubmit={handleSubmit(onSubmit)}>
+                <div className="hidden w-full items-center gap-5 lg:flex">
                   {FORM_FIELDS_DATA.slice(0, 3).map((dt) => (
                     <Input
                       color="rose"
@@ -182,14 +197,14 @@ export const Home: FC<I> = (props): ReactElement => {
                   ))}
                 </div>
 
-                <div className="flex w-full items-center gap-5">
+                <div className="flex w-full items-center gap-1 sm:gap-3 md:gap-5">
                   {FORM_FIELDS_DATA.slice(3).map((dt) => {
                     if (dt.isSelect) {
                       return (
                         <Select
                           className="h-[26px]"
                           color="rose"
-                          containerClassName="w-64"
+                          containerClassName="w-full lg:w-64"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
                           key={dt.id}
@@ -210,7 +225,7 @@ export const Home: FC<I> = (props): ReactElement => {
                       return (
                         <DatePickerInput
                           color="rose"
-                          containerClassName="w-64 z-[2]"
+                          containerClassName="w-full lg:w-64 z-[2]"
                           dateFormat="yyyy/MM/dd"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
@@ -223,30 +238,27 @@ export const Home: FC<I> = (props): ReactElement => {
                         />
                       );
                     }
-
-                    return (
-                      <Input
-                        color="rose"
-                        containerClassName="w-64"
-                        disabled={loading}
-                        errorMessage={errors[dt.name]?.message}
-                        key={dt.id}
-                        label={dt.label}
-                        maxLength={dt.maxLength}
-                        onKeyDown={dt.onKeyDown}
-                        type={dt.type}
-                        {...register(dt.name)}
-                      />
-                    );
                   })}
 
-                  <ExampleA className="mt-2 w-64 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+                  <ExampleA
+                    className="mt-2 hidden w-64 font-semibold lg:flex"
+                    color="rose"
+                    disabled={loading}
+                    size="sm"
+                    type="submit"
+                    variant="solid"
+                  >
                     <FaChevronRight size={14} /> {loading ? "Loading..." : "BOOKING NOW"}
                   </ExampleA>
                 </div>
+
+                {/* Components For Responsive Purposes Only */}
+                <ExampleA className="mt-2 w-full font-semibold lg:hidden" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+                  <FaChevronRight size={14} /> {loading ? "Loading..." : "BOOKING NOW"}
+                </ExampleA>
               </form>
 
-              <address className="flex items-center gap-2">
+              <address className="hidden items-center gap-2 xl:flex">
                 <Link
                   className="flex size-20 items-center justify-center rounded-full bg-rose-100 text-rose-500 hover:bg-rose-200 active:scale-95 active:bg-rose-100 active:text-rose-400"
                   href={"https://wa.me/6285762346703"}

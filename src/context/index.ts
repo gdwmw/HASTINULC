@@ -16,6 +16,7 @@ interface IActions {
 
 export const useGlobalStates = create<IActions & IStates>((set) => ({
   open: {
+    aside: false,
     bookingSummary: true,
   },
   setBooking: (booking: IBookingsContext) => set({ booking }),

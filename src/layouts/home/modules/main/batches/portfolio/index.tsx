@@ -14,6 +14,7 @@ export const Portfolio: FC = (): ReactElement => (
         description="Our portfolio highlights the artistry and precision that define our work. From bold, dramatic looks to soft, natural elegance, each image reflects our dedication to perfection. With over 15 years of expertise, we have transformed countless faces into timeless masterpieces for every special occasion. Explore our work and let us inspire your next unforgettable look."
         subtitle="PORTFOLIO"
         title="Showcasing Our Masterpieces"
+        titleClassname="text-4xl sm:text-5xl md:text-6xl"
       />
 
       <Image alt="Portfolio Image" loading="lazy" src={portfolioImage} width={1000} />

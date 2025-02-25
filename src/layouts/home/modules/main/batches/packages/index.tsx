@@ -32,6 +32,7 @@ export const Packages: FC = (): ReactElement => {
           description="With Hastinulc Makeup Art, You'll not get only your Dream Makeup services but also at affordable price."
           subtitle="PACKAGES"
           title="Choose your makeup package"
+          titleClassname="text-4xl sm:text-5xl md:text-6xl"
         />
 
         <div className="flex w-fit flex-wrap justify-center gap-5">
@@ -68,9 +69,14 @@ export const Packages: FC = (): ReactElement => {
         </div>
       </section>
 
-      <section className="container mx-auto flex gap-5 px-5">
-        <div className="space-y-5">
-          <SectionHeader containerClassname="text-right" subtitle="TESTIMONIALS" title="Words from Clients" titleClassname="text-nowrap" />
+      <section className="container mx-auto flex gap-5 px-5 max-xl:flex-col">
+        <div className="space-y-10 sm:space-y-5">
+          <SectionHeader
+            containerClassname="text-center sm:text-right"
+            subtitle="TESTIMONIALS"
+            title="Words from Clients"
+            titleClassname="sm:text-nowrap text-4xl sm:text-5xl md:text-6xl"
+          />
 
           <blockquote className="flex flex-col gap-5 rounded-lg bg-black p-5 text-white">
             <figure className="flex items-center gap-4">
@@ -102,7 +108,7 @@ export const Packages: FC = (): ReactElement => {
           </blockquote>
         </div>
 
-        <div className="relative w-full overflow-hidden rounded-lg border border-rose-500 bg-white py-8 shadow-md">
+        <div className="flex w-full flex-col justify-center overflow-hidden rounded-lg border border-rose-500 bg-white py-8 shadow-md">
           <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentTestimonialIndex * 100}%)` }}>
             {TESTIMONIALS_DATA.map((dt) => (
               <blockquote className="flex w-full shrink-0 items-center justify-center px-8" key={dt.id}>
@@ -135,38 +141,40 @@ export const Packages: FC = (): ReactElement => {
             ))}
           </div>
 
-          <div className="absolute bottom-[93px] left-1/2 flex w-full max-w-[400px] -translate-x-1/2 gap-2 rounded-full border-b border-rose-500" />
+          <div className="mx-auto my-8 flex w-full max-w-[400px] gap-2 rounded-full border-b border-rose-500" />
 
-          <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
-            {TESTIMONIALS_DATA.map((_, i) => (
-              <button
-                className={`size-2 rounded-full transition-all duration-300 ${currentTestimonialIndex === i ? "w-4 bg-rose-500" : "bg-rose-300"}`}
-                key={i}
-                onClick={() => setCurrentTestimonialIndex(i)}
-              />
-            ))}
-          </div>
+          <div className="relative flex w-full items-center justify-center px-8 max-sm:flex-col max-sm:gap-7 sm:h-11">
+            <div className="flex gap-2">
+              {TESTIMONIALS_DATA.map((_, i) => (
+                <button
+                  className={`size-2 rounded-full transition-all duration-300 ${currentTestimonialIndex === i ? "w-4 bg-rose-500" : "bg-rose-300"}`}
+                  key={i}
+                  onClick={() => setCurrentTestimonialIndex(i)}
+                />
+              ))}
+            </div>
 
-          <div className="absolute bottom-5 right-5 flex gap-3">
-            <ExampleA
-              className="min-w-fit rounded-full ring-2 hover:ring-rose-500 active:ring-rose-600"
-              color="rose"
-              onClick={prevTestimonial}
-              size="sm"
-              variant="outline"
-            >
-              <FaChevronLeft size={16} />
-            </ExampleA>
+            <div className="flex gap-3 sm:absolute sm:right-8">
+              <ExampleA
+                className="min-w-fit rounded-full ring-2 hover:ring-rose-500 active:ring-rose-600"
+                color="rose"
+                onClick={prevTestimonial}
+                size="sm"
+                variant="outline"
+              >
+                <FaChevronLeft size={16} />
+              </ExampleA>
 
-            <ExampleA
-              className="min-w-fit rounded-full ring-2 hover:ring-rose-500 active:ring-rose-600"
-              color="rose"
-              onClick={nextTestimonial}
-              size="sm"
-              variant="outline"
-            >
-              <FaChevronRight size={16} />
-            </ExampleA>
+              <ExampleA
+                className="min-w-fit rounded-full ring-2 hover:ring-rose-500 active:ring-rose-600"
+                color="rose"
+                onClick={nextTestimonial}
+                size="sm"
+                variant="outline"
+              >
+                <FaChevronRight size={16} />
+              </ExampleA>
+            </div>
           </div>
         </div>
       </section>
