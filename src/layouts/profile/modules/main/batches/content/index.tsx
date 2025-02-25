@@ -161,7 +161,7 @@ export const Content: FC<I> = (props): ReactElement => {
       <FormContainer href={"/"} innerContainerClassName="size-full max-h-[624px] max-w-[450px]" label={"Home"}>
         <form className="w-full space-y-3 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative mx-auto aspect-square size-32 overflow-hidden rounded-full border border-gray-200">
-            <Image alt="Review Image" className="object-cover" fill quality={50} src={previewImage ?? props.session?.user?.image ?? ""} />
+            <Image alt="Profile Image" className="object-cover" fill quality={50} src={previewImage ?? props.session?.user?.image ?? ""} />
           </div>
 
           {FORM_FIELDS_DATA.map((dt) => (
