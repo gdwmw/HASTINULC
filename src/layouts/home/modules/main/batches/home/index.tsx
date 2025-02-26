@@ -152,7 +152,7 @@ export const Home: FC<I> = (props): ReactElement => {
 
   return (
     <section className="bg-rose-200" id="home">
-      <div className="flex h-[calc(100dvh-88px)] max-h-[1080px] flex-col">
+      <div className="flex h-[calc(100svh-88px)] max-h-[1080px] flex-col">
         <section className="relative h-full overflow-hidden">
           <Image
             alt="Home Image"
