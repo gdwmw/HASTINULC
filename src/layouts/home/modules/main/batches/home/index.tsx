@@ -152,11 +152,11 @@ export const Home: FC<I> = (props): ReactElement => {
 
   return (
     <section className="bg-rose-200" id="home">
-      <div className="flex h-[857px] flex-col">
+      <div className="flex h-[calc(100dvh-88px)] max-h-[1080px] flex-col">
         <section className="relative h-full overflow-hidden">
           <Image
             alt="Home Image"
-            className="absolute right-[-450px] top-0 h-full min-w-fit max-w-[863.641px] md:-right-80 lg:-right-36 xl:right-0"
+            className="absolute right-[-450px] top-0 h-full min-h-[680px] w-fit min-w-fit md:-right-80 lg:-right-36 xl:right-0"
             priority
             src={homeImage}
             unoptimized
