@@ -32,7 +32,7 @@ export const Content: FC<I> = (props): ReactElement => {
       ) : (
         <section className="w-full max-w-[400px] rounded-lg border border-gray-200 bg-white p-6 shadow-md">
           <header>
-            <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-500">-- YOUR REVIEW --</h1>
+            <h1 className="mb-4 text-center text-lg font-bold tracking-widest text-rose-500 sm:text-xl">-- YOUR REVIEW --</h1>
             <div className="my-3 border-t border-gray-300" />
           </header>
 

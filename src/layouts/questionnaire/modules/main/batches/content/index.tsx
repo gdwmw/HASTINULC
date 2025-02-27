@@ -61,7 +61,7 @@ export const Content: FC<I> = (props): ReactElement => {
     <main className="bg-slate-100">
       <FormContainer href={"/"} innerContainerClassName="size-full max-h-[800px] max-w-[800px] flex-col gap-5" label={"Home"}>
         <header>
-          <h1 className="text-center text-xl font-bold text-rose-500 min-[500px]:text-2xl">Customer Satisfaction Questionnaire</h1>
+          <h1 className="text-center text-2xl font-bold text-rose-500">Questionnaire</h1>
           <p className="text-center text-gray-600 max-[500px]:text-sm">Your feedback drives our continuous improvement</p>
         </header>
 

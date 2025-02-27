@@ -88,7 +88,10 @@ export const Content: FC<I> = (props): ReactElement => {
       >
         <form className="flex w-full items-start overflow-y-auto lg:max-w-[600px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col items-center justify-center gap-4">
-            <h1 className="text-center text-2xl font-bold text-rose-500">How Was Your Experience?</h1>
+            <header>
+              <h1 className="text-center text-2xl font-bold text-rose-500">Rate Our Services</h1>
+              <p className="text-center text-gray-600 max-[500px]:text-sm">Your feedback drives our continuous improvement</p>
+            </header>
 
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) => {
