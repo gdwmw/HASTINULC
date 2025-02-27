@@ -61,8 +61,8 @@ export const Content: FC<I> = (props): ReactElement => {
     <main className="bg-slate-100">
       <FormContainer href={"/"} innerContainerClassName="size-full max-h-[800px] max-w-[800px] flex-col gap-5" label={"Home"}>
         <header>
-          <h1 className="text-center text-2xl font-bold text-rose-500">Customer Satisfaction Questionnaire</h1>
-          <p className="text-center text-gray-600">Your feedback drives our continuous improvement</p>
+          <h1 className="text-center text-xl font-bold text-rose-500 min-[500px]:text-2xl">Customer Satisfaction Questionnaire</h1>
+          <p className="text-center text-gray-600 max-[500px]:text-sm">Your feedback drives our continuous improvement</p>
         </header>
 
         <form className="flex flex-col gap-5 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
@@ -78,12 +78,12 @@ export const Content: FC<I> = (props): ReactElement => {
                         <span className="font-bold text-rose-500"> *</span>
                       </span>
                     </h2>
-                    <div className="ml-8 flex gap-3">
+                    <div className="ml-8 flex gap-3 overflow-x-auto">
                       {Array.isArray(dt.options) &&
                         dt.options.map((opt) => (
                           <label className="flex items-center gap-1" key={opt}>
                             <input className="accent-rose-500" disabled={loading} type="radio" value={opt} {...register(`question${i + 1}`)} />
-                            <span>{opt}</span>
+                            <span className="whitespace-nowrap">{opt}</span>
                           </label>
                         ))}
                     </div>

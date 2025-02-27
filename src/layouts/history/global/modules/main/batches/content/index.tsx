@@ -22,7 +22,7 @@ interface I {
 export const Content: FC<I> = (props): ReactElement => {
   const pathname = usePathname();
   const router = useRouter();
-  const { setOpen, setResponse } = useGlobalStates();
+  const { open, setOpen, setResponse } = useGlobalStates();
 
   useEffect(() => {
     setResponse({
@@ -44,8 +44,10 @@ export const Content: FC<I> = (props): ReactElement => {
 
   return (
     <main className="bg-slate-100">
-      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[1000px] gap-5" label={"Home"}>
-        <div className="size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5">
+      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[460px] lg:max-w-[1000px] gap-5" isBooking label={"Home"}>
+        <div
+          className={`size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5 max-lg:mx-auto lg:block ${open?.bookingList ? "block" : "hidden"}`}
+        >
           {props.bookingsResponse.map((dt) => (
             <section
               className="relative flex w-full max-w-[360px] flex-col justify-between overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md"
@@ -68,6 +70,7 @@ export const Content: FC<I> = (props): ReactElement => {
               <div className="flex flex-col gap-4 p-5">
                 <header className="flex items-center justify-between">
                   <h1 className="line-clamp-1 text-lg font-semibold text-gray-900">{dt.name || "-"}</h1>
+
                   <strong
                     className={`flex h-6 w-full max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${
                       {
@@ -85,7 +88,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 </header>
 
                 <div className="space-y-3 text-sm">
-                  <div className="flex justify-between gap-3">
+                  <div className="flex justify-between gap-3 max-[450px]:flex-col">
                     <figure className="flex items-center gap-3">
                       <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
                         <FaBox className="text-rose-500" />
@@ -97,7 +100,7 @@ export const Content: FC<I> = (props): ReactElement => {
                     </figure>
 
                     {dt.review?.rating && (
-                      <figure className="flex items-center gap-3">
+                      <figure className="flex items-center gap-3 max-[450px]:order-first">
                         <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
                           <IoStar className="text-rose-500" />
                         </div>
@@ -153,7 +156,10 @@ export const Content: FC<I> = (props): ReactElement => {
                       className="text-sm font-semibold"
                       color="rose"
                       onClick={() => {
-                        setOpen({ bookingSummary: false });
+                        setOpen({
+                          bookingList: false,
+                          bookingSummary: false,
+                        });
                         router.replace(`/history/${props.session?.user?.username}/${dt.documentId}`);
                       }}
                       size="sm"
@@ -169,7 +175,10 @@ export const Content: FC<I> = (props): ReactElement => {
                   className="text-sm font-semibold"
                   color="rose"
                   onClick={() => {
-                    setOpen({ bookingSummary: true });
+                    setOpen({
+                      bookingList: false,
+                      bookingSummary: true,
+                    });
                     router.replace(`/history/${props.session?.user?.username}/${dt.documentId}`);
                   }}
                   size="sm"
@@ -182,7 +191,7 @@ export const Content: FC<I> = (props): ReactElement => {
           ))}
         </div>
 
-        <aside className="flex min-w-fit grow items-start overflow-y-auto">
+        <aside className={`min-w-fit grow items-start overflow-y-auto ${open?.bookingList ? "max-lg:hidden" : "flex"}`}>
           <div className="my-auto flex w-full justify-center p-2">{props.children}</div>
         </aside>
       </FormContainer>

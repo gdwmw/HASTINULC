@@ -66,7 +66,7 @@ export const Content: FC<I> = (props): ReactElement => {
         await POSTUpload({ field: "images", files: dt.images, ref: "api::review.review", refId: res.id.toString() });
       }
       console.log("Review Success!");
-      setOpen({ bookingSummary: false });
+      setOpen({ bookingList: false, bookingSummary: false });
       router.push(`/history/${props.session?.user?.username}/${props.slug[1]}`);
       router.refresh();
       setSelectedSuggestions([]);
@@ -82,11 +82,11 @@ export const Content: FC<I> = (props): ReactElement => {
     <main className="bg-slate-100">
       <FormContainer
         href={`/history/${props.session?.user?.username}/${props.slug[1]}`}
-        innerContainerClassName="size-full max-h-[821px] max-w-[1100px] gap-5"
+        innerContainerClassName="size-full max-h-[821px] max-w-[600px] lg:max-w-[1100px] gap-5"
         label={"Back"}
-        onClick={() => setOpen({ bookingSummary: true })}
+        onClick={() => setOpen({ bookingList: true, bookingSummary: true })}
       >
-        <form className="flex w-full max-w-[600px] items-start overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex w-full items-start overflow-y-auto lg:max-w-[600px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col items-center justify-center gap-4">
             <h1 className="text-center text-2xl font-bold text-rose-500">How Was Your Experience?</h1>
 
@@ -95,7 +95,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 const ratingValue = i + 1;
                 return (
                   <button
-                    className={`text-4xl ${!loading && "hover:scale-110"} ${loading ? "text-gray-300" : ratingValue <= (ratingHover || watch("rating")) ? "text-yellow-400" : "text-gray-300"}`}
+                    className={`text-4xl disabled:cursor-not-allowed ${!loading && "hover:scale-110"} ${loading ? "text-gray-300" : ratingValue <= (ratingHover || watch("rating")) ? "text-yellow-400" : "text-gray-300"}`}
                     disabled={loading}
                     key={i}
                     onClick={() => setValue("rating", ratingValue)}
@@ -135,12 +135,10 @@ export const Content: FC<I> = (props): ReactElement => {
             <div className="flex w-full flex-wrap justify-center gap-2">
               {SUGGESTIONS_DATA.map((dt, i) => (
                 <button
-                  className={`rounded-full px-4 py-2 text-sm font-semibold ${
-                    loading
-                      ? "bg-gray-100 text-gray-700"
-                      : selectedSuggestions.includes(dt)
-                        ? "bg-rose-500 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-rose-400 hover:text-white"
+                  className={`flex select-none items-center justify-center rounded-xl border-2 p-3 text-sm font-semibold disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 ${
+                    selectedSuggestions.includes(dt)
+                      ? "border-rose-300 bg-rose-50 text-rose-500"
+                      : "border-gray-200 bg-white text-gray-700 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500"
                   }`}
                   disabled={loading}
                   key={i}
@@ -158,7 +156,7 @@ export const Content: FC<I> = (props): ReactElement => {
           </div>
         </form>
 
-        <aside className="flex min-w-fit grow items-start overflow-y-auto">
+        <aside className="hidden min-w-fit grow items-start overflow-y-auto lg:flex">
           <div className="my-auto flex w-full justify-center p-2">
             <BookingSummary
               {...props.selectedBookingSummary}

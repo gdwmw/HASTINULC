@@ -26,18 +26,20 @@ interface I {
 }
 
 export const BookingSummary: FC<I> = (props): ReactElement => (
-  <section className="flex min-w-[400px] max-w-[500px] flex-col justify-between gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md">
+  <section className="flex flex-col justify-between gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md max-lg:w-full max-lg:min-w-[260px] max-lg:max-w-[400px] lg:min-w-[400px]">
     <div className="space-y-4">
       <header>
-        <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-500">-- BOOKING SUMMARY --</h1>
+        <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-500 max-[450px]:text-base max-[380px]:text-xs">
+          -- BOOKING SUMMARY --
+        </h1>
         <div className="my-3 border-t border-gray-300" />
       </header>
 
-      <dl className="space-y-4">
+      <dl className="space-y-4 max-[450px]:text-sm max-[380px]:text-xs">
         <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
-          <div className="flex justify-between">
+          <div className="flex justify-between gap-5">
             <dt className="font-medium text-gray-600">Name:</dt>
-            <dd className="font-semibold text-gray-800">{props.name || "-"}</dd>
+            <dd className="line-clamp-1 font-semibold text-gray-800">{props.name || "-"}</dd>
           </div>
 
           <div className="flex justify-between">
@@ -66,7 +68,9 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Email:</dt>
-            <dd className="font-semibold text-gray-800">{props.email || "-"}</dd>
+            <dd className="max-w-[250px] truncate font-semibold text-gray-800 max-[480px]:max-w-[200px] max-[430px]:max-w-[150px] max-[380px]:max-w-[120px]">
+              {props.email || "-"}
+            </dd>
           </div>
 
           <div className="flex justify-between">
@@ -74,7 +78,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
             <dd>
               <Link
                 className={ExampleATWM({
-                  className: "font-semibold text-rose-500 underline hover:text-rose-600",
+                  className: "font-semibold text-rose-500 underline hover:text-rose-600 max-[450px]:text-sm max-[380px]:text-xs",
                   color: "rose",
                   size: "sm",
                   variant: "ghost",
@@ -92,7 +96,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
           <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 p-4">
             <dt className="font-medium text-gray-600">Status:</dt>
             <dd
-              className={`flex h-7 w-28 items-center justify-center rounded-full text-sm font-semibold text-white ${
+              className={`flex h-7 w-28 items-center justify-center rounded-full text-sm font-semibold text-white max-[380px]:text-xs ${
                 {
                   Canceled: "bg-red-400",
                   "On Going": "bg-blue-400",
@@ -128,9 +132,9 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
 
           <div className="my-3 border-t border-gray-300" />
 
-          <div className="flex justify-between">
-            <dt className="text-lg font-semibold text-gray-800">TOTAL:</dt>
-            <dd className="text-lg font-bold text-rose-500">{currencyFormat(props.total || 0, "IDR")}</dd>
+          <div className="flex justify-between text-lg max-[450px]:text-base max-[380px]:text-sm">
+            <dt className="font-semibold text-gray-800">TOTAL:</dt>
+            <dd className="font-bold text-rose-500">{currencyFormat(props.total || 0, "IDR")}</dd>
           </div>
         </div>
       </dl>

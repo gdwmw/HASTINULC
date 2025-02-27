@@ -85,7 +85,9 @@ export const Content: FC<I> = (props): ReactElement => {
               </div>
             )}
             <figcaption>
-              <span className="-mb-1.5 mt-[-5px] block max-w-[200px] truncate text-lg">{props.session?.user?.name}</span>
+              <div className="-mb-1.5 mt-[-5px] line-clamp-1">
+                <span className="text-lg">{props.session?.user?.name}</span>
+              </div>
               <span className="block text-xs text-rose-500">{props.session?.user?.username}</span>
             </figcaption>
           </figure>
@@ -95,7 +97,7 @@ export const Content: FC<I> = (props): ReactElement => {
               <FaUser className="text-gray-400" size={25} />
             </div>
             <figcaption>
-              <span className="-mb-1.5 mt-[-5px] block max-w-[200px] truncate text-lg">Guest</span>
+              <span className="-mb-1.5 mt-[-5px] block text-lg">Guest</span>
               <span className="block text-xs text-gray-400">Not logged in</span>
             </figcaption>
           </figure>
@@ -148,7 +150,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 <Link
                   className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                   href={`/history/${props.session?.user?.username}`}
-                  onClick={() => setOpen({ aside: false })}
+                  onClick={() => setOpen({ aside: false, bookingList: true, bookingSummary: true })}
                 >
                   <FaHistory size={16} />
                   History

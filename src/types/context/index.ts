@@ -9,6 +9,7 @@ export interface IBookingsContext {
 }
 
 export interface IOpenContext {
+  bookingList?: boolean;
   bookingSummary?: boolean;
   aside?: boolean;
 }

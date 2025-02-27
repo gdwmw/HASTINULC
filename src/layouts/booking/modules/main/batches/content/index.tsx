@@ -176,7 +176,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
       window.open(`https://wa.me/6285762346703?text=${encodedMessage}`, "_blank");
 
-      setOpen({ bookingSummary: true });
+      setOpen({ bookingList: false, bookingSummary: true });
       router.push(`/history/${props.session?.user?.username}/${res.documentId}`);
       reset();
     } catch {
@@ -188,8 +188,8 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
   return (
     <main className="bg-slate-100">
-      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[1000px] gap-5" label={"Home"}>
-        <form className="flex w-full max-w-[500px] items-start overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
+      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[600px] lg:max-w-[1000px] gap-5" label={"Home"}>
+        <form className="flex w-full items-start overflow-y-auto lg:max-w-[500px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col justify-center gap-4">
             {FORM_FIELDS_DATA.map((dt) => {
               if (dt.isDatePicker) {
@@ -229,7 +229,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
                       {dt.options?.map((opt, i) => (
                         <label className="group relative cursor-pointer" key={i}>
                           <input className="peer absolute opacity-0" disabled={loading} type="checkbox" value={opt} {...register(dt.name)} />
-                          <div className="flex select-none items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-3 text-sm font-semibold text-gray-700 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 peer-checked:border-rose-400 peer-checked:bg-rose-400 peer-checked:text-white peer-disabled:cursor-not-allowed peer-disabled:border-gray-200 peer-disabled:bg-gray-100 peer-disabled:text-gray-400">
+                          <div className="flex select-none items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-3 text-sm font-semibold text-gray-700 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 peer-checked:border-rose-300 peer-checked:bg-rose-50 peer-checked:text-rose-500 peer-disabled:cursor-not-allowed peer-disabled:border-gray-200 peer-disabled:bg-gray-100 peer-disabled:text-gray-400">
                             {opt}
                           </div>
                         </label>
@@ -279,7 +279,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
           </div>
         </form>
 
-        <aside className="flex min-w-fit grow items-start overflow-y-auto">
+        <aside className="hidden min-w-fit grow items-start overflow-y-auto lg:flex">
           <div className="my-auto flex w-full justify-center p-2">
             <BookingSummary {...watch()} datasDocumentId={props.session?.user?.datasDocumentId} subTotal={subtotal} tax={tax} total={total} />
           </div>

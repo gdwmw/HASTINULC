@@ -143,7 +143,7 @@ export const Content: FC<I> = (props): ReactElement => {
                       href={`/history/${props.session?.user?.username}`}
                       onClick={() => {
                         setMenuOpen(false);
-                        setOpen({ bookingSummary: true });
+                        setOpen({ bookingList: true, bookingSummary: true });
                       }}
                     >
                       <FaHistory size={16} />
