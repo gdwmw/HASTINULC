@@ -164,13 +164,13 @@ export const Home: FC<I> = (props): ReactElement => {
 
           <div className="container mx-auto size-full px-5">
             <SectionHeader
-              containerClassname="flex h-full flex-col justify-center gap-6 space-y-0"
+              containerClassName="flex h-full flex-col justify-center gap-6 space-y-0"
               description="Delivering elegant and professional beauty touches for your special moments. Trust us to bring out your best look."
-              descriptionClassname="max-w-[450px] text-base md:max-w-[550px] z-[1] md:text-lg lg:max-w-[650] lg:text-xl"
+              descriptionClassName="z-[1] max-w-[450px] text-base md:max-w-[550px] md:text-lg lg:max-w-[650] lg:text-xl"
               subtitle="BEAUTIFY"
-              subtitleClassname="-mb-5 z-[1]"
+              subtitleClassName="z-[1] -mb-5"
               title="Professional Makeup Artist"
-              titleClassname="max-w-[500px] text-5xl sm:max-w-[600px] sm:text-6xl md:max-w-[700px] md:text-7xl z-[1] lg:max-w-[800px] lg:text-8xl"
+              titleClassName="z-[1] max-w-[500px] text-5xl sm:max-w-[600px] sm:text-6xl md:max-w-[700px] md:text-7xl lg:max-w-[800px] lg:text-8xl"
             />
           </div>
         </section>
@@ -226,7 +226,7 @@ export const Home: FC<I> = (props): ReactElement => {
                       return (
                         <DatePickerInput
                           color="rose"
-                          containerClassName="w-full lg:w-64 z-[2]"
+                          containerClassName="z-[2] w-full lg:w-64"
                           dateFormat="yyyy/MM/dd"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}

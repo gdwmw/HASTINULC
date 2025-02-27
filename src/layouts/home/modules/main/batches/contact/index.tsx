@@ -10,32 +10,32 @@ export const Contact: FC = (): ReactElement => (
     <div className="container mx-auto flex justify-center gap-5 px-5 max-lg:flex-col">
       <div className="space-y-5">
         <SectionHeader
-          containerClassname="max-w-[600px]"
+          containerClassName="max-w-[600px]"
           description="Feel free to reach out to us for any inquiries or bookings. We're here to provide you with exceptional service and ensure your special moments are unforgettable. Let's get in touch and create something beautiful together."
           subtitle="CONTACT US"
           title="Get in touch"
-          titleClassname="text-4xl sm:text-5xl md:text-6xl"
+          titleClassName="text-4xl sm:text-5xl md:text-6xl"
         />
 
         <address className="space-y-5 text-nowrap">
           <ContactButton
             icon={<FaLocationDot className="-mr-px" size={25} />}
             label="Padang, Padang City, West Sumatra"
-            labelClassname="max-[350px]:text-sm max-[380px]:text-base max-[420px]:text-lg max-[480px]:text-xl"
+            labelClassName="max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm"
             url="https://maps.app.goo.gl/ZzjRDTfPCRsXefUi7"
           />
 
           <ContactButton
             icon={<MdEmail className="-mr-px" size={25} />}
             label="hastinulcmakeupart@gmail.com"
-            labelClassname="max-[350px]:text-sm max-[380px]:text-base max-[420px]:text-lg max-[480px]:text-xl"
+            labelClassName="max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm"
             url="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKhbqXwZZlCGblTvnSbqqVScKFDqJfllGdJbTKMLRgGBvTbLsrZdPLRtZDfHVQzxnvVTfTq"
           />
 
           <ContactButton
             icon={<IoLogoWhatsapp className="-mr-px" size={25} />}
             label="(085) 7623-4670-3"
-            labelClassname="max-[350px]:text-sm max-[380px]:text-base max-[420px]:text-lg max-[480px]:text-xl"
+            labelClassName="max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm"
             url="https://wa.me/6285762346703"
           />
         </address>

@@ -188,7 +188,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
   return (
     <main className="bg-slate-100">
-      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[600px] lg:max-w-[1000px] gap-5" label={"Home"}>
+      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[600px] gap-5 lg:max-w-[1000px]" label={"Home"}>
         <form className="flex w-full items-start overflow-y-auto lg:max-w-[500px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col justify-center gap-4">
             {FORM_FIELDS_DATA.map((dt) => {

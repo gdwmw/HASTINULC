@@ -82,7 +82,7 @@ export const Content: FC<I> = (props): ReactElement => {
     <main className="bg-slate-100">
       <FormContainer
         href={`/history/${props.session?.user?.username}/${props.slug[1]}`}
-        innerContainerClassName="size-full max-h-[821px] max-w-[600px] lg:max-w-[1100px] gap-5"
+        innerContainerClassName="size-full max-h-[821px] max-w-[600px] gap-5 lg:max-w-[1100px]"
         label={"Back"}
         onClick={() => setOpen({ bookingList: true, bookingSummary: true })}
       >

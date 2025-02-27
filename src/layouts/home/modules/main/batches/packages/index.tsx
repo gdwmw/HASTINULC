@@ -28,11 +28,11 @@ export const Packages: FC = (): ReactElement => {
     <section className="flex scroll-mt-[88px] flex-col gap-24 bg-white pt-24" id="packages">
       <section className="container mx-auto flex flex-col items-center gap-10 px-5">
         <SectionHeader
-          containerClassname="max-w-[1000px] text-center"
+          containerClassName="max-w-[1000px] text-center"
           description="With Hastinulc Makeup Art, You'll not get only your Dream Makeup services but also at affordable price."
           subtitle="PACKAGES"
           title="Choose your makeup package"
-          titleClassname="text-4xl sm:text-5xl md:text-6xl"
+          titleClassName="text-4xl sm:text-5xl md:text-6xl"
         />
 
         <div className="flex w-fit flex-wrap justify-center gap-5">
@@ -72,10 +72,10 @@ export const Packages: FC = (): ReactElement => {
       <section className="container mx-auto flex gap-5 px-5 max-xl:flex-col">
         <div className="space-y-10 sm:space-y-5">
           <SectionHeader
-            containerClassname="text-center sm:text-right"
+            containerClassName="text-center sm:text-right"
             subtitle="TESTIMONIALS"
             title="Words from Clients"
-            titleClassname="sm:text-nowrap text-4xl sm:text-5xl md:text-6xl"
+            titleClassName="text-4xl sm:text-nowrap sm:text-5xl md:text-6xl"
           />
 
           <blockquote className="flex flex-col gap-5 rounded-lg bg-black p-5 text-white">

@@ -99,8 +99,8 @@ export const Content: FC<I> = (props): ReactElement => {
                     <TextArea
                       color="rose"
                       disabled={loading}
-                      fieldsetClassName="py-1 border"
-                      legendClassName="px-0 ml-0"
+                      fieldsetClassName="border py-1"
+                      legendClassName="ml-0 px-0"
                       {...register(`question${i + 1}`)}
                     />
                   </div>
