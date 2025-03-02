@@ -13,9 +13,9 @@ import { useGlobalStates } from "@/src/context";
 import { IBookingsResponse, IReviewsResponse } from "@/src/types";
 
 interface I {
-  bookingsResponse: IBookingsResponse[];
+  bookingsResponse: IBookingsResponse[] | null | undefined;
   children: ReactNode;
-  reviewsResponse: IReviewsResponse[];
+  reviewsResponse: IReviewsResponse[] | null | undefined;
   session: null | Session;
 }
 
@@ -26,8 +26,8 @@ export const Content: FC<I> = (props): ReactElement => {
 
   useEffect(() => {
     setResponse({
-      bookings: props.bookingsResponse,
-      reviews: props.reviewsResponse,
+      bookings: props.bookingsResponse ?? [],
+      reviews: props.reviewsResponse ?? [],
     });
     // eslint-disable-next-line
   }, []);
@@ -48,7 +48,7 @@ export const Content: FC<I> = (props): ReactElement => {
         <div
           className={`size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5 max-lg:mx-auto lg:block ${open?.bookingList ? "block" : "hidden"}`}
         >
-          {props.bookingsResponse.map((dt) => (
+          {props.bookingsResponse?.map((dt) => (
             <section
               className="relative flex w-full max-w-[360px] flex-col justify-between overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md"
               id={dt.documentId}

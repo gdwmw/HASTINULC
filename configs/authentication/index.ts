@@ -3,6 +3,7 @@ import type { NextAuthOptions, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import { DUMMY_ACCOUNT_DATA } from "@/src/libs";
 import { ILoginPayload } from "@/src/types";
 import { POSTLogin } from "@/src/utils";
 
@@ -39,13 +40,17 @@ export const options: NextAuthOptions = {
         try {
           const { identifier, password } = credentials as ILoginPayload;
 
-          const res = await POSTLogin({ identifier, password });
+          if ((identifier === "demo" || identifier === "demo@demo.com") && password === "demo") {
+            return DUMMY_ACCOUNT_DATA;
+          } else {
+            const res = await POSTLogin({ identifier, password });
 
-          if (!res) {
-            return null;
+            if (!res) {
+              return null;
+            }
+
+            return res;
           }
-
-          return res;
         } catch {
           return null;
         }

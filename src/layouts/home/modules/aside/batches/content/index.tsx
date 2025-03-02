@@ -24,7 +24,7 @@ export const Content: FC<I> = (props): ReactElement => {
   const { open, setOpen } = useGlobalStates();
   const [activeSection, setActiveSection] = useState("");
 
-  const questionnairesConditions = conditions(props.response);
+  const questionnairesConditions = conditions({ data: props.response, session: props.session });
 
   const handleSmoothScroll = (e: FormEvent, href: string) => {
     e.preventDefault();

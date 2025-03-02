@@ -25,7 +25,7 @@ export const Content: FC<I> = (props): ReactElement => {
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const questionnairesConditions = conditions(props.response);
+  const questionnairesConditions = conditions({ data: props.response, session: props.session });
 
   const handleSmoothScroll = (e: FormEvent, href: string) => {
     e.preventDefault();

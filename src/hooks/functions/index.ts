@@ -1,3 +1,4 @@
+import { Session } from "next-auth";
 import { KeyboardEvent } from "react";
 
 import { IDatasResponse } from "@/src/types";
@@ -32,12 +33,13 @@ export const inputValidations = {
   },
 };
 
-export const questionnairesConditions = (data: IDatasResponse | null | undefined) => {
+export const questionnairesConditions = ({ data, session }: { data: IDatasResponse | null | undefined; session: null | Session }) => {
   const questionnairesLength = data?.questionnaires?.length ?? 0;
   return (
-    (data?.reviews?.length ?? 0) > 0 &&
-    (questionnairesLength === 0 ||
-      (data?.questionnaires?.[questionnairesLength - 1].current &&
-        new Date().getTime() - new Date(data?.questionnaires[questionnairesLength - 1].current).getTime() > 30 * 24 * 60 * 60 * 1000))
+    session?.user?.role === "demo" ||
+    ((data?.reviews?.length ?? 0) > 0 &&
+      (questionnairesLength === 0 ||
+        (data?.questionnaires?.[questionnairesLength - 1].current &&
+          new Date().getTime() - new Date(data?.questionnaires[questionnairesLength - 1].current).getTime() > 30 * 24 * 60 * 60 * 1000)))
   );
 };
