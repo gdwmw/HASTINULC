@@ -57,7 +57,7 @@ export const Content: FC<I> = (props): ReactElement => {
             <div className="flex flex-col gap-3">
               <dt className="font-medium text-gray-600">Description:</dt>
               <dd className="rounded-lg border border-gray-200 bg-gray-50 p-3">
-                <p className="leading-relaxed text-gray-700">{selectedReview?.description ?? "Loading..."}</p>
+                <p className="leading-relaxed text-gray-700">{selectedReview?.description ?? "-"}</p>
               </dd>
             </div>
 
