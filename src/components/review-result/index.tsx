@@ -25,7 +25,7 @@ const ReviewResult: FC<I> = (props): ReactElement => (
             const ratingValue = i + 1;
             return (
               <IoStar
-                className={`size-7 max-[450px]:size-6 max-[380px]:size-5  ${ratingValue <= (props.selectedReview?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}`}
+                className={`size-7 max-[450px]:size-6 max-[380px]:size-5 ${ratingValue <= (props.selectedReview?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}`}
                 key={i}
               />
             );
