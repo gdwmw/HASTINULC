@@ -32,17 +32,24 @@ export const Content: FC<I> = (props): ReactElement => {
       ) : (
         <section className="w-full max-w-[400px] rounded-lg border border-gray-200 bg-white p-6 shadow-md">
           <header>
-            <h1 className="mb-4 text-center text-lg font-bold tracking-widest text-rose-500 sm:text-xl">-- YOUR REVIEW --</h1>
+            <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-500 max-[450px]:text-base max-[380px]:text-sm">
+              -- YOUR REVIEW --
+            </h1>
             <div className="my-3 border-t border-gray-300" />
           </header>
 
-          <dl className="space-y-4">
+          <dl className="space-y-4 max-[450px]:text-sm max-[380px]:text-xs">
             <div className="flex flex-col gap-2">
               <dt className="font-medium text-gray-600">Rating:</dt>
               <dd className="flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, i) => {
                   const ratingValue = i + 1;
-                  return <IoStar className={ratingValue <= (selectedReview?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"} key={i} size={28} />;
+                  return (
+                    <IoStar
+                      className={`size-7 max-[450px]:size-6 max-[380px]:size-5  ${ratingValue <= (selectedReview?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}`}
+                      key={i}
+                    />
+                  );
                 })}
               </dd>
             </div>

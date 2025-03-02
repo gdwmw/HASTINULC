@@ -103,7 +103,7 @@ export const Content: FC<I> = (props): ReactElement => {
                   </div>
                 )}
                 {props.session?.user?.image ? (
-                  <div className="relative aspect-square size-[45px] overflow-hidden rounded-full border border-gray-200">
+                  <div className="relative aspect-square size-fit min-h-[45px] min-w-[45px] overflow-hidden rounded-full border border-gray-200">
                     <Image
                       alt="Profile Image"
                       className="cursor-pointer object-cover"
@@ -115,7 +115,7 @@ export const Content: FC<I> = (props): ReactElement => {
                   </div>
                 ) : (
                   <button
-                    className="flex aspect-square size-[45px] items-center justify-center rounded-full border border-gray-200 bg-gray-100"
+                    className="flex aspect-square size-fit min-h-[45px] min-w-[45px] items-center justify-center rounded-full border border-gray-200 bg-gray-100"
                     onClick={() => setMenuOpen((prev) => !prev)}
                     type="button"
                   >

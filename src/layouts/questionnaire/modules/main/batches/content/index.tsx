@@ -75,7 +75,7 @@ export const Content: FC<I> = (props): ReactElement => {
                       <span className="font-bold text-rose-500">{i + 1}.</span>
                       <span>
                         {dt.question}
-                        <span className="font-bold text-rose-500"> *</span>
+                        <span className="pl-0.5 font-bold text-rose-500">*</span>
                       </span>
                     </h2>
                     <div className="ml-8 flex gap-3 overflow-x-auto">

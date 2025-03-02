@@ -29,7 +29,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
   <section className="flex flex-col justify-between gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md max-lg:w-full max-lg:min-w-[260px] max-lg:max-w-[400px] lg:min-w-[400px]">
     <div className="space-y-4">
       <header>
-        <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-500 max-[450px]:text-base max-[380px]:text-xs">
+        <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-500 max-[450px]:text-base max-[380px]:text-sm">
           -- BOOKING SUMMARY --
         </h1>
         <div className="my-3 border-t border-gray-300" />

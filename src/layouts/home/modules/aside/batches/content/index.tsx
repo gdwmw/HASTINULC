@@ -76,11 +76,11 @@ export const Content: FC<I> = (props): ReactElement => {
         {props.session?.user?.status ? (
           <figure className="flex items-center gap-2">
             {props.session?.user?.image ? (
-              <div className="relative aspect-square size-[50px] overflow-hidden rounded-full border border-gray-200">
+              <div className="relative aspect-square size-fit min-h-[50px] min-w-[50px] overflow-hidden rounded-full border border-gray-200">
                 <Image alt="Profile Image" className="object-cover" fill quality={30} src={props.session?.user?.image ?? ""} />
               </div>
             ) : (
-              <div className="flex aspect-square size-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
+              <div className="flex aspect-square size-fit min-h-[50px] min-w-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
                 <FaUser className="text-gray-400" size={25} />
               </div>
             )}
@@ -93,7 +93,7 @@ export const Content: FC<I> = (props): ReactElement => {
           </figure>
         ) : (
           <figure className="flex items-center gap-2">
-            <div className="flex aspect-square size-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
+            <div className="flex aspect-square size-fit min-h-[50px] min-w-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
               <FaUser className="text-gray-400" size={25} />
             </div>
             <figcaption>

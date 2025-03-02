@@ -87,11 +87,11 @@ export const Content: FC<I> = (props): ReactElement => {
                   </strong>
                 </header>
 
-                <div className="space-y-3 text-sm">
+                <div className="space-y-3 text-sm max-[400px]:text-xs">
                   <div className="flex justify-between gap-3 max-[450px]:flex-col">
                     <figure className="flex items-center gap-3">
                       <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
-                        <FaBox className="text-rose-500" />
+                        <FaBox className="size-[12px] text-rose-500 max-[400px]:size-[10px]" />
                       </div>
                       <figcaption>
                         <h2 className="block text-gray-500">Package</h2>
@@ -112,7 +112,7 @@ export const Content: FC<I> = (props): ReactElement => {
                                 const ratingValue = i + 1;
                                 return (
                                   <IoStar
-                                    className={ratingValue <= (dt.review?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}
+                                    className={`size-4 max-[400px]:size-[14px] ${ratingValue <= (dt.review?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}`}
                                     key={i}
                                     size={15}
                                   />

@@ -163,11 +163,11 @@ export const Content: FC<I> = (props): ReactElement => {
       <FormContainer href={"/"} innerContainerClassName="size-full max-h-[624px] max-w-[450px]" label={"Home"}>
         <form className="w-full space-y-3 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
           {previewImage || props.session?.user?.image ? (
-            <div className="relative mx-auto aspect-square size-32 overflow-hidden rounded-full border border-gray-200">
+            <div className="relative mx-auto aspect-square size-fit min-h-32 min-w-32 overflow-hidden rounded-full border border-gray-200">
               <Image alt="Profile Image" className="object-cover" fill quality={50} src={previewImage ?? props.session?.user?.image ?? ""} />
             </div>
           ) : (
-            <div className="mx-auto flex aspect-square size-32 items-center justify-center rounded-full border border-gray-200 bg-gray-100">
+            <div className="mx-auto flex aspect-square size-fit min-h-32 min-w-32 items-center justify-center rounded-full border border-gray-200 bg-gray-100">
               <FaUser className="text-gray-400" size={64} />
             </div>
           )}
