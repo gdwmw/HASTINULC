@@ -78,7 +78,7 @@ export const Content: FC<I> = (props): ReactElement => {
                         <span className="pl-0.5 font-bold text-rose-500">*</span>
                       </span>
                     </h2>
-                    <div className="ml-8 flex gap-3 overflow-x-auto">
+                    <div className="ml-8 flex gap-3 overflow-x-auto max-sm:flex-col">
                       {Array.isArray(dt.options) &&
                         dt.options.map((opt) => (
                           <label className="flex items-center gap-1" key={opt}>

@@ -256,7 +256,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
                   {dt.type === "url" && (
                     <>
                       <span className="text-xs italic text-rose-400">*Please share Google Maps location link</span>
-                      <div className="flex justify-center gap-1">
+                      <div className="flex justify-center gap-1 max-[380px]:flex-col max-[380px]:items-center">
                         <span className="text-xs">Don&apos;t know how to get Google Maps Link?</span>
                         <Link
                           className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}

@@ -186,7 +186,7 @@ export const Content: FC<I> = (props): ReactElement => {
             />
           ))}
 
-          <div className="flex justify-center gap-1">
+          <div className="flex justify-center gap-1 max-[350px]:flex-col max-[350px]:items-center">
             <span className="text-xs">Do you want to change your password?</span>
             <Link
               className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
