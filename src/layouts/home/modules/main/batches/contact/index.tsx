@@ -34,7 +34,7 @@ export const Contact: FC = (): ReactElement => (
 
           <ContactButton
             icon={<IoLogoWhatsapp className="-mr-px" size={25} />}
-            label="(085) 7623-4670-3"
+            label="(+62) 8576-2346-703"
             labelClassName="max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm"
             url="https://wa.me/6285762346703"
           />

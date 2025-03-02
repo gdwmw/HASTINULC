@@ -275,7 +275,7 @@ export const Home: FC<I> = (props): ReactElement => {
                     href={"https://wa.me/6285762346703"}
                     target="_blank"
                   >
-                    (085) 7623-4670-3
+                    (+62) 8576-2346-703
                   </Link>
                 </div>
               </address>
