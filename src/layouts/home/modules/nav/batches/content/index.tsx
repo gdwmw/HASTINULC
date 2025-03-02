@@ -117,7 +117,6 @@ export const Content: FC<I> = (props): ReactElement => {
                   <button
                     className="flex aspect-square size-fit min-h-[45px] min-w-[45px] items-center justify-center rounded-full border border-gray-200 bg-gray-100"
                     onClick={() => setMenuOpen((prev) => !prev)}
-                    type="button"
                   >
                     <FaUser className="text-gray-400" size={25} />
                   </button>

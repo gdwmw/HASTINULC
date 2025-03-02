@@ -3,43 +3,90 @@ import { KeyboardEvent } from "react";
 
 import { IDatasResponse } from "@/src/types";
 
-export const currencyFormat = (amount: number | string, currency: "IDR" | "USD") => {
-  const locale = currency === "IDR" ? "id-ID" : "en-US";
-  const result = new Intl.NumberFormat(locale, {
-    currency: currency,
-    maximumFractionDigits: 0,
-    minimumFractionDigits: 0,
-    style: "currency",
-  }).format(typeof amount === "string" ? parseInt(amount) : amount);
+// ----------------------------
 
-  return result;
+const CURRENCY_SETTINGS = {
+  EUR: {
+    fractionDigits: 2,
+    locale: "de-DE",
+  },
+  GBP: {
+    fractionDigits: 2,
+    locale: "en-GB",
+  },
+  IDR: {
+    fractionDigits: 0,
+    locale: "id-ID",
+  },
+  JPY: {
+    fractionDigits: 0,
+    locale: "ja-JP",
+  },
+  SGD: {
+    fractionDigits: 2,
+    locale: "en-SG",
+  },
+  USD: {
+    fractionDigits: 2,
+    locale: "en-US",
+  },
 };
+
+type TCurrencyCode = keyof typeof CURRENCY_SETTINGS;
+
+export const currencyFormat = (amount: number | string, currency: TCurrencyCode): string => {
+  const { fractionDigits, locale } = CURRENCY_SETTINGS[currency] || CURRENCY_SETTINGS.IDR;
+
+  const numericAmount = typeof amount === "string" ? parseFloat(amount) : amount;
+
+  if (isNaN(numericAmount)) {
+    throw new Error("Invalid amount value");
+  }
+
+  return new Intl.NumberFormat(locale, {
+    currency,
+    maximumFractionDigits: fractionDigits,
+    minimumFractionDigits: fractionDigits,
+    style: "currency",
+  }).format(numericAmount);
+};
+
+// ----------------------------
+
+const ALLOWED_KEYS = ["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"];
+
+const createValidation =
+  (regex: RegExp, additionalKeys: string[] = []) =>
+  (e: KeyboardEvent) => {
+    const allowedKeys = [...ALLOWED_KEYS, ...additionalKeys];
+    if (!regex.test(e.key) && !allowedKeys.includes(e.key)) {
+      e.preventDefault();
+    }
+  };
 
 export const inputValidations = {
-  name: (e: KeyboardEvent) => {
-    if (!/^[a-zA-Z\s]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-      e.preventDefault();
-    }
-  },
-  phoneNumber: (e: KeyboardEvent) => {
-    if (!/\d/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key) && !(e.ctrlKey && e.key === "a")) {
-      e.preventDefault();
-    }
-  },
-  username: (e: KeyboardEvent) => {
-    if (!/^[a-z0-9]$/.test(e.key) && !["ArrowLeft", "ArrowRight", "Backspace", "Delete", "Tab"].includes(e.key)) {
-      e.preventDefault();
-    }
-  },
+  email: createValidation(/^[a-zA-Z0-9@._-]$/),
+  name: createValidation(/^[a-zA-Z\s]$/),
+  numeric: createValidation(/^\d$/),
+  phoneNumber: createValidation(/\d/, ["a"]),
+  username: createValidation(/^[a-z0-9]$/),
 };
 
-export const questionnairesConditions = ({ data, session }: { data: IDatasResponse | null | undefined; session: null | Session }) => {
-  const questionnairesLength = data?.questionnaires?.length ?? 0;
-  return (
-    session?.user?.role === "demo" ||
-    ((data?.reviews?.length ?? 0) > 0 &&
-      (questionnairesLength === 0 ||
-        (data?.questionnaires?.[questionnairesLength - 1].current &&
-          new Date().getTime() - new Date(data?.questionnaires[questionnairesLength - 1].current).getTime() > 30 * 24 * 60 * 60 * 1000)))
-  );
+// ----------------------------
+
+const EXPIRY_TIME = 30 * 24 * 60 * 60 * 1000;
+
+const expired = (data: IDatasResponse | null | undefined): boolean => {
+  const questionnaires = data?.questionnaires;
+  const lastFilled = questionnaires?.[questionnaires.length - 1]?.current;
+
+  if (!lastFilled) {
+    return true;
+  }
+
+  const timeCalc = new Date().getTime() - new Date(lastFilled).getTime();
+  return timeCalc > EXPIRY_TIME;
 };
+
+export const questionnairesConditions = ({ data, session }: { data: IDatasResponse | null | undefined; session: null | Session }): boolean =>
+  session?.user?.role === "demo" || ((data?.reviews?.length ?? 0) > 0 && (!data?.questionnaires?.length || expired(data)));

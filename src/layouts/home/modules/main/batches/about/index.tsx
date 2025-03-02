@@ -100,7 +100,6 @@ export const About: FC = (): ReactElement => {
               <button
                 className="absolute left-1/2 top-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white text-white hover:border-rose-400 hover:text-rose-400 active:scale-95 active:border-rose-300 active:text-rose-300"
                 onClick={() => setActive((prev) => !prev)}
-                type="button"
               >
                 <FaPlay className="-mb-0.5 -mr-1" size={25} />
               </button>
