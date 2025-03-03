@@ -124,12 +124,46 @@ export const Content: FC<I> = (props): ReactElement => {
               </div>
 
               {menuOpen && (
-                <ul className="absolute right-0 mt-2 w-48 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md">
+                <ul className="absolute right-0 mt-2 w-96 overflow-hidden rounded-lg border border-gray-200 bg-white p-5 shadow-md">
+                  <li>
+                    {props.session?.user?.status ? (
+                      <figure className="flex items-center gap-2">
+                        {props.session?.user?.image ? (
+                          <div className="relative aspect-square size-fit min-h-[50px] min-w-[50px] overflow-hidden rounded-full border border-gray-200">
+                            <Image alt="Profile Image" className="object-cover" fill quality={30} src={props.session?.user?.image ?? ""} />
+                          </div>
+                        ) : (
+                          <div className="flex aspect-square size-fit min-h-[50px] min-w-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
+                            <FaUser className="text-gray-400" size={25} />
+                          </div>
+                        )}
+                        <figcaption>
+                          <div className="-mb-1.5 mt-[-5px] line-clamp-1">
+                            <span className="text-lg">{props.session?.user?.name}</span>
+                          </div>
+                          <span className="block text-xs text-rose-500">{props.session?.user?.username}</span>
+                        </figcaption>
+                      </figure>
+                    ) : (
+                      <figure className="flex items-center gap-2">
+                        <div className="flex aspect-square size-fit min-h-[50px] min-w-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
+                          <FaUser className="text-gray-400" size={25} />
+                        </div>
+                        <figcaption>
+                          <span className="-mb-1.5 mt-[-5px] block text-lg">Guest</span>
+                          <span className="block text-xs text-gray-400">Not logged in</span>
+                        </figcaption>
+                      </figure>
+                    )}
+                  </li>
+
+                  <div className="my-3 border-t border-gray-300" />
+
                   <li>
                     <Link
-                      className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
-                      href={`/profile`}
-                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
+                      href="/profile"
+                      onClick={() => setOpen({ aside: false })}
                     >
                       <FaUser size={16} />
                       Profile
@@ -138,12 +172,9 @@ export const Content: FC<I> = (props): ReactElement => {
 
                   <li>
                     <Link
-                      className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
+                      className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                       href={`/history/${props.session?.user?.username}`}
-                      onClick={() => {
-                        setMenuOpen(false);
-                        setOpen({ bookingList: true, bookingSummary: true });
-                      }}
+                      onClick={() => setOpen({ aside: false, bookingList: true, bookingSummary: true })}
                     >
                       <FaHistory size={16} />
                       History
@@ -152,13 +183,17 @@ export const Content: FC<I> = (props): ReactElement => {
 
                   <li>
                     <Link
-                      className={`group flex items-center justify-between gap-2 px-4 py-2 text-sm ${questionnairesConditions ? "hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white" : "cursor-not-allowed text-gray-400"}`}
+                      className={`group flex items-center justify-between rounded-md px-4 py-2 ${
+                        questionnairesConditions
+                          ? "text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
+                          : "cursor-not-allowed text-gray-400"
+                      }`}
                       href={`/questionnaire`}
                       onClick={(e) => {
                         if (!questionnairesConditions) {
                           e.preventDefault();
                         } else {
-                          setMenuOpen(false);
+                          setOpen({ aside: false });
                         }
                       }}
                     >
@@ -175,9 +210,11 @@ export const Content: FC<I> = (props): ReactElement => {
                     </Link>
                   </li>
 
+                  <div className="my-3 border-t border-gray-300" />
+
                   <li>
                     <button
-                      className="flex w-full items-center justify-center gap-2 border-t border-gray-200 px-4 py-2 text-sm hover:bg-rose-400 hover:text-white active:bg-rose-500 active:text-white"
+                      className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                       onClick={() => signOut()}
                     >
                       <FaSignOutAlt size={16} />

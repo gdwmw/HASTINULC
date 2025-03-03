@@ -138,7 +138,7 @@ export const Content: FC<I> = (props): ReactElement => {
             <div className="flex w-full flex-wrap justify-center gap-2">
               {SUGGESTIONS_DATA.map((dt, i) => (
                 <button
-                  className={`flex select-none items-center justify-center rounded-xl border-2 p-3 text-sm font-semibold disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 max-sm:text-xs max-[415px]:w-full ${
+                  className={`flex grow select-none items-center justify-center rounded-xl border-2 p-3 text-sm font-semibold disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 max-sm:text-xs ${
                     selectedSuggestions.includes(dt)
                       ? "border-rose-300 bg-rose-50 text-rose-500"
                       : "border-gray-200 bg-white text-gray-700 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500"
@@ -153,7 +153,14 @@ export const Content: FC<I> = (props): ReactElement => {
               ))}
             </div>
 
-            <ExampleA className="w-64 font-semibold" color="rose" disabled={loading || watch("rating") === 0} size="sm" type="submit" variant="solid">
+            <ExampleA
+              className="w-full font-semibold"
+              color="rose"
+              disabled={loading || watch("rating") === 0}
+              size="sm"
+              type="submit"
+              variant="solid"
+            >
               {loading ? "Loading..." : "SUBMIT"}
             </ExampleA>
           </div>

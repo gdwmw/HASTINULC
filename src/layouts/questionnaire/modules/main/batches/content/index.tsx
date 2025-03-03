@@ -109,7 +109,7 @@ export const Content: FC<I> = (props): ReactElement => {
             </div>
           ))}
 
-          <ExampleA className="mx-auto min-h-10 w-64 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
+          <ExampleA className="min-h-10 w-full font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
             {loading ? "Loading..." : "SUBMIT"}
           </ExampleA>
         </form>
