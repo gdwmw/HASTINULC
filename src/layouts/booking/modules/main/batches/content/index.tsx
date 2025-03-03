@@ -152,7 +152,7 @@ export const Content: FC<I> = (props): ReactElement => {
       const res = await POSTBookings(newPayload);
       console.log("Booking Success!");
 
-      const whatsappMessage = `*Hastinulc Makeup Art Booking Details*
+      const whatsappMessage = `*Hastinulc Makeup Art | Booking Details | ${dt.name}*
 
 - *Booking ID:* ${res.documentId}
 - *Name:* ${dt.name}
