@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
+import { DUMMY_BOOKINGS_DATA } from "@/src/libs";
+import { IBookingsResponse } from "@/src/types";
 import { GETBookings } from "@/src/utils";
 
 import { Content } from "./batches";
@@ -22,9 +24,12 @@ export const Main: FC<I> = async (props): Promise<ReactElement> => {
     }
   };
   const response = await fetchBookings();
-  const selectedBookingSummary = response?.find((dt) => dt.documentId === slug[1]);
+  const selectedBookingSummary =
+    session?.user?.role === "demo"
+      ? (DUMMY_BOOKINGS_DATA as IBookingsResponse[]).find((dt) => dt.documentId === slug[1])
+      : response?.find((dt) => dt.documentId === slug[1]);
 
-  if (selectedBookingSummary?.review?.rating) {
+  if (selectedBookingSummary?.review) {
     redirect(`/history/${session?.user?.username}/${slug[1]}`);
   }
 
