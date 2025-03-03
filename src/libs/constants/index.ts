@@ -4,7 +4,7 @@ import testimonialsImage3 from "@/public/assets/images/model/Testimonials-4.jpg"
 import testimonialsImage4 from "@/public/assets/images/model/Testimonials-5.jpg";
 import testimonialsImage5 from "@/public/assets/images/model/Testimonials-6.jpg";
 
-export const DUMMY_ACCOUNT_DATA = {
+export const DEMO_ACCOUNT_DATA = {
   datasDocumentId: "dEmOdataSDocuMenTid",
   datasId: "1",
   email: "demo@demo.com",
@@ -18,6 +18,47 @@ export const DUMMY_ACCOUNT_DATA = {
   token: "dEmOTOkeN",
   username: "demo",
 };
+
+export const DUMMY_ACCOUNT_DATA = [
+  {
+    email: "admin@admin.com",
+    password: "admin",
+    response: {
+      datasDocumentId: "ADmiNSDocuMenTid",
+      datasId: "1",
+      email: "admin@admin.com",
+      id: "1",
+      image: null,
+      imageId: null,
+      name: "This Is Admin Account",
+      phoneNumber: "0000000000",
+      role: "admin",
+      status: "authenticated",
+      token: "ADmiNTOkeN",
+      username: "admin",
+    },
+    username: "admin",
+  },
+  {
+    email: "user@user.com",
+    password: "user",
+    response: {
+      datasDocumentId: "uSErDocuMenTid",
+      datasId: "2",
+      email: "user@user.com",
+      id: "2",
+      image: null,
+      imageId: null,
+      name: "This Is User Account",
+      phoneNumber: "0000000000",
+      role: "user",
+      status: "authenticated",
+      token: "uSErTOkeN",
+      username: "user",
+    },
+    username: "user",
+  },
+];
 
 export const DUMMY_DATAS_DATA = {
   documentId: "dEmOdataSDocuMenTid",
