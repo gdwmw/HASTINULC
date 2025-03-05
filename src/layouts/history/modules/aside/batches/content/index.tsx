@@ -17,17 +17,17 @@ interface I {
 export const Content: FC<I> = (props): ReactElement => {
   const { open, response } = useGlobalStates();
 
-  const selectedBooking = response?.bookings.find((dt) => dt.documentId === props.slug[1]);
-  const selectedReview = response?.reviews.find((dt) => dt.documentId === selectedBooking?.review?.documentId);
+  const selectedBooking = response?.booking.find((dt) => dt.documentId === props.slug[1]);
+  const selectedReview = response?.review.find((dt) => dt.documentId === selectedBooking?.relation_review?.documentId);
 
   return open?.bookingSummary ? (
     <BookingSummary
       {...selectedBooking}
-      datasDocumentId={props.session?.user?.datasDocumentId}
+      dataDocumentId={props.session?.user?.dataDocumentId}
       documentId={props.slug[1]}
       status={selectedBooking?.indicator}
     />
   ) : (
-    <ReviewResult selectedReview={selectedReview} />
+    <ReviewResult selectedReview={selectedReview} session={props.session} />
   );
 };

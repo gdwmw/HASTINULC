@@ -1,3 +1,8 @@
+export type TRole = "admin" | "demo" | "user";
+export type TIndicator = "Canceled" | "On Going" | "Payment" | "Rejected" | "Success" | "Waiting";
+
+// ----------------------------
+
 export interface IRegisterPayload {
   username: string;
   email: string;
@@ -11,37 +16,31 @@ export interface ILoginPayload {
 
 export interface IAuthSchema {
   jwt: string;
-  user: IUsersResponse;
+  user: IUserResponse;
 }
 
-export interface IAuthResponse {
+interface IAuthCommon {
   id: string;
-  datasId: string;
-  datasDocumentId: string;
+  dataId: string;
+  dataDocumentId: string;
   imageId: null | string;
   username: string;
+  phoneNumber: string;
+  role: TRole;
+  status: string;
+  token: string;
+}
+
+export interface IAuthResponse extends IAuthCommon {
   name: string;
   email: string;
-  phoneNumber: string;
   image?: null | string;
-  role: string;
-  status: string;
-  token: string;
 }
 
-export interface INextAuthResponse {
-  id: string;
-  datasId: string;
-  datasDocumentId: string;
-  imageId: null | string;
-  username: string;
+export interface INextAuthResponse extends IAuthCommon {
   name?: null | string;
   email?: null | string;
-  phoneNumber: string;
   image?: null | string;
-  role: string;
-  status: string;
-  token: string;
 }
 
 // ----------------------------
@@ -54,24 +53,20 @@ export interface IPasswordPayload {
   passwordConfirmation?: string;
 }
 
-export interface IPasswordResponse extends IUsersResponse {
-  token: string;
-}
-
 // ----------------------------
 
-export interface IUsersPayload {
+export interface IUserPayload {
   id?: number;
   username?: string;
   email?: string;
-  datasDocumentId?: string;
+  relation_data?: number;
 }
 
-export interface IUsersResponse {
+export interface IUserResponse {
   id: number;
   username: string;
   email: string;
-  datasDocumentId?: string;
+  relation_data?: IDataResponse;
 }
 
 // ----------------------------
@@ -93,37 +88,34 @@ export interface IUploadResponse {
 
 // ----------------------------
 
-export interface IDatasPayload {
+interface IDataCommon {
+  name: string;
+  phoneNumber: string;
+}
+
+export interface IDataPayload extends IDataCommon {
   id?: number;
   documentId?: string;
-  name: string;
-  phoneNumber: string;
   image?: FileList | number;
-  role?: string;
-  bookings?: string;
-  reviews?: string;
-  questionnaires?: string;
+  role?: TRole;
+  relation_booking?: string;
+  relation_review?: string;
+  relation_questionnaire?: string;
 }
 
-export interface IDatasResponse {
+export interface IDataResponse extends IDataCommon {
   id: number;
   documentId: string;
-  name: string;
-  phoneNumber: string;
-  image: {
-    id: number;
-    url: string;
-  } | null;
-  role: string;
-  bookings?: IBookingsResponse[];
-  reviews?: IReviewsResponse[];
-  questionnaires?: IQuestionnairesResponse[];
+  image: IUploadResponse | null;
+  role: TRole;
+  relation_booking?: IBookingResponse[];
+  relation_review?: IReviewResponse[];
+  relation_questionnaire?: IQuestionnaireResponse[];
 }
 
 // ----------------------------
 
-export interface IBookingsPayload {
-  documentId?: string;
+interface IBookingCommon {
   username: string;
   name: string;
   email: string;
@@ -135,82 +127,66 @@ export interface IBookingsPayload {
   tax: string;
   subTotal: string;
   total: string;
-  indicator: string;
-  current: Date;
-  data: string;
-  review?: string;
+  indicator: TIndicator;
 }
 
-export interface IBookingsResponse {
+export interface IBookingPayload extends IBookingCommon {
+  documentId?: string;
+  relation_data: string;
+  relation_review?: string;
+}
+
+export interface IBookingResponse extends IBookingCommon {
   documentId: string;
-  username: string;
-  name: string;
-  email: string;
-  phoneNumber: string;
-  package: string;
-  date: string;
-  time: string[];
-  googleMapsLink: string;
-  tax: string;
-  subTotal: string;
-  total: string;
-  indicator: string;
-  current: Date;
-  data: IDatasResponse;
-  review?: IReviewsResponse;
+  relation_data: IDataResponse;
+  relation_review?: IReviewResponse;
+  createdAt: Date;
 }
 
 // ----------------------------
 
-export interface IReviewsPayload {
-  documentId?: string;
+interface IReviewCommon {
   username: string;
   name: string;
   rating: number;
   description: string;
-  images?: FileList | number[];
-  current: Date;
-  data?: string;
-  booking?: string;
 }
 
-export interface IReviewsResponse {
+export interface IReviewPayload extends IReviewCommon {
+  documentId?: string;
+  image?: FileList | number[];
+  relation_data?: string;
+  relation_booking?: string;
+}
+
+export interface IReviewResponse extends IReviewCommon {
   id: number;
   documentId: string;
-  username: string;
-  name: string;
-  rating: number;
-  description: string;
-  images: { url: string }[] | null;
-  current: Date;
-  data: IDatasResponse;
-  booking: IBookingsResponse;
+  image: IUploadResponse[] | null;
+  relation_data: IDataResponse;
+  relation_booking: IBookingResponse;
+  createdAt: Date;
 }
 
 // ----------------------------
 
-export interface IQuestionnairesPayload {
-  documentId?: string;
+interface IQuestionnaireCommon {
   username: string;
   name: string;
-  responses: {
+  feedback: {
     id: number;
     question: string;
     answer: string;
   }[];
-  current: Date;
-  data?: string;
 }
 
-export interface IQuestionnairesResponse {
+export interface IQuestionnairePayload extends IQuestionnaireCommon {
+  documentId?: string;
+  relation_data?: string;
+}
+
+export interface IQuestionnaireResponse extends IQuestionnaireCommon {
   documentId: string;
-  username: string;
-  name: string;
-  responses: {
-    id: number;
-    question: string;
-    answer: string;
-  }[];
-  current: Date;
-  data: IDatasResponse;
+  relation_data: IDataResponse;
+  createdAt: Date;
 }

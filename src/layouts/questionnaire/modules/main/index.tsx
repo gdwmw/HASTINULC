@@ -1,27 +1,24 @@
 import { redirect } from "next/navigation";
 import { FC, ReactElement } from "react";
 
-import { getAllSession, questionnairesConditions } from "@/src/hooks";
-import { DUMMY_DATAS_DATA } from "@/src/libs";
-import { IDatasResponse } from "@/src/types";
-import { GETDatasByDocumentId } from "@/src/utils";
+import { getAllSession, questionnaireConditions } from "@/src/hooks";
+import { DUMMY_DATA_DATA } from "@/src/libs";
+import { GETDataByDocumentId } from "@/src/utils";
 
 import { Content } from "./batches";
 
 export const Main: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
-  const fetchDatas = async () => {
+  const fetchData = async () => {
     try {
-      return await GETDatasByDocumentId(session?.user?.datasDocumentId ?? "");
+      return await GETDataByDocumentId(session?.user?.dataDocumentId ?? "");
     } catch {
-      console.log("GETDatasByDocumentId Failed, Bypassed!");
+      console.log("GETDataByDocumentId Failed, Bypassed!");
       return null;
     }
   };
 
-  if (
-    !questionnairesConditions({ data: session?.user?.role === "demo" ? (DUMMY_DATAS_DATA as IDatasResponse) : await fetchDatas(), session: session })
-  ) {
+  if (!questionnaireConditions({ data: session?.user?.role === "demo" ? DUMMY_DATA_DATA : await fetchData(), session: session })) {
     redirect("/");
   }
 

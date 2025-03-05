@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
-import { IBookingsContext, IOpenContext, IResponseContext } from "../types/context";
+import { IBookingContext, IOpenContext, IResponseContext } from "../types/context";
 
 interface IStates {
-  booking?: IBookingsContext;
+  booking?: IBookingContext;
   open?: IOpenContext;
   response?: IResponseContext;
 }
 
 interface IActions {
-  setBooking: (param: IBookingsContext) => void;
+  setBooking: (param: IBookingContext) => void;
   setOpen: (param: IOpenContext) => void;
   setResponse: (param: IResponseContext) => void;
 }
@@ -20,7 +20,7 @@ export const useGlobalStates = create<IActions & IStates>((set) => ({
     bookingList: true,
     bookingSummary: true,
   },
-  setBooking: (booking: IBookingsContext) => set({ booking }),
+  setBooking: (booking: IBookingContext) => set({ booking }),
   setOpen: (open: IOpenContext) => set({ open }),
   setResponse: (response: IResponseContext) => set({ response }),
 }));

@@ -2,9 +2,8 @@ import { redirect } from "next/navigation";
 import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
-import { DUMMY_BOOKINGS_DATA } from "@/src/libs";
-import { IBookingsResponse } from "@/src/types";
-import { GETBookings } from "@/src/utils";
+import { DUMMY_BOOKING_DATA } from "@/src/libs";
+import { GETBooking } from "@/src/utils";
 
 import { Content } from "./batches";
 
@@ -15,21 +14,19 @@ interface I {
 export const Main: FC<I> = async (props): Promise<ReactElement> => {
   const slug = (await props.slug).slug;
   const session = await getAllSession();
-  const fetchBookings = async () => {
+  const fetchBooking = async () => {
     try {
-      return await GETBookings(`sort[0]=current:desc&filters[data][documentId][$eq]=${session?.user?.datasDocumentId}`);
+      return await GETBooking(`sort[0]=createdAt:desc&filters[relation_data][documentId][$eq]=${session?.user?.dataDocumentId}`);
     } catch {
-      console.log("GETBookings Failed, Bypassed!");
+      console.log("GETBooking Failed, Bypassed!");
       return null;
     }
   };
-  const response = await fetchBookings();
+  const response = await fetchBooking();
   const selectedBookingSummary =
-    session?.user?.role === "demo"
-      ? (DUMMY_BOOKINGS_DATA as IBookingsResponse[]).find((dt) => dt.documentId === slug[1])
-      : response?.find((dt) => dt.documentId === slug[1]);
+    session?.user?.role === "demo" ? DUMMY_BOOKING_DATA.find((dt) => dt.documentId === slug[1]) : response?.find((dt) => dt.documentId === slug[1]);
 
-  if (selectedBookingSummary?.review) {
+  if (selectedBookingSummary?.relation_review) {
     redirect(`/history/${session?.user?.username}/${slug[1]}`);
   }
 

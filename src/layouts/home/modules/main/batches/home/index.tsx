@@ -17,7 +17,7 @@ import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA } from "@/src/libs";
 import { HomeBookingSchema, THomeBookingSchema } from "@/src/schemas";
-import { IBookingsResponse } from "@/src/types";
+import { IBookingResponse } from "@/src/types";
 
 interface IFormField {
   id: number;
@@ -70,7 +70,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
 ];
 
 interface I {
-  response: IBookingsResponse[] | null | undefined;
+  response: IBookingResponse[] | null | undefined;
   session: null | Session;
 }
 

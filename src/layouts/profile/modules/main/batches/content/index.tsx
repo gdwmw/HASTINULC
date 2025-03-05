@@ -13,7 +13,13 @@ import { FaUser } from "react-icons/fa";
 import { ExampleA, ExampleATWM, FormContainer, Input } from "@/src/components";
 import { inputValidations } from "@/src/hooks";
 import { ProfileSchema, TProfileSchema } from "@/src/schemas";
-import { DELETEUpload, POSTUpload, PUTDatas, PUTUsers } from "@/src/utils";
+import { DELETEUpload, POSTUpload, PUTData, PUTUser } from "@/src/utils";
+
+const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
+
+if (!API_URL) {
+  throw new Error("The API URL is not defined. Please check your environment variables.");
+}
 
 interface IFormField {
   id: number;
@@ -106,14 +112,14 @@ export const Content: FC<I> = (props): ReactElement => {
     setLoading(true);
 
     try {
-      const usersResponse = await PUTUsers({
+      const userResponse = await PUTUser({
         email: dt.email,
         id: Number(props.session?.user?.id),
         username: dt.username,
       });
 
-      const datasResponse = await PUTDatas({
-        documentId: props.session?.user?.datasDocumentId ?? "",
+      const dataResponse = await PUTData({
+        documentId: props.session?.user?.dataDocumentId ?? "",
         name: dt.name,
         phoneNumber: dt.phoneNumber,
       });
@@ -130,7 +136,7 @@ export const Content: FC<I> = (props): ReactElement => {
           field: "image",
           files: dt.image,
           ref: "api::data.data",
-          refId: props.session?.user?.datasId ?? "",
+          refId: props.session?.user?.dataId ?? "",
         });
 
         imageId = uploadResponse[0].id.toString();
@@ -140,12 +146,12 @@ export const Content: FC<I> = (props): ReactElement => {
       await session.update({
         user: {
           ...session.data?.user,
-          email: usersResponse.email,
-          image: imageUrl,
+          email: userResponse.email,
+          image: API_URL + imageUrl,
           imageId: imageId,
-          name: datasResponse.name,
-          phoneNumber: datasResponse.phoneNumber,
-          username: usersResponse.username,
+          name: dataResponse.name,
+          phoneNumber: dataResponse.phoneNumber,
+          username: userResponse.username,
         },
       });
 

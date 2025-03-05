@@ -12,8 +12,8 @@ import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA, TIME_SLOTS_DATA } from "@/src/libs";
 import { BookingSchema, TBookingSchema } from "@/src/schemas";
-import { IBookingsPayload, IBookingsResponse } from "@/src/types";
-import { POSTBookings } from "@/src/utils";
+import { IBookingPayload, IBookingResponse } from "@/src/types";
+import { POSTBooking } from "@/src/utils";
 
 interface IFormField {
   id: number;
@@ -78,7 +78,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
 ];
 
 interface I {
-  response: IBookingsResponse[] | null | undefined;
+  response: IBookingResponse[] | null | undefined;
   session: null | Session;
 }
 
@@ -137,11 +137,10 @@ export const Content: FC<I> = (props): ReactElement => {
   const onSubmit: SubmitHandler<TBookingSchema> = async (dt) => {
     setLoading(true);
 
-    const newPayload: IBookingsPayload = {
+    const newPayload: IBookingPayload = {
       ...dt,
-      current: new Date(),
-      data: props.session?.user?.datasDocumentId ?? "",
       indicator: "Waiting",
+      relation_data: props.session?.user?.dataDocumentId ?? "",
       subTotal: subtotal.toString(),
       tax: tax.toString(),
       total: total.toString(),
@@ -149,7 +148,7 @@ export const Content: FC<I> = (props): ReactElement => {
     };
 
     try {
-      const res = await POSTBookings(newPayload);
+      const res = await POSTBooking(newPayload);
       console.log("Booking Success!");
 
       const whatsappMessage = `*Hastinulc Makeup Art | Booking Details | ${dt.name}*
@@ -281,7 +280,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
         <aside className="hidden min-w-fit grow items-start overflow-y-auto lg:flex">
           <div className="my-auto flex w-full justify-center p-2">
-            <BookingSummary {...watch()} datasDocumentId={props.session?.user?.datasDocumentId} subTotal={subtotal} tax={tax} total={total} />
+            <BookingSummary {...watch()} dataDocumentId={props.session?.user?.dataDocumentId} subTotal={subtotal} tax={tax} total={total} />
           </div>
         </aside>
       </FormContainer>

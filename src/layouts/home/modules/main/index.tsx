@@ -1,25 +1,25 @@
 import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
-import { GETBookings } from "@/src/utils";
+import { GETBooking } from "@/src/utils";
 
 import { About, Contact, Home, Packages, Portfolio } from "./batches";
 
 export const Main: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
-  const fetchBookings = async () => {
+  const fetchBooking = async () => {
     try {
-      const res = await GETBookings();
+      const res = await GETBooking();
       return res;
     } catch {
-      console.log("GETBookings Failed, Bypassed!");
+      console.log("GETBooking Failed, Bypassed!");
       return null;
     }
   };
 
   return (
     <main>
-      <Home response={await fetchBookings()} session={session} />
+      <Home response={await fetchBooking()} session={session} />
       <About />
       <Portfolio />
       <Packages />

@@ -3,10 +3,11 @@ import testimonialsImage2 from "@/public/assets/images/model/Testimonials-3.jpg"
 import testimonialsImage3 from "@/public/assets/images/model/Testimonials-4.jpg";
 import testimonialsImage4 from "@/public/assets/images/model/Testimonials-5.jpg";
 import testimonialsImage5 from "@/public/assets/images/model/Testimonials-6.jpg";
+import { IAuthResponse, IBookingResponse, IDataResponse, IReviewResponse } from "@/src/types";
 
-export const DEMO_ACCOUNT_DATA = {
-  datasDocumentId: "dEmOdataSDocuMenTid",
-  datasId: "1",
+export const DEMO_ACCOUNT_DATA: IAuthResponse = {
+  dataDocumentId: "dEmOdataSDocuMenTid",
+  dataId: "1",
   email: "demo@demo.com",
   id: "1",
   image: null,
@@ -19,13 +20,20 @@ export const DEMO_ACCOUNT_DATA = {
   username: "demo",
 };
 
-export const DUMMY_ACCOUNT_DATA = [
+interface IDUMMY_ACCOUNT_DATA {
+  email: string;
+  password: string;
+  response: IAuthResponse;
+  username: string;
+}
+
+export const DUMMY_ACCOUNT_DATA: IDUMMY_ACCOUNT_DATA[] = [
   {
     email: "admin@admin.com",
     password: "admin",
     response: {
-      datasDocumentId: "ADmiNSDocuMenTid",
-      datasId: "1",
+      dataDocumentId: "ADmiNSDocuMenTid",
+      dataId: "1",
       email: "admin@admin.com",
       id: "1",
       image: null,
@@ -43,8 +51,8 @@ export const DUMMY_ACCOUNT_DATA = [
     email: "user@user.com",
     password: "user",
     response: {
-      datasDocumentId: "uSErDocuMenTid",
-      datasId: "2",
+      dataDocumentId: "uSErDocuMenTid",
+      dataId: "2",
       email: "user@user.com",
       id: "2",
       image: null,
@@ -60,20 +68,42 @@ export const DUMMY_ACCOUNT_DATA = [
   },
 ];
 
-export const DUMMY_DATAS_DATA = {
+export const DUMMY_DATA_DATA: IDataResponse = {
   documentId: "dEmOdataSDocuMenTid",
   id: 1,
   image: null,
   name: "This Is Demo Account",
   phoneNumber: "0000000000",
-  questionnaires: [],
-  reviews: [],
+  relation_booking: [],
+  relation_questionnaire: [],
+  relation_review: [],
   role: "demo",
 };
 
-export const DUMMY_BOOKINGS_DATA = [
+export const DUMMY_REVIEW_DATA: IReviewResponse[] = [
   {
-    current: new Date(),
+    createdAt: new Date(),
+    description:
+      "Professional Service, Excellent Makeup Skills, Highly Recommended, Friendly and Attentive, On Time and Punctual, Affordable Pricing, Clean & Hygienic Tools, Creative and Trendy Styles, Perfect Color Matching, Long-lasting Makeup, Comfortable Application, Attention to Detail, Customized Look, Patient and Understanding, Skilled Makeup Artist",
+    documentId: "dEmOREvIewSDocuMenTid",
+    id: 1,
+    image: [
+      { documentId: "imAgEDoCuMenTId01", formats: null, id: 1, name: "review", url: "/assets/images/model/Testimonials-3.jpg" },
+      { documentId: "imAgEDoCuMenTId02", formats: null, id: 2, name: "review", url: "/assets/images/model/Testimonials-2.jpg" },
+      { documentId: "imAgEDoCuMenTId03", formats: null, id: 3, name: "review", url: "/assets/images/model/Testimonials-1.jpg" },
+      { documentId: "imAgEDoCuMenTId04", formats: null, id: 4, name: "review", url: "/assets/images/model/Testimonials-4.jpg" },
+    ],
+    name: "This Is Demo Account",
+    rating: 5,
+    relation_booking: {} as IBookingResponse,
+    relation_data: {} as IDataResponse,
+    username: "demo",
+  },
+];
+
+export const DUMMY_BOOKING_DATA: IBookingResponse[] = [
+  {
+    createdAt: new Date(),
     date: "0000-00-00",
     documentId: "dEmOboOKingSDocuMenTid01",
     email: "demo@demo.com",
@@ -82,7 +112,8 @@ export const DUMMY_BOOKINGS_DATA = [
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",
-    review: { documentId: "dEmOREvIewSDocuMenTid", rating: 5 },
+    relation_data: DUMMY_DATA_DATA,
+    relation_review: DUMMY_REVIEW_DATA[0],
     subTotal: "350000",
     tax: "42000",
     time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
@@ -90,7 +121,7 @@ export const DUMMY_BOOKINGS_DATA = [
     username: "demo",
   },
   {
-    current: new Date(),
+    createdAt: new Date(),
     date: "0000-00-00",
     documentId: "dEmOboOKingSDocuMenTid02",
     email: "demo@demo.com",
@@ -99,6 +130,7 @@ export const DUMMY_BOOKINGS_DATA = [
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",
+    relation_data: DUMMY_DATA_DATA,
     subTotal: "350000",
     tax: "42000",
     time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
@@ -106,7 +138,7 @@ export const DUMMY_BOOKINGS_DATA = [
     username: "demo",
   },
   {
-    current: new Date(),
+    createdAt: new Date(),
     date: "0000-00-00",
     documentId: "dEmOboOKingSDocuMenTid03",
     email: "demo@demo.com",
@@ -115,6 +147,7 @@ export const DUMMY_BOOKINGS_DATA = [
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",
+    relation_data: DUMMY_DATA_DATA,
     subTotal: "350000",
     tax: "42000",
     time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
@@ -122,7 +155,7 @@ export const DUMMY_BOOKINGS_DATA = [
     username: "demo",
   },
   {
-    current: new Date(),
+    createdAt: new Date(),
     date: "0000-00-00",
     documentId: "dEmOboOKingSDocuMenTid04",
     email: "demo@demo.com",
@@ -131,6 +164,7 @@ export const DUMMY_BOOKINGS_DATA = [
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",
+    relation_data: DUMMY_DATA_DATA,
     subTotal: "350000",
     tax: "42000",
     time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
@@ -138,7 +172,7 @@ export const DUMMY_BOOKINGS_DATA = [
     username: "demo",
   },
   {
-    current: new Date(),
+    createdAt: new Date(),
     date: "0000-00-00",
     documentId: "dEmOboOKingSDocuMenTid05",
     email: "demo@demo.com",
@@ -147,6 +181,7 @@ export const DUMMY_BOOKINGS_DATA = [
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",
+    relation_data: DUMMY_DATA_DATA,
     subTotal: "350000",
     tax: "42000",
     time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
@@ -154,7 +189,7 @@ export const DUMMY_BOOKINGS_DATA = [
     username: "demo",
   },
   {
-    current: new Date(),
+    createdAt: new Date(),
     date: "0000-00-00",
     documentId: "dEmOboOKingSDocuMenTid06",
     email: "demo@demo.com",
@@ -163,6 +198,7 @@ export const DUMMY_BOOKINGS_DATA = [
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",
+    relation_data: DUMMY_DATA_DATA,
     subTotal: "350000",
     tax: "42000",
     time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
@@ -170,7 +206,7 @@ export const DUMMY_BOOKINGS_DATA = [
     username: "demo",
   },
   {
-    current: new Date(),
+    createdAt: new Date(),
     date: "0000-00-00",
     documentId: "dEmOboOKingSDocuMenTid07",
     email: "demo@demo.com",
@@ -179,29 +215,11 @@ export const DUMMY_BOOKINGS_DATA = [
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",
+    relation_data: DUMMY_DATA_DATA,
     subTotal: "350000",
     tax: "42000",
     time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
     total: "392000",
-    username: "demo",
-  },
-];
-
-export const DUMMY_REVIEWS_DATA = [
-  {
-    current: new Date(),
-    description:
-      "Professional Service, Excellent Makeup Skills, Highly Recommended, Friendly and Attentive, On Time and Punctual, Affordable Pricing, Clean & Hygienic Tools, Creative and Trendy Styles, Perfect Color Matching, Long-lasting Makeup, Comfortable Application, Attention to Detail, Customized Look, Patient and Understanding, Skilled Makeup Artist",
-    documentId: "dEmOREvIewSDocuMenTid",
-    id: 1,
-    images: [
-      { url: "/assets/images/model/Testimonials-3.jpg" },
-      { url: "/assets/images/model/Testimonials-2.jpg" },
-      { url: "/assets/images/model/Testimonials-1.jpg" },
-      { url: "/assets/images/model/Testimonials-4.jpg" },
-    ],
-    name: "This Is Demo Account",
-    rating: 5,
     username: "demo",
   },
 ];

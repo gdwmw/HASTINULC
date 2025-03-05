@@ -3,14 +3,13 @@ import Link from "next/link";
 import { FC, ReactElement } from "react";
 
 import { currencyFormat } from "@/src/hooks";
+import { TIndicator } from "@/src/types";
 
 import { ExampleATWM } from "../interfaces/example/A";
 
-type TStatus = "Canceled" | "On Going" | "Payment" | "Rejected" | "Success" | "Waiting";
-
 interface I {
-  current?: Date;
-  datasDocumentId?: string;
+  createdAt?: Date;
+  dataDocumentId?: string;
   date?: string;
   documentId?: string;
   email?: string;
@@ -18,7 +17,7 @@ interface I {
   name?: string;
   package?: string;
   phoneNumber?: string;
-  status?: string | TStatus;
+  status?: string | TIndicator;
   subTotal?: number | string;
   tax?: number | string;
   time?: string[];
@@ -26,7 +25,7 @@ interface I {
 }
 
 export const BookingSummary: FC<I> = (props): ReactElement => (
-  <section className="flex w-full min-w-[260px] max-w-[400px] flex-col justify-between gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md">
+  <section className="flex w-full min-w-[260px] max-w-[400px] flex-col justify-between gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md lg:min-w-[400px]">
     <div className="space-y-4">
       <header>
         <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-500 max-[450px]:text-base max-[380px]:text-sm">
@@ -112,10 +111,10 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
           </div>
         )}
 
-        {props.current && (
+        {props.createdAt && (
           <div className="flex justify-between rounded-lg border border-gray-200 bg-gray-50 p-4">
-            <dt className="font-medium text-gray-600">Booked At:</dt>
-            <dd className="font-semibold text-gray-800">{format(new Date(props.current), "yyyy-MM-dd / HH:mm") || "-"}</dd>
+            <dt className="font-medium text-gray-600">Created At:</dt>
+            <dd className="font-semibold text-gray-800">{format(new Date(props.createdAt), "yyyy-MM-dd / HH:mm") || "-"}</dd>
           </div>
         )}
 
@@ -142,7 +141,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
 
     <footer className="mt-4 text-center text-xs text-gray-400">
       <span className="block">{props.documentId?.toLocaleUpperCase() || "< EMPTY >"}</span>
-      <span className="block">{props.datasDocumentId?.toLocaleUpperCase() || "< EMPTY >"}</span>
+      <span className="block">{props.dataDocumentId?.toLocaleUpperCase() || "< EMPTY >"}</span>
     </footer>
   </section>
 );

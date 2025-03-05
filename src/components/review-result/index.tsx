@@ -1,11 +1,19 @@
+import { Session } from "next-auth";
 import Image from "next/image";
 import { FC, ReactElement } from "react";
 import { IoStar } from "react-icons/io5";
 
-import { IReviewsResponse } from "@/src/types";
+import { IReviewResponse } from "@/src/types";
+
+const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
+
+if (!API_URL) {
+  throw new Error("The API URL is not defined. Please check your environment variables.");
+}
 
 interface I {
-  selectedReview: IReviewsResponse | undefined;
+  selectedReview: IReviewResponse | undefined;
+  session: null | Session;
 }
 
 const ReviewResult: FC<I> = (props): ReactElement => (
@@ -43,10 +51,16 @@ const ReviewResult: FC<I> = (props): ReactElement => (
       <div className="flex flex-col gap-3">
         <dt className="font-medium text-gray-600">Images:</dt>
         <dd className="grid grid-cols-2 gap-3 md:grid-cols-3">
-          {props.selectedReview?.images ? (
-            props.selectedReview?.images.map((dt, i) => (
+          {props.selectedReview?.image ? (
+            props.selectedReview?.image.map((dt, i) => (
               <div className="relative aspect-square overflow-hidden rounded-lg border border-gray-200" key={i}>
-                <Image alt="Review Image" className="object-cover" fill quality={50} src={dt.url} />
+                <Image
+                  alt="Review Image"
+                  className="object-cover"
+                  fill
+                  quality={50}
+                  src={props.session?.user?.role === "demo" ? dt.url : API_URL + dt.url}
+                />
               </div>
             ))
           ) : (

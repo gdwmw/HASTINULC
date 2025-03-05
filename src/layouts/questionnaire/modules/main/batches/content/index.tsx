@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ErrorMessage, ExampleA, FormContainer, TextArea } from "@/src/components";
 import { QUESTIONS_DATA } from "@/src/libs";
 import { QuestionnaireSchema, TQuestionnaireSchema } from "@/src/schemas";
-import { POSTQuestionnaires } from "@/src/utils";
+import { POSTQuestionnaire } from "@/src/utils";
 
 interface I {
   session: null | Session;
@@ -31,22 +31,21 @@ export const Content: FC<I> = (props): ReactElement => {
   const onSubmit: SubmitHandler<TQuestionnaireSchema> = async (dt) => {
     setLoading(true);
 
-    const questionsAnswers = QUESTIONS_DATA.map((qst, i) => ({
+    const feedback = QUESTIONS_DATA.map((qst, i) => ({
       answer: dt[`question${i + 1}`],
       id: i + 1,
       question: qst.question,
     }));
 
     const newPayload = {
-      current: new Date(),
-      data: props.session?.user?.datasDocumentId ?? "",
+      feedback: feedback,
       name: props.session?.user?.name ?? "",
-      responses: questionsAnswers,
+      relation_data: props.session?.user?.dataDocumentId ?? "",
       username: props.session?.user?.username ?? "",
     };
 
     try {
-      await POSTQuestionnaires(newPayload);
+      await POSTQuestionnaire(newPayload);
       console.log("Questionnaire Success!");
       router.push("/");
       reset();

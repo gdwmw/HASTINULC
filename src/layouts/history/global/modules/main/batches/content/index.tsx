@@ -10,12 +10,12 @@ import { IoStar } from "react-icons/io5";
 
 import { ExampleA, ExampleATWM, FormContainer } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
-import { IBookingsResponse, IReviewsResponse } from "@/src/types";
+import { IBookingResponse, IReviewResponse } from "@/src/types";
 
 interface I {
-  bookingsResponse: IBookingsResponse[] | null | undefined;
+  bookingResponse: IBookingResponse[] | null | undefined;
   children: ReactNode;
-  reviewsResponse: IReviewsResponse[] | null | undefined;
+  reviewResponse: IReviewResponse[] | null | undefined;
   session: null | Session;
 }
 
@@ -26,8 +26,8 @@ export const Content: FC<I> = (props): ReactElement => {
 
   useEffect(() => {
     setResponse({
-      bookings: props.bookingsResponse ?? [],
-      reviews: props.reviewsResponse ?? [],
+      booking: props.bookingResponse ?? [],
+      review: props.reviewResponse ?? [],
     });
     // eslint-disable-next-line
   }, []);
@@ -48,7 +48,7 @@ export const Content: FC<I> = (props): ReactElement => {
         <div
           className={`size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5 max-lg:mx-auto lg:block ${open?.bookingList ? "block" : "hidden"}`}
         >
-          {props.bookingsResponse?.map((dt) => (
+          {props.bookingResponse?.map((dt) => (
             <section
               className="relative flex w-full max-w-[360px] flex-col justify-between overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md"
               id={dt.documentId}
@@ -99,20 +99,20 @@ export const Content: FC<I> = (props): ReactElement => {
                       </figcaption>
                     </figure>
 
-                    {dt.review?.rating && (
+                    {dt.relation_review?.rating && (
                       <figure className="flex items-center gap-3 max-[450px]:order-first">
                         <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
                           <IoStar className="text-rose-500" />
                         </div>
                         <figcaption>
                           <h2 className="block text-gray-500">Rating</h2>
-                          {dt.indicator === "Success" && dt.review && (
+                          {dt.indicator === "Success" && dt.relation_review && (
                             <div className="flex items-center">
                               {Array.from({ length: 5 }, (_, i) => {
                                 const ratingValue = i + 1;
                                 return (
                                   <IoStar
-                                    className={`size-4 max-[400px]:size-[14px] ${ratingValue <= (dt.review?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}`}
+                                    className={`size-4 max-[400px]:size-[14px] ${ratingValue <= (dt.relation_review?.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}`}
                                     key={i}
                                     size={15}
                                   />
@@ -138,7 +138,7 @@ export const Content: FC<I> = (props): ReactElement => {
               </div>
 
               <footer className="flex items-center justify-end gap-3 border-t border-gray-200 p-3">
-                {dt.indicator === "Success" && !dt.review && (
+                {dt.indicator === "Success" && !dt.relation_review && (
                   <>
                     <Link
                       className={ExampleATWM({ className: "text-sm font-semibold", color: "rose", size: "sm", variant: "ghost" })}
@@ -150,7 +150,7 @@ export const Content: FC<I> = (props): ReactElement => {
                   </>
                 )}
 
-                {dt.indicator === "Success" && dt.review && (
+                {dt.indicator === "Success" && dt.relation_review && (
                   <>
                     <ExampleA
                       className="text-sm font-semibold"
@@ -191,7 +191,7 @@ export const Content: FC<I> = (props): ReactElement => {
           ))}
         </div>
 
-        <aside className={`min-w-fit grow items-start overflow-y-auto ${open?.bookingList ? "max-lg:hidden" : "flex"}`}>
+        <aside className={`min-w-fit grow items-start overflow-y-auto ${open?.bookingList ? "max-lg:hidden lg:flex" : "flex"}`}>
           <div className="my-auto flex w-full justify-center p-2">{props.children}</div>
         </aside>
       </FormContainer>

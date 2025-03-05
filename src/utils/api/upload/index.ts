@@ -6,32 +6,6 @@ if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-const DUMMY_OBJECTS_DATA: IUploadResponse = {
-  documentId: "",
-  formats: null,
-  id: 0,
-  name: "",
-  url: "",
-};
-
-const create = (response: IUploadResponse): IUploadResponse =>
-  Object.keys(DUMMY_OBJECTS_DATA).reduce(
-    (result, field) => ({
-      ...result,
-      [field]:
-        field === "formats"
-          ? response[field]
-            ? { thumbnail: { url: API_URL + response[field].thumbnail.url } }
-            : null
-          : field === "url"
-            ? API_URL + response[field]
-            : response[field as keyof IUploadResponse],
-    }),
-    {} as IUploadResponse,
-  );
-
-const rearrange = (response: IUploadResponse): IUploadResponse => create(response);
-
 export const GETUpload = async (query?: string): Promise<IUploadResponse[]> => {
   try {
     const res = await fetch(`${API_URL}/api/upload/files?${query ? query + "&" : ""}populate=*`);
@@ -42,7 +16,7 @@ export const GETUpload = async (query?: string): Promise<IUploadResponse[]> => {
       throw new Error(`Failed to get: Upload with status ${res.status} || ${response.error.message}`);
     }
 
-    return response.map(rearrange);
+    return response;
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -59,7 +33,7 @@ export const GETUploadById = async (id: string): Promise<IUploadResponse> => {
       throw new Error(`Failed to get: Upload By ID with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return response;
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -95,7 +69,7 @@ export const POSTUpload = async (payload: IUploadPayload): Promise<IUploadRespon
       throw new Error(`Failed to post: Upload with status ${res.status} || ${response.error.message}`);
     }
 
-    return response.map(rearrange);
+    return response;
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;
@@ -114,7 +88,7 @@ export const DELETEUpload = async (id: number): Promise<IUploadResponse> => {
       throw new Error(`Failed to delete: Upload with status ${res.status} || ${response.error.message}`);
     }
 
-    return rearrange(response);
+    return response;
   } catch (error) {
     console.error("--- Fetch Error Message ---", error);
     throw error;

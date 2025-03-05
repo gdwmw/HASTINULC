@@ -1,22 +1,22 @@
 import { FC, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
-import { GETDatasByDocumentId } from "@/src/utils";
+import { GETDataByDocumentId } from "@/src/utils";
 
 import { Content } from "./batches";
 
 export const ASide: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
-  const fetchDatas = async () => {
-    if (session?.user?.datasDocumentId) {
+  const fetchData = async () => {
+    if (session?.user?.dataDocumentId) {
       try {
-        const res = await GETDatasByDocumentId(session?.user?.datasDocumentId);
+        const res = await GETDataByDocumentId(session?.user?.dataDocumentId);
         return res;
       } catch {
-        console.log("GETDatas Failed, Bypassed!");
+        console.log("GETDataByDocumentId Failed, Bypassed!");
         return null;
       }
     }
   };
-  return <Content response={await fetchDatas()} session={session} />;
+  return <Content response={await fetchData()} session={session} />;
 };

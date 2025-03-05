@@ -1,7 +1,7 @@
-import { IAuthResponse, IAuthSchema, IDatasPayload, IDatasResponse, IRegisterPayload } from "@/src/types";
+import { IAuthResponse, IAuthSchema, IDataPayload, IDataResponse, IRegisterPayload } from "@/src/types";
 
-import { POSTDatas } from "../../datas";
-import { PUTUsers } from "../../users";
+import { POSTData } from "../../data";
+import { PUTUser } from "../../user";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -9,15 +9,15 @@ if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-interface IRearrange extends IAuthSchema, IDatasResponse {}
-interface IPayload extends IDatasPayload, IRegisterPayload {}
+interface IRearrange extends IAuthSchema, IDataResponse {}
+interface IPayload extends IDataPayload, IRegisterPayload {}
 
 const rearrange = (response: IRearrange): IAuthResponse => ({
-  datasDocumentId: response.user.datasDocumentId ?? "",
-  datasId: response.id.toString(),
+  dataDocumentId: response.documentId ?? "",
+  dataId: response.id.toString(),
   email: response.user.email,
   id: response.user.id.toString(),
-  image: response.image?.url ?? null,
+  image: response.image ? API_URL + response.image.url : null,
   imageId: response.image?.id.toString() ?? null,
   name: response.name,
   phoneNumber: response.phoneNumber,
@@ -47,21 +47,17 @@ export const POSTRegister = async (payload: IPayload): Promise<IAuthResponse> =>
       throw new Error(`Failed to post: Register with status ${res.status} || ${response.error.message}`);
     }
 
-    const datasResponse = await POSTDatas({
+    const dataResponse = await POSTData({
       name: payload.name,
       phoneNumber: payload.phoneNumber,
       role: "user",
     });
 
-    const usersResponse = await PUTUsers({ datasDocumentId: datasResponse.documentId, id: response.user.id });
+    await PUTUser({ id: response.user.id, relation_data: dataResponse.id });
 
     const result: IRearrange = {
       ...response,
-      ...datasResponse,
-      user: {
-        ...response.user,
-        datasDocumentId: usersResponse.datasDocumentId,
-      },
+      ...dataResponse,
     };
 
     return rearrange(result);

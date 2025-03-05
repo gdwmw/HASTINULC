@@ -11,12 +11,12 @@ import { IoClose } from "react-icons/io5";
 
 import { ExampleA, ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
-import { questionnairesConditions as conditions } from "@/src/hooks";
+import { questionnaireConditions as conditions } from "@/src/hooks";
 import { NAVIGATION_DATA } from "@/src/libs";
-import { IDatasResponse } from "@/src/types";
+import { IDataResponse } from "@/src/types";
 
 interface I {
-  response: IDatasResponse | null | undefined;
+  response: IDataResponse | null | undefined;
   session: null | Session;
 }
 
@@ -24,7 +24,7 @@ export const Content: FC<I> = (props): ReactElement => {
   const { open, setOpen } = useGlobalStates();
   const [activeSection, setActiveSection] = useState("");
 
-  const questionnairesConditions = conditions({ data: props.response, session: props.session });
+  const questionnaireConditions = conditions({ data: props.response, session: props.session });
 
   const handleSmoothScroll = (e: FormEvent, href: string) => {
     e.preventDefault();
@@ -160,11 +160,11 @@ export const Content: FC<I> = (props): ReactElement => {
               <li>
                 <Link
                   className={`group flex items-center justify-between rounded-md px-4 py-2 ${
-                    questionnairesConditions ? "text-black hover:bg-rose-400 hover:text-white active:bg-rose-500" : "cursor-not-allowed text-gray-400"
+                    questionnaireConditions ? "text-black hover:bg-rose-400 hover:text-white active:bg-rose-500" : "cursor-not-allowed text-gray-400"
                   }`}
                   href={`/questionnaire`}
                   onClick={(e) => {
-                    if (!questionnairesConditions) {
+                    if (!questionnaireConditions) {
                       e.preventDefault();
                     } else {
                       setOpen({ aside: false });
@@ -175,7 +175,7 @@ export const Content: FC<I> = (props): ReactElement => {
                     <FaClipboardList size={16} />
                     <span>Questionnaire</span>
                   </div>
-                  {questionnairesConditions && (
+                  {questionnaireConditions && (
                     <div className="relative mt-[2px] flex size-2">
                       <div className="absolute size-full animate-ping rounded-full bg-rose-400 opacity-75 group-hover:bg-white" />
                       <div className="size-2 rounded-full bg-rose-500 group-hover:bg-white" />

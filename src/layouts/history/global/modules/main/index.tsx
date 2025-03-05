@@ -1,9 +1,8 @@
 import { FC, PropsWithChildren, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
-import { DUMMY_BOOKINGS_DATA, DUMMY_REVIEWS_DATA } from "@/src/libs";
-import { IBookingsResponse, IReviewsResponse } from "@/src/types";
-import { GETBookings, GETReviews } from "@/src/utils";
+import { DUMMY_BOOKING_DATA, DUMMY_REVIEW_DATA } from "@/src/libs";
+import { GETBooking, GETReview } from "@/src/utils";
 
 import { Content } from "./batches";
 
@@ -11,27 +10,27 @@ type T = Readonly<PropsWithChildren>;
 
 export const Main: FC<T> = async (props): Promise<ReactElement> => {
   const session = await getAllSession();
-  const fetchBookings = async () => {
+  const fetchBooking = async () => {
     try {
-      return await GETBookings(`sort[0]=current:desc&filters[data][documentId][$eq]=${session?.user?.datasDocumentId}`);
+      return await GETBooking(`sort[0]=createdAt:desc&filters[relation_data][documentId][$eq]=${session?.user?.dataDocumentId}`);
     } catch {
-      console.log("GETBookings Failed, Bypassed!");
+      console.log("GETBooking Failed, Bypassed!");
       return null;
     }
   };
-  const fetchReviews = async () => {
+  const fetchReview = async () => {
     try {
-      return await GETReviews(`filters[username][$eq]=${session?.user?.username}`);
+      return await GETReview(`filters[relation_data][documentId][$eq]=${session?.user?.dataDocumentId}`);
     } catch {
-      console.log("GETReviews Failed, Bypassed!");
+      console.log("GETReview Failed, Bypassed!");
       return null;
     }
   };
 
   return (
     <Content
-      bookingsResponse={session?.user?.role === "demo" ? (DUMMY_BOOKINGS_DATA as IBookingsResponse[]) : await fetchBookings()}
-      reviewsResponse={session?.user?.role === "demo" ? (DUMMY_REVIEWS_DATA as IReviewsResponse[]) : await fetchReviews()}
+      bookingResponse={session?.user?.role === "demo" ? DUMMY_BOOKING_DATA : await fetchBooking()}
+      reviewResponse={session?.user?.role === "demo" ? DUMMY_REVIEW_DATA : await fetchReview()}
       session={session}
     >
       {props.children}

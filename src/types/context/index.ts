@@ -1,6 +1,6 @@
-import { IBookingsResponse, IReviewsResponse } from "../api";
+import { IBookingResponse, IReviewResponse } from "../api";
 
-export interface IBookingsContext {
+export interface IBookingContext {
   name?: string;
   email?: string;
   phoneNumber?: string;
@@ -15,6 +15,6 @@ export interface IOpenContext {
 }
 
 export interface IResponseContext {
-  bookings: IBookingsResponse[];
-  reviews: IReviewsResponse[];
+  booking: IBookingResponse[];
+  review: IReviewResponse[];
 }

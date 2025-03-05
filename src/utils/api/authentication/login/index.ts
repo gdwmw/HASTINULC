@@ -1,6 +1,7 @@
-import { IAuthResponse, IAuthSchema, IDatasResponse, ILoginPayload } from "@/src/types";
+import { IAuthResponse, IAuthSchema, IDataResponse, ILoginPayload } from "@/src/types";
 
-import { GETDatasByDocumentId } from "../../datas";
+import { GETDataByDocumentId } from "../../data";
+import { GETUserByDocumentId } from "../../user";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -8,14 +9,14 @@ if (!API_URL) {
   throw new Error("The API URL is not defined. Please check your environment variables.");
 }
 
-interface IRearrange extends IAuthSchema, IDatasResponse {}
+interface IRearrange extends IAuthSchema, IDataResponse {}
 
 const rearrange = (response: IRearrange): IAuthResponse => ({
-  datasDocumentId: response.user.datasDocumentId ?? "",
-  datasId: response.id.toString(),
+  dataDocumentId: response.documentId ?? "",
+  dataId: response.id.toString(),
   email: response.user.email,
   id: response.user.id.toString(),
-  image: response.image?.url ?? null,
+  image: response.image ? API_URL + response.image.url : null,
   imageId: response.image?.id.toString() ?? null,
   name: response.name,
   phoneNumber: response.phoneNumber,
@@ -41,11 +42,12 @@ export const POSTLogin = async (payload: ILoginPayload): Promise<IAuthResponse> 
       throw new Error(`Failed to post: Login with status ${res.status} || ${response.error.message}`);
     }
 
-    const datasResponse = await GETDatasByDocumentId(response.user.datasDocumentId);
+    const userResponse = await GETUserByDocumentId(response.user.id);
+    const dataResponse = await GETDataByDocumentId(userResponse.relation_data?.documentId ?? "");
 
     const result: IRearrange = {
       ...response,
-      ...datasResponse,
+      ...dataResponse,
     };
 
     return rearrange(result);

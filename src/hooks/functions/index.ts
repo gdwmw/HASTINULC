@@ -1,7 +1,7 @@
 import { Session } from "next-auth";
 import { KeyboardEvent } from "react";
 
-import { IDatasResponse } from "@/src/types";
+import { IDataResponse } from "@/src/types";
 
 // ----------------------------
 
@@ -76,9 +76,9 @@ export const inputValidations = {
 
 const EXPIRY_TIME = 30 * 24 * 60 * 60 * 1000;
 
-const expired = (data: IDatasResponse | null | undefined): boolean => {
-  const questionnaires = data?.questionnaires;
-  const lastFilled = questionnaires?.[questionnaires.length - 1]?.current;
+const expired = (data: IDataResponse | null | undefined): boolean => {
+  const questionnaire = data?.relation_questionnaire;
+  const lastFilled = questionnaire?.[questionnaire.length - 1]?.createdAt;
 
   if (!lastFilled) {
     return true;
@@ -88,5 +88,5 @@ const expired = (data: IDatasResponse | null | undefined): boolean => {
   return timeCalc > EXPIRY_TIME;
 };
 
-export const questionnairesConditions = ({ data, session }: { data: IDatasResponse | null | undefined; session: null | Session }): boolean =>
-  session?.user?.role === "demo" || ((data?.reviews?.length ?? 0) > 0 && (!data?.questionnaires?.length || expired(data)));
+export const questionnaireConditions = ({ data, session }: { data: IDataResponse | null | undefined; session: null | Session }): boolean =>
+  session?.user?.role === "demo" || ((data?.relation_review?.length ?? 0) > 0 && (!data?.relation_questionnaire?.length || expired(data)));

@@ -11,11 +11,11 @@ import { BookingSummary, ExampleA, FormContainer, Input, TextArea } from "@/src/
 import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs";
 import { ReviewSchema, TReviewSchema } from "@/src/schemas";
-import { IBookingsResponse, IReviewsPayload } from "@/src/types";
-import { POSTReviews, POSTUpload } from "@/src/utils";
+import { IBookingResponse, IReviewPayload } from "@/src/types";
+import { POSTReview, POSTUpload } from "@/src/utils";
 
 interface I {
-  selectedBookingSummary: IBookingsResponse | undefined;
+  selectedBookingSummary: IBookingResponse | undefined;
   session: null | Session;
   slug: string[];
 }
@@ -51,19 +51,18 @@ export const Content: FC<I> = (props): ReactElement => {
   const onSubmit: SubmitHandler<TReviewSchema> = async (dt) => {
     setLoading(true);
 
-    const newPayload: IReviewsPayload = {
+    const newPayload: IReviewPayload = {
       ...dt,
-      booking: props.slug[1],
-      current: new Date(),
-      data: props.session?.user?.datasDocumentId,
       name: props.session?.user?.name ?? "",
+      relation_booking: props.slug[1],
+      relation_data: props.session?.user?.dataDocumentId,
       username: props.session?.user?.username ?? "",
     };
 
     try {
-      const res = await POSTReviews(newPayload);
-      if (dt.images && dt.images?.length > 0 && res.id) {
-        await POSTUpload({ field: "images", files: dt.images, ref: "api::review.review", refId: res.id.toString() });
+      const res = await POSTReview(newPayload);
+      if (dt.image && dt.image?.length > 0 && res.id) {
+        await POSTUpload({ field: "image", files: dt.image, ref: "api::review.review", refId: res.id.toString() });
       }
       console.log("Review Success!");
       setOpen({ bookingList: false, bookingSummary: false });
@@ -118,11 +117,11 @@ export const Content: FC<I> = (props): ReactElement => {
               color="rose"
               containerClassName="w-full"
               disabled={loading}
-              errorMessage={errors.images?.message}
+              errorMessage={errors.image?.message}
               label="Images"
               multiple
               type="file"
-              {...register("images")}
+              {...register("image")}
             />
 
             <TextArea
@@ -170,7 +169,7 @@ export const Content: FC<I> = (props): ReactElement => {
           <div className="my-auto flex w-full justify-center p-2">
             <BookingSummary
               {...props.selectedBookingSummary}
-              datasDocumentId={props.session?.user?.datasDocumentId}
+              dataDocumentId={props.session?.user?.dataDocumentId}
               documentId={props.slug[1]}
               status={props.selectedBookingSummary?.indicator}
             />
