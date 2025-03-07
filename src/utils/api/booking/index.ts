@@ -1,47 +1,24 @@
-const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
+import type { IBookingPayload, IBookingResponse } from "@/src/types";
 
-import { IBookingPayload, IBookingResponse } from "@/src/types";
+import { getApi, postApi } from "../base";
 
-if (!API_URL) {
-  throw new Error("The API URL is not defined. Please check your environment variables.");
-}
+const label = "Booking";
 
 export const GETBooking = async (query?: string): Promise<IBookingResponse[]> => {
-  try {
-    const res = await fetch(`${API_URL}/api/bookings?${query ? query + "&" : ""}populate=*`);
-
-    const response = await res.json();
-
-    if (!res.ok) {
-      throw new Error(`Failed to get: Booking with status ${res.status} || ${response.error.message}`);
-    }
-
-    return response.data;
-  } catch (error) {
-    console.error("--- Fetch Error Message ---", error);
-    throw error;
-  }
+  const params = query ? Object.fromEntries(new URLSearchParams(query).entries()) : undefined;
+  const response = await getApi<{ data: IBookingResponse[] }>({
+    endpoint: "/api/bookings",
+    label: label,
+    params: params,
+  });
+  return response.data;
 };
 
 export const POSTBooking = async (payload: IBookingPayload): Promise<IBookingResponse> => {
-  try {
-    const res = await fetch(`${API_URL}/api/bookings?populate=*`, {
-      body: JSON.stringify({ data: payload }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
-
-    const response = await res.json();
-
-    if (!res.ok) {
-      throw new Error(`Failed to post: Booking with status ${res.status} || ${response.error.message}`);
-    }
-
-    return response.data;
-  } catch (error) {
-    console.error("--- Fetch Error Message ---", error);
-    throw error;
-  }
+  const response = await postApi<{ data: IBookingResponse }>({
+    data: { data: payload },
+    endpoint: "/api/bookings",
+    label: label,
+  });
+  return response.data;
 };

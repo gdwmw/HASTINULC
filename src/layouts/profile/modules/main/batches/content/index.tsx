@@ -140,14 +140,14 @@ export const Content: FC<I> = (props): ReactElement => {
         });
 
         imageId = uploadResponse[0].id.toString();
-        imageUrl = uploadResponse[0].url;
+        imageUrl = API_URL + uploadResponse[0].url;
       }
 
       await session.update({
         user: {
           ...session.data?.user,
           email: userResponse.email,
-          image: API_URL + imageUrl,
+          image: imageUrl,
           imageId: imageId,
           name: dataResponse.name,
           phoneNumber: dataResponse.phoneNumber,

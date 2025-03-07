@@ -118,7 +118,7 @@ export const Content: FC<I> = (props): ReactElement => {
               containerClassName="w-full"
               disabled={loading}
               errorMessage={errors.image?.message}
-              label="Images"
+              label="Image(s)"
               multiple
               type="file"
               {...register("image")}
