@@ -10,10 +10,10 @@ import { geistMono, geistSans, montaguSlab } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  authors: [{ name: "Gede Dewo Wahyu M.W", url: "https://github.com/gdwmw" }],
+  authors: [{ name: "Hastinulc Makeup Art", url: "https://github.com/hastinulchotimah" }],
   category: "Boilerplate",
-  creator: "Gede Dewo Wahyu M.W",
-  publisher: "Gede Dewo Wahyu M.W",
+  creator: "Hastinulc Makeup Art",
+  publisher: "Hastinulc Makeup Art",
   referrer: "strict-origin-when-cross-origin",
   title: {
     default: "Hastinulc | Home",
