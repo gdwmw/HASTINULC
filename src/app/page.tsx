@@ -9,7 +9,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  description: "Hastinulc Makeup Art - Professional Makeup Services in Padang. Get the perfect look for your special day at affordable prices",
+  description: "Hastinulc Makeup Art || Professional Makeup Services in Padang || Get the perfect look for your special day at an affordable price",
   keywords: [
     "Hastinulc Makeup Art",
     "Hastinulc Makeup",
@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     "Professional Makeup",
   ],
   openGraph: {
-    description: "Hastinulc Makeup Art - Professional Makeup Services in Padang. Get the perfect look for your special day at affordable prices",
+    description: "Hastinulc Makeup Art || Professional Makeup Services in Padang || Get the perfect look for your special day at an affordable price",
     images: [
       {
         alt: "Hastinulc Makeup Art",
         height: 800,
-        url: "https://hastinulc-makeup-art.vercel.app/assets/images/logos/Hastinulc-Makeup-Art.png", // Must be an absolute URL and PNG format
+        url: "https://hastinulc-makeup-art.vercel.app/assets/images/logos/Hastinulc.png", // Must be an absolute URL and PNG format
         width: 800,
       },
     ],
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@hastinulchotimah",
-    description: "Hastinulc Makeup Art - Professional Makeup Services in Padang. Get the perfect look for your special day at affordable prices",
-    images: ["https://hastinulc-makeup-art.vercel.app/assets/images/logos/Hastinulc-Makeup-Art.png"], // Must be an absolute URL and PNG format
+    description: "Hastinulc Makeup Art || Professional Makeup Services in Padang || Get the perfect look for your special day at an affordable price",
+    images: ["https://hastinulc-makeup-art.vercel.app/assets/images/logos/Hastinulc.png"], // Must be an absolute URL and PNG format
     title: "Hastinulc | Home",
   },
 };
