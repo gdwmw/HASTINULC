@@ -39,7 +39,7 @@ export const apiRequest = async <T>(props: I): Promise<T> => {
       );
     }
 
-    return response.json();
+    return response;
   } catch (error) {
     console.error("--- API Request Error ---", error);
     throw error;
