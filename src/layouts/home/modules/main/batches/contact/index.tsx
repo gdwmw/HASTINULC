@@ -13,7 +13,7 @@ export const Contact: FC = (): ReactElement => (
           containerClassName="max-w-[600px]"
           description="Feel free to reach out to us for any inquiries or bookings. We're here to provide you with exceptional service and ensure your special moments are unforgettable. Let's get in touch and create something beautiful together."
           subtitle="CONTACT US"
-          title="Get in touch"
+          title="Get In Touch"
           titleClassName="text-4xl sm:text-5xl md:text-6xl"
         />
 

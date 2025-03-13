@@ -31,7 +31,7 @@ export const Packages: FC = (): ReactElement => {
           containerClassName="max-w-[1000px] text-center"
           description="With Hastinulc Makeup Art, You'll not get only your Dream Makeup services but also at affordable price."
           subtitle="PACKAGES"
-          title="Choose your makeup package"
+          title="Choose Your Makeup Package"
           titleClassName="text-4xl sm:text-5xl md:text-6xl"
         />
 
@@ -74,7 +74,7 @@ export const Packages: FC = (): ReactElement => {
           <SectionHeader
             containerClassName="text-center sm:text-right"
             subtitle="TESTIMONIALS"
-            title="Words from Clients"
+            title="Words From Clients"
             titleClassName="text-4xl sm:text-nowrap sm:text-5xl md:text-6xl"
           />
 
