@@ -149,7 +149,6 @@ export const Content: FC<I> = (props): ReactElement => {
 
     try {
       const res = await POSTBooking(newPayload);
-      console.log("Booking Success!");
 
       const whatsappMessage = `*Hastinulc Makeup Art | Booking Details | ${dt.name}*
 
@@ -175,6 +174,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
       window.open(`https://wa.me/6285762346703?text=${encodedMessage}`, "_blank");
 
+      console.log("Booking Success!");
       setOpen({ bookingList: false, bookingSummary: true });
       router.push(`/history/${props.session?.user?.username}/${res.documentId}`);
       reset();

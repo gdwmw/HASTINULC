@@ -10,8 +10,7 @@ export const Nav: FC = async (): Promise<ReactElement> => {
   const fetchData = async () => {
     if (session?.user?.dataDocumentId) {
       try {
-        const res = await GETDataByDocumentId(session?.user?.dataDocumentId);
-        return res;
+        return await GETDataByDocumentId(session?.user?.dataDocumentId);
       } catch {
         console.log("GETDataByDocumentId Failed, Bypassed!");
         return null;
