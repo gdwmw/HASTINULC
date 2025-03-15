@@ -3,6 +3,7 @@ import type { NextAuthOptions, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import { deleteCookie, setCookie } from "@/src/hooks";
 import { DEMO_ACCOUNT_DATA } from "@/src/libs";
 import { ILoginPayload } from "@/src/types";
 import { POSTLogin } from "@/src/utils";
@@ -37,22 +38,24 @@ export const options: NextAuthOptions = {
           return null;
         }
 
-        try {
-          const { identifier, password } = credentials as ILoginPayload;
+        const { identifier, password } = credentials as ILoginPayload;
 
-          if ((identifier === "demo" || identifier === "demo@demo.com") && password === "demo") {
-            return DEMO_ACCOUNT_DATA;
-          } else {
+        if ((identifier === "demo" || identifier === "demo@demo.com") && password === "demo") {
+          return DEMO_ACCOUNT_DATA;
+        } else {
+          try {
             const res = await POSTLogin({ identifier, password });
 
-            if (!res) {
+            if (!res.confirmed || res.blocked) {
+              await setCookie({ name: "report", value: JSON.stringify([res.confirmed, res.blocked]) });
               return null;
             }
 
             return res;
+          } catch {
+            await deleteCookie("report");
+            return null;
           }
-        } catch {
-          return null;
         }
       },
       credentials: {},

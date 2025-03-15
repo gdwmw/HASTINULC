@@ -11,6 +11,8 @@ if (!API_URL) {
 }
 
 const rearrange = (authResponse: IAuthSchema, dataResponse: IDataResponse): IAuthResponse => ({
+  blocked: authResponse.user.blocked,
+  confirmed: authResponse.user.confirmed,
   dataDocumentId: dataResponse.documentId ?? "",
   dataId: dataResponse.id.toString(),
   email: authResponse.user.email,

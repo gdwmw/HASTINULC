@@ -6,6 +6,8 @@ import testimonialsImage5 from "@/public/assets/images/model/Testimonials-6.jpg"
 import { IAuthResponse, IBookingResponse, IDataResponse, IReviewResponse } from "@/src/types";
 
 export const DEMO_ACCOUNT_DATA: IAuthResponse = {
+  blocked: false,
+  confirmed: true,
   dataDocumentId: "dEmOdataSDocuMenTid",
   dataId: "1",
   email: "demo@demo.com",
@@ -32,6 +34,8 @@ export const DUMMY_ACCOUNT_DATA: IDUMMY_ACCOUNT_DATA[] = [
     email: "admin@admin.com",
     password: "admin",
     response: {
+      blocked: false,
+      confirmed: true,
       dataDocumentId: "ADmiNSDocuMenTid",
       dataId: "1",
       email: "admin@admin.com",
@@ -51,6 +55,8 @@ export const DUMMY_ACCOUNT_DATA: IDUMMY_ACCOUNT_DATA[] = [
     email: "user@user.com",
     password: "user",
     response: {
+      blocked: false,
+      confirmed: true,
       dataDocumentId: "uSErDocuMenTid",
       dataId: "2",
       email: "user@user.com",
