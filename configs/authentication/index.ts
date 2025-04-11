@@ -3,6 +3,7 @@ import type { NextAuthOptions, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+// import { DUMMY_ACCOUNT_DATA } from "@/src/libs";
 import { deleteCookie, setCookie } from "@/src/hooks";
 import { DEMO_ACCOUNT_DATA } from "@/src/libs";
 import { ILoginPayload } from "@/src/types";
@@ -57,6 +58,14 @@ export const options: NextAuthOptions = {
             return null;
           }
         }
+
+        // const res = DUMMY_ACCOUNT_DATA.find((user) => (user.username === identifier || user.email === identifier) && user.password === password);
+
+        // if (!res) {
+        //   return null;
+        // }
+
+        // return res.response;
       },
       credentials: {},
       name: "Credentials",
