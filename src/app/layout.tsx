@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FC, PropsWithChildren, ReactElement } from "react";
 
+import { APIConnectionChecker } from "@/src/components";
 import { NextAuthProvider, NextThemesProvider, ReactQueryProvider } from "@/src/libs";
 
 import { geistMono, geistSans, montaguSlab } from "./fonts";
@@ -30,6 +31,7 @@ const RootLayout: FC<T> = (props): ReactElement => (
         <ReactQueryProvider>
           <NextAuthProvider>
             {props.children}
+            <APIConnectionChecker />
             <Analytics />
             <SpeedInsights />
           </NextAuthProvider>
