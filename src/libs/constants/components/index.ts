@@ -9,3 +9,7 @@ export const EXAMPLEC_COLOR_OPTIONS = ["emerald", "rose"] as const;
 // ----------------------------
 
 export const LABEL_COLOR_OPTIONS = ["emerald", "rose"] as const;
+
+// ----------------------------
+
+export const AVATAR_SIZE_OPTIONS = ["lg", "md", "sm"] as const;

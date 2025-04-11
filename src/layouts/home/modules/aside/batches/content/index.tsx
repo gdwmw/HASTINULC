@@ -2,14 +2,13 @@
 
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { FC, FormEvent, ReactElement, useEffect, useState } from "react";
 import { FaClipboardList, FaHistory, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { GoDot, GoDotFill } from "react-icons/go";
 import { IoClose } from "react-icons/io5";
 
-import { ExampleA, ExampleATWM } from "@/src/components";
+import { DetailedAvatar, ExampleA, ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { questionnaireConditions as conditions } from "@/src/hooks";
 import { NAVIGATION_DATA } from "@/src/libs";
@@ -73,35 +72,12 @@ export const Content: FC<I> = (props): ReactElement => {
       id="aside-menu"
     >
       <section className="flex items-center justify-between">
-        {props.session?.user?.status ? (
-          <figure className="flex items-center gap-2">
-            {props.session?.user?.image ? (
-              <div className="relative aspect-square size-fit min-h-[50px] min-w-[50px] overflow-hidden rounded-full border border-gray-200">
-                <Image alt="Profile Image" className="object-cover" fill quality={30} src={props.session?.user?.image ?? ""} />
-              </div>
-            ) : (
-              <div className="flex aspect-square size-fit min-h-[50px] min-w-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
-                <FaUser className="text-gray-400" size={25} />
-              </div>
-            )}
-            <figcaption>
-              <div className="-mb-1.5 mt-[-5px] line-clamp-1">
-                <span className="text-lg">{props.session?.user?.name}</span>
-              </div>
-              <span className="block text-xs text-rose-500">{props.session?.user?.username}</span>
-            </figcaption>
-          </figure>
-        ) : (
-          <figure className="flex items-center gap-2">
-            <div className="flex aspect-square size-fit min-h-[50px] min-w-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
-              <FaUser className="text-gray-400" size={25} />
-            </div>
-            <figcaption>
-              <span className="-mb-1.5 mt-[-5px] block text-lg">Guest</span>
-              <span className="block text-xs text-gray-400">Not logged in</span>
-            </figcaption>
-          </figure>
-        )}
+        <DetailedAvatar
+          name={props.session?.user?.name ?? ""}
+          src={props.session?.user?.image ?? ""}
+          status={props.session?.user?.status ?? ""}
+          username={props.session?.user?.username ?? ""}
+        />
 
         <ExampleA color="rose" onClick={() => setOpen({ aside: false })} size="sm" variant="ghost">
           <IoClose size={30} />

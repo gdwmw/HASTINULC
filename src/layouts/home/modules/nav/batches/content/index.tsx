@@ -9,7 +9,7 @@ import { FaClipboardList, FaHistory, FaSignOutAlt, FaUser } from "react-icons/fa
 import { HiOutlineBars3 } from "react-icons/hi2";
 
 import logo from "@/public/assets/images/logos/Black.svg";
-import { ExampleA, ExampleATWM } from "@/src/components";
+import { Avatar, DetailedAvatar, ExampleA, ExampleATWM } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { questionnaireConditions as conditions } from "@/src/hooks";
 import { NAVIGATION_DATA } from "@/src/libs";
@@ -102,59 +102,21 @@ export const Content: FC<I> = (props): ReactElement => {
                     </div>
                   </div>
                 )}
-                {props.session?.user?.image ? (
-                  <div className="relative aspect-square size-fit min-h-[45px] min-w-[45px] overflow-hidden rounded-full border border-gray-200">
-                    <Image
-                      alt="Profile Image"
-                      className="cursor-pointer object-cover"
-                      fill
-                      onClick={() => setMenuOpen((prev) => !prev)}
-                      quality={30}
-                      src={props.session?.user?.image ?? ""}
-                    />
-                  </div>
-                ) : (
-                  <button
-                    className="flex aspect-square size-fit min-h-[45px] min-w-[45px] items-center justify-center rounded-full border border-gray-200 bg-gray-100"
-                    onClick={() => setMenuOpen((prev) => !prev)}
-                  >
-                    <FaUser className="text-gray-400" size={25} />
-                  </button>
-                )}
+
+                <button onClick={() => setMenuOpen((prev) => !prev)}>
+                  <Avatar size="sm" src={props.session?.user?.image ?? ""} />
+                </button>
               </div>
 
               {menuOpen && (
                 <ul className="absolute right-0 mt-2 w-96 overflow-hidden rounded-lg border border-gray-200 bg-white p-5 shadow-md">
                   <li>
-                    {props.session?.user?.status ? (
-                      <figure className="flex items-center gap-2">
-                        {props.session?.user?.image ? (
-                          <div className="relative aspect-square size-fit min-h-[50px] min-w-[50px] overflow-hidden rounded-full border border-gray-200">
-                            <Image alt="Profile Image" className="object-cover" fill quality={30} src={props.session?.user?.image ?? ""} />
-                          </div>
-                        ) : (
-                          <div className="flex aspect-square size-fit min-h-[50px] min-w-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
-                            <FaUser className="text-gray-400" size={25} />
-                          </div>
-                        )}
-                        <figcaption>
-                          <div className="-mb-1.5 mt-[-5px] line-clamp-1">
-                            <span className="text-lg">{props.session?.user?.name}</span>
-                          </div>
-                          <span className="block text-xs text-rose-500">{props.session?.user?.username}</span>
-                        </figcaption>
-                      </figure>
-                    ) : (
-                      <figure className="flex items-center gap-2">
-                        <div className="flex aspect-square size-fit min-h-[50px] min-w-[50px] items-center justify-center rounded-full border border-gray-200 bg-gray-100">
-                          <FaUser className="text-gray-400" size={25} />
-                        </div>
-                        <figcaption>
-                          <span className="-mb-1.5 mt-[-5px] block text-lg">Guest</span>
-                          <span className="block text-xs text-gray-400">Not logged in</span>
-                        </figcaption>
-                      </figure>
-                    )}
+                    <DetailedAvatar
+                      name={props.session?.user?.name ?? ""}
+                      src={props.session?.user?.image ?? ""}
+                      status={props.session?.user?.status}
+                      username={props.session?.user?.username}
+                    />
                   </li>
 
                   <div className="my-3 border-t border-gray-300" />
