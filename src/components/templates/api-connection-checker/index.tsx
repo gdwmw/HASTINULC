@@ -26,7 +26,6 @@ export const APIConnectionChecker: FC = (): ReactElement => {
           cache: "no-store",
           method: "HEAD",
         });
-
         handleSetArray(true, index);
       } catch {
         handleSetArray(false, index);
@@ -39,12 +38,9 @@ export const APIConnectionChecker: FC = (): ReactElement => {
           await checkConnection(url, i);
         }
       });
-
     handleCheckConnection();
-
     const interval = setInterval(handleCheckConnection, 30000);
     return () => clearInterval(interval);
-
     // eslint-disable-next-line
   }, [open]);
 
@@ -60,28 +56,28 @@ export const APIConnectionChecker: FC = (): ReactElement => {
               </ExampleA>
             </header>
 
-            <div className="flex items-center gap-3 rounded-md border bg-gray-100 p-2 dark:border-gray-600 dark:bg-gray-800">
+            <figure className="flex items-center gap-3 rounded-md border bg-gray-100 p-2 dark:border-gray-600 dark:bg-gray-800">
               <div className="flex size-8 items-center justify-center rounded-full bg-emerald-400 text-white">
                 <IoCheckmark size={18} />
               </div>
-              <div>
-                <p className="font-semibold dark:text-white">Connected</p>
-                <p className="text-xs text-gray-600 dark:text-gray-300">NEXT_PUBLIC_EXAMPLE_URL</p>
-              </div>
-            </div>
+              <figcaption>
+                <h2 className="font-semibold dark:text-white">Connected</h2>
+                <span className="block text-xs text-gray-600 dark:text-gray-300">NEXT_PUBLIC_EXAMPLE_URL</span>
+              </figcaption>
+            </figure>
 
             {ENVIRONMENT_DATA_VARIABLES.map((dt, i) => (
-              <div className="flex items-center gap-3 rounded-md border bg-gray-100 p-2 dark:border-gray-600 dark:bg-gray-800" key={dt}>
+              <figure className="flex items-center gap-3 rounded-md border bg-gray-100 p-2 dark:border-gray-600 dark:bg-gray-800" key={dt}>
                 <div
                   className={`flex size-8 items-center justify-center rounded-full text-white ${connection[i] ? "bg-emerald-400" : "bg-rose-400"}`}
                 >
                   {connection[i] ? <IoCheckmark size={18} /> : <IoClose size={18} />}
                 </div>
-                <div>
-                  <p className="font-semibold dark:text-white">{connection[i] ? "Connected" : "Disconnected"}</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-300">{dt}</p>
-                </div>
-              </div>
+                <figcaption>
+                  <h2 className="font-semibold dark:text-white">{connection[i] ? "Connected" : "Disconnected"}</h2>
+                  <span className="block text-xs text-gray-600 dark:text-gray-300">{dt}</span>
+                </figcaption>
+              </figure>
             ))}
 
             <p className="text-xs text-gray-400">Last checked: {new Date().toLocaleTimeString()}</p>
