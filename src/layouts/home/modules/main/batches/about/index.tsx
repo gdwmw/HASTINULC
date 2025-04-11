@@ -55,21 +55,19 @@ export const About: FC = (): ReactElement => {
         </figure>
 
         <SectionHeader
-          containerClassName="max-w-[500px] border-b border-rose-200 pb-8"
+          className={{ container: "max-w-[500px] border-b border-rose-200 pb-8", title: "text-4xl sm:text-5xl md:text-6xl" }}
           description="At Hastinulc Makeup Art, we believe every face tells a story, and we're here to make it shine. With over 15 years of experience, we specialize in enhancing natural beauty and creating unforgettable looks for every special moment. Trust us to bring out your confidence and elegance with our professional makeup services."
           subtitle="WELCOME TO"
           title="Best Professional Makeup Artist"
-          titleClassName="text-4xl sm:text-5xl md:text-6xl"
         />
       </section>
 
       <section className="container mx-auto flex justify-between gap-10 px-5 max-lg:flex-col lg:gap-5">
         <SectionHeader
-          containerClassName="max-w-[700px] max-lg:text-right"
+          className={{ container: "max-w-[700px] max-lg:text-right", title: "text-4xl sm:text-5xl md:text-6xl" }}
           description="Every moment deserves to be extraordinary, and we are here to make that happen. From weddings to special events, our expert touch ensures you'll look and feel your absolute best. Let us create memories that last a lifetime with flawless and personalized beauty services."
           subtitle="SPECIALS"
           title="We're Here to Make Your Day Memorable"
-          titleClassName="text-4xl sm:text-5xl md:text-6xl"
         />
 
         <div className="flex gap-5 max-lg:justify-center">
@@ -109,11 +107,10 @@ export const About: FC = (): ReactElement => {
         </div>
 
         <SectionHeader
-          containerClassName="z-[1] max-w-[700px] text-center"
+          className={{ container: "z-[1] max-w-[700px] text-center", title: "text-4xl sm:text-5xl md:text-6xl" }}
           description="Choosing the right makeup artist is key to making your special day unforgettable. We combine skill, passion, and attention to detail to ensure your beauty shines through every moment. Here's why we stand out."
           subtitle="WHY US"
           title="Why Choose Us?"
-          titleClassName="text-4xl sm:text-5xl md:text-6xl"
         />
 
         <footer className="z-[1] flex gap-3 font-montaguSlab max-md:flex-col md:gap-10">

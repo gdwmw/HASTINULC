@@ -1,11 +1,13 @@
-import { FC, ReactElement } from "react";
+import { FC, PropsWithChildren, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
 import { GETBooking } from "@/src/utils";
 
 import { About, Contact, Home, Packages, Portfolio } from "./batches";
 
-export const Main: FC = async (): Promise<ReactElement> => {
+type T = Readonly<PropsWithChildren>;
+
+export const Main: FC<T> = async (props): Promise<ReactElement> => {
   const session = await getAllSession();
   const fetchBooking = async () => {
     try {
@@ -23,6 +25,7 @@ export const Main: FC = async (): Promise<ReactElement> => {
       <Portfolio />
       <Packages />
       <Contact />
+      {props.children}
     </main>
   );
 };

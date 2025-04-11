@@ -7,8 +7,9 @@ const HomeLayout: FC = (): ReactElement => (
     <Header>
       <Nav />
     </Header>
-    <ASide />
-    <Main />
+    <Main>
+      <ASide />
+    </Main>
     <Footer />
   </>
 );
