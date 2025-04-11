@@ -23,13 +23,13 @@ export default withAuth(function middleware(request: NextRequestWithAuth) {
 
 export const config = {
   matcher: [
-    "/admin-example/:path*",
     "/user-example/:path*",
+    "/admin-example/:path*",
     "/booking/:path*",
     "/history/:path*",
-    "/password/:path*",
-    "/profile/:path*",
-    "/questionnaire/:path*",
     "/review/:path*",
+    "/profile/:path*",
+    "/password/:path*",
+    "/questionnaire/:path*",
   ],
 };
