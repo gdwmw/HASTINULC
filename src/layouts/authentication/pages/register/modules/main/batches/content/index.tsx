@@ -3,11 +3,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useState } from "react";
+import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-import { ExampleA, ExampleATWM, FormContainer, Input } from "@/src/components";
+import { ExampleATWM, FormContainer, Input, SubmitButton } from "@/src/components";
 import { inputValidations } from "@/src/hooks";
 import { RegisterSchema, TRegisterSchema } from "@/src/schemas";
 import { POSTRegister } from "@/src/utils";
@@ -74,7 +74,7 @@ export const Content: FC = (): ReactElement => {
   const router = useRouter();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [passwordNotMatch, setPasswordNotMatch] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setTransition] = useTransition();
 
   const {
     formState: { errors },
@@ -86,30 +86,28 @@ export const Content: FC = (): ReactElement => {
     resolver: zodResolver(RegisterSchema),
   });
 
-  const onSubmit: SubmitHandler<TRegisterSchema> = async (dt) => {
-    setLoading(true);
-    setPasswordNotMatch(false);
+  const onSubmit: SubmitHandler<TRegisterSchema> = (dt) => {
+    setTransition(async () => {
+      setPasswordNotMatch(false);
 
-    if (getValues("password") === getValues("confirmPassword")) {
-      try {
-        await POSTRegister(dt);
-        console.log("Register Success!");
-        router.push("/authentication/login");
-        reset();
-      } catch {
-        console.log("Register Failed!");
-      } finally {
-        setLoading(false);
+      if (getValues("password") === getValues("confirmPassword")) {
+        try {
+          await POSTRegister(dt);
+          console.log("Register Success!");
+          router.push("/authentication/login");
+          reset();
+        } catch {
+          console.log("Register Failed!");
+        }
+      } else {
+        setPasswordNotMatch(true);
       }
-    } else {
-      setLoading(false);
-      setPasswordNotMatch(true);
-    }
+    });
   };
 
   return (
-    <main className="bg-slate-100">
-      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[556px] max-w-[450px]" label={"Home"}>
+    <main className="bg-slate-100 dark:bg-slate-900">
+      <FormContainer className={{ innerContainer: "max-h-[556px] w-full max-w-[450px]" }} href={"/"} label={"Home"}>
         <form className="flex w-full flex-col gap-3 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
           {FORM_FIELDS_DATA.map((dt) => (
             <Input
@@ -129,9 +127,7 @@ export const Content: FC = (): ReactElement => {
 
           <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password does not match Password"}</span>
 
-          <ExampleA className="min-h-10 font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-            {loading ? "Loading..." : "REGISTER"}
-          </ExampleA>
+          <SubmitButton color="rose" disabled={loading} label="REGISTER" size="sm" variant="solid" />
 
           <div className="flex justify-center gap-1">
             <span className="text-xs">Already have an account?</span>
