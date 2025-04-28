@@ -1,7 +1,6 @@
 export * from "./authentication";
 export * from "./booking";
 export * from "./data";
-export * from "./example";
 export * from "./password";
 export * from "./questionnaire";
 export * from "./review";

@@ -17,5 +17,6 @@ export const ASide: FC = async (): Promise<ReactElement> => {
       }
     }
   };
+
   return <Content response={await fetchData()} session={session} />;
 };

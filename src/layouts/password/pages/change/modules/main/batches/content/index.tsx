@@ -2,11 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signOut } from "next-auth/react";
-import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useState } from "react";
+import { FC, HTMLInputTypeAttribute, ReactElement, useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
-import { ExampleA, FormContainer, Input } from "@/src/components";
+import { FormContainer, Input, SubmitButton } from "@/src/components";
 import { ChangePasswordSchema, TChangePasswordSchema } from "@/src/schemas";
 import { POSTChangePassword } from "@/src/utils";
 
@@ -15,7 +15,6 @@ interface IFormField {
   label: string;
   maxLength?: number;
   name: keyof TChangePasswordSchema;
-  onKeyDown?: (e: KeyboardEvent) => void;
   type: HTMLInputTypeAttribute;
 }
 
@@ -44,7 +43,7 @@ const FORM_FIELDS_DATA: IFormField[] = [
 export const Content: FC = (): ReactElement => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [passwordNotMatch, setPasswordNotMatch] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setTransition] = useTransition();
 
   const {
     formState: { errors },
@@ -56,30 +55,28 @@ export const Content: FC = (): ReactElement => {
     resolver: zodResolver(ChangePasswordSchema),
   });
 
-  const onSubmit: SubmitHandler<TChangePasswordSchema> = async (dt) => {
-    setLoading(true);
-    setPasswordNotMatch(false);
+  const onSubmit: SubmitHandler<TChangePasswordSchema> = (dt) => {
+    setTransition(async () => {
+      setPasswordNotMatch(false);
 
-    if (getValues("password") === getValues("passwordConfirmation")) {
-      try {
-        await POSTChangePassword(dt);
-        console.log("Change Password Success!");
-        signOut();
-        reset();
-      } catch {
-        console.log("Change Password Failed!");
-      } finally {
-        setLoading(false);
+      if (getValues("password") === getValues("passwordConfirmation")) {
+        try {
+          await POSTChangePassword(dt);
+          console.log("Change Password Success!");
+          signOut();
+          reset();
+        } catch {
+          console.log("Change Password Failed!");
+        }
+      } else {
+        setPasswordNotMatch(true);
       }
-    } else {
-      setLoading(false);
-      setPasswordNotMatch(true);
-    }
+    });
   };
 
   return (
-    <main className="bg-slate-100">
-      <FormContainer href={"/profile"} innerContainerClassName="w-full max-w-[350px]" label={"Back"}>
+    <main className="bg-slate-100 dark:bg-slate-900">
+      <FormContainer className={{ innerContainer: "w-full max-w-[350px]" }} href={"/profile"} label={"Back"}>
         <form className="flex w-full flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
           {FORM_FIELDS_DATA.map((dt) => (
             <Input
@@ -91,7 +88,6 @@ export const Content: FC = (): ReactElement => {
               key={dt.id}
               label={dt.label}
               maxLength={dt.maxLength}
-              onKeyDown={dt.onKeyDown}
               type={passwordVisibility ? "text" : "password"}
               {...register(dt.name)}
             />
@@ -99,9 +95,7 @@ export const Content: FC = (): ReactElement => {
 
           <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password does not match Password"}</span>
 
-          <ExampleA className="w-full font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-            {loading ? "Loading..." : "UPDATE"}
-          </ExampleA>
+          <SubmitButton color="rose" disabled={loading} label="UPDATE" size="sm" variant="solid" />
         </form>
       </FormContainer>
     </main>

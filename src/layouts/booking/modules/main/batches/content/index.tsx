@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { FC, Fragment, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { BookingSummary, DatePickerInput, ErrorMessage, ExampleA, ExampleATWM, FormContainer, Input, Select } from "@/src/components";
+import { BookingSummary, DatePickerInput, ErrorMessage, ExampleATWM, FormContainer, Input, Select, SubmitButton } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA, TIME_SLOTS_DATA } from "@/src/libs";
@@ -108,6 +108,7 @@ export const Content: FC<I> = (props): ReactElement => {
       name: booking?.name ?? props.session?.user?.name ?? undefined,
       package: booking?.package,
       phoneNumber: booking?.phoneNumber ?? props.session?.user?.phoneNumber,
+      time: [],
     },
     resolver: zodResolver(BookingSchema),
   });
@@ -141,7 +142,7 @@ export const Content: FC<I> = (props): ReactElement => {
       ...dt,
       indicator: "Waiting",
       relation_data: props.session?.user?.dataDocumentId ?? "",
-      subTotal: subtotal.toString(),
+      subtotal: subtotal.toString(),
       tax: tax.toString(),
       total: total.toString(),
       username: props.session?.user?.username ?? "",
@@ -187,7 +188,13 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
   return (
     <main className="bg-slate-100">
-      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[600px] gap-5 lg:max-w-[1000px]" label={"Home"}>
+      <FormContainer
+        className={{
+          innerContainer: "size-full max-h-[821px] max-w-[600px] gap-5 lg:max-w-[1000px]",
+        }}
+        href="/"
+        label="Home"
+      >
         <form className="flex w-full items-start overflow-y-auto lg:max-w-[500px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col justify-center gap-4">
             {FORM_FIELDS_DATA.map((dt) => {
@@ -200,9 +207,9 @@ I'm looking forward to your *confirmation*. Thank you!`;
                     errorMessage={errors[dt.name]?.message}
                     excludeDates={bookedDates}
                     key={dt.id}
-                    label={dt.label}
+                    label={dt.label ?? ""}
                     minDate={new Date()}
-                    onChange={(value) => value && setDate(value)}
+                    onChange={(value: Date | null) => value && setDate(value)}
                     selected={date}
                   />
                 );
@@ -210,7 +217,14 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
               if (dt.isSelect) {
                 return (
-                  <Select color="rose" disabled={loading} errorMessage={errors[dt.name]?.message} key={dt.id} label={dt.label} {...register(dt.name)}>
+                  <Select
+                    color="rose"
+                    disabled={loading}
+                    errorMessage={errors[dt.name]?.message}
+                    key={dt.id}
+                    label={dt.label ?? ""}
+                    {...register(dt.name)}
+                  >
                     <option value="-">-</option>
                     {dt.options?.map((opt, i) => (
                       <option key={i} value={opt}>
@@ -246,7 +260,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
                     disabled={loading}
                     errorMessage={errors[dt.name]?.message}
                     key={dt.id}
-                    label={dt.label}
+                    label={dt.label ?? ""}
                     maxLength={dt.maxLength}
                     onKeyDown={dt.onKeyDown}
                     type={dt.type}
@@ -272,15 +286,21 @@ I'm looking forward to your *confirmation*. Thank you!`;
               );
             })}
 
-            <ExampleA className="font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-              {loading ? "Loading..." : "BOOKING NOW"}
-            </ExampleA>
+            <SubmitButton color="rose" disabled={loading} label="BOOKING NOW" size="sm" variant="solid" />
           </div>
         </form>
 
         <aside className="hidden min-w-fit grow items-start overflow-y-auto lg:flex">
           <div className="my-auto flex w-full justify-center p-2">
-            <BookingSummary {...watch()} dataDocumentId={props.session?.user?.dataDocumentId} subTotal={subtotal} tax={tax} total={total} />
+            <BookingSummary
+              data={{
+                documentId: props.session?.user?.dataDocumentId ?? "",
+                subtotal: subtotal.toString(),
+                tax: tax.toString(),
+                total: total.toString(),
+                ...watch(),
+              }}
+            />
           </div>
         </aside>
       </FormContainer>

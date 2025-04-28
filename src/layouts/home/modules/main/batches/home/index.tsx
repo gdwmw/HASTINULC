@@ -164,13 +164,15 @@ export const Home: FC<I> = (props): ReactElement => {
 
           <div className="container mx-auto size-full px-5">
             <SectionHeader
-              containerClassName="flex h-full flex-col justify-center gap-6 space-y-0"
+              className={{
+                container: "flex h-full flex-col justify-center gap-6 space-y-0",
+                description: "z-[1] max-w-[450px] text-base md:max-w-[550px] md:text-lg lg:max-w-[650] lg:text-xl",
+                subtitle: "z-[1] -mb-5",
+                title: "z-[1] max-w-[500px] text-5xl sm:max-w-[600px] sm:text-6xl md:max-w-[700px] md:text-7xl lg:max-w-[800px] lg:text-8xl",
+              }}
               description="Delivering elegant and professional beauty touches for your special moments. Trust us to bring out your best look."
-              descriptionClassName="z-[1] max-w-[450px] text-base md:max-w-[550px] md:text-lg lg:max-w-[650] lg:text-xl"
               subtitle="BEAUTIFY"
-              subtitleClassName="z-[1] -mb-5"
               title="Professional Makeup Artist"
-              titleClassName="z-[1] max-w-[500px] text-5xl sm:max-w-[600px] sm:text-6xl md:max-w-[700px] md:text-7xl lg:max-w-[800px] lg:text-8xl"
             />
           </div>
         </section>
@@ -184,12 +186,12 @@ export const Home: FC<I> = (props): ReactElement => {
                 <div className="hidden w-full items-center gap-5 lg:flex">
                   {FORM_FIELDS_DATA.slice(0, 3).map((dt) => (
                     <Input
+                      className={{ container: "w-64" }}
                       color="rose"
-                      containerClassName="w-64"
                       disabled={loading}
                       errorMessage={errors[dt.name]?.message}
                       key={dt.id}
-                      label={dt.label}
+                      label={dt.label ?? ""}
                       maxLength={dt.maxLength}
                       onKeyDown={dt.onKeyDown}
                       type={dt.type}
@@ -203,13 +205,12 @@ export const Home: FC<I> = (props): ReactElement => {
                     if (dt.isSelect) {
                       return (
                         <Select
-                          className="h-[26px]"
+                          className={{ container: "w-full lg:w-64", select: "h-[26px]" }}
                           color="rose"
-                          containerClassName="w-full lg:w-64"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
                           key={dt.id}
-                          label={dt.label}
+                          label={dt.label ?? ""}
                           {...register(dt.name)}
                         >
                           <option value="-">-</option>
@@ -225,16 +226,16 @@ export const Home: FC<I> = (props): ReactElement => {
                     if (dt.isDatePicker) {
                       return (
                         <DatePickerInput
+                          className={{ container: "z-[2] w-full lg:w-64" }}
                           color="rose"
-                          containerClassName="z-[2] w-full lg:w-64"
                           dateFormat="yyyy/MM/dd"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
                           excludeDates={bookedDates}
                           key={dt.id}
-                          label={dt.label}
+                          label={dt.label ?? ""}
                           minDate={new Date()}
-                          onChange={(value) => value && setDate(value)}
+                          onChange={(value: Date | null) => value && setDate(value)}
                           selected={date}
                         />
                       );

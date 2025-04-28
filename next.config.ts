@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
         protocol: "http",
         search: "",
       },
+      {
+        hostname: "strapi.zettara.com",
+        pathname: "/**",
+        port: "",
+        protocol: "https",
+        search: "",
+      },
     ],
   },
 };

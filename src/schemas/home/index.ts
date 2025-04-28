@@ -2,34 +2,19 @@ import { z } from "zod";
 
 import { PACKAGES_DATA } from "@/src/libs";
 
-/* eslint-disable perfectionist/sort-objects */
-const errorMessage = {
-  string: {
-    min: (label: string, min: number) => `Please enter ${label} minimum ${min} characters`,
-    max: (label: string, max: number) => `${label} maximum ${max} characters`,
-    required: (label: string) => `Please enter ${label}`,
-    email: (label: string) => `${label} must be a valid email address`,
-    url: (label: string) => `${label} must be a valid url`,
-    enum: (label: string) => `Please select ${label}`,
-  },
-  number: {
-    min: (label: string, min: number) => `${label} minimum ${min}`,
-    max: (label: string, max: number) => `${label} maximum ${max}`,
-  },
-};
-/* eslint-enable perfectionist/sort-objects */
+import { schemaErrorMessage } from "../schema-error-message";
 
-// -----------------------------------------------------------------------------
+// ----------------------------
 
 export const HomeBookingSchema = (screenWidth: number) =>
   z.object({
-    date: z.string().min(1, { message: errorMessage.string.required("Date") }),
-    email: screenWidth <= 1024 ? z.string().optional() : z.string().email({ message: errorMessage.string.email("Email") }),
-    name: screenWidth <= 1024 ? z.string().optional() : z.string().min(3, { message: errorMessage.string.min("Name", 3) }),
+    date: z.string().min(1, { message: schemaErrorMessage.string.required("Date") }),
+    email: screenWidth <= 1024 ? z.string().optional() : z.string().email({ message: schemaErrorMessage.string.email("Email") }),
+    name: screenWidth <= 1024 ? z.string().optional() : z.string().min(3, { message: schemaErrorMessage.string.min("Name", 3) }),
     package: z.enum(PACKAGES_DATA.map((dt) => dt.title) as [string, ...string[]], {
-      errorMap: () => ({ message: errorMessage.string.enum("Package") }),
+      errorMap: () => ({ message: schemaErrorMessage.string.enum("Package") }),
     }),
-    phoneNumber: screenWidth <= 1024 ? z.string().optional() : z.string().min(10, { message: errorMessage.string.min("Phone", 10) }),
+    phoneNumber: screenWidth <= 1024 ? z.string().optional() : z.string().min(10, { message: schemaErrorMessage.string.min("Phone", 10) }),
   });
 
 export type THomeBookingSchema = z.infer<ReturnType<typeof HomeBookingSchema>>;

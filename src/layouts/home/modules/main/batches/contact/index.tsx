@@ -10,32 +10,31 @@ export const Contact: FC = (): ReactElement => (
     <div className="container mx-auto flex justify-center gap-5 px-5 max-lg:flex-col">
       <div className="space-y-5">
         <SectionHeader
-          containerClassName="max-w-[600px]"
+          className={{ container: "max-w-[600px]", title: "text-4xl sm:text-5xl md:text-6xl" }}
           description="Feel free to reach out to us for any inquiries or bookings. We're here to provide you with exceptional service and ensure your special moments are unforgettable. Let's get in touch and create something beautiful together."
           subtitle="CONTACT US"
           title="Get In Touch"
-          titleClassName="text-4xl sm:text-5xl md:text-6xl"
         />
 
         <address className="space-y-5 text-nowrap">
           <ContactButton
+            className={{ label: "max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm" }}
             icon={<FaLocationDot className="-mr-px" size={25} />}
             label="Padang, Padang City, West Sumatra"
-            labelClassName="max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm"
             url="https://maps.app.goo.gl/ZzjRDTfPCRsXefUi7"
           />
 
           <ContactButton
+            className={{ label: "max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm" }}
             icon={<MdEmail className="-mr-px" size={25} />}
             label="hastinulcmakeupart@gmail.com"
-            labelClassName="max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm"
             url="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSKhbqXwZZlCGblTvnSbqqVScKFDqJfllGdJbTKMLRgGBvTbLsrZdPLRtZDfHVQzxnvVTfTq"
           />
 
           <ContactButton
+            className={{ label: "max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm" }}
             icon={<IoLogoWhatsapp className="-mr-px" size={25} />}
             label="(+62) 8576-2346-703"
-            labelClassName="max-[480px]:text-xl max-[420px]:text-lg max-[380px]:text-base max-[350px]:text-sm"
             url="https://wa.me/6285762346703"
           />
         </address>

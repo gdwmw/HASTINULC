@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { IBookingContext, IOpenContext, IResponseContext } from "../types/context";
+import { IBookingContext, IOpenContext, IResponseContext } from "../types";
 
 interface IStates {
   booking?: IBookingContext;

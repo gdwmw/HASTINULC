@@ -44,7 +44,14 @@ export const Content: FC<I> = (props): ReactElement => {
 
   return (
     <main className="bg-slate-100">
-      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[821px] max-w-[460px] gap-5 lg:max-w-[1000px]" isBooking label={"Home"}>
+      <FormContainer
+        className={{
+          innerContainer: "size-full max-h-[821px] max-w-[460px] gap-5 lg:max-w-[1000px]",
+        }}
+        href="/"
+        isHistory
+        label="Home"
+      >
         <div
           className={`size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5 max-lg:mx-auto lg:block ${open?.bookingList ? "block" : "hidden"}`}
         >
@@ -94,7 +101,7 @@ export const Content: FC<I> = (props): ReactElement => {
                         <FaBox className="size-[12px] text-rose-500 max-[400px]:size-[10px]" />
                       </div>
                       <figcaption>
-                        <h2 className="block text-gray-500">Package</h2>
+                        <h2 className="text-gray-500">Package</h2>
                         <span className="block font-semibold text-gray-900">{dt.package || "-"}</span>
                       </figcaption>
                     </figure>
@@ -105,7 +112,7 @@ export const Content: FC<I> = (props): ReactElement => {
                           <IoStar className="text-rose-500" />
                         </div>
                         <figcaption>
-                          <h2 className="block text-gray-500">Rating</h2>
+                          <h2 className="text-gray-500">Rating</h2>
                           {dt.indicator === "Success" && dt.relation_review && (
                             <div className="flex items-center">
                               {Array.from({ length: 5 }, (_, i) => {
@@ -130,7 +137,7 @@ export const Content: FC<I> = (props): ReactElement => {
                       <FaClock className="text-rose-500" />
                     </div>
                     <figcaption>
-                      <h2 className="block text-gray-500">Date</h2>
+                      <h2 className="text-gray-500">Date</h2>
                       <span className="block font-semibold text-gray-900">{dt.date || "-"}</span>
                     </figcaption>
                   </figure>

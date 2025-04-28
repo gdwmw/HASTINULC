@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { FC, ReactElement, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { ErrorMessage, ExampleA, FormContainer, TextArea } from "@/src/components";
+import { ErrorMessage, FormContainer, SubmitButton, TextArea } from "@/src/components";
 import { QUESTIONS_DATA } from "@/src/libs";
 import { QuestionnaireSchema, TQuestionnaireSchema } from "@/src/schemas";
 import { POSTQuestionnaire } from "@/src/utils";
@@ -58,7 +58,13 @@ export const Content: FC<I> = (props): ReactElement => {
 
   return (
     <main className="bg-slate-100">
-      <FormContainer href={"/"} innerContainerClassName="size-full max-h-[800px] max-w-[800px] flex-col gap-5" label={"Home"}>
+      <FormContainer
+        className={{
+          innerContainer: "size-full max-h-[800px] max-w-[800px] flex-col gap-5",
+        }}
+        href={"/"}
+        label={"Home"}
+      >
         <header>
           <h1 className="text-center text-2xl font-bold text-rose-500">Questionnaire</h1>
           <p className="text-center text-gray-600 max-[500px]:text-sm">Your feedback drives our continuous improvement</p>
@@ -96,10 +102,13 @@ export const Content: FC<I> = (props): ReactElement => {
                       <span>{dt.question}</span>
                     </h2>
                     <TextArea
+                      className={{
+                        fieldset: "border py-1",
+                        legend: "ml-0 px-0",
+                      }}
                       color="rose"
                       disabled={loading}
-                      fieldsetClassName="border py-1"
-                      legendClassName="ml-0 px-0"
+                      label=""
                       {...register(`question${i + 1}`)}
                     />
                   </div>
@@ -108,9 +117,7 @@ export const Content: FC<I> = (props): ReactElement => {
             </div>
           ))}
 
-          <ExampleA className="min-h-10 w-full font-semibold" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-            {loading ? "Loading..." : "SUBMIT"}
-          </ExampleA>
+          <SubmitButton color="rose" disabled={loading} label="SUBMIT" size="sm" variant="solid" />
         </form>
       </FormContainer>
     </main>
