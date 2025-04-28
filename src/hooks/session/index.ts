@@ -2,11 +2,11 @@
 
 import { getServerSession, Session, User } from "next-auth";
 
-import { options } from "@/auth";
+import { options } from "@/configs/authentication";
 
 type T = keyof User;
 
-export const getSession = async (props: T): Promise<null | string | undefined> => {
+export const getSession = async (props: T): Promise<boolean | null | string | undefined> => {
   const session = await getServerSession(options);
   return session?.user?.[props];
 };

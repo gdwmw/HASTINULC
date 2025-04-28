@@ -1,3 +1,5 @@
-import { FC, ReactElement } from "react";
+import { FC, PropsWithChildren, ReactElement } from "react";
 
-export const Header: FC = (): ReactElement => <header></header>;
+type T = Readonly<PropsWithChildren>;
+
+export const Header: FC<T> = (props): ReactElement => <header className="sticky inset-x-0 top-0 z-10">{props.children}</header>;

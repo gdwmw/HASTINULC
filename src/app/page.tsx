@@ -9,23 +9,30 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  description: "Boilerplate by Gede Dewo Wahyu M.W",
-  keywords: ["Boilerplate"],
+  description: "Hastinulc Makeup Art - Professional Makeup Services in Padang - Get the perfect look for your special day at an affordable price",
+  keywords: [
+    "Hastinulc Makeup Art",
+    "Hastinulc Makeup",
+    "Hastinulc",
+    "Professional Makeup Services in Padang",
+    "Professional Makeup Services",
+    "Professional Makeup",
+  ],
   openGraph: {
-    description: "Boilerplate by Gede Dewo Wahyu M.W",
+    description: "Hastinulc Makeup Art - Professional Makeup Services in Padang - Get the perfect look for your special day at an affordable price",
     images: [
       {
-        alt: "Next.js",
+        alt: "Hastinulc Makeup Art",
         height: 800,
-        url: "https://website-name.com/assets/images/logos/logo-name.png", // Must be an absolute URL and PNG format
+        url: "https://hastinulc-makeup-art.vercel.app/assets/images/logos/Hastinulc.png", // Must be an absolute URL and PNG format
         width: 800,
       },
     ],
     locale: "en_US",
-    siteName: "Next.js",
-    title: "Next.js | Home",
+    siteName: "Hastinulc Makeup Art",
+    title: "Hastinulc | Home",
     type: "website",
-    url: "https://website-name.com/",
+    url: "https://hastinulc-makeup-art.vercel.app/",
   },
   robots: {
     follow: true,
@@ -42,10 +49,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    creator: "@gdwmw",
-    description: "Boilerplate by Gede Dewo Wahyu M.W",
-    images: ["https://website-name.com/assets/images/logos/logo-name.png"], // Must be an absolute URL and PNG format
-    title: "Next.js | Home",
+    creator: "@hastinulchotimah",
+    description: "Hastinulc Makeup Art - Professional Makeup Services in Padang - Get the perfect look for your special day at an affordable price",
+    images: ["https://hastinulc-makeup-art.vercel.app/assets/images/logos/Hastinulc.png"], // Must be an absolute URL and PNG format
+    title: "Hastinulc | Home",
   },
 };
 

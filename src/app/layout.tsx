@@ -1,43 +1,40 @@
 import type { Metadata } from "next";
 
-import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FC, PropsWithChildren, ReactElement } from "react";
 
-import { NextAuthProvider, NextThemesProvider, ReactQueryProvider } from "@/src/libs/providers";
+import { APIConnectionChecker } from "@/src/components";
+import { NextAuthProvider, NextThemesProvider, ReactQueryProvider } from "@/src/libs";
 
+import { geistMono, geistSans, montaguSlab } from "./fonts";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
 export const metadata: Metadata = {
-  authors: [{ name: "Gede Dewo Wahyu M.W", url: "https://github.com/gdwmw" }],
+  authors: [{ name: "Hastinulc Makeup Art", url: "https://github.com/hastinulchotimah" }],
   category: "Boilerplate",
-  creator: "Gede Dewo Wahyu M.W",
-  publisher: "Gede Dewo Wahyu M.W",
+  creator: "Hastinulc Makeup Art",
+  publisher: "Hastinulc Makeup Art",
   referrer: "strict-origin-when-cross-origin",
   title: {
-    default: "Next.js | Home",
-    template: "Next.js | %s",
+    default: "Hastinulc | Home",
+    template: "Hastinulc | %s",
   },
 };
 
 type T = Readonly<PropsWithChildren>;
 
 const RootLayout: FC<T> = (props): ReactElement => (
-  <html lang="en" suppressHydrationWarning>
-    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+  <html className="scroll-smooth" lang="en" suppressHydrationWarning>
+    <body className={`${geistSans.variable} ${geistMono.variable} ${montaguSlab.variable} antialiased`}>
       <NextThemesProvider>
         <ReactQueryProvider>
-          <NextAuthProvider>{props.children}</NextAuthProvider>
+          <NextAuthProvider>
+            {props.children}
+            <APIConnectionChecker />
+            <Analytics />
+            <SpeedInsights />
+          </NextAuthProvider>
         </ReactQueryProvider>
       </NextThemesProvider>
     </body>

@@ -1,25 +1,31 @@
-import Link from "next/link";
-import { FC, ReactElement } from "react";
+import { FC, PropsWithChildren, ReactElement } from "react";
 
-import { ExampleATWM } from "@/src/components/interfaces/example/A";
-import { Logout } from "@/src/components/logout";
-import { getSession } from "@/src/hooks/session";
+import { getAllSession } from "@/src/hooks";
+import { GETBooking } from "@/src/utils";
 
-export const Main: FC = async (): Promise<ReactElement> => {
-  const session = await getSession("status");
+import { About, Contact, Home, Packages, Portfolio } from "./batches";
+
+type T = Readonly<PropsWithChildren>;
+
+export const Main: FC<T> = async (props): Promise<ReactElement> => {
+  const session = await getAllSession();
+  const fetchBooking = async () => {
+    try {
+      return await GETBooking();
+    } catch {
+      console.log("GETBooking Failed, Bypassed!");
+      return null;
+    }
+  };
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center gap-3">
-      <p className="text-2xl font-semibold">This is the home page.</p>
-      <div className="flex gap-3">
-        <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/user"}>
-          User
-        </Link>
-        <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/admin"}>
-          Admin
-        </Link>
-        {session && <Logout />}
-      </div>
+    <main>
+      <Home response={await fetchBooking()} session={session} />
+      <About />
+      <Portfolio />
+      <Packages />
+      <Contact />
+      {props.children}
     </main>
   );
 };
