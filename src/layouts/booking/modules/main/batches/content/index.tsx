@@ -108,6 +108,7 @@ export const Content: FC<I> = (props): ReactElement => {
       name: booking?.name ?? props.session?.user?.name ?? undefined,
       package: booking?.package,
       phoneNumber: booking?.phoneNumber ?? props.session?.user?.phoneNumber,
+      time: [],
     },
     resolver: zodResolver(BookingSchema),
   });

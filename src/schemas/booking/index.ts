@@ -23,9 +23,9 @@ export const BookingSchema = z.object({
   time: z
     .array(z.string())
     .min(1, { message: schemaErrorMessage.string.enum("Time") })
-    .or(z.never())
+    .or(z.array(z.string()).length(0))
     .superRefine((val, ctx) => {
-      if (Array.isArray(val) && val.length === 0) {
+      if (val.length === 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: schemaErrorMessage.string.enum("Time"),
