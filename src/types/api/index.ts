@@ -159,7 +159,7 @@ interface IBookingCommon {
   time: string[];
   googleMapsLink: string;
   tax: string;
-  subTotal: string;
+  subtotal: string;
   total: string;
   indicator: TIndicator;
 }

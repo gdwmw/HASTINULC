@@ -191,7 +191,7 @@
         <mxCell id="dkekARPeMLxRxsYVXgvD-68" value="tax: string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;spacing=4;" parent="dkekARPeMLxRxsYVXgvD-52" vertex="1">
           <mxGeometry y="296" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="dkekARPeMLxRxsYVXgvD-69" value="subTotal: string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;spacing=4;" parent="dkekARPeMLxRxsYVXgvD-52" vertex="1">
+        <mxCell id="dkekARPeMLxRxsYVXgvD-69" value="subtotal: string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;spacing=4;" parent="dkekARPeMLxRxsYVXgvD-52" vertex="1">
           <mxGeometry y="326" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="dkekARPeMLxRxsYVXgvD-70" value="total: string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;spacing=4;" parent="dkekARPeMLxRxsYVXgvD-52" vertex="1">

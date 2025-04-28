@@ -8,7 +8,8 @@ import { IBookingResponse } from "@/src/types";
 import { ExampleATWM } from "../../";
 
 interface I {
-  data: IBookingResponse;
+  data: Omit<IBookingResponse, "createdAt" | "indicator" | "relation_data" | "username"> &
+    Partial<Pick<IBookingResponse, "createdAt" | "indicator" | "relation_data" | "username">>;
 }
 
 export const BookingSummary: FC<I> = (props): ReactElement => (
@@ -113,7 +114,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Subtotal:</dt>
-            <dd className="font-semibold text-gray-800">{currencyFormat(props.data.subTotal || 0, "IDR")}</dd>
+            <dd className="font-semibold text-gray-800">{currencyFormat(props.data.subtotal || 0, "IDR")}</dd>
           </div>
 
           <div className="my-3 border-t border-gray-300" />
@@ -128,7 +129,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
 
     <footer className="mt-4 text-center text-xs text-gray-400">
       <span className="block">{props.data.documentId.toLocaleUpperCase() || "< EMPTY >"}</span>
-      <span className="block">{props.data.relation_data.documentId.toLocaleUpperCase() || "< EMPTY >"}</span>
+      <span className="block">{props.data.relation_data?.documentId.toLocaleUpperCase() || "< EMPTY >"}</span>
     </footer>
   </section>
 );

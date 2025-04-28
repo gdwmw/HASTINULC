@@ -23,7 +23,7 @@ export const BookingSchema = z.object({
   time: z
     .array(z.string())
     .min(1, { message: schemaErrorMessage.string.enum("Time") })
-    .or(z.literal(false).transform(() => []))
+    .or(z.never())
     .superRefine((val, ctx) => {
       if (Array.isArray(val) && val.length === 0) {
         ctx.addIssue({
