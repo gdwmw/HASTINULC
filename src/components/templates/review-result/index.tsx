@@ -12,8 +12,8 @@ if (!API_URL) {
 }
 
 interface I {
-  data: IReviewResponse;
-  session: Session;
+  data: Partial<IReviewResponse>;
+  session: null | Session;
 }
 
 const ReviewResult: FC<I> = (props): ReactElement => (
@@ -33,7 +33,7 @@ const ReviewResult: FC<I> = (props): ReactElement => (
             const ratingValue = i + 1;
             return (
               <IoStar
-                className={`size-7 max-[450px]:size-6 max-[380px]:size-5 ${ratingValue <= props.data.rating ? "text-yellow-400" : "text-gray-200"}`}
+                className={`size-7 max-[450px]:size-6 max-[380px]:size-5 ${ratingValue <= (props.data.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}`}
                 key={i}
               />
             );
@@ -59,7 +59,7 @@ const ReviewResult: FC<I> = (props): ReactElement => (
                   className="object-cover"
                   fill
                   quality={50}
-                  src={props.session.user?.role === "demo" ? dt.url : API_URL + dt.url}
+                  src={props.session?.user?.role === "demo" ? dt.url : API_URL + dt.url}
                 />
               </div>
             ))

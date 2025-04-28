@@ -7,7 +7,7 @@ import { FC, ReactElement } from "react";
 import { BookingSummary } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 
-const ReviewResult = dynamic(() => import("../../../../../../components/review-result"));
+const ReviewResult = dynamic(() => import("../../../../../../components/templates/review-result"));
 
 interface I {
   session: null | Session;
@@ -22,12 +22,12 @@ export const Content: FC<I> = (props): ReactElement => {
 
   return open?.bookingSummary ? (
     <BookingSummary
-      {...selectedBooking}
-      dataDocumentId={props.session?.user?.dataDocumentId}
-      documentId={props.slug[1]}
-      status={selectedBooking?.indicator}
+      data={{
+        documentId: props.slug[1],
+        ...selectedBooking,
+      }}
     />
   ) : (
-    <ReviewResult selectedReview={selectedReview} session={props.session} />
+    <ReviewResult data={{ ...selectedReview }} session={props.session} />
   );
 };

@@ -8,8 +8,7 @@ import { IBookingResponse } from "@/src/types";
 import { ExampleATWM } from "../../";
 
 interface I {
-  data: Omit<IBookingResponse, "createdAt" | "indicator" | "relation_data" | "username"> &
-    Partial<Pick<IBookingResponse, "createdAt" | "indicator" | "relation_data" | "username">>;
+  data: Partial<IBookingResponse>;
 }
 
 export const BookingSummary: FC<I> = (props): ReactElement => (
@@ -128,7 +127,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
     </div>
 
     <footer className="mt-4 text-center text-xs text-gray-400">
-      <span className="block">{props.data.documentId.toLocaleUpperCase() || "< EMPTY >"}</span>
+      <span className="block">{props.data.documentId?.toLocaleUpperCase() || "< EMPTY >"}</span>
       <span className="block">{props.data.relation_data?.documentId.toLocaleUpperCase() || "< EMPTY >"}</span>
     </footer>
   </section>
