@@ -15,7 +15,7 @@ import { IBookingResponse, IReviewPayload } from "@/src/types";
 import { POSTReview, POSTUpload } from "@/src/utils";
 
 interface I {
-  selectedBookingSummary: IBookingResponse | undefined;
+  data: IBookingResponse | undefined;
   session: null | Session;
   slug: string[];
 }
@@ -80,8 +80,10 @@ export const Content: FC<I> = (props): ReactElement => {
   return (
     <main className="bg-slate-100">
       <FormContainer
+        className={{
+          innerContainer: "size-full max-h-[821px] max-w-[600px] gap-5 lg:max-w-[1100px]",
+        }}
         href={`/history/${props.session?.user?.username}/${props.slug[1]}`}
-        innerContainerClassName="size-full max-h-[821px] max-w-[600px] gap-5 lg:max-w-[1100px]"
         label={"Back"}
         onClick={() => setOpen({ bookingList: true, bookingSummary: true })}
       >
@@ -113,9 +115,8 @@ export const Content: FC<I> = (props): ReactElement => {
 
             <Input
               accept="image/*"
-              className="pt-1"
+              className={{ container: "w-full", input: "pt-1" }}
               color="rose"
-              containerClassName="w-full"
               disabled={loading}
               errorMessage={errors.image?.message}
               label="Image(s)"
@@ -125,8 +126,8 @@ export const Content: FC<I> = (props): ReactElement => {
             />
 
             <TextArea
+              className={{ container: "w-full" }}
               color="rose"
-              containerClassName="w-full"
               disabled={loading}
               errorMessage={errors.description?.message}
               label="Description"
@@ -168,10 +169,10 @@ export const Content: FC<I> = (props): ReactElement => {
         <aside className="hidden min-w-fit grow items-start overflow-y-auto lg:flex">
           <div className="my-auto flex w-full justify-center p-2">
             <BookingSummary
-              {...props.selectedBookingSummary}
-              dataDocumentId={props.session?.user?.dataDocumentId}
-              documentId={props.slug[1]}
-              status={props.selectedBookingSummary?.indicator}
+              data={{
+                documentId: props.slug[1],
+                ...props.data,
+              }}
             />
           </div>
         </aside>
