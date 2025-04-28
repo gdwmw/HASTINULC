@@ -3,9 +3,9 @@ import { FC, ReactElement } from "react";
 import { Avatar, IAvatar } from "../avatar";
 
 interface I extends Pick<IAvatar, "src"> {
+  email: string;
   name: string;
   status: string;
-  username: string;
 }
 
 export const DetailedAvatar: FC<I> = (props): ReactElement =>
@@ -16,7 +16,7 @@ export const DetailedAvatar: FC<I> = (props): ReactElement =>
         <div className="-mb-1.5 mt-[-5px] line-clamp-1">
           <span className="text-lg">{props.name}</span>
         </div>
-        <span className="block text-xs text-rose-500">{props.username}</span>
+        <span className="block text-xs text-rose-500">{props.email}</span>
       </figcaption>
     </figure>
   ) : (

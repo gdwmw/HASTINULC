@@ -85,7 +85,7 @@ export const APIConnectionChecker: FC = (): ReactElement => {
         )}
 
         {!open && (
-          <ExampleA className="min-w-16" color={"rose"} onClick={() => setOpen(true)} size="sm" variant="solid">
+          <ExampleA className="min-w-16 ring-1 ring-white" color={"rose"} onClick={() => setOpen(true)} size="sm" variant="solid">
             <FaServer size={18} />
           </ExampleA>
         )}

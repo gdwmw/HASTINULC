@@ -112,10 +112,10 @@ export const Content: FC<I> = (props): ReactElement => {
                 <ul className="absolute right-0 mt-2 w-96 overflow-hidden rounded-lg border border-gray-200 bg-white p-5 shadow-md">
                   <li>
                     <DetailedAvatar
+                      email={props.session?.user?.email ?? ""}
                       name={props.session?.user?.name ?? ""}
                       src={props.session?.user?.image ?? ""}
                       status={props.session?.user?.status}
-                      username={props.session?.user?.username}
                     />
                   </li>
 

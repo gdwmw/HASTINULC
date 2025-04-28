@@ -73,10 +73,10 @@ export const Content: FC<I> = (props): ReactElement => {
     >
       <section className="flex items-center justify-between">
         <DetailedAvatar
+          email={props.session?.user?.email ?? ""}
           name={props.session?.user?.name ?? ""}
           src={props.session?.user?.image ?? ""}
           status={props.session?.user?.status ?? ""}
-          username={props.session?.user?.username ?? ""}
         />
 
         <ExampleA color="rose" onClick={() => setOpen({ aside: false })} size="sm" variant="ghost">
