@@ -7,6 +7,7 @@ import { Content } from "./batches";
 
 export const Nav: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
+
   const fetchData = async () => {
     if (session?.user?.dataDocumentId) {
       try {
@@ -18,5 +19,5 @@ export const Nav: FC = async (): Promise<ReactElement> => {
     }
   };
 
-  return <Content response={await fetchData()} session={session} />;
+  return <Content response={session?.user?.role !== "demo" ? await fetchData() : undefined} session={session} />;
 };

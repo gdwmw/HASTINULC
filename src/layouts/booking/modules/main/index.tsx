@@ -7,6 +7,7 @@ import { Content } from "./batches";
 
 export const Main: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
+
   const fetchBooking = async () => {
     try {
       const res = await GETBooking();
@@ -17,5 +18,5 @@ export const Main: FC = async (): Promise<ReactElement> => {
     }
   };
 
-  return <Content response={await fetchBooking()} session={session} />;
+  return <Content response={session?.user?.role !== "demo" ? await fetchBooking() : undefined} session={session} />;
 };

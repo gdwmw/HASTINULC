@@ -14,6 +14,7 @@ interface I {
 export const Main: FC<I> = async (props): Promise<ReactElement> => {
   const slug = (await props.slug).slug;
   const session = await getAllSession();
+
   const fetchBooking = async () => {
     try {
       const res = await GETBooking(`sort[0]=createdAt:desc&filters[relation_data][documentId][$eq]=${session?.user?.dataDocumentId}`);
@@ -23,7 +24,9 @@ export const Main: FC<I> = async (props): Promise<ReactElement> => {
       return null;
     }
   };
-  const response = await fetchBooking();
+
+  const response = session?.user?.role !== "demo" ? await fetchBooking() : undefined;
+
   const selectedBookingSummary =
     session?.user?.role === "demo" ? DUMMY_BOOKING_DATA.find((dt) => dt.documentId === slug[1]) : response?.find((dt) => dt.documentId === slug[1]);
 

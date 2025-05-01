@@ -9,6 +9,7 @@ type T = Readonly<PropsWithChildren>;
 
 export const Main: FC<T> = async (props): Promise<ReactElement> => {
   const session = await getAllSession();
+
   const fetchBooking = async () => {
     try {
       const res = await GETBooking();
@@ -21,7 +22,7 @@ export const Main: FC<T> = async (props): Promise<ReactElement> => {
 
   return (
     <main>
-      <Home response={await fetchBooking()} session={session} />
+      <Home response={session?.user?.role !== "demo" ? await fetchBooking() : undefined} session={session} />
       <About />
       <Portfolio />
       <Packages />

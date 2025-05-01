@@ -9,6 +9,7 @@ import { Content } from "./batches";
 
 export const Main: FC = async (): Promise<ReactElement> => {
   const session = await getAllSession();
+
   const fetchData = async () => {
     try {
       return await GETDataByDocumentId(session?.user?.dataDocumentId ?? "");
@@ -18,7 +19,7 @@ export const Main: FC = async (): Promise<ReactElement> => {
     }
   };
 
-  if (!questionnaireConditions({ data: session?.user?.role === "demo" ? DUMMY_DATA_DATA : await fetchData(), session: session })) {
+  if (!questionnaireConditions({ data: session?.user?.role !== "demo" ? await fetchData() : DUMMY_DATA_DATA, session: session })) {
     redirect("/");
   }
 

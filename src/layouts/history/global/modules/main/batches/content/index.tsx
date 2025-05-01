@@ -35,6 +35,7 @@ export const Content: FC<I> = (props): ReactElement => {
   const { open, setOpen, setResponse } = useGlobalStates();
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery<{ data: IBookingResponse[] } & IMetaResponse>({
+    enabled: props.session?.user?.role !== "demo",
     getNextPageParam: (lastPage, allPages): number | undefined => (pageCount === allPages.length ? undefined : allPages.length + 1),
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
@@ -74,7 +75,18 @@ export const Content: FC<I> = (props): ReactElement => {
       }
     };
 
-    execute();
+    if (props.session?.user?.role !== "demo") {
+      execute();
+    } else {
+      const findBooking = DUMMY_BOOKING_DATA?.find((dt) => dt.documentId === pathKeeper);
+
+      if (findBooking?.relation_review) {
+        setResponse({ booking: findBooking, review: findBooking.relation_review });
+      } else {
+        setResponse({ booking: findBooking });
+      }
+    }
+
     // eslint-disable-next-line
   }, [data?.pages, pathKeeper]);
 
