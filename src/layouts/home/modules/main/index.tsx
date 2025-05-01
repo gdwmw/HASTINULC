@@ -11,9 +11,10 @@ export const Main: FC<T> = async (props): Promise<ReactElement> => {
   const session = await getAllSession();
   const fetchBooking = async () => {
     try {
-      return await GETBooking();
+      const res = await GETBooking();
+      return res.data;
     } catch {
-      console.log("GETBooking Failed, Bypassed!");
+      console.warn("GETBooking Failed, Bypassed!");
       return null;
     }
   };

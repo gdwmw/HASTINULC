@@ -9,12 +9,12 @@ export interface IBookingContext {
 }
 
 export interface IOpenContext {
-  bookingList?: boolean;
-  bookingSummary?: boolean;
-  aside?: boolean;
+  historyDetailSwitch?: boolean;
+  historyAsideSwitch?: boolean;
+  homeAside?: boolean;
 }
 
 export interface IResponseContext {
-  booking: IBookingResponse[];
-  review: IReviewResponse[];
+  booking?: IBookingResponse;
+  review?: IReviewResponse;
 }

@@ -63,14 +63,14 @@ export const Content: FC<I> = (props): ReactElement => {
         if (dt.image && dt.image?.length > 0 && res.id) {
           await POSTUpload({ field: "image", files: dt.image, ref: "api::review.review", refId: res.id.toString() });
         }
-        console.log("Review Success!");
-        setOpen({ bookingList: false, bookingSummary: false });
+        console.info("Review Success!");
+        setOpen({ historyAsideSwitch: true, historyDetailSwitch: true });
         router.push(`/history/${props.session?.user?.username}/${props.slug[1]}`);
         router.refresh();
         setSelectedSuggestions([]);
         reset();
       } catch {
-        console.log("Review Failed!");
+        console.warn("Review Failed!");
       }
     });
   };
@@ -83,7 +83,7 @@ export const Content: FC<I> = (props): ReactElement => {
         }}
         href={`/history/${props.session?.user?.username}/${props.slug[1]}`}
         label={"Back"}
-        onClick={() => setOpen({ bookingList: true, bookingSummary: true })}
+        onClick={() => setOpen({ historyAsideSwitch: false, historyDetailSwitch: false })}
       >
         <form className="flex w-full items-start overflow-y-auto lg:max-w-[600px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col items-center justify-center gap-4">

@@ -174,12 +174,12 @@ export const Content: FC<I> = (props): ReactElement => {
 
         window.open(`https://wa.me/6285762346703?text=${encodedMessage}`, "_blank");
 
-        console.log("Booking Success!");
-        setOpen({ bookingList: false, bookingSummary: true });
+        console.info("Booking Success!");
+        setOpen({ historyAsideSwitch: true, historyDetailSwitch: false });
         router.push(`/history/${props.session?.user?.username}/${res.documentId}`);
         reset();
       } catch {
-        console.log("Booking Failed!");
+        console.warn("Booking Failed!");
       }
     });
   };
