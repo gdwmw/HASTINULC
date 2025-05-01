@@ -54,15 +54,15 @@ export const FormContainer: FC<I> = ({ children, className, href, isHistory, lab
               <ExampleA
                 className="flex items-center gap-1 lg:hidden"
                 color="rose"
-                onClick={() => setOpen({ bookingList: !open?.bookingList })}
+                onClick={() => setOpen({ historyAsideSwitch: !open?.historyAsideSwitch })}
                 size="sm"
                 variant="ghost"
               >
                 Open{" "}
-                {open?.bookingList ? (
-                  <TbLayoutSidebarRightExpandFilled className="-mb-1" size={20} />
-                ) : (
+                {open?.historyAsideSwitch ? (
                   <TbLayoutSidebarLeftExpandFilled className="-mb-1" size={20} />
+                ) : (
+                  <TbLayoutSidebarRightExpandFilled className="-mb-1" size={20} />
                 )}
               </ExampleA>
             </>

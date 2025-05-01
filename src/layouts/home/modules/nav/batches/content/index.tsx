@@ -95,7 +95,7 @@ export const Content: FC<I> = (props): ReactElement => {
             <div id="profile-menu">
               <div className="relative active:scale-95">
                 {questionnaireConditions && (
-                  <div className="absolute -bottom-px -right-px z-[1] flex size-4 items-center justify-center rounded-full bg-white">
+                  <div className="absolute bottom-1.5 right-0 z-[1] flex size-4 items-center justify-center rounded-full bg-white">
                     <div className="relative flex size-2">
                       <div className="absolute size-full animate-ping rounded-full bg-rose-400 opacity-75" />
                       <div className="size-2 rounded-full bg-rose-500" />
@@ -125,7 +125,6 @@ export const Content: FC<I> = (props): ReactElement => {
                     <Link
                       className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                       href="/profile"
-                      onClick={() => setOpen({ aside: false })}
                     >
                       <FaUser size={16} />
                       Profile
@@ -136,7 +135,7 @@ export const Content: FC<I> = (props): ReactElement => {
                     <Link
                       className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                       href={`/history/${props.session?.user?.username}`}
-                      onClick={() => setOpen({ aside: false, bookingList: true, bookingSummary: true })}
+                      onClick={() => setOpen({ historyAsideSwitch: false, historyDetailSwitch: false })}
                     >
                       <FaHistory size={16} />
                       History
@@ -154,8 +153,6 @@ export const Content: FC<I> = (props): ReactElement => {
                       onClick={(e) => {
                         if (!questionnaireConditions) {
                           e.preventDefault();
-                        } else {
-                          setOpen({ aside: false });
                         }
                       }}
                     >
@@ -203,7 +200,7 @@ export const Content: FC<I> = (props): ReactElement => {
             </div>
           </div>
         )}
-        <ExampleA className="flex active:scale-100" color="rose" onClick={() => setOpen({ aside: true })} size="sm" variant="ghost">
+        <ExampleA className="flex active:scale-100" color="rose" onClick={() => setOpen({ homeAside: true })} size="sm" variant="ghost">
           <HiOutlineBars3 size={30} />
         </ExampleA>
       </div>

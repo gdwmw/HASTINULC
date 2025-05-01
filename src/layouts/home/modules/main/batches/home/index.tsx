@@ -5,14 +5,13 @@ import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState } from "react";
+import { FC, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FaChevronRight } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 
 import accentDot from "@/public/assets/images/background/Accent-Dot.svg";
 import homeImage from "@/public/assets/images/model/Home.png";
-import { DatePickerInput, ExampleA, Input, SectionHeader, Select } from "@/src/components";
+import { DatePickerInput, Input, SectionHeader, Select, SubmitButton } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA } from "@/src/libs";
@@ -79,7 +78,7 @@ export const Home: FC<I> = (props): ReactElement => {
   const { setBooking } = useGlobalStates();
   const [screenWidth, setScreenWidth] = useState(0);
   const [date, setDate] = useState<Date | undefined>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setTransition] = useTransition();
 
   const bookedDates = props.response
     ? props.response
@@ -138,16 +137,16 @@ export const Home: FC<I> = (props): ReactElement => {
   }, [date]);
 
   const onSubmit: SubmitHandler<THomeBookingSchema> = (dt) => {
-    setLoading(true);
-
-    if (props.session?.user?.status) {
-      setBooking(dt);
-      router.push("/booking");
-      reset();
-    } else {
-      localStorage.setItem("pendingBooking", JSON.stringify(dt));
-      router.push("/authentication/login");
-    }
+    setTransition(() => {
+      if (props.session?.user?.status) {
+        setBooking(dt);
+        router.push("/booking");
+        reset();
+      } else {
+        localStorage.setItem("pendingBooking", JSON.stringify(dt));
+        router.push("/authentication/login");
+      }
+    });
   };
 
   return (
@@ -242,22 +241,11 @@ export const Home: FC<I> = (props): ReactElement => {
                     }
                   })}
 
-                  <ExampleA
-                    className="mt-2 hidden w-64 font-semibold lg:flex"
-                    color="rose"
-                    disabled={loading}
-                    size="sm"
-                    type="submit"
-                    variant="solid"
-                  >
-                    <FaChevronRight size={14} /> {loading ? "Loading..." : "BOOKING NOW"}
-                  </ExampleA>
+                  <SubmitButton className="mt-2 hidden w-64 lg:flex" color="rose" disabled={loading} label="BOOKING NOW" size="sm" variant="solid" />
                 </div>
 
                 {/* Components For Responsive Purposes Only */}
-                <ExampleA className="mt-2 w-full font-semibold lg:hidden" color="rose" disabled={loading} size="sm" type="submit" variant="solid">
-                  <FaChevronRight size={14} /> {loading ? "Loading..." : "BOOKING NOW"}
-                </ExampleA>
+                <SubmitButton className="mt-2 w-full lg:hidden" color="rose" disabled={loading} label="BOOKING NOW" size="sm" variant="solid" />
               </form>
 
               <address className="hidden items-center gap-2 xl:flex">

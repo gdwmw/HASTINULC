@@ -25,19 +25,19 @@ export const About: FC = (): ReactElement => {
 
         <figure className="relative flex flex-col gap-3 max-lg:order-last sm:gap-5">
           <div className="z-[1] flex gap-3 sm:gap-5">
-            <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-3xl">
+            <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-lg">
               <Image alt="About Image" className="object-cover" src={aboutImage1} width={230} />
             </div>
-            <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-3xl">
+            <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-lg">
               <Image alt="About Image" className="object-cover" src={aboutImage2} width={230} />
             </div>
           </div>
 
           <div className="z-[1] flex gap-3 sm:gap-5">
-            <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-3xl">
+            <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-lg">
               <Image alt="About Image" className="object-cover" src={aboutImage4} width={230} />
             </div>
-            <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-3xl">
+            <div className="relative aspect-square size-full max-h-[230px] max-w-[230px] overflow-hidden rounded-lg">
               <Image alt="About Image" className="object-cover" src={aboutImage3} width={230} />
             </div>
           </div>
@@ -72,15 +72,15 @@ export const About: FC = (): ReactElement => {
 
         <div className="flex gap-5 max-lg:justify-center">
           <div>
-            <Image alt="About Image" src={aboutImage5} />
+            <Image alt="About Image" className="rounded-lg" src={aboutImage5} />
           </div>
           <div className="lg:mt-auto xl:mt-0">
-            <Image alt="About Image" src={aboutImage6} />
+            <Image alt="About Image" className="rounded-lg" src={aboutImage6} />
           </div>
         </div>
       </section>
 
-      <section className="container relative mx-auto flex flex-col items-center justify-center space-y-16 bg-slate-100 px-5 py-20 sm:mt-36 sm:pt-48 md:mt-48 md:pt-64 lg:mt-64 lg:pt-80">
+      <section className="container relative mx-auto flex flex-col items-center justify-center space-y-16 rounded-lg bg-slate-100 px-5 py-20 sm:mt-36 sm:pt-48 md:mt-48 md:pt-64 lg:mt-64 lg:pt-80">
         <div className="max-sm:w-full sm:absolute sm:inset-x-0 sm:-top-36 sm:z-[1] md:-top-48 lg:-top-64">
           {active ? (
             <div className="sm:px-5">

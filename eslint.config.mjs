@@ -52,6 +52,7 @@ const eslintConfig = [
       react,
     },
     rules: {
+      "@tanstack/query/infinite-query-property-order": "off",
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/no-unused-expressions": "error",
       "arrow-body-style": ["error", "as-needed"],

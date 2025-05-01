@@ -13,7 +13,7 @@ export const Main: FC = async (): Promise<ReactElement> => {
     try {
       return await GETDataByDocumentId(session?.user?.dataDocumentId ?? "");
     } catch {
-      console.log("GETDataByDocumentId Failed, Bypassed!");
+      console.warn("GETDataByDocumentId Failed, Bypassed!");
       return null;
     }
   };

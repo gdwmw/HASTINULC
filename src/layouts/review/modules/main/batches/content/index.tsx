@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
-import { FC, ReactElement, useState } from "react";
+import { FC, ReactElement, useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoStar } from "react-icons/io5";
 
@@ -25,7 +25,7 @@ export const Content: FC<I> = (props): ReactElement => {
   const { setOpen } = useGlobalStates();
   const [ratingHover, setRatingHover] = useState(0);
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setTransition] = useTransition();
 
   const {
     formState: { errors },
@@ -48,33 +48,31 @@ export const Content: FC<I> = (props): ReactElement => {
     setValue("description", newSuggestions.join(", "));
   };
 
-  const onSubmit: SubmitHandler<TReviewSchema> = async (dt) => {
-    setLoading(true);
+  const onSubmit: SubmitHandler<TReviewSchema> = (dt) => {
+    setTransition(async () => {
+      const newPayload: IReviewPayload = {
+        ...dt,
+        name: props.session?.user?.name ?? "",
+        relation_booking: props.slug[1],
+        relation_data: props.session?.user?.dataDocumentId,
+        username: props.session?.user?.username ?? "",
+      };
 
-    const newPayload: IReviewPayload = {
-      ...dt,
-      name: props.session?.user?.name ?? "",
-      relation_booking: props.slug[1],
-      relation_data: props.session?.user?.dataDocumentId,
-      username: props.session?.user?.username ?? "",
-    };
-
-    try {
-      const res = await POSTReview(newPayload);
-      if (dt.image && dt.image?.length > 0 && res.id) {
-        await POSTUpload({ field: "image", files: dt.image, ref: "api::review.review", refId: res.id.toString() });
+      try {
+        const res = await POSTReview(newPayload);
+        if (dt.image && dt.image?.length > 0 && res.id) {
+          await POSTUpload({ field: "image", files: dt.image, ref: "api::review.review", refId: res.id.toString() });
+        }
+        console.info("Review Success!");
+        setOpen({ historyAsideSwitch: true, historyDetailSwitch: true });
+        router.push(`/history/${props.session?.user?.username}/${props.slug[1]}`);
+        router.refresh();
+        setSelectedSuggestions([]);
+        reset();
+      } catch {
+        console.warn("Review Failed!");
       }
-      console.log("Review Success!");
-      setOpen({ bookingList: false, bookingSummary: false });
-      router.push(`/history/${props.session?.user?.username}/${props.slug[1]}`);
-      router.refresh();
-      setSelectedSuggestions([]);
-      reset();
-    } catch {
-      console.log("Review Failed!");
-    } finally {
-      setLoading(false);
-    }
+    });
   };
 
   return (
@@ -85,7 +83,7 @@ export const Content: FC<I> = (props): ReactElement => {
         }}
         href={`/history/${props.session?.user?.username}/${props.slug[1]}`}
         label={"Back"}
-        onClick={() => setOpen({ bookingList: true, bookingSummary: true })}
+        onClick={() => setOpen({ historyAsideSwitch: false, historyDetailSwitch: false })}
       >
         <form className="flex w-full items-start overflow-y-auto lg:max-w-[600px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col items-center justify-center gap-4">

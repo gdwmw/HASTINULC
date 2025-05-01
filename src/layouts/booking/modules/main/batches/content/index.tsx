@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Session } from "next-auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FC, Fragment, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState } from "react";
+import { FC, Fragment, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { BookingSummary, DatePickerInput, ErrorMessage, ExampleATWM, FormContainer, Input, Select, SubmitButton } from "@/src/components";
@@ -89,7 +89,7 @@ export const Content: FC<I> = (props): ReactElement => {
   const [tax, setTax] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setTransition] = useTransition();
 
   const bookedDates = props.response
     ?.map((dt) => (dt.indicator === "On Going" || dt.indicator === "Success" ? new Date(dt.date) : null))
@@ -135,55 +135,53 @@ export const Content: FC<I> = (props): ReactElement => {
     // eslint-disable-next-line
   }, [watch("package")]);
 
-  const onSubmit: SubmitHandler<TBookingSchema> = async (dt) => {
-    setLoading(true);
+  const onSubmit: SubmitHandler<TBookingSchema> = (dt) => {
+    setTransition(async () => {
+      const newPayload: IBookingPayload = {
+        ...dt,
+        indicator: "Waiting",
+        relation_data: props.session?.user?.dataDocumentId ?? "",
+        subtotal: subtotal.toString(),
+        tax: tax.toString(),
+        total: total.toString(),
+        username: props.session?.user?.username ?? "",
+      };
 
-    const newPayload: IBookingPayload = {
-      ...dt,
-      indicator: "Waiting",
-      relation_data: props.session?.user?.dataDocumentId ?? "",
-      subtotal: subtotal.toString(),
-      tax: tax.toString(),
-      total: total.toString(),
-      username: props.session?.user?.username ?? "",
-    };
+      try {
+        const res = await POSTBooking(newPayload);
 
-    try {
-      const res = await POSTBooking(newPayload);
+        const whatsappMessage = `*Hastinulc Makeup Art | Booking Details | ${dt.name}*
+  
+  - *Booking ID:* ${res.documentId}
+  - *Name:* ${dt.name}
+  - *Email:* ${dt.email}
+  - *Phone:* ${dt.phoneNumber}
+  
+  - *Package:* ${dt.package}
+  - *Date:* ${dt.date}
+  - *Time:* ${dt.time}
+  - *Location:* ${dt.googleMapsLink}
+  
+  - *Status:* Waiting
+  
+  - *Subtotal:* Rp${subtotal.toLocaleString()}
+  - *Tax (PPN):* Rp${tax.toLocaleString()}
+  - *TOTAL:* Rp${total.toLocaleString()}
+  
+  I'm looking forward to your *confirmation*. Thank you!`;
 
-      const whatsappMessage = `*Hastinulc Makeup Art | Booking Details | ${dt.name}*
+        const encodedMessage = encodeURIComponent(whatsappMessage);
 
-- *Booking ID:* ${res.documentId}
-- *Name:* ${dt.name}
-- *Email:* ${dt.email}
-- *Phone:* ${dt.phoneNumber}
+        window.open(`https://wa.me/6285762346703?text=${encodedMessage}`, "_blank");
 
-- *Package:* ${dt.package}
-- *Date:* ${dt.date}
-- *Time:* ${dt.time}
-- *Location:* ${dt.googleMapsLink}
-
-- *Status:* Waiting
-
-- *Subtotal:* Rp${subtotal.toLocaleString()}
-- *Tax (PPN):* Rp${tax.toLocaleString()}
-- *TOTAL:* Rp${total.toLocaleString()}
-
-I'm looking forward to your *confirmation*. Thank you!`;
-
-      const encodedMessage = encodeURIComponent(whatsappMessage);
-
-      window.open(`https://wa.me/6285762346703?text=${encodedMessage}`, "_blank");
-
-      console.log("Booking Success!");
-      setOpen({ bookingList: false, bookingSummary: true });
-      router.push(`/history/${props.session?.user?.username}/${res.documentId}`);
-      reset();
-    } catch {
-      console.log("Booking Failed!");
-    } finally {
-      setLoading(false);
-    }
+        console.info("Booking Success!");
+        setOpen({ historyAsideSwitch: true, historyDetailSwitch: false });
+        router.push(`/history/${props.session?.user?.username}/${res.documentId}`);
+        reset();
+      } catch {
+        console.warn("Booking Failed!");
+      }
+    });
   };
 
   return (

@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
-import { FC, ReactElement, useState } from "react";
+import { FC, ReactElement, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { ErrorMessage, FormContainer, SubmitButton, TextArea } from "@/src/components";
@@ -17,7 +17,7 @@ interface I {
 
 export const Content: FC<I> = (props): ReactElement => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, setTransition] = useTransition();
 
   const {
     formState: { errors },
@@ -28,32 +28,30 @@ export const Content: FC<I> = (props): ReactElement => {
     resolver: zodResolver(QuestionnaireSchema),
   });
 
-  const onSubmit: SubmitHandler<TQuestionnaireSchema> = async (dt) => {
-    setLoading(true);
+  const onSubmit: SubmitHandler<TQuestionnaireSchema> = (dt) => {
+    setTransition(async () => {
+      const feedback = QUESTIONS_DATA.map((qst, i) => ({
+        answer: dt[`question${i + 1}`],
+        id: i + 1,
+        question: qst.question,
+      }));
 
-    const feedback = QUESTIONS_DATA.map((qst, i) => ({
-      answer: dt[`question${i + 1}`],
-      id: i + 1,
-      question: qst.question,
-    }));
+      const newPayload = {
+        feedback: feedback,
+        name: props.session?.user?.name ?? "",
+        relation_data: props.session?.user?.dataDocumentId ?? "",
+        username: props.session?.user?.username ?? "",
+      };
 
-    const newPayload = {
-      feedback: feedback,
-      name: props.session?.user?.name ?? "",
-      relation_data: props.session?.user?.dataDocumentId ?? "",
-      username: props.session?.user?.username ?? "",
-    };
-
-    try {
-      await POSTQuestionnaire(newPayload);
-      console.log("Questionnaire Success!");
-      router.push("/");
-      reset();
-    } catch {
-      console.log("Questionnaire Failed!");
-    } finally {
-      setLoading(false);
-    }
+      try {
+        await POSTQuestionnaire(newPayload);
+        console.info("Questionnaire Success!");
+        router.push("/");
+        reset();
+      } catch {
+        console.warn("Questionnaire Failed!");
+      }
+    });
   };
 
   return (
