@@ -55,19 +55,19 @@ export const Content: FC<I> = (props): ReactElement => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (open?.aside && !(e.target as HTMLElement).closest("#aside-menu")) {
-        setOpen({ aside: false });
+      if (open?.homeAside && !(e.target as HTMLElement).closest("#aside-menu")) {
+        setOpen({ homeAside: false });
       }
     };
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
     // eslint-disable-next-line
-  }, [open?.aside]);
+  }, [open?.homeAside]);
 
   return (
     <aside
       className={`fixed inset-y-0 right-0 z-[11] w-full max-w-96 bg-white p-5 font-semibold shadow-md transition-transform duration-300 ease-in-out ${
-        open?.aside ? "translate-x-0" : "translate-x-full"
+        open?.homeAside ? "translate-x-0" : "translate-x-full"
       }`}
       id="aside-menu"
     >
@@ -79,7 +79,7 @@ export const Content: FC<I> = (props): ReactElement => {
           status={props.session?.user?.status ?? ""}
         />
 
-        <ExampleA color="rose" onClick={() => setOpen({ aside: false })} size="sm" variant="ghost">
+        <ExampleA color="rose" onClick={() => setOpen({ homeAside: false })} size="sm" variant="ghost">
           <IoClose size={30} />
         </ExampleA>
       </section>
@@ -94,7 +94,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 className={`flex items-center gap-2 rounded-lg px-4 py-2 ${activeSection === dt.href.substring(1) ? "bg-rose-500 text-white" : "text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"}`}
                 href={dt.href}
                 onClick={(e) => {
-                  setOpen({ aside: false });
+                  setOpen({ homeAside: false });
                   handleSmoothScroll(e, dt.href);
                 }}
                 prefetch={false}
@@ -115,7 +115,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 <Link
                   className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                   href="/profile"
-                  onClick={() => setOpen({ aside: false })}
+                  onClick={() => setOpen({ homeAside: false })}
                 >
                   <FaUser size={16} />
                   Profile
@@ -126,7 +126,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 <Link
                   className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                   href={`/history/${props.session?.user?.username}`}
-                  onClick={() => setOpen({ aside: false, bookingList: true, bookingSummary: true })}
+                  onClick={() => setOpen({ historyAsideSwitch: false, historyDetailSwitch: false, homeAside: false })}
                 >
                   <FaHistory size={16} />
                   History
@@ -143,7 +143,7 @@ export const Content: FC<I> = (props): ReactElement => {
                     if (!questionnaireConditions) {
                       e.preventDefault();
                     } else {
-                      setOpen({ aside: false });
+                      setOpen({ homeAside: false });
                     }
                   }}
                 >
@@ -165,7 +165,10 @@ export const Content: FC<I> = (props): ReactElement => {
               <li>
                 <button
                   className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
-                  onClick={() => signOut()}
+                  onClick={() => {
+                    setOpen({ homeAside: false });
+                    signOut();
+                  }}
                 >
                   <FaSignOutAlt size={16} />
                   Logout
@@ -174,7 +177,11 @@ export const Content: FC<I> = (props): ReactElement => {
             </>
           ) : (
             <li>
-              <Link className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })} href={"/authentication/login"}>
+              <Link
+                className={ExampleATWM({ color: "rose", size: "sm", variant: "solid" })}
+                href={"/authentication/login"}
+                onClick={() => setOpen({ homeAside: false })}
+              >
                 LOGIN
               </Link>
             </li>

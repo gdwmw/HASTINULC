@@ -16,9 +16,10 @@ export const Main: FC<I> = async (props): Promise<ReactElement> => {
   const session = await getAllSession();
   const fetchBooking = async () => {
     try {
-      return await GETBooking(`sort[0]=createdAt:desc&filters[relation_data][documentId][$eq]=${session?.user?.dataDocumentId}`);
+      const res = await GETBooking(`sort[0]=createdAt:desc&filters[relation_data][documentId][$eq]=${session?.user?.dataDocumentId}`);
+      return res.data;
     } catch {
-      console.log("GETBooking Failed, Bypassed!");
+      console.warn("GETBooking Failed, Bypassed!");
       return null;
     }
   };

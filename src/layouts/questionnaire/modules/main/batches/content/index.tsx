@@ -45,11 +45,11 @@ export const Content: FC<I> = (props): ReactElement => {
 
       try {
         await POSTQuestionnaire(newPayload);
-        console.log("Questionnaire Success!");
+        console.info("Questionnaire Success!");
         router.push("/");
         reset();
       } catch {
-        console.log("Questionnaire Failed!");
+        console.warn("Questionnaire Failed!");
       }
     });
   };
