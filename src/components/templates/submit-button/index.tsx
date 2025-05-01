@@ -4,8 +4,8 @@ import { FC, ReactElement } from "react";
 import loadingAnimation from "@/public/assets/animations/Loading-W.svg";
 import { ExampleA, IExampleA } from "@/src/components";
 
-export const SubmitButton: FC<{ label: string } & IExampleA> = ({ disabled, label, ...props }): ReactElement => (
+export const SubmitButton: FC<{ isReview?: boolean; label: string } & IExampleA> = ({ disabled, isReview, label, ...props }): ReactElement => (
   <ExampleA disabled={disabled} type="submit" {...props}>
-    {disabled ? <Image alt="Loading..." src={loadingAnimation} width={20} /> : label}
+    {disabled ? isReview ? label : <Image alt="Loading..." src={loadingAnimation} width={20} /> : label}
   </ExampleA>
 );

@@ -93,9 +93,9 @@ export const Content: FC<I> = (props): ReactElement => {
         <li className="relative">
           {props.session?.user?.status ? (
             <div id="profile-menu">
-              <div className="relative active:scale-95">
+              <div className="relative flex items-center active:scale-95">
                 {questionnaireConditions && (
-                  <div className="absolute bottom-1.5 right-0 z-[1] flex size-4 items-center justify-center rounded-full bg-white">
+                  <div className="absolute -right-0.5 bottom-0 z-[1] flex size-4 items-center justify-center rounded-full bg-white">
                     <div className="relative flex size-2">
                       <div className="absolute size-full animate-ping rounded-full bg-rose-400 opacity-75" />
                       <div className="size-2 rounded-full bg-rose-500" />
