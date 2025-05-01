@@ -99,7 +99,7 @@ export const Content: FC<I> = (props): ReactElement => {
 
   useEffect(() => {
     const pathSegments = pathname.split("/");
-    const documentId = pathSegments[pathSegments.length - 1];
+    const documentId = pathSegments[3];
 
     setPathKeeper(documentId);
 
