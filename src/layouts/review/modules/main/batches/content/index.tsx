@@ -7,7 +7,7 @@ import { FC, ReactElement, useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoStar } from "react-icons/io5";
 
-import { BookingSummary, ExampleA, FormContainer, Input, TextArea } from "@/src/components";
+import { BookingSummary, FormContainer, Input, SubmitButton, TextArea } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { SUGGESTIONS_DATA } from "@/src/libs";
 import { ReviewSchema, TReviewSchema } from "@/src/schemas";
@@ -151,16 +151,15 @@ export const Content: FC<I> = (props): ReactElement => {
               ))}
             </div>
 
-            <ExampleA
-              className="w-full font-semibold"
+            <SubmitButton
+              className="w-full"
               color="rose"
               disabled={loading || watch("rating") === 0}
+              isReview={watch("rating") === 0}
+              label="SUBMIT"
               size="sm"
-              type="submit"
               variant="solid"
-            >
-              {loading ? "Loading..." : "SUBMIT"}
-            </ExampleA>
+            />
           </div>
         </form>
 

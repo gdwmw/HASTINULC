@@ -46,7 +46,7 @@ export const Avatar: FC<IAvatar> = (props): ReactElement => {
         props.className,
       )}
     >
-      <FaUser className="text-gray-400" size={props.iconSize ? props.iconSize : icon} />
+      <FaUser className="text-gray-400" size={props.iconSize ?? icon} />
     </div>
   );
 };
