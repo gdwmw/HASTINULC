@@ -52,7 +52,7 @@ export const Content: FC<I> = (props): ReactElement => {
           return;
         }
 
-        setPageCount(data.pages[0].meta.pagination.pageCount ?? 1);
+        setPageCount(data.pages[0].meta.pagination.pageCount || 1);
 
         if (!pathKeeper) {
           return;
