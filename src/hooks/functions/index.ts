@@ -5,6 +5,22 @@ import { IDataResponse } from "@/src/types";
 
 // ----------------------------
 
+export const getErrorMessage = (error: unknown): string | undefined => {
+  const errorMessage =
+    error instanceof Error
+      ? error.message
+          .split("Message: ")
+          .pop()
+          ?.split(" ")
+          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      : "An Unknown Error Occurred";
+
+  return errorMessage;
+};
+
+// ----------------------------
+
 const CURRENCY_SETTINGS = {
   EUR: {
     fractionDigits: 2,
