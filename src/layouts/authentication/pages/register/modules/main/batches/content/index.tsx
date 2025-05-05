@@ -125,7 +125,7 @@ export const Content: FC = (): ReactElement => {
             />
           ))}
 
-          <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password does not match Password"}</span>
+          <span className="text-center text-sm text-red-600">{passwordNotMatch && "Confirm Password Does Not Match Password"}</span>
 
           <SubmitButton color="rose" disabled={loading} label="REGISTER" size="sm" variant="solid" />
 

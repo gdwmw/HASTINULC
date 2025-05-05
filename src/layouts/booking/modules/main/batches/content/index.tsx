@@ -152,23 +152,23 @@ export const Content: FC<I> = (props): ReactElement => {
 
         const whatsappMessage = `*Hastinulc Makeup Art | Booking Details | ${dt.name}*
   
-  - *Booking ID:* ${res.documentId}
-  - *Name:* ${dt.name}
-  - *Email:* ${dt.email}
-  - *Phone:* ${dt.phoneNumber}
+  • *Booking ID:* ${res.documentId}
+  • *Name:* ${dt.name}
+  • *Email:* ${dt.email}
+  • *Phone:* ${dt.phoneNumber}
   
-  - *Package:* ${dt.package}
-  - *Date:* ${dt.date}
-  - *Time:* ${dt.time}
-  - *Location:* ${dt.googleMapsLink}
+  • *Package:* ${dt.package}
+  • *Date:* ${dt.date}
+  • *Time:* ${dt.time}
+  • *Location:* ${dt.googleMapsLink}
   
-  - *Status:* Waiting
+  • *Status:* Waiting
   
-  - *Subtotal:* Rp${subtotal.toLocaleString()}
-  - *Tax (PPN):* Rp${tax.toLocaleString()}
-  - *TOTAL:* Rp${total.toLocaleString()}
+  • *Subtotal:* Rp${subtotal.toLocaleString()}
+  • *Tax (PPN):* Rp${tax.toLocaleString()}
+  • *TOTAL:* Rp${total.toLocaleString()}
   
-  I'm looking forward to your *confirmation*. Thank you!`;
+I'm looking forward to your *confirmation*. Thank you!`;
 
         const encodedMessage = encodeURIComponent(whatsappMessage);
 
