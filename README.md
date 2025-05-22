@@ -13,6 +13,7 @@ Below is the main directory structure of the boilerplate:
 ```
 └── 📁configs
     └── 📁authentication
+└── 📁docs
 └── 📁src
     └── 📁app
         └── 📁(authed)
@@ -96,6 +97,7 @@ Below is the main directory structure of the boilerplate:
 ### Structure Explanation 📚
 
 - **/configs**: Contains configuration files, including authentication settings and logic.
+- **/docs**: Contains project documentation such as architectural diagrams, flowcharts, API documentation, and other technical documentation that helps understand the project structure and functionality.
 - **/public**: Contains static assets such as images, animations, and other static files.
 - **/src/app**: Contains the main application pages, including login, admin, user, and others.
 - **/src/components**: Contains reusable components throughout the application, organized following the principles of Atomic Design.
