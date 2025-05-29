@@ -1,5 +1,7 @@
 import { IBookingResponse, IReviewResponse } from "../api";
 
+// ----------------------------
+
 export interface IBookingContext {
   name?: string;
   email?: string;

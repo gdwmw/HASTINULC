@@ -2,6 +2,10 @@ import { IAuthResponse, IBookingResponse, IDataResponse, IDummyAccount, IReviewR
 
 // ----------------------------
 
+export const ROLE_OPTIONS = ["admin", "demo", "user"] as const;
+
+// ----------------------------
+
 export const DEMO_ACCOUNT_DATA: IAuthResponse = {
   blocked: false,
   confirmed: true,
@@ -164,7 +168,24 @@ export const DUMMY_BOOKING_DATA: IBookingResponse[] = [
     documentId: "dEmOboOKingSDocuMenTid04",
     email: "demo@demo.com",
     googleMapsLink: "https://maps.app.goo.gl/EyxeJKGgqkPScknT9",
-    indicator: "Payment",
+    indicator: "Down Payment",
+    name: "This Is Demo Account",
+    package: "ENGAGEMENT",
+    phoneNumber: "0000000000",
+    relation_data: DUMMY_DATA_DATA,
+    subtotal: "350000",
+    tax: "42000",
+    time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
+    total: "392000",
+    username: "demo",
+  },
+  {
+    createdAt: new Date(),
+    date: "0000-00-00",
+    documentId: "dEmOboOKingSDocuMenTid04",
+    email: "demo@demo.com",
+    googleMapsLink: "https://maps.app.goo.gl/EyxeJKGgqkPScknT9",
+    indicator: "Final Payment",
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",
@@ -216,6 +237,23 @@ export const DUMMY_BOOKING_DATA: IBookingResponse[] = [
     email: "demo@demo.com",
     googleMapsLink: "https://maps.app.goo.gl/EyxeJKGgqkPScknT9",
     indicator: "Rejected",
+    name: "This Is Demo Account",
+    package: "ENGAGEMENT",
+    phoneNumber: "0000000000",
+    relation_data: DUMMY_DATA_DATA,
+    subtotal: "350000",
+    tax: "42000",
+    time: ["06:00 - 09:00", "10:00 - 13:00", "14:00 - 17:00", "18:00 - 21:00", "22:00 - 01:00", "02:00 - 05:00"],
+    total: "392000",
+    username: "demo",
+  },
+  {
+    createdAt: new Date(),
+    date: "0000-00-00",
+    documentId: "dEmOboOKingSDocuMenTid07",
+    email: "demo@demo.com",
+    googleMapsLink: "https://maps.app.goo.gl/EyxeJKGgqkPScknT9",
+    indicator: "Expired",
     name: "This Is Demo Account",
     package: "ENGAGEMENT",
     phoneNumber: "0000000000",

@@ -171,8 +171,10 @@ const Component: FC<IComponent> = (props): ReactElement => (
       className={`absolute inset-x-0 top-0 m-0 h-1.5 border-none ${
         {
           Canceled: "bg-red-400",
+          "Down Payment": "bg-orange-400",
+          Expired: "bg-red-400",
+          "Final Payment": "bg-orange-400",
           "On Going": "bg-blue-400",
-          Payment: "bg-orange-400",
           Rejected: "bg-red-400",
           Success: "bg-green-400",
           Waiting: "bg-yellow-400",
@@ -189,8 +191,10 @@ const Component: FC<IComponent> = (props): ReactElement => (
             className={`flex h-6 w-full max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${
               {
                 Canceled: "bg-red-400",
+                "Down Payment": "bg-orange-400",
+                Expired: "bg-red-400",
+                "Final Payment": "bg-orange-400",
                 "On Going": "bg-blue-400",
-                Payment: "bg-orange-400",
                 Rejected: "bg-red-400",
                 Success: "bg-green-400",
                 Waiting: "bg-yellow-400",
