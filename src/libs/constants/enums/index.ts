@@ -1,1 +1,1 @@
-export const INDICATOR_OPTIONS = ["Canceled", "Expired", "On Going", "Down Payment", "Rejected", "Success", "Waiting", "Final Payment"] as const;
+export const INDICATOR_OPTIONS = ["Canceled", "Expired", "On Going", "Down Pay", "Rejected", "Success", "Waiting", "Final Pay"] as const;

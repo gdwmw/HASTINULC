@@ -6,6 +6,10 @@ export default withAuth(function middleware(request: NextRequestWithAuth) {
     return NextResponse.rewrite(new URL("/denied", request.url));
   }
 
+  if (request.nextUrl.pathname.startsWith("/admin") && request.nextauth.token?.role !== "admin" && request.nextauth.token?.role !== "demo") {
+    return NextResponse.rewrite(new URL("/denied", request.url));
+  }
+
   if (request.nextUrl.pathname.startsWith("/history/")) {
     const path = request.nextUrl.pathname.split("/").filter(Boolean);
     if (path[1] !== request.nextauth.token?.username) {
@@ -31,5 +35,6 @@ export const config = {
     "/profile/:path*",
     "/password/:path*",
     "/questionnaire/:path*",
+    "/admin/:path*",
   ],
 };

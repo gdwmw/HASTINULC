@@ -175,6 +175,7 @@ interface IBookingCommon {
   subtotal: string;
   total: string;
   indicator: TIndicator;
+  confirmedAt?: Date;
 }
 
 export interface IBookingPayload extends IBookingCommon {

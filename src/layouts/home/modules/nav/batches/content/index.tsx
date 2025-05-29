@@ -7,6 +7,7 @@ import Link from "next/link";
 import { FC, FormEvent, ReactElement, useEffect, useState } from "react";
 import { FaClipboardList, FaHistory, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { HiOutlineBars3 } from "react-icons/hi2";
+import { MdSpaceDashboard } from "react-icons/md";
 
 import logo from "@/public/assets/images/logos/Black.svg";
 import { Avatar, DetailedAvatar, ExampleA, ExampleATWM } from "@/src/components";
@@ -168,6 +169,18 @@ export const Content: FC<I> = (props): ReactElement => {
                       )}
                     </Link>
                   </li>
+
+                  {props.session.user.role === "admin" && (
+                    <li>
+                      <Link
+                        className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
+                        href="/admin/dashboard"
+                      >
+                        <MdSpaceDashboard className="-mr-px" size={17} />
+                        Dashboard
+                      </Link>
+                    </li>
+                  )}
 
                   <div className="my-3 border-t border-gray-300" />
 
