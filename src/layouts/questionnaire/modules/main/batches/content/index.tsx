@@ -64,7 +64,7 @@ export const Content: FC<I> = (props): ReactElement => {
         label={"Home"}
       >
         <header>
-          <h1 className="text-center text-2xl font-bold text-rose-500">Questionnaire</h1>
+          <h1 className="text-center text-2xl font-bold text-rose-400">Questionnaire</h1>
           <p className="text-center text-gray-600 max-[500px]:text-sm">Your feedback drives our continuous improvement</p>
         </header>
 
@@ -75,17 +75,23 @@ export const Content: FC<I> = (props): ReactElement => {
                 {dt.options !== "textarea" ? (
                   <div className="space-y-2">
                     <h2 className="flex gap-1">
-                      <span className="font-bold text-rose-500">{i + 1}.</span>
+                      <span className="font-bold text-rose-400">{i + 1}.</span>
                       <span>
                         {dt.question}
-                        <span className="pl-0.5 font-bold text-rose-500">*</span>
+                        <span className="pl-0.5 font-bold text-rose-400">*</span>
                       </span>
                     </h2>
                     <div className="ml-8 flex gap-3 overflow-x-auto max-sm:flex-col">
                       {Array.isArray(dt.options) &&
                         dt.options.map((opt) => (
                           <label className="flex items-center gap-1" key={opt}>
-                            <input className="accent-rose-500" disabled={loading} type="radio" value={opt} {...register(`question${i + 1}`)} />
+                            <input
+                              className="size-3 cursor-pointer appearance-none rounded-full border border-gray-400 checked:border-[3px] checked:border-rose-400"
+                              disabled={loading}
+                              type="radio"
+                              value={opt}
+                              {...register(`question${i + 1}`)}
+                            />
                             <span className="whitespace-nowrap">{opt}</span>
                           </label>
                         ))}
@@ -96,7 +102,7 @@ export const Content: FC<I> = (props): ReactElement => {
                 ) : (
                   <div className="space-y-4">
                     <h2 className="flex gap-1">
-                      <span className="font-bold text-rose-500">{i + 1}.</span>
+                      <span className="font-bold text-rose-400">{i + 1}.</span>
                       <span>{dt.question}</span>
                     </h2>
                     <TextArea
