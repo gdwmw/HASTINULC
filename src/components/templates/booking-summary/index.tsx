@@ -15,7 +15,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
   <section className="flex w-full min-w-[260px] max-w-[400px] flex-col justify-between gap-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md lg:min-w-[400px]">
     <div className="space-y-4">
       <header>
-        <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-500 max-[450px]:text-base max-[380px]:text-sm">
+        <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-400 max-[450px]:text-base max-[380px]:text-sm">
           -- BOOKING SUMMARY --
         </h1>
         <div className="my-3 border-t border-gray-300" />
@@ -64,7 +64,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
             <dd>
               <Link
                 className={ExampleATWM({
-                  className: "font-semibold text-rose-500 underline hover:text-rose-600 max-[450px]:text-sm max-[380px]:text-xs",
+                  className: "font-semibold text-rose-400 underline hover:text-rose-500 max-[450px]:text-sm max-[380px]:text-xs",
                   color: "rose",
                   size: "sm",
                   variant: "ghost",
@@ -85,9 +85,9 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
               className={`flex h-7 w-28 items-center justify-center rounded-full text-sm font-semibold text-white max-[380px]:text-xs ${
                 {
                   Canceled: "bg-red-400",
-                  "Down Payment": "bg-orange-400",
+                  "Down Pay": "bg-orange-400",
                   Expired: "bg-red-400",
-                  "Final Payment": "bg-orange-400",
+                  "Final Pay": "bg-orange-400",
                   "On Going": "bg-blue-400",
                   Rejected: "bg-red-400",
                   Success: "bg-green-400",
@@ -122,7 +122,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
 
           <div className="flex justify-between text-lg max-[450px]:text-base max-[380px]:text-sm">
             <dt className="font-semibold text-gray-800">TOTAL:</dt>
-            <dd className="font-bold text-rose-500">{currencyFormat(props.data.total || 0, "IDR")}</dd>
+            <dd className="font-bold text-rose-400">{currencyFormat(props.data.total || 0, "IDR")}</dd>
           </div>
         </div>
       </dl>
