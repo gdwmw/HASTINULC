@@ -8,7 +8,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FC, ReactElement, ReactNode, useEffect, useState } from "react";
 import { BiSolidDetail } from "react-icons/bi";
-import { FaBox, FaChevronRight, FaClock, FaEdit } from "react-icons/fa";
+import { BsCalendar2CheckFill } from "react-icons/bs";
+import { FaBox, FaChevronRight, FaEdit } from "react-icons/fa";
 import { IoStar } from "react-icons/io5";
 import { useInView } from "react-intersection-observer";
 
@@ -34,7 +35,11 @@ export const Content: FC<I> = (props): ReactElement => {
   const [searchedData, setSearchedData] = useState<IBookingResponse>();
   const { open, setOpen, setResponse } = useGlobalStates();
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery<{ data: IBookingResponse[] } & IMetaResponse>({
+  const {
+    data: bookingResponse,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery<{ data: IBookingResponse[] } & IMetaResponse>({
     enabled: props.session?.user?.role !== "demo",
     getNextPageParam: (lastPage, allPages): number | undefined => (pageCount === allPages.length ? undefined : allPages.length + 1),
     initialPageParam: 1,
@@ -42,24 +47,24 @@ export const Content: FC<I> = (props): ReactElement => {
       GETBooking(
         `sort[0]=createdAt:desc&filters[relation_data][documentId][$eq]=${props.session?.user?.dataDocumentId}&pagination[pageSize]=5&pagination[page]=${pageParam}`,
       ),
-    queryKey: ["bookings", props.session?.user?.dataDocumentId],
+    queryKey: ["booking", props.session?.user?.dataDocumentId],
   });
 
   useEffect(() => {
     const execute = async () => {
       try {
-        if (!data?.pages[0]?.meta.pagination) {
+        if (!bookingResponse?.pages[0]?.meta.pagination) {
           return;
         }
 
-        setPageCount(data.pages[0].meta.pagination.pageCount || 1);
+        setPageCount(bookingResponse.pages[0].meta.pagination.pageCount || 1);
 
         if (!pathKeeper) {
           return;
         }
 
-        const bookingResponse = data.pages.flatMap((pg) => pg.data);
-        const findBooking = bookingResponse?.find((dt) => dt.documentId === pathKeeper);
+        const data = bookingResponse.pages.flatMap((pg) => pg.data);
+        const findBooking = data?.find((dt) => dt.documentId === pathKeeper);
 
         const findReview = props.reviewResponse?.find((dt) => dt.relation_booking.documentId === pathKeeper);
 
@@ -88,7 +93,7 @@ export const Content: FC<I> = (props): ReactElement => {
     }
 
     // eslint-disable-next-line
-  }, [data?.pages, pathKeeper]);
+  }, [bookingResponse?.pages, pathKeeper]);
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -134,7 +139,7 @@ export const Content: FC<I> = (props): ReactElement => {
             ? DUMMY_BOOKING_DATA.map((dt, i) => (
                 <Component data={dt} key={i} pathName={pathKeeper} router={router} setOpen={setOpen} username={props.session?.user?.username} />
               ))
-            : data?.pages.map((pg) =>
+            : bookingResponse?.pages.map((pg) =>
                 pg.data.map((dt, i) => (
                   <Component data={dt} key={i} pathName={pathKeeper} router={router} setOpen={setOpen} username={props.session?.user?.username} />
                 )),
@@ -171,9 +176,9 @@ const Component: FC<IComponent> = (props): ReactElement => (
       className={`absolute inset-x-0 top-0 m-0 h-1.5 border-none ${
         {
           Canceled: "bg-red-400",
-          "Down Payment": "bg-orange-400",
+          "Down Pay": "bg-orange-400",
           Expired: "bg-red-400",
-          "Final Payment": "bg-orange-400",
+          "Final Pay": "bg-orange-400",
           "On Going": "bg-blue-400",
           Rejected: "bg-red-400",
           Success: "bg-green-400",
@@ -183,17 +188,17 @@ const Component: FC<IComponent> = (props): ReactElement => (
     />
 
     <div className="flex flex-col gap-4 p-5">
-      <header className="flex items-center justify-between">
+      <header className="flex items-center justify-between gap-2">
         <h1 className="line-clamp-1 text-lg font-semibold text-gray-900">{props.data.name || "-"}</h1>
 
         <div className="flex w-fit items-center gap-2">
           <strong
-            className={`flex h-6 w-full max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${
+            className={`flex h-6 w-full min-w-fit max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${
               {
                 Canceled: "bg-red-400",
-                "Down Payment": "bg-orange-400",
+                "Down Pay": "bg-orange-400",
                 Expired: "bg-red-400",
-                "Final Payment": "bg-orange-400",
+                "Final Pay": "bg-orange-400",
                 "On Going": "bg-blue-400",
                 Rejected: "bg-red-400",
                 Success: "bg-green-400",
@@ -212,7 +217,7 @@ const Component: FC<IComponent> = (props): ReactElement => (
         <div className="flex justify-between gap-3 max-[450px]:flex-col">
           <figure className="flex items-center gap-3">
             <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
-              <FaBox className="size-[12px] text-rose-500 max-[400px]:size-[10px]" />
+              <FaBox className="text-rose-500" size={12} />
             </div>
             <figcaption>
               <h2 className="text-gray-500">Package</h2>
@@ -223,7 +228,7 @@ const Component: FC<IComponent> = (props): ReactElement => (
           {props.data.relation_review?.rating && (
             <figure className="flex items-center gap-3 max-[450px]:order-first">
               <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
-                <IoStar className="text-rose-500" />
+                <IoStar className="text-rose-500" size={15} />
               </div>
               <figcaption>
                 <h2 className="text-gray-500">Rating</h2>
@@ -248,7 +253,7 @@ const Component: FC<IComponent> = (props): ReactElement => (
 
         <figure className="flex items-center gap-3">
           <div className="flex size-8 items-center justify-center rounded-full bg-rose-100">
-            <FaClock className="text-rose-500" />
+            <BsCalendar2CheckFill className="text-rose-500" size={13} />
           </div>
           <figcaption>
             <h2 className="text-gray-500">Date</h2>
@@ -267,7 +272,7 @@ const Component: FC<IComponent> = (props): ReactElement => (
           >
             <FaEdit size={18} />
           </Link>
-          <span className="h-5 w-px bg-rose-200" />
+          <div className="h-5 w-px bg-rose-200" />
         </>
       )}
 
@@ -288,7 +293,7 @@ const Component: FC<IComponent> = (props): ReactElement => (
           >
             <BiSolidDetail size={20} />
           </ExampleA>
-          <span className="h-5 w-px bg-rose-200" />
+          <div className="h-5 w-px bg-rose-200" />
         </>
       )}
 

@@ -21,7 +21,7 @@ export const Main: FC<T> = async (props): Promise<ReactElement> => {
         GETBooking(
           `sort[0]=createdAt:desc&filters[relation_data][documentId][$eq]=${session?.user?.dataDocumentId}&pagination[pageSize]=5&pagination[page]=1`,
         ),
-      queryKey: ["bookings", session?.user?.dataDocumentId],
+      queryKey: ["booking", session?.user?.dataDocumentId],
     });
   };
 
