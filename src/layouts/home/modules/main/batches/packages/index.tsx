@@ -132,7 +132,7 @@ export const Packages: FC = (): ReactElement => {
                     ))}
                   </div>
 
-                  <p className="text-lg">{dt.text}</p>
+                  <p className="text-lg">{dt.word}</p>
                 </div>
               </blockquote>
             ))}
