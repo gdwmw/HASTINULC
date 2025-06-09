@@ -108,7 +108,7 @@ export const Content: FC = (): ReactElement => {
 
                 <div className="flex flex-col gap-4 p-5">
                   <header className="flex items-center justify-between gap-2">
-                    <h1 className="line-clamp-1 text-lg font-semibold text-gray-900">{dt.name || "-"}</h1>
+                    <h1 className="line-clamp-1 text-lg font-semibold">{dt.name || "-"}</h1>
 
                     <strong
                       className={`flex h-6 w-full min-w-fit max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${
@@ -135,8 +135,8 @@ export const Content: FC = (): ReactElement => {
                           <FaBox className="text-rose-500" size={12} />
                         </div>
                         <figcaption>
-                          <h2 className="text-gray-500">Package</h2>
-                          <span className="block font-semibold text-gray-900">{dt.package || "-"}</span>
+                          <h2 className="text-gray-600">Package</h2>
+                          <span className="font-semibold">{dt.package || "-"}</span>
                         </figcaption>
                       </figure>
 
@@ -146,7 +146,7 @@ export const Content: FC = (): ReactElement => {
                             <IoStar className="text-rose-500" size={15} />
                           </div>
                           <figcaption>
-                            <h2 className="text-gray-500">Rating</h2>
+                            <h2 className="text-gray-600">Rating</h2>
                             {dt.indicator === "Success" && dt.relation_review && (
                               <div className="flex items-center">
                                 {Array.from({ length: 5 }, (_, i) => {
@@ -171,8 +171,8 @@ export const Content: FC = (): ReactElement => {
                           <BsCalendar2CheckFill className="text-rose-500" size={13} />
                         </div>
                         <figcaption>
-                          <h2 className="text-gray-500">Date</h2>
-                          <span className="block font-semibold text-gray-900">{dt.date || "-"}</span>
+                          <h2 className="text-gray-600">Date</h2>
+                          <span className="font-semibold">{dt.date || "-"}</span>
                         </figcaption>
                       </figure>
 
@@ -181,7 +181,7 @@ export const Content: FC = (): ReactElement => {
                           <FaLocationDot className="text-rose-500" size={14} />
                         </div>
                         <figcaption>
-                          <h2 className="text-gray-500">Location</h2>
+                          <h2 className="text-gray-600">Location</h2>
                           <Link
                             className="font-semibold text-rose-400 underline hover:text-rose-500 max-[450px]:text-sm max-[380px]:text-xs"
                             href={dt.googleMapsLink}
@@ -198,10 +198,8 @@ export const Content: FC = (): ReactElement => {
                         <FaClock className="text-rose-500" size={13} />
                       </div>
                       <figcaption>
-                        <h2 className="text-gray-500">Time</h2>
-                        <pre className="block font-semibold text-gray-900">
-                          {Array.isArray(dt.time) && dt.time.length > 0 ? dt.time.join(`\n`) : "-"}
-                        </pre>
+                        <h2 className="text-gray-600">Time</h2>
+                        <pre className="font-semibold">{Array.isArray(dt.time) && dt.time.length > 0 ? dt.time.join(`\n`) : "-"}</pre>
                       </figcaption>
                     </figure>
                   </div>
@@ -209,7 +207,7 @@ export const Content: FC = (): ReactElement => {
 
                 <footer className="flex items-center justify-end gap-3 border-t border-gray-200 p-3 group-hover:border-rose-200">
                   <div className="mr-auto flex gap-1">
-                    <h2 className="text-gray-500">Total:</h2>
+                    <h2 className="text-gray-600">Total:</h2>
                     <span className="font-bold text-rose-400">{currencyFormat(dt.total, "IDR")}</span>
                   </div>
 

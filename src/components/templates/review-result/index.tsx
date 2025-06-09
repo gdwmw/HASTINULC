@@ -44,7 +44,7 @@ const ReviewResult: FC<I> = (props): ReactElement => (
       <div className="flex flex-col gap-3">
         <dt className="font-medium text-gray-600">Description:</dt>
         <dd className="rounded-lg border border-gray-200 bg-gray-50 p-3">
-          <p className="leading-relaxed text-gray-700">{props.data.description || "-"}</p>
+          <p className="leading-relaxed">{props.data.description || "-"}</p>
         </dd>
       </div>
 
@@ -64,7 +64,7 @@ const ReviewResult: FC<I> = (props): ReactElement => (
               </div>
             ))
           ) : (
-            <p className="text-gray-500">-</p>
+            <p>-</p>
           )}
         </dd>
       </div>

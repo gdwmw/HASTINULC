@@ -189,7 +189,7 @@ const Component: FC<IComponent> = (props): ReactElement => (
 
     <div className="flex flex-col gap-4 p-5">
       <header className="flex items-center justify-between gap-2">
-        <h1 className="line-clamp-1 text-lg font-semibold text-gray-900">{props.data.name || "-"}</h1>
+        <h1 className="line-clamp-1 text-lg font-semibold">{props.data.name || "-"}</h1>
 
         <div className="flex w-fit items-center gap-2">
           <strong
@@ -220,8 +220,8 @@ const Component: FC<IComponent> = (props): ReactElement => (
               <FaBox className="text-rose-500" size={12} />
             </div>
             <figcaption>
-              <h2 className="text-gray-500">Package</h2>
-              <span className="block font-semibold text-gray-900">{props.data.package || "-"}</span>
+              <h2 className="text-gray-600">Package</h2>
+              <span className="font-semibold">{props.data.package || "-"}</span>
             </figcaption>
           </figure>
 
@@ -231,7 +231,7 @@ const Component: FC<IComponent> = (props): ReactElement => (
                 <IoStar className="text-rose-500" size={15} />
               </div>
               <figcaption>
-                <h2 className="text-gray-500">Rating</h2>
+                <h2 className="text-gray-600">Rating</h2>
                 {props.data.indicator === "Success" && props.data.relation_review && (
                   <div className="flex items-center">
                     {Array.from({ length: 5 }, (_, i) => {
@@ -256,8 +256,8 @@ const Component: FC<IComponent> = (props): ReactElement => (
             <BsCalendar2CheckFill className="text-rose-500" size={13} />
           </div>
           <figcaption>
-            <h2 className="text-gray-500">Date</h2>
-            <span className="block font-semibold text-gray-900">{props.data.date || "-"}</span>
+            <h2 className="text-gray-600">Date</h2>
+            <span className="font-semibold">{props.data.date || "-"}</span>
           </figcaption>
         </figure>
       </div>

@@ -240,7 +240,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
                       {dt.options?.map((opt, i) => (
                         <label className="group relative cursor-pointer" key={i}>
                           <input className="peer absolute opacity-0" disabled={loading} type="checkbox" value={opt} {...register(dt.name)} />
-                          <div className="flex select-none items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-3 text-sm font-semibold text-gray-700 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 peer-checked:border-rose-300 peer-checked:bg-rose-50 peer-checked:text-rose-500 peer-disabled:cursor-not-allowed peer-disabled:border-gray-200 peer-disabled:bg-gray-100 peer-disabled:text-gray-400">
+                          <div className="flex select-none items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-3 text-sm font-semibold hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 peer-checked:border-rose-300 peer-checked:bg-rose-50 peer-checked:text-rose-500 peer-disabled:cursor-not-allowed peer-disabled:border-gray-200 peer-disabled:bg-gray-100 peer-disabled:text-gray-400">
                             {opt}
                           </div>
                         </label>

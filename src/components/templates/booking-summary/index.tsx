@@ -25,22 +25,22 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
         <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
           <div className="flex justify-between gap-5">
             <dt className="font-medium text-gray-600">Name:</dt>
-            <dd className="line-clamp-1 font-semibold text-gray-800">{props.data.name || "-"}</dd>
+            <dd className="line-clamp-1 font-semibold">{props.data.name || "-"}</dd>
           </div>
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Package:</dt>
-            <dd className="font-semibold text-gray-800">{props.data.package || "-"}</dd>
+            <dd className="font-semibold">{props.data.package || "-"}</dd>
           </div>
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Date:</dt>
-            <dd className="font-semibold text-gray-800">{props.data.date || "-"}</dd>
+            <dd className="font-semibold">{props.data.date || "-"}</dd>
           </div>
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Time:</dt>
-            <dd className="max-w-60 text-right text-gray-800">
+            <dd className="max-w-60 text-right">
               <pre>{Array.isArray(props.data.time) && props.data.time.length > 0 ? props.data.time.join(`\n`) : "-"}</pre>
             </dd>
           </div>
@@ -49,12 +49,12 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
         <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Phone:</dt>
-            <dd className="font-semibold text-gray-800">{props.data.phoneNumber || "-"}</dd>
+            <dd className="font-semibold">{props.data.phoneNumber || "-"}</dd>
           </div>
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Email:</dt>
-            <dd className="max-w-[250px] truncate font-semibold text-gray-800 max-[480px]:max-w-[200px] max-[430px]:max-w-[150px] max-[380px]:max-w-[120px]">
+            <dd className="max-w-[250px] truncate font-semibold max-[480px]:max-w-[200px] max-[430px]:max-w-[150px] max-[380px]:max-w-[120px]">
               {props.data.email || "-"}
             </dd>
           </div>
@@ -103,25 +103,25 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
         {props.data.createdAt && (
           <div className="flex justify-between rounded-lg border border-gray-200 bg-gray-50 p-4">
             <dt className="font-medium text-gray-600">Created At:</dt>
-            <dd className="font-semibold text-gray-800">{format(new Date(props.data.createdAt), "yyyy-MM-dd / HH:mm") || "-"}</dd>
+            <dd className="font-semibold">{format(new Date(props.data.createdAt), "yyyy-MM-dd / HH:mm") || "-"}</dd>
           </div>
         )}
 
         <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Tax (PPN):</dt>
-            <dd className="font-semibold text-gray-800">{currencyFormat(props.data.tax || 0, "IDR")}</dd>
+            <dd className="font-semibold">{currencyFormat(props.data.tax || 0, "IDR")}</dd>
           </div>
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Subtotal:</dt>
-            <dd className="font-semibold text-gray-800">{currencyFormat(props.data.subtotal || 0, "IDR")}</dd>
+            <dd className="font-semibold">{currencyFormat(props.data.subtotal || 0, "IDR")}</dd>
           </div>
 
           <div className="my-3 border-t border-gray-300" />
 
           <div className="flex justify-between text-lg max-[450px]:text-base max-[380px]:text-sm">
-            <dt className="font-semibold text-gray-800">TOTAL:</dt>
+            <dt className="font-semibold">TOTAL:</dt>
             <dd className="font-bold text-rose-400">{currencyFormat(props.data.total || 0, "IDR")}</dd>
           </div>
         </div>
