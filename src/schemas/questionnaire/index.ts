@@ -1,13 +1,13 @@
 import { z } from "zod";
 
-import { schemaErrorMessage } from "../schema-error-message";
+import { schemaErrorMessage as errorMessage } from "../schema-error-message";
 
 // ----------------------------
 
 const questionsSchema: Record<string, z.ZodTypeAny> = {};
 
 const createQuestionValidator = (questionNumber: number) => {
-  const message = schemaErrorMessage.string.enum(`the answer for question number ${questionNumber}`);
+  const message = errorMessage.string.enum(`the answer for question number ${questionNumber}`);
   return z
     .string()
     .min(1, { message })
