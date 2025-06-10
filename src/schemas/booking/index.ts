@@ -2,33 +2,33 @@ import { z } from "zod";
 
 import { PACKAGES_DATA } from "@/src/libs";
 
-import { schemaErrorMessage } from "../schema-error-message";
+import { schemaErrorMessage as errorMessage } from "../schema-error-message";
 
 // ----------------------------
 
 export const BookingSchema = z.object({
-  date: z.string().min(1, { message: schemaErrorMessage.string.required("Date") }),
-  email: z.string().email({ message: schemaErrorMessage.string.email("Email") }),
+  date: z.string().min(1, { message: errorMessage.string.required("Date") }),
+  email: z.string().email({ message: errorMessage.string.email("Email") }),
   googleMapsLink: z
     .string()
-    .url({ message: schemaErrorMessage.string.url("Google Maps Link") })
+    .url({ message: errorMessage.string.url("Google Maps Link") })
     .refine((url) => url.includes("https://maps.app.goo.gl/"), {
-      message: schemaErrorMessage.string.url("Google Maps Link"),
+      message: errorMessage.string.url("Google Maps Link"),
     }),
-  name: z.string().min(3, { message: schemaErrorMessage.string.min("Name", 3) }),
+  name: z.string().min(3, { message: errorMessage.string.min("Name", 3) }),
   package: z.enum(PACKAGES_DATA.map((dt) => dt.title) as [string, ...string[]], {
-    errorMap: () => ({ message: schemaErrorMessage.string.enum("Package") }),
+    errorMap: () => ({ message: errorMessage.string.enum("Package") }),
   }),
-  phoneNumber: z.string().min(10, { message: schemaErrorMessage.string.min("Phone", 10) }),
+  phoneNumber: z.string().min(10, { message: errorMessage.string.min("Phone", 10) }),
   time: z
     .array(z.string())
-    .min(1, { message: schemaErrorMessage.string.enum("Time") })
+    .min(1, { message: errorMessage.string.enum("Time") })
     .or(z.array(z.string()).length(0))
     .superRefine((val, ctx) => {
       if (val.length === 0) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: schemaErrorMessage.string.enum("Time"),
+          message: errorMessage.string.enum("Time"),
         });
       }
     }),

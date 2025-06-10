@@ -4,4 +4,6 @@ import { Main } from "./modules";
 
 type T = Readonly<PropsWithChildren>;
 
-export const GlobalHistoryLayout: FC<T> = (props): ReactElement => <Main>{props.children}</Main>;
+const GlobalHistoryLayout: FC<T> = (props): ReactElement => <Main>{props.children}</Main>;
+
+export default GlobalHistoryLayout;

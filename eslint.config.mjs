@@ -40,7 +40,7 @@ const eslintConfig = [
     },
   },
   {
-    files: ["src/types/**/*.ts"],
+    files: ["src/types/**"],
     rules: {
       "perfectionist/sort-enums": "off",
       "perfectionist/sort-interfaces": "off",

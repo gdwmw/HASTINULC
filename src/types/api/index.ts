@@ -1,5 +1,5 @@
-export type TRole = "admin" | "demo" | "user";
-export type TIndicator = "Canceled" | "On Going" | "Payment" | "Rejected" | "Success" | "Waiting";
+import { TRole } from "../authentication";
+import { TIndicator } from "../enums";
 
 // ----------------------------
 
@@ -175,6 +175,7 @@ interface IBookingCommon {
   subtotal: string;
   total: string;
   indicator: TIndicator;
+  confirmedAt?: Date;
 }
 
 export interface IBookingPayload extends IBookingCommon {
