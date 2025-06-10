@@ -1,6 +1,6 @@
 import type { IBookingPayload, IBookingResponse, IMetaResponse } from "@/src/types";
 
-import { getApi, postApi } from "../base";
+import { getApi, postApi, putApi } from "../base";
 
 const label = "Booking";
 
@@ -26,6 +26,16 @@ export const POSTBooking = async (payload: IBookingPayload): Promise<IBookingRes
   const response = await postApi<{ data: IBookingResponse }>({
     data: { data: payload },
     endpoint: "/api/bookings",
+    label: label,
+  });
+  return response.data;
+};
+
+export const PUTBooking = async (payload: IBookingPayload): Promise<IBookingResponse> => {
+  const { documentId, ...restPayload } = payload;
+  const response = await putApi<{ data: IBookingResponse }>({
+    data: { data: restPayload },
+    endpoint: `/api/bookings/${documentId}`,
     label: label,
   });
   return response.data;

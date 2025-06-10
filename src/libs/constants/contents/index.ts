@@ -230,7 +230,7 @@ export const TESTIMONIALS_DATA = [
     name: "Emily Carter",
     rating: 5,
     role: "ACTRESS",
-    text: "The makeup was done with great attention to detail and provided a flawless look for every scene. Very satisfying!",
+    word: "The makeup was done with great attention to detail and provided a flawless look for every scene. Very satisfying!",
   },
   {
     id: 2,
@@ -238,7 +238,7 @@ export const TESTIMONIALS_DATA = [
     name: "Linda Martinez",
     rating: 5,
     role: "MODEL",
-    text: "Such a pleasant experience! The makeup turned out exactly as I wanted. Highly recommended!",
+    word: "Such a pleasant experience! The makeup turned out exactly as I wanted. Highly recommended!",
   },
   {
     id: 3,
@@ -246,7 +246,7 @@ export const TESTIMONIALS_DATA = [
     name: "Sarah Anderson",
     rating: 5,
     role: "BRIDE",
-    text: "Amazing makeup service! The results were very natural and long-lasting. Highly professional and punctual.",
+    word: "Amazing makeup service! The results were very natural and long-lasting. Highly professional and punctual.",
   },
   {
     id: 4,
@@ -254,7 +254,7 @@ export const TESTIMONIALS_DATA = [
     name: "Jessica Lee",
     rating: 5,
     role: "BRIDESMAID",
-    text: "Beautiful makeup that perfectly matched the wedding theme. I felt so confident all day long.",
+    word: "Beautiful makeup that perfectly matched the wedding theme. I felt so confident all day long.",
   },
   {
     id: 5,
@@ -262,7 +262,7 @@ export const TESTIMONIALS_DATA = [
     name: "Sophia Wilson",
     rating: 5,
     role: "PHOTOGRAPHER",
-    text: "As a photographer, I was amazed by how flawless the makeup looked on camera. Highly recommend this service!",
+    word: "As a photographer, I was amazed by how flawless the makeup looked on camera. Highly recommend this service!",
   },
 ];
 

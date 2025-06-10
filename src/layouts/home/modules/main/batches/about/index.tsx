@@ -113,35 +113,39 @@ export const About: FC = (): ReactElement => {
           title="Why Choose Us?"
         />
 
-        <footer className="z-[1] flex gap-3 font-montaguSlab max-md:flex-col md:gap-10">
-          <ul className="space-y-3">
-            <li className="flex items-center gap-5">
-              <FaCheck className="text-rose-500" size={20} />
-              <span className="md:text-sm lg:text-xl xl:text-2xl">We travel to you, no matter how far</span>
-            </li>
-            <li className="flex items-center gap-5">
-              <FaCheck className="text-rose-500" size={20} />
-              <span className="md:text-sm lg:text-xl xl:text-2xl">We provide full services for you</span>
-            </li>
-            <li className="flex items-center gap-5">
-              <FaCheck className="text-rose-500" size={20} />
-              <span className="md:text-sm lg:text-xl xl:text-2xl">We you pick out the perfect makeup</span>
-            </li>
+        <footer className="z-[1] flex w-full gap-3 font-montaguSlab max-md:flex-col md:gap-10">
+          <ul className="basis-1/2">
+            <div className="mx-auto w-fit space-y-3">
+              <li className="flex items-center gap-5">
+                <FaCheck className="min-w-fit text-rose-500" size={20} />
+                <span className="md:text-sm lg:text-xl xl:text-2xl">We travel to you, no matter how far</span>
+              </li>
+              <li className="flex items-center gap-5">
+                <FaCheck className="min-w-fit text-rose-500" size={20} />
+                <span className="md:text-sm lg:text-xl xl:text-2xl">We provide full services for you</span>
+              </li>
+              <li className="flex items-center gap-5">
+                <FaCheck className="min-w-fit text-rose-500" size={20} />
+                <span className="md:text-sm lg:text-xl xl:text-2xl">We you pick out the perfect makeup</span>
+              </li>
+            </div>
           </ul>
 
-          <ul className="space-y-3">
-            <li className="flex items-center gap-5">
-              <FaCheck className="text-rose-500" size={20} />
-              <span className="md:text-sm lg:text-xl xl:text-2xl">We keep calm & fun on your special day</span>
-            </li>
-            <li className="flex items-center gap-5">
-              <FaCheck className="text-rose-500" size={20} />
-              <span className="md:text-sm lg:text-xl xl:text-2xl">We are a very professional team</span>
-            </li>
-            <li className="flex items-center gap-5">
-              <FaCheck className="text-rose-500" size={20} />
-              <span className="md:text-sm lg:text-xl xl:text-2xl">Quarantee for you who are not satisfied</span>
-            </li>
+          <ul className="basis-1/2">
+            <div className="mx-auto w-fit space-y-3">
+              <li className="flex items-center gap-5">
+                <FaCheck className="min-w-fit text-rose-500" size={20} />
+                <span className="md:text-sm lg:text-xl xl:text-2xl">We keep calm & fun on your special day</span>
+              </li>
+              <li className="flex items-center gap-5">
+                <FaCheck className="min-w-fit text-rose-500" size={20} />
+                <span className="md:text-sm lg:text-xl xl:text-2xl">We are a very professional team</span>
+              </li>
+              <li className="flex items-center gap-5">
+                <FaCheck className="min-w-fit text-rose-500" size={20} />
+                <span className="md:text-sm lg:text-xl xl:text-2xl">Quarantee for you who are not satisfied</span>
+              </li>
+            </div>
           </ul>
         </footer>
       </section>
