@@ -193,7 +193,7 @@ const Component: FC<IComponent> = (props): ReactElement => (
 
         <div className="flex w-fit items-center gap-2">
           <strong
-            className={`flex h-6 w-full min-w-fit max-w-24 items-center justify-center rounded-full px-5 text-xs font-semibold text-white ${
+            className={`flex h-6 w-full min-w-fit max-w-24 items-center justify-center whitespace-nowrap rounded-full px-5 text-xs font-semibold text-white ${
               {
                 Canceled: "bg-red-400",
                 "Down Pay": "bg-orange-400",
