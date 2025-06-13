@@ -35,13 +35,46 @@ export const Packages: FC = (): ReactElement => {
         />
 
         <div className="flex w-fit flex-wrap justify-center gap-5">
-          {PACKAGES_DATA.map((dt) => (
+          {PACKAGES_DATA.slice(0, 3).map((dt) => (
             <div
               className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md transition-transform hover:scale-105 hover:shadow-lg"
               key={dt.id}
             >
               <span className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</span>
-              <span className="border-b border-rose-500 pb-4 font-montaguSlab text-4xl">{currencyFormat(dt.price, "IDR")}</span>
+              <span className="border-b border-rose-500 pb-4 font-montaguSlab text-4xl">{currencyFormat(dt.price, "USD")}</span>
+
+              <ul className="space-y-2 text-left">
+                {dt.description.map((ls, i) => (
+                  <li key={ls.id}>
+                    <span className="font-bold text-rose-500">{i + 1}.</span> {ls.text}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                className={ExampleATWM({
+                  className: "mt-auto w-full font-semibold",
+                  color: "rose",
+                  size: "sm",
+                  variant: "solid",
+                })}
+                href={"/booking"}
+                onClick={() => setBooking({ package: dt.title })}
+              >
+                <FaChevronRight size={14} /> BOOKING NOW
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex w-fit flex-wrap justify-center gap-5">
+          {PACKAGES_DATA.slice(3).map((dt) => (
+            <div
+              className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md transition-transform hover:scale-105 hover:shadow-lg"
+              key={dt.id}
+            >
+              <span className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</span>
+              <span className="border-b border-rose-500 pb-4 font-montaguSlab text-4xl">{currencyFormat(dt.price, "USD")}</span>
 
               <ul className="space-y-2 text-left">
                 {dt.description.map((ls, i) => (

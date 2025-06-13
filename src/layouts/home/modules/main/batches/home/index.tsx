@@ -251,7 +251,7 @@ export const Home: FC<I> = (props): ReactElement => {
               <address className="hidden items-center gap-2 xl:flex">
                 <Link
                   className="flex size-20 items-center justify-center rounded-full bg-rose-100 text-rose-500 hover:bg-rose-200 active:scale-95 active:bg-rose-100 active:text-rose-400"
-                  href={"https://wa.me/6285762346703"}
+                  href={"https://wa.me/100000000000"}
                   prefetch={false}
                   target="_blank"
                 >
@@ -261,10 +261,10 @@ export const Home: FC<I> = (props): ReactElement => {
                   <span className="-mb-1 block text-lg">Need Help? Contact us</span>
                   <Link
                     className="inline-block text-2xl font-semibold not-italic text-rose-500 active:scale-95 active:text-rose-400"
-                    href={"https://wa.me/6285762346703"}
+                    href={"https://wa.me/100000000000"}
                     target="_blank"
                   >
-                    (+62) 8576-2346-703
+                    (+1) 000-000-0000
                   </Link>
                 </div>
               </address>
