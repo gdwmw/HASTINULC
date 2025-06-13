@@ -208,7 +208,7 @@ export const Content: FC = (): ReactElement => {
                 <footer className="flex items-center justify-end gap-3 border-t border-gray-200 p-3 group-hover:border-rose-200">
                   <div className="mr-auto flex gap-1">
                     <h2 className="text-gray-600">Total:</h2>
-                    <span className="font-bold text-rose-400">{currencyFormat(dt.total, "IDR")}</span>
+                    <span className="font-bold text-rose-400">{currencyFormat(dt.total, "USD")}</span>
                   </div>
 
                   {(dt.indicator === "Down Pay" || dt.indicator === "On Going") && (

@@ -18,7 +18,7 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
         <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-400 max-[450px]:text-base max-[380px]:text-sm">
           -- BOOKING SUMMARY --
         </h1>
-        <div className="my-3 border-t border-gray-300" />
+        <div className="my-3 border-t border-gray-200" />
       </header>
 
       <dl className="space-y-4 max-[450px]:text-sm max-[380px]:text-xs">
@@ -109,20 +109,20 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
 
         <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
           <div className="flex justify-between">
-            <dt className="font-medium text-gray-600">Tax (PPN):</dt>
-            <dd className="font-semibold">{currencyFormat(props.data.tax || 0, "IDR")}</dd>
+            <dt className="font-medium text-gray-600">Tax:</dt>
+            <dd className="font-semibold">{currencyFormat(props.data.tax || 0, "USD")}</dd>
           </div>
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Subtotal:</dt>
-            <dd className="font-semibold">{currencyFormat(props.data.subtotal || 0, "IDR")}</dd>
+            <dd className="font-semibold">{currencyFormat(props.data.subtotal || 0, "USD")}</dd>
           </div>
 
-          <div className="my-3 border-t border-gray-300" />
+          <div className="my-3 border-t border-gray-200" />
 
           <div className="flex justify-between text-lg max-[450px]:text-base max-[380px]:text-sm">
             <dt className="font-semibold">TOTAL:</dt>
-            <dd className="font-bold text-rose-400">{currencyFormat(props.data.total || 0, "IDR")}</dd>
+            <dd className="font-bold text-rose-400">{currencyFormat(props.data.total || 0, "USD")}</dd>
           </div>
         </div>
       </dl>

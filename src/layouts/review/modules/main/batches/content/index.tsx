@@ -89,7 +89,7 @@ export const Content: FC<I> = (props): ReactElement => {
           <div className="my-auto flex w-full flex-col items-center justify-center gap-4">
             <header className="pb-1">
               <h1 className="text-center text-2xl font-bold text-rose-400">Rate Our Services</h1>
-              <p className="text-center max-[500px]:text-sm">Your feedback drives our continuous improvement</p>
+              <p className="text-center max-[500px]:text-sm">Your Feedback Drives Our Continuous Improvement</p>
             </header>
 
             <div className="flex items-center gap-1">

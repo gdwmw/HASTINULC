@@ -22,7 +22,7 @@ const ReviewResult: FC<I> = (props): ReactElement => (
       <h1 className="mb-4 text-center text-xl font-bold tracking-widest text-rose-400 max-[450px]:text-base max-[380px]:text-sm">
         -- YOUR REVIEW --
       </h1>
-      <div className="my-3 border-t border-gray-300" />
+      <div className="my-3 border-t border-gray-200" />
     </header>
 
     <dl className="space-y-4 max-[450px]:text-sm max-[380px]:text-xs">

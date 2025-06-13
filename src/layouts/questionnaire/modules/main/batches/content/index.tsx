@@ -65,7 +65,7 @@ export const Content: FC<I> = (props): ReactElement => {
       >
         <header>
           <h1 className="text-center text-2xl font-bold text-rose-400">Questionnaire</h1>
-          <p className="text-center max-[500px]:text-sm">Your feedback drives our continuous improvement</p>
+          <p className="text-center max-[500px]:text-sm">Your Feedback Drives Our Continuous Improvement</p>
         </header>
 
         <form className="flex flex-col gap-5 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>

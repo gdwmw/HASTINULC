@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { BookingSummary, DatePickerInput, ErrorMessage, ExampleATWM, FormContainer, Input, Select, SubmitButton } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
-import { inputValidations } from "@/src/hooks";
+import { currencyFormat, inputValidations } from "@/src/hooks";
 import { PACKAGES_DATA, TIME_SLOTS_DATA } from "@/src/libs";
 import { BookingSchema, TBookingSchema } from "@/src/schemas";
 import { IBookingPayload, IBookingResponse } from "@/src/types";
@@ -164,15 +164,15 @@ export const Content: FC<I> = (props): ReactElement => {
   
   • *Status:* Waiting
   
-  • *Subtotal:* Rp${subtotal.toLocaleString()}
-  • *Tax (PPN):* Rp${tax.toLocaleString()}
-  • *TOTAL:* Rp${total.toLocaleString()}
-  
+  • *Subtotal:* ${currencyFormat(subtotal || 0, "USD")}
+  • *Tax:* ${currencyFormat(tax || 0, "USD")}
+  • *TOTAL:* ${currencyFormat(total || 0, "USD")}
+
 I'm looking forward to your *confirmation*. Thank you!`;
 
         const encodedMessage = encodeURIComponent(whatsappMessage);
 
-        window.open(`https://wa.me/6285762346703?text=${encodedMessage}`, "_blank");
+        window.open(`https://wa.me/100000000000?text=${encodedMessage}`, "_blank");
 
         console.info("Booking Success!");
         setOpen({ historyAsideSwitch: true, historyDetailSwitch: false });

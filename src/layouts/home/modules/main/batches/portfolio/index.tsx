@@ -20,7 +20,7 @@ export const Portfolio: FC = (): ReactElement => (
 
       <Link
         className={ExampleATWM({ className: "w-64 font-semibold", color: "rose", size: "sm", variant: "solid" })}
-        href={"https://www.instagram.com/hastinulc_makeupart/"}
+        href={"https://www.instagram.com/"}
         prefetch={false}
         target="_blank"
       >
