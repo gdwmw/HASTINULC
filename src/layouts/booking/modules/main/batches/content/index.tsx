@@ -17,8 +17,6 @@ import { POSTBooking } from "@/src/utils";
 
 interface IFormField {
   id: number;
-  isDatePicker?: boolean;
-  isSelect?: boolean;
   label?: string;
   maxLength?: number;
   name: keyof TBookingSchema;
@@ -52,14 +50,12 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 4,
-    isSelect: true,
     label: "Package",
     name: "package",
     options: PACKAGES_DATA.map((dt) => dt.title),
   },
   {
     id: 5,
-    isDatePicker: true,
     label: "Date",
     name: "date",
   },
@@ -196,24 +192,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
         <form className="flex w-full items-start overflow-y-auto lg:max-w-[500px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col justify-center gap-4">
             {FORM_FIELDS_DATA.map((dt) => {
-              if (dt.isDatePicker) {
-                return (
-                  <DatePickerInput
-                    color="rose"
-                    dateFormat="yyyy/MM/dd"
-                    disabled={loading}
-                    errorMessage={errors[dt.name]?.message}
-                    excludeDates={bookedDates}
-                    key={dt.id}
-                    label={dt.label ?? ""}
-                    minDate={new Date()}
-                    onChange={(value: Date | null) => value && setDate(value)}
-                    selected={date}
-                  />
-                );
-              }
-
-              if (dt.isSelect) {
+              if (dt.name === "package") {
                 return (
                   <Select
                     color="rose"
@@ -233,7 +212,24 @@ I'm looking forward to your *confirmation*. Thank you!`;
                 );
               }
 
-              if (dt.type === "checkbox") {
+              if (dt.name === "date") {
+                return (
+                  <DatePickerInput
+                    color="rose"
+                    dateFormat="yyyy/MM/dd"
+                    disabled={loading}
+                    errorMessage={errors[dt.name]?.message}
+                    excludeDates={[...(bookedDates ?? []), new Date()]}
+                    key={dt.id}
+                    label={dt.label ?? ""}
+                    minDate={new Date()}
+                    onChange={(value: Date | null) => value && setDate(value)}
+                    selected={date}
+                  />
+                );
+              }
+
+              if (dt.name === "time") {
                 return (
                   <div className="space-y-2" key={dt.id}>
                     <div className="grid grid-cols-2 gap-3">
