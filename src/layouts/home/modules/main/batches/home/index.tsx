@@ -20,8 +20,6 @@ import { IBookingResponse } from "@/src/types";
 
 interface IFormField {
   id: number;
-  isDatePicker?: boolean;
-  isSelect?: boolean;
   label?: string;
   maxLength?: number;
   name: keyof THomeBookingSchema;
@@ -55,14 +53,12 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 4,
-    isSelect: true,
     label: "Package",
     name: "package",
     options: PACKAGES_DATA.map((dt) => dt.title),
   },
   {
     id: 5,
-    isDatePicker: true,
     label: "Date",
     name: "date",
   },
@@ -201,7 +197,7 @@ export const Home: FC<I> = (props): ReactElement => {
 
                 <div className="flex w-full items-center gap-1 sm:gap-3 md:gap-5">
                   {FORM_FIELDS_DATA.slice(3).map((dt) => {
-                    if (dt.isSelect) {
+                    if (dt.name === "package") {
                       return (
                         <Select
                           className={{ container: "w-full lg:w-64", select: "h-[26px]" }}
@@ -222,7 +218,7 @@ export const Home: FC<I> = (props): ReactElement => {
                       );
                     }
 
-                    if (dt.isDatePicker) {
+                    if (dt.name === "date") {
                       return (
                         <DatePickerInput
                           className={{ container: "z-[2] w-full lg:w-64" }}

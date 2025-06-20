@@ -14,7 +14,6 @@ import { POSTRegister } from "@/src/utils";
 
 interface IFormField {
   id: number;
-  isPassword?: boolean;
   label: string;
   maxLength?: number;
   name: keyof TRegisterSchema;
@@ -55,7 +54,6 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 5,
-    isPassword: true,
     label: "Password",
     maxLength: 72,
     name: "password",
@@ -63,7 +61,6 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 6,
-    isPassword: true,
     label: "Confirm Password",
     name: "confirmPassword",
     type: "password",
@@ -115,13 +112,13 @@ export const Content: FC = (): ReactElement => {
               color="rose"
               disabled={loading}
               errorMessage={errors[dt.name]?.message}
-              icon={dt.isPassword ? passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} /> : undefined}
-              iconOnClick={dt.isPassword ? () => setPasswordVisibility((prev) => !prev) : undefined}
+              icon={dt.type === "password" ? passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} /> : undefined}
+              iconOnClick={dt.type === "password" ? () => setPasswordVisibility((prev) => !prev) : undefined}
               key={dt.id}
               label={dt.label}
               maxLength={dt.maxLength}
               onKeyDown={dt.onKeyDown}
-              type={dt.isPassword ? (passwordVisibility ? "text" : "password") : dt.type}
+              type={dt.type === "password" ? (passwordVisibility ? "text" : "password") : dt.type}
               {...register(dt.name)}
             />
           ))}
