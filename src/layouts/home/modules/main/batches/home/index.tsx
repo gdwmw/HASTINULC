@@ -226,7 +226,7 @@ export const Home: FC<I> = (props): ReactElement => {
                           dateFormat="yyyy/MM/dd"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
-                          excludeDates={bookedDates}
+                          excludeDates={[...bookedDates, new Date()]}
                           key={dt.id}
                           label={dt.label ?? ""}
                           minDate={new Date()}
