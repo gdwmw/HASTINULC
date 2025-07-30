@@ -241,7 +241,7 @@ export const Content: FC = (): ReactElement => {
                       </div>
                       <figcaption>
                         <h2 className="text-gray-600">Time</h2>
-                        <pre className="font-semibold">{Array.isArray(dt.time) && dt.time.length > 0 ? dt.time.join(`\n`) : "-"}</pre>
+                        <span className="font-semibold">{dt.time.slice(0, 5) || "-"}</span>
                       </figcaption>
                     </figure>
                   </div>
