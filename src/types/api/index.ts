@@ -163,7 +163,6 @@ export interface IDataResponse extends IDataCommon {
 // ----------------------------
 
 interface IBookingCommon {
-  id?: number;
   username: string;
   name: string;
   email: string;
@@ -171,6 +170,7 @@ interface IBookingCommon {
   package: string;
   date: string;
   time: string;
+  person: number;
   googleMapsLink: string;
   tax: string;
   subtotal: string;
@@ -186,6 +186,7 @@ export interface IBookingPayload extends IBookingCommon {
 }
 
 export interface IBookingResponse extends IBookingCommon {
+  id?: number;
   documentId: string;
   relation_data: IDataResponse;
   relation_review?: IReviewResponse;

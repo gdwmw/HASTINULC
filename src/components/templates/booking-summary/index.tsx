@@ -40,10 +40,15 @@ export const BookingSummary: FC<I> = (props): ReactElement => (
 
           <div className="flex justify-between">
             <dt className="font-medium text-gray-600">Time:</dt>
-            <dd className="max-w-60 text-right">
-              <pre>{Array.isArray(props.data.time) && props.data.time.length > 0 ? props.data.time.join(`\n`) : "-"}</pre>
-            </dd>
+            <dd className="font-semibold">{props.data.time?.slice(0, 5) || "-"}</dd>
           </div>
+
+          {(props.data.package === "REGULAR" || props.data.package === "GRADUATION") && (
+            <div className="flex justify-between">
+              <dt className="font-medium text-gray-600">Person:</dt>
+              <dd className="font-semibold">{props.data.person || "-"}</dd>
+            </div>
+          )}
         </div>
 
         <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">

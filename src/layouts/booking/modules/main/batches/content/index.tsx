@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation";
 import { FC, Fragment, HTMLInputTypeAttribute, KeyboardEvent, ReactElement, useEffect, useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { BookingSummary, DatePickerInput, ErrorMessage, ExampleATWM, FormContainer, Input, Select, SubmitButton } from "@/src/components";
+import { BookingSummary, DatePickerInput, ExampleATWM, FormContainer, Input, Select, SubmitButton } from "@/src/components";
 import { useGlobalStates } from "@/src/context";
 import { currencyFormat, inputValidations } from "@/src/hooks";
-import { PACKAGES_DATA, TIME_SLOTS_DATA } from "@/src/libs";
+import { PACKAGES_DATA } from "@/src/libs";
 import { BookingSchema, TBookingSchema } from "@/src/schemas";
 import { IBookingPayload, IBookingResponse } from "@/src/types";
 import { POSTBooking } from "@/src/utils";
@@ -61,12 +61,16 @@ const FORM_FIELDS_DATA: IFormField[] = [
   },
   {
     id: 6,
+    label: "Time",
     name: "time",
-    options: TIME_SLOTS_DATA.map((dt) => dt.time),
-    type: "checkbox",
   },
   {
     id: 7,
+    label: "Person",
+    name: "person",
+  },
+  {
+    id: 8,
     label: "Google Maps Link",
     name: "googleMapsLink",
     type: "url",
@@ -91,6 +95,19 @@ export const Content: FC<I> = (props): ReactElement => {
     ?.map((dt) => (dt.indicator === "On Going" || dt.indicator === "Success" ? new Date(dt.date) : null))
     .filter((date): date is Date => date !== null);
 
+  const generateTimeOptions = () => {
+    const times: string[] = [];
+    for (let h = 0; h < 24; h++) {
+      for (let m = 0; m < 60; m += 15) {
+        const hour = h.toString().padStart(2, "0");
+        const minute = m.toString().padStart(2, "0");
+        times.push(`${hour}:${minute}`);
+      }
+    }
+
+    return times.filter((t) => t >= "00:15" && t <= "23:45");
+  };
+
   const {
     formState: { errors },
     handleSubmit,
@@ -103,8 +120,8 @@ export const Content: FC<I> = (props): ReactElement => {
       email: booking?.email ?? props.session?.user?.email ?? undefined,
       name: booking?.name ?? props.session?.user?.name ?? undefined,
       package: booking?.package,
+      person: 1,
       phoneNumber: booking?.phoneNumber ?? props.session?.user?.phoneNumber,
-      time: [],
     },
     resolver: zodResolver(BookingSchema),
   });
@@ -125,20 +142,38 @@ export const Content: FC<I> = (props): ReactElement => {
   useEffect(() => {
     const selectedPackage = PACKAGES_DATA.find((dt) => dt.title === watch("package"));
     const price = parseInt(selectedPackage?.price ?? "0");
-    setTax(price * 0.12);
-    setSubtotal(price);
-    setTotal(price + price * 0.12);
+    if (watch("package") === "REGULAR" || watch("package") === "GRADUATION") {
+      if (watch("person") > 1) {
+        setTax(0);
+        setSubtotal(price);
+        setTotal(price * watch("person"));
+      } else {
+        setTax(5);
+        setSubtotal(price);
+        setTotal(price * watch("person") + 5);
+      }
+    } else {
+      setTax(price * 0.12);
+      setSubtotal(price);
+      setTotal(price + price * 0.12);
+    }
     // eslint-disable-next-line
-  }, [watch("package")]);
+  }, [watch("package"), watch("person")]);
 
   const onSubmit: SubmitHandler<TBookingSchema> = (dt) => {
     setTransition(async () => {
+      let formattedTime = dt.time;
+      if (formattedTime && /^\d{2}:\d{2}$/.test(formattedTime)) {
+        formattedTime = `${formattedTime}:00.000`;
+      }
+
       const newPayload: IBookingPayload = {
         ...dt,
         indicator: "Waiting",
         relation_data: props.session?.user?.dataDocumentId ?? "",
         subtotal: subtotal.toString(),
         tax: tax.toString(),
+        time: formattedTime,
         total: total.toString(),
         username: props.session?.user?.username ?? "",
       };
@@ -156,6 +191,7 @@ export const Content: FC<I> = (props): ReactElement => {
   • *Package:* ${dt.package}
   • *Date:* ${dt.date}
   • *Time:* ${dt.time}
+  • *Person:* ${dt.person}
   • *Location:* ${dt.googleMapsLink}
   
   • *Status:* Waiting
@@ -212,6 +248,47 @@ I'm looking forward to your *confirmation*. Thank you!`;
                 );
               }
 
+              if (dt.name === "time") {
+                return (
+                  <Select
+                    color="rose"
+                    disabled={loading}
+                    errorMessage={errors[dt.name]?.message}
+                    key={dt.id}
+                    label={dt.label ?? ""}
+                    {...register(dt.name)}
+                  >
+                    <option className="hidden" value="">
+                      --:-- --
+                    </option>
+                    {generateTimeOptions().map((time) => (
+                      <option key={time} value={time}>
+                        {time}
+                      </option>
+                    ))}
+                  </Select>
+                );
+              }
+
+              if (dt.name === "person") {
+                return (
+                  <Select
+                    className={{ container: watch("package") === "REGULAR" || watch("package") === "GRADUATION" ? "" : "hidden" }}
+                    color="rose"
+                    disabled={loading}
+                    errorMessage={errors[dt.name]?.message}
+                    key={dt.id}
+                    label={dt.label ?? ""}
+                    {...register(dt.name, { valueAsNumber: true })}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </Select>
+                );
+              }
+
               if (dt.name === "date") {
                 return (
                   <DatePickerInput
@@ -229,21 +306,33 @@ I'm looking forward to your *confirmation*. Thank you!`;
                 );
               }
 
-              if (dt.name === "time") {
+              if (dt.type === "url") {
                 return (
-                  <div className="space-y-2" key={dt.id}>
-                    <div className="grid grid-cols-2 gap-3">
-                      {dt.options?.map((opt, i) => (
-                        <label className="group relative cursor-pointer" key={i}>
-                          <input className="peer absolute opacity-0" disabled={loading} type="checkbox" value={opt} {...register(dt.name)} />
-                          <div className="flex select-none items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-3 text-sm font-semibold hover:border-rose-300 hover:bg-rose-50 hover:text-rose-500 peer-checked:border-rose-300 peer-checked:bg-rose-50 peer-checked:text-rose-500 peer-disabled:cursor-not-allowed peer-disabled:border-gray-200 peer-disabled:bg-gray-100 peer-disabled:text-gray-400">
-                            {opt}
-                          </div>
-                        </label>
-                      ))}
+                  <Fragment key={dt.id}>
+                    <Input
+                      color="rose"
+                      disabled={loading}
+                      errorMessage={errors[dt.name]?.message}
+                      key={dt.id}
+                      label={dt.label ?? ""}
+                      maxLength={dt.maxLength}
+                      onKeyDown={dt.onKeyDown}
+                      type={dt.type}
+                      {...register(dt.name)}
+                    />
+                    <span className="text-xs italic text-rose-400">*Please share your Google Maps location link</span>
+                    <div className="flex justify-center gap-1 max-[380px]:flex-col max-[380px]:items-center">
+                      <span className="text-xs">Don&apos;t know how to get a Google Maps link?</span>
+                      <Link
+                        className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
+                        href={"https://drive.google.com/drive/folders/1czzvGaymg_aEkVhRe00CBz-X_PR2hoxA?usp=sharing"}
+                        onClick={(e) => loading && e.preventDefault()}
+                        target="_blank"
+                      >
+                        Click here!
+                      </Link>
                     </div>
-                    {errors[dt.name] && <ErrorMessage errorMessage={errors[dt.name]?.message ?? ""} />}
-                  </div>
+                  </Fragment>
                 );
               }
 
@@ -260,22 +349,6 @@ I'm looking forward to your *confirmation*. Thank you!`;
                     type={dt.type}
                     {...register(dt.name)}
                   />
-                  {dt.type === "url" && (
-                    <>
-                      <span className="text-xs italic text-rose-400">*Please share Google Maps location link</span>
-                      <div className="flex justify-center gap-1 max-[380px]:flex-col max-[380px]:items-center">
-                        <span className="text-xs">Don&apos;t know how to get Google Maps Link?</span>
-                        <Link
-                          className={ExampleATWM({ className: "text-xs", color: "rose", disabled: loading, size: "sm", variant: "ghost" })}
-                          href={"https://drive.google.com/drive/folders/1czzvGaymg_aEkVhRe00CBz-X_PR2hoxA?usp=sharing"}
-                          onClick={(e) => loading && e.preventDefault()}
-                          target="_blank"
-                        >
-                          Click here!
-                        </Link>
-                      </div>
-                    </>
-                  )}
                 </Fragment>
               );
             })}
