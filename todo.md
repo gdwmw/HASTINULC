@@ -1,3 +1,7 @@
+buat demo di bagian admin
+halaman admin responsive
+tambah fitur list booking di admin untuk mengubah status pesanan
+
 buat fitur payment gateway (pake whatsapp dulu)
 buat fitur reset password (optional)
 buat fitur delete account (optional)
