@@ -152,8 +152,6 @@ export const Content: FC = (): ReactElement => {
       </section>
 
       <section className="space-y-4 rounded-lg border p-4 shadow-md">
-        <h3 className="text-lg font-semibold">Booking Table</h3>
-
         <div className="flex flex-wrap gap-2">
           {columns.map((col) => (
             <label className="flex items-center gap-1" key={col.key}>
@@ -322,8 +320,8 @@ export const Content: FC = (): ReactElement => {
           size="sm"
           variant="solid"
         >
-          <FaFileExport className="text-lg" />
-          <span className="font-medium">Export to PDF</span>
+          <FaFileExport />
+          Export to PDF
         </ExampleA>
       </section>
     </aside>
