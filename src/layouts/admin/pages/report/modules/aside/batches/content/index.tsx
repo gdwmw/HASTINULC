@@ -12,7 +12,12 @@ import { currencyFormat } from "@/src/hooks";
 import { IBookingResponse, IMetaResponse } from "@/src/types";
 import { GETBooking } from "@/src/utils";
 
-const columns = [
+interface IListOfColumns {
+  key: string;
+  label: string;
+}
+
+const LIST_OF_COLUMNS: IListOfColumns[] = [
   { key: "id", label: "ID" },
   { key: "documentId", label: "Document ID" },
   { key: "username", label: "Username" },
@@ -20,13 +25,15 @@ const columns = [
   { key: "package", label: "Package" },
   { key: "date", label: "Date" },
   { key: "time", label: "Time" },
+  { key: "person", label: "Person" },
   { key: "indicator", label: "Status" },
+  { key: "subtotal", label: "Subtotal" },
   { key: "total", label: "Total" },
 ];
 
 export const Content: FC = (): ReactElement => {
   const [enabledCols, setEnabledCols] = useState<Record<string, boolean>>(
-    columns.reduce((acc, col) => ({ ...acc, [col.key]: col.key !== "documentId" }), {}),
+    LIST_OF_COLUMNS.reduce((acc, col) => ({ ...acc, [col.key]: col.key !== "documentId" }), {}),
   );
   const [dateA, setDateA] = useState<Date | null>(null);
   const [dateB, setDateB] = useState<Date | null>(null);
@@ -80,6 +87,12 @@ export const Content: FC = (): ReactElement => {
         case "package":
           value = dt.package ?? "";
           break;
+        case "person":
+          value = dt.person.toString() ?? "";
+          break;
+        case "subtotal":
+          value = String(dt.subtotal ?? "");
+          break;
         case "time":
           value = dt.time ?? "";
           break;
@@ -97,7 +110,6 @@ export const Content: FC = (): ReactElement => {
     return passDate && passSearch;
   });
 
-  // Format tanggal untuk periode (dd/mm/yyyy)
   const formatDateWithLeadingZero = (date: Date) => {
     const day = String(date.getDate()).padStart(2, "0");
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -105,10 +117,93 @@ export const Content: FC = (): ReactElement => {
     return `${day}/${month}/${year}`;
   };
 
-  // Format tanggal untuk tanda tangan (d MMMM yyyy)
   const formatDateWithMonthName = (date: Date) => {
     const options: Intl.DateTimeFormatOptions = { day: "numeric", month: "long", year: "numeric" };
     return date.toLocaleDateString("id-ID", options);
+  };
+
+  const handleExportToPDF = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.setTextColor(40, 40, 40);
+    doc.setFont("helvetica", "bold");
+    doc.text("MAKEUP BOOKING RECAPITULATION", doc.internal.pageSize.getWidth() / 2, 20, { align: "center" });
+
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+
+    let periodeText = "Period: ";
+    if (dateA && dateB) {
+      periodeText += `${formatDateWithLeadingZero(dateA)} to ${formatDateWithLeadingZero(dateB)}`;
+    } else if (dateA) {
+      periodeText += `From ${formatDateWithLeadingZero(dateA)}`;
+    } else if (dateB) {
+      periodeText += `To ${formatDateWithLeadingZero(dateB)}`;
+    } else {
+      periodeText += "All Data";
+    }
+    doc.text(periodeText, doc.internal.pageSize.getWidth() / 2, 30, { align: "center" });
+
+    const tableColumn = LIST_OF_COLUMNS.filter((col) => enabledCols[col.key]).map((col) => col.label);
+    const tableRows = filteredData.map((dt) =>
+      LIST_OF_COLUMNS.filter((col) => enabledCols[col.key]).map((col) => {
+        if (col.key === "subtotal") {
+          return currencyFormat(dt.subtotal, "USD");
+        }
+        if (col.key === "total") {
+          return currencyFormat(dt.total, "USD");
+        }
+        if (col.key === "indicator") {
+          return dt.indicator;
+        }
+        if (col.key === "time") {
+          return dt.time?.slice(0, 5);
+        }
+        return dt[col.key as keyof IBookingResponse] ?? "-";
+      }),
+    );
+
+    autoTable(doc, {
+      alternateRowStyles: {
+        fillColor: [245, 245, 245],
+      },
+      // @ts-expect-error - jspdf-autotable
+      body: tableRows,
+      bodyStyles: {
+        halign: "center",
+        lineColor: [0, 0, 0],
+        lineWidth: 0.1,
+        textColor: [40, 40, 40],
+      },
+      head: [tableColumn],
+      headStyles: {
+        fillColor: [251, 113, 133],
+        fontStyle: "bold",
+        halign: "center",
+        lineColor: [0, 0, 0],
+        lineWidth: 0.1,
+        textColor: [255, 255, 255],
+      },
+      margin: { top: 45 },
+      startY: 40,
+      styles: {
+        lineColor: [0, 0, 0],
+        lineWidth: 0.1,
+      },
+    });
+
+    // @ts-expect-error - jspdf-autotable
+    const finalY = doc.lastAutoTable.finalY || 45 + 10;
+    const printDate = new Date();
+
+    doc.setFontSize(12);
+    doc.text(`Padang, ${formatDateWithMonthName(printDate)}`, doc.internal.pageSize.getWidth() - 70, finalY + 20);
+    doc.text("MUA (Makeup Artist)", doc.internal.pageSize.getWidth() - 70, finalY + 25);
+    doc.line(doc.internal.pageSize.getWidth() - 70, finalY + 45, doc.internal.pageSize.getWidth() - 20, finalY + 45);
+    doc.text("Hastinul Chotimah", doc.internal.pageSize.getWidth() - 70, finalY + 50);
+
+    doc.save("Makeup-Booking-Recapitulation.pdf");
   };
 
   return (
@@ -145,7 +240,9 @@ export const Content: FC = (): ReactElement => {
             <option value="package">Package</option>
             <option value="date">Date</option>
             <option value="time">Time</option>
+            <option value="person">Person</option>
             <option value="status">Status</option>
+            <option value="subtotal">Subtotal</option>
             <option value="total">Total</option>
           </Select>
         </div>
@@ -153,7 +250,7 @@ export const Content: FC = (): ReactElement => {
 
       <section className="space-y-4 rounded-lg border p-4 shadow-md">
         <div className="flex flex-wrap gap-2">
-          {columns.map((col) => (
+          {LIST_OF_COLUMNS.map((col) => (
             <label className="flex items-center gap-1" key={col.key}>
               <input
                 checked={enabledCols[col.key]}
@@ -170,7 +267,7 @@ export const Content: FC = (): ReactElement => {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-gray-100">
-                {columns.map(
+                {LIST_OF_COLUMNS.map(
                   (col) =>
                     enabledCols[col.key] && (
                       <th className="border p-2" key={col.key}>
@@ -183,7 +280,7 @@ export const Content: FC = (): ReactElement => {
             <tbody>
               {filteredData.map((dt) => (
                 <tr className="text-center" key={dt.documentId}>
-                  {columns.map(
+                  {LIST_OF_COLUMNS.map(
                     (col) =>
                       enabledCols[col.key] && (
                         <td className="border p-2" key={col.key}>
@@ -201,6 +298,8 @@ export const Content: FC = (): ReactElement => {
                             dt.date
                           ) : col.key === "time" ? (
                             dt.time.slice(0, 5)
+                          ) : col.key === "person" ? (
+                            dt.person
                           ) : col.key === "indicator" ? (
                             <div
                               className={`mx-auto flex h-6 w-full min-w-fit max-w-24 items-center justify-center whitespace-nowrap rounded-full px-5 text-xs font-semibold text-white ${
@@ -218,6 +317,8 @@ export const Content: FC = (): ReactElement => {
                             >
                               {dt.indicator}
                             </div>
+                          ) : col.key === "subtotal" ? (
+                            currencyFormat(dt.subtotal, "USD")
                           ) : col.key === "total" ? (
                             currencyFormat(dt.total, "USD")
                           ) : (
@@ -232,94 +333,7 @@ export const Content: FC = (): ReactElement => {
           </table>
         </div>
 
-        <ExampleA
-          className="mt-4 flex items-center gap-2 px-4 py-2"
-          color="rose"
-          onClick={() => {
-            const doc = new jsPDF();
-
-            doc.setFontSize(18);
-            doc.setTextColor(40, 40, 40);
-            doc.setFont("helvetica", "bold");
-            doc.text("MAKEUP BOOKING RECAPITULATION", doc.internal.pageSize.getWidth() / 2, 20, { align: "center" });
-
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-
-            let periodeText = "Period: ";
-            if (dateA && dateB) {
-              periodeText += `${formatDateWithLeadingZero(dateA)} to ${formatDateWithLeadingZero(dateB)}`;
-            } else if (dateA) {
-              periodeText += `From ${formatDateWithLeadingZero(dateA)}`;
-            } else if (dateB) {
-              periodeText += `To ${formatDateWithLeadingZero(dateB)}`;
-            } else {
-              periodeText += "All Data";
-            }
-            doc.text(periodeText, doc.internal.pageSize.getWidth() / 2, 30, { align: "center" });
-
-            const tableColumn = columns.filter((col) => enabledCols[col.key]).map((col) => col.label);
-            const tableRows = filteredData.map((dt) =>
-              columns
-                .filter((col) => enabledCols[col.key])
-                .map((col) => {
-                  if (col.key === "total") {
-                    return currencyFormat(dt.total, "USD");
-                  }
-                  if (col.key === "indicator") {
-                    return dt.indicator;
-                  }
-                  if (col.key === "time") {
-                    return dt.time?.slice(0, 5);
-                  }
-                  return dt[col.key as keyof IBookingResponse] ?? "-";
-                }),
-            );
-
-            autoTable(doc, {
-              alternateRowStyles: {
-                fillColor: [245, 245, 245],
-              },
-              // @ts-expect-error - jspdf-autotable
-              body: tableRows,
-              bodyStyles: {
-                halign: "center",
-                lineColor: [0, 0, 0],
-                lineWidth: 0.1,
-                textColor: [40, 40, 40],
-              },
-              head: [tableColumn],
-              headStyles: {
-                fillColor: [251, 113, 133],
-                fontStyle: "bold",
-                halign: "center",
-                lineColor: [0, 0, 0],
-                lineWidth: 0.1,
-                textColor: [255, 255, 255],
-              },
-              margin: { top: 45 },
-              startY: 40,
-              styles: {
-                lineColor: [0, 0, 0],
-                lineWidth: 0.1,
-              },
-            });
-
-            // @ts-expect-error - jspdf-autotable
-            const finalY = doc.lastAutoTable.finalY || 45 + 10;
-            const printDate = new Date();
-
-            doc.setFontSize(12);
-            doc.text(`Padang, ${formatDateWithMonthName(printDate)}`, doc.internal.pageSize.getWidth() - 70, finalY + 20);
-            doc.text("MUA (Makeup Artist)", doc.internal.pageSize.getWidth() - 70, finalY + 25);
-            doc.line(doc.internal.pageSize.getWidth() - 70, finalY + 45, doc.internal.pageSize.getWidth() - 20, finalY + 45);
-            doc.text("Hastinul Chotimah", doc.internal.pageSize.getWidth() - 70, finalY + 50);
-
-            doc.save("Makeup-Booking-Recapitulation.pdf");
-          }}
-          size="sm"
-          variant="solid"
-        >
+        <ExampleA className="mt-4 flex items-center gap-2 px-4 py-2" color="rose" onClick={handleExportToPDF} size="sm" variant="solid">
           <FaFileExport />
           Export to PDF
         </ExampleA>
