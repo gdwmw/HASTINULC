@@ -40,7 +40,7 @@ export const Content: FC = (): ReactElement => {
 
   const { data } = useQuery<{ data: IBookingResponse[] } & IMetaResponse>({
     queryFn: () => GETBooking("sort[0]=createdAt:desc"),
-    queryKey: ["booking"],
+    queryKey: ["booking-report"],
   });
 
   const { register, watch } = useForm();
@@ -250,8 +250,8 @@ export const Content: FC = (): ReactElement => {
 
       <section className="space-y-4 rounded-lg border p-4 shadow-md">
         <div className="flex flex-wrap gap-2">
-          {LIST_OF_COLUMNS.map((col) => (
-            <label className="flex items-center gap-1" key={col.key}>
+          {LIST_OF_COLUMNS.map((col, i) => (
+            <label className="flex items-center gap-1" key={i}>
               <input
                 checked={enabledCols[col.key]}
                 className="size-3 cursor-pointer appearance-none rounded-full border border-gray-400 checked:border-[3px] checked:border-rose-400"
@@ -268,9 +268,9 @@ export const Content: FC = (): ReactElement => {
             <thead>
               <tr className="bg-gray-100">
                 {LIST_OF_COLUMNS.map(
-                  (col) =>
+                  (col, i) =>
                     enabledCols[col.key] && (
-                      <th className="border p-2" key={col.key}>
+                      <th className="border p-2" key={i}>
                         {col.label}
                       </th>
                     ),
@@ -278,12 +278,12 @@ export const Content: FC = (): ReactElement => {
               </tr>
             </thead>
             <tbody>
-              {filteredData.map((dt) => (
-                <tr className="text-center" key={dt.documentId}>
+              {filteredData.map((dt, i) => (
+                <tr className="text-center" key={i}>
                   {LIST_OF_COLUMNS.map(
-                    (col) =>
+                    (col, i) =>
                       enabledCols[col.key] && (
-                        <td className="border p-2" key={col.key}>
+                        <td className="border p-2" key={i}>
                           {col.key === "id" ? (
                             dt.id
                           ) : col.key === "documentId" ? (

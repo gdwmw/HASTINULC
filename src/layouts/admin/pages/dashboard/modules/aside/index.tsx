@@ -11,17 +11,17 @@ export const ASide: FC = async (): Promise<ReactElement> => {
 
   await queryClient.prefetchQuery<{ data: IBookingResponse[] } & IMetaResponse>({
     queryFn: () => GETBooking(),
-    queryKey: ["all-booking"],
+    queryKey: ["all-booking-dashboard"],
   });
 
   await queryClient.prefetchQuery<{ data: IBookingResponse[] } & IMetaResponse>({
     queryFn: () => GETBooking("sort[0]=createdAt:desc&pagination[pageSize]=5&pagination[page]=1"),
-    queryKey: ["booking"],
+    queryKey: ["booking-dashboard"],
   });
 
   await queryClient.prefetchQuery<IReviewResponse[]>({
     queryFn: () => GETReview("sort[0]=createdAt:desc&pagination[pageSize]=5&pagination[page]=1"),
-    queryKey: ["review"],
+    queryKey: ["review-dashboard"],
   });
 
   return (

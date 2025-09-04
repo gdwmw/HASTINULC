@@ -1,3 +1,4 @@
+export * from "./admin-booking-card";
 export * from "./api-connection-checker";
 export * from "./avatar";
 export * from "./booking-summary";

@@ -35,17 +35,17 @@ export const Packages: FC = (): ReactElement => {
         />
 
         <div className="flex w-fit flex-wrap justify-center gap-5">
-          {PACKAGES_DATA.slice(0, 3).map((dt) => (
+          {PACKAGES_DATA.slice(0, 3).map((dt, i) => (
             <div
               className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md transition-transform hover:scale-105 hover:shadow-lg"
-              key={dt.id}
+              key={i}
             >
               <span className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</span>
               <span className="border-b border-rose-500 pb-4 font-montaguSlab text-4xl">{currencyFormat(dt.price, "USD")}</span>
 
               <ul className="space-y-2 text-left">
                 {dt.description.map((ls, i) => (
-                  <li key={ls.id}>
+                  <li key={i}>
                     <span className="font-bold text-rose-500">{i + 1}.</span> {ls.text}
                   </li>
                 ))}
@@ -68,17 +68,17 @@ export const Packages: FC = (): ReactElement => {
         </div>
 
         <div className="flex w-fit flex-wrap justify-center gap-5">
-          {PACKAGES_DATA.slice(3).map((dt) => (
+          {PACKAGES_DATA.slice(3).map((dt, i) => (
             <div
               className="flex w-80 flex-col gap-4 rounded-lg border border-rose-500 bg-white p-5 text-center shadow-md transition-transform hover:scale-105 hover:shadow-lg"
-              key={dt.id}
+              key={i}
             >
               <span className="-mb-2 font-semibold tracking-wider text-rose-500">{dt.title}</span>
               <span className="border-b border-rose-500 pb-4 font-montaguSlab text-4xl">{currencyFormat(dt.price, "USD")}</span>
 
               <ul className="space-y-2 text-left">
                 {dt.description.map((ls, i) => (
-                  <li key={ls.id}>
+                  <li key={i}>
                     <span className="font-bold text-rose-500">{i + 1}.</span> {ls.text}
                   </li>
                 ))}
@@ -141,8 +141,8 @@ export const Packages: FC = (): ReactElement => {
 
         <div className="flex w-full flex-col justify-center overflow-hidden rounded-lg border border-rose-500 bg-white py-8 shadow-md">
           <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentTestimonialIndex * 100}%)` }}>
-            {TESTIMONIALS_DATA.map((dt) => (
-              <blockquote className="flex w-full shrink-0 items-center justify-center px-8" key={dt.id}>
+            {TESTIMONIALS_DATA.map((dt, i) => (
+              <blockquote className="flex w-full shrink-0 items-center justify-center px-8" key={i}>
                 <div className="flex flex-col gap-5">
                   <figure className="flex items-center gap-4">
                     <Image

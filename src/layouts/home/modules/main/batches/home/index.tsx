@@ -179,13 +179,13 @@ export const Home: FC<I> = (props): ReactElement => {
             <div className="flex size-full items-center justify-center gap-20">
               <form className="flex w-full flex-col items-center justify-center lg:w-fit" onSubmit={handleSubmit(onSubmit)}>
                 <div className="hidden w-full items-center gap-5 lg:flex">
-                  {FORM_FIELDS_DATA.slice(0, 3).map((dt) => (
+                  {FORM_FIELDS_DATA.slice(0, 3).map((dt, i) => (
                     <Input
                       className={{ container: "w-64" }}
                       color="rose"
                       disabled={loading}
                       errorMessage={errors[dt.name]?.message}
-                      key={dt.id}
+                      key={i}
                       label={dt.label ?? ""}
                       maxLength={dt.maxLength}
                       onKeyDown={dt.onKeyDown}
@@ -196,7 +196,7 @@ export const Home: FC<I> = (props): ReactElement => {
                 </div>
 
                 <div className="flex w-full items-center gap-1 sm:gap-3 md:gap-5">
-                  {FORM_FIELDS_DATA.slice(3).map((dt) => {
+                  {FORM_FIELDS_DATA.slice(3).map((dt, i) => {
                     if (dt.name === "package") {
                       return (
                         <Select
@@ -204,7 +204,7 @@ export const Home: FC<I> = (props): ReactElement => {
                           color="rose"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
-                          key={dt.id}
+                          key={i}
                           label={dt.label ?? ""}
                           {...register(dt.name)}
                         >
@@ -227,7 +227,7 @@ export const Home: FC<I> = (props): ReactElement => {
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
                           excludeDates={[...bookedDates, new Date()]}
-                          key={dt.id}
+                          key={i}
                           label={dt.label ?? ""}
                           minDate={new Date()}
                           onChange={(value: Date | null) => value && setDate(value)}

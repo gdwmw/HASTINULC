@@ -9,9 +9,10 @@ import { Content } from "./batches";
 export const ASide: FC = async (): Promise<ReactElement> => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery<{ data: IBookingResponse[] } & IMetaResponse>({
-    queryFn: () => GETBooking("sort[0]=createdAt:desc"),
-    queryKey: ["booking-report"],
+  await queryClient.prefetchInfiniteQuery<{ data: IBookingResponse[] } & IMetaResponse>({
+    initialPageParam: 1,
+    queryFn: () => GETBooking("sort[0]=createdAt:desc&pagination[pageSize]=8&pagination[page]=1"),
+    queryKey: ["booking-bookings"],
   });
 
   return (

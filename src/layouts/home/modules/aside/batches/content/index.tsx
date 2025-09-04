@@ -89,8 +89,8 @@ export const Content: FC<I> = (props): ReactElement => {
 
       <section>
         <ul className="space-y-2">
-          {NAVIGATION_DATA.map((dt) => (
-            <li key={dt.id}>
+          {NAVIGATION_DATA.map((dt, i) => (
+            <li key={i}>
               <Link
                 className={`flex items-center gap-2 rounded-lg px-4 py-2 ${activeSection === dt.href.substring(1) ? "bg-rose-500 text-white" : "text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"}`}
                 href={dt.href}

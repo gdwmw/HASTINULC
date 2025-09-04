@@ -73,8 +73,8 @@ export const Content: FC<I> = (props): ReactElement => {
       <Image alt="Hastinulc Makeup Art" priority src={logo} width={200} />
 
       <ul className="hidden items-center gap-5 font-semibold min-[850px]:flex">
-        {NAVIGATION_DATA.map((dt) => (
-          <li key={dt.id}>
+        {NAVIGATION_DATA.map((dt, i) => (
+          <li key={i}>
             <Link
               className={ExampleATWM({
                 className: `${activeSection === dt.href.substring(1) ? "border-b-2 border-rose-500 text-rose-500" : "text-black"}`,

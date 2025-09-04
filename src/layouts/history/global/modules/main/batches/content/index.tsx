@@ -30,7 +30,6 @@ export const Content: FC<I> = (props): ReactElement => {
   const pathname = usePathname();
   const router = useRouter();
   const { inView, ref } = useInView();
-  const [pageCount, setPageCount] = useState(1);
   const [pathKeeper, setPathKeeper] = useState("");
   const [searchedData, setSearchedData] = useState<IBookingResponse>();
   const { open, setOpen, setResponse } = useGlobalStates();
@@ -41,7 +40,10 @@ export const Content: FC<I> = (props): ReactElement => {
     hasNextPage,
   } = useInfiniteQuery<{ data: IBookingResponse[] } & IMetaResponse>({
     enabled: props.session?.user?.role !== "demo",
-    getNextPageParam: (lastPage, allPages): number | undefined => (pageCount === allPages.length ? undefined : allPages.length + 1),
+    getNextPageParam: (lastPage) => {
+      const { page, pageCount } = lastPage.meta.pagination;
+      return page < pageCount ? page + 1 : undefined;
+    },
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
       GETBooking(
@@ -56,8 +58,6 @@ export const Content: FC<I> = (props): ReactElement => {
         if (!bookingResponse?.pages[0]?.meta.pagination) {
           return;
         }
-
-        setPageCount(bookingResponse.pages[0].meta.pagination.pageCount || 1);
 
         if (!pathKeeper) {
           return;
@@ -170,7 +170,6 @@ const Component: FC<IComponent> = (props): ReactElement => (
   <section
     className="group relative flex w-full max-w-[360px] flex-col justify-between overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm hover:border-rose-200 hover:shadow-md"
     id={props.data.documentId}
-    key={props.data.documentId}
   >
     <div
       className={`absolute inset-x-0 top-0 m-0 h-1.5 border-none ${

@@ -166,12 +166,12 @@ export const Content: FC<I> = (props): ReactElement => {
         <form className="flex w-full flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
           <Avatar className="mx-auto min-h-32 min-w-32" iconSize={64} src={previewImage ?? props.session?.user?.image ?? ""} />
 
-          {FORM_FIELDS_DATA.map((dt) => (
+          {FORM_FIELDS_DATA.map((dt, i) => (
             <Input
               color="rose"
               disabled={loading}
               errorMessage={errors[dt.name]?.message}
-              key={dt.id}
+              key={i}
               label={dt.label}
               maxLength={dt.maxLength}
               onKeyDown={dt.onKeyDown}

@@ -227,14 +227,14 @@ I'm looking forward to your *confirmation*. Thank you!`;
       >
         <form className="flex w-full items-start overflow-y-auto lg:max-w-[500px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="my-auto flex w-full flex-col justify-center gap-4">
-            {FORM_FIELDS_DATA.map((dt) => {
+            {FORM_FIELDS_DATA.map((dt, i) => {
               if (dt.name === "package") {
                 return (
                   <Select
                     color="rose"
                     disabled={loading}
                     errorMessage={errors[dt.name]?.message}
-                    key={dt.id}
+                    key={i}
                     label={dt.label ?? ""}
                     {...register(dt.name)}
                   >
@@ -254,15 +254,15 @@ I'm looking forward to your *confirmation*. Thank you!`;
                     color="rose"
                     disabled={loading}
                     errorMessage={errors[dt.name]?.message}
-                    key={dt.id}
+                    key={i}
                     label={dt.label ?? ""}
                     {...register(dt.name)}
                   >
                     <option className="hidden" value="">
                       --:-- --
                     </option>
-                    {generateTimeOptions().map((time) => (
-                      <option key={time} value={time}>
+                    {generateTimeOptions().map((time, i) => (
+                      <option key={i} value={time}>
                         {time}
                       </option>
                     ))}
@@ -277,7 +277,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
                     color="rose"
                     disabled={loading}
                     errorMessage={errors[dt.name]?.message}
-                    key={dt.id}
+                    key={i}
                     label={dt.label ?? ""}
                     {...register(dt.name, { valueAsNumber: true })}
                   >
@@ -297,7 +297,7 @@ I'm looking forward to your *confirmation*. Thank you!`;
                     disabled={loading}
                     errorMessage={errors[dt.name]?.message}
                     excludeDates={[...(bookedDates ?? []), new Date()]}
-                    key={dt.id}
+                    key={i}
                     label={dt.label ?? ""}
                     minDate={new Date()}
                     onChange={(value: Date | null) => value && setDate(value)}
@@ -308,12 +308,12 @@ I'm looking forward to your *confirmation*. Thank you!`;
 
               if (dt.type === "url") {
                 return (
-                  <Fragment key={dt.id}>
+                  <Fragment key={i}>
                     <Input
                       color="rose"
                       disabled={loading}
                       errorMessage={errors[dt.name]?.message}
-                      key={dt.id}
+                      key={i}
                       label={dt.label ?? ""}
                       maxLength={dt.maxLength}
                       onKeyDown={dt.onKeyDown}
@@ -337,12 +337,12 @@ I'm looking forward to your *confirmation*. Thank you!`;
               }
 
               return (
-                <Fragment key={dt.id}>
+                <Fragment key={i}>
                   <Input
                     color="rose"
                     disabled={loading}
                     errorMessage={errors[dt.name]?.message}
-                    key={dt.id}
+                    key={i}
                     label={dt.label ?? ""}
                     maxLength={dt.maxLength}
                     onKeyDown={dt.onKeyDown}

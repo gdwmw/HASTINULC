@@ -107,14 +107,14 @@ export const Content: FC = (): ReactElement => {
     <main className="bg-slate-100 dark:bg-slate-900">
       <FormContainer className={{ innerContainer: "max-h-[556px] w-full max-w-[450px]" }} href={"/"} label={"Home"}>
         <form className="flex w-full flex-col gap-3 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
-          {FORM_FIELDS_DATA.map((dt) => (
+          {FORM_FIELDS_DATA.map((dt, i) => (
             <Input
               color="rose"
               disabled={loading}
               errorMessage={errors[dt.name]?.message}
               icon={dt.type === "password" ? passwordVisibility ? <IoIosEye size={18} /> : <IoIosEyeOff size={18} /> : undefined}
               iconOnClick={dt.type === "password" ? () => setPasswordVisibility((prev) => !prev) : undefined}
-              key={dt.id}
+              key={i}
               label={dt.label}
               maxLength={dt.maxLength}
               onKeyDown={dt.onKeyDown}

@@ -70,7 +70,7 @@ export const Content: FC<I> = (props): ReactElement => {
 
         <form className="flex flex-col gap-5 overflow-y-auto" onSubmit={handleSubmit(onSubmit)}>
           {QUESTIONS_DATA.map((dt, i) => (
-            <div className="space-y-4" key={dt.id}>
+            <div className="space-y-4" key={i}>
               <div className="space-y-4 rounded-lg border border-gray-200 bg-gray-50 p-4">
                 {dt.options !== "textarea" ? (
                   <div className="space-y-2">
@@ -83,8 +83,8 @@ export const Content: FC<I> = (props): ReactElement => {
                     </h2>
                     <div className="ml-8 flex gap-3 overflow-x-auto max-sm:flex-col">
                       {Array.isArray(dt.options) &&
-                        dt.options.map((opt) => (
-                          <label className="flex items-center gap-1" key={opt}>
+                        dt.options.map((opt, i) => (
+                          <label className="flex items-center gap-1" key={i}>
                             <input
                               className="size-3 cursor-pointer appearance-none rounded-full border border-gray-400 checked:border-[3px] checked:border-rose-400"
                               disabled={loading}
