@@ -13,7 +13,6 @@ import { RegisterSchema, TRegisterSchema } from "@/src/schemas";
 import { POSTRegister } from "@/src/utils";
 
 interface IFormField {
-  id: number;
   label: string;
   maxLength?: number;
   name: keyof TRegisterSchema;
@@ -23,7 +22,6 @@ interface IFormField {
 
 const FORM_FIELDS_DATA: IFormField[] = [
   {
-    id: 1,
     label: "Name",
     maxLength: 50,
     name: "name",
@@ -31,7 +29,6 @@ const FORM_FIELDS_DATA: IFormField[] = [
     type: "text",
   },
   {
-    id: 2,
     label: "Username",
     maxLength: 8,
     name: "username",
@@ -39,13 +36,11 @@ const FORM_FIELDS_DATA: IFormField[] = [
     type: "text",
   },
   {
-    id: 3,
     label: "Email",
     name: "email",
     type: "email",
   },
   {
-    id: 4,
     label: "Phone",
     maxLength: 15,
     name: "phoneNumber",
@@ -53,14 +48,12 @@ const FORM_FIELDS_DATA: IFormField[] = [
     type: "tel",
   },
   {
-    id: 5,
     label: "Password",
     maxLength: 72,
     name: "password",
     type: "password",
   },
   {
-    id: 6,
     label: "Confirm Password",
     name: "confirmPassword",
     type: "password",

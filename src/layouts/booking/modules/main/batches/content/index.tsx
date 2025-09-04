@@ -16,7 +16,6 @@ import { IBookingPayload, IBookingResponse } from "@/src/types";
 import { POSTBooking } from "@/src/utils";
 
 interface IFormField {
-  id: number;
   label?: string;
   maxLength?: number;
   name: keyof TBookingSchema;
@@ -27,7 +26,6 @@ interface IFormField {
 
 const FORM_FIELDS_DATA: IFormField[] = [
   {
-    id: 1,
     label: "Name",
     maxLength: 50,
     name: "name",
@@ -35,13 +33,11 @@ const FORM_FIELDS_DATA: IFormField[] = [
     type: "text",
   },
   {
-    id: 2,
     label: "Email",
     name: "email",
     type: "email",
   },
   {
-    id: 3,
     label: "Phone",
     maxLength: 15,
     name: "phoneNumber",
@@ -49,28 +45,23 @@ const FORM_FIELDS_DATA: IFormField[] = [
     type: "tel",
   },
   {
-    id: 4,
     label: "Package",
     name: "package",
     options: PACKAGES_DATA.map((dt) => dt.title),
   },
   {
-    id: 5,
     label: "Date",
     name: "date",
   },
   {
-    id: 6,
     label: "Time",
     name: "time",
   },
   {
-    id: 7,
     label: "Person",
     name: "person",
   },
   {
-    id: 8,
     label: "Google Maps Link",
     name: "googleMapsLink",
     type: "url",

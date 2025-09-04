@@ -12,7 +12,6 @@ import { ChangePasswordSchema, TChangePasswordSchema } from "@/src/schemas";
 import { POSTChangePassword } from "@/src/utils";
 
 interface IFormField {
-  id: number;
   label: string;
   maxLength?: number;
   name: keyof TChangePasswordSchema;
@@ -21,20 +20,17 @@ interface IFormField {
 
 const FORM_FIELDS_DATA: IFormField[] = [
   {
-    id: 1,
     label: "Current Password",
     name: "currentPassword",
     type: "password",
   },
   {
-    id: 2,
     label: "New Password",
     maxLength: 72,
     name: "password",
     type: "password",
   },
   {
-    id: 3,
     label: "Confirm Password",
     name: "passwordConfirmation",
     type: "password",
