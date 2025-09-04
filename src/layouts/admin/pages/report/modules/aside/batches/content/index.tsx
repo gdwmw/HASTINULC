@@ -5,7 +5,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { FC, ReactElement, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaFileExport } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaFileExport, FaSortNumericDownAlt, FaSortNumericUpAlt } from "react-icons/fa";
 
 import { DatePickerInput, ExampleA, Input, Select } from "@/src/components";
 import { currencyFormat } from "@/src/hooks";
@@ -37,10 +37,13 @@ export const Content: FC = (): ReactElement => {
   );
   const [dateA, setDateA] = useState<Date | null>(null);
   const [dateB, setDateB] = useState<Date | null>(null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
 
-  const { data } = useQuery<{ data: IBookingResponse[] } & IMetaResponse>({
-    queryFn: () => GETBooking("sort[0]=createdAt:desc"),
-    queryKey: ["booking-report"],
+  const { data, isFetching, refetch } = useQuery<{ data: IBookingResponse[] } & IMetaResponse>({
+    queryFn: () => GETBooking(`sort[0]=createdAt:${sortOrder}&pagination[pageSize]=${pageSize}&pagination[page]=${page}`),
+    queryKey: ["booking-report", sortOrder, page, pageSize],
   });
 
   const { register, watch } = useForm();
@@ -109,6 +112,9 @@ export const Content: FC = (): ReactElement => {
 
     return passDate && passSearch;
   });
+
+  const total = data?.meta?.pagination?.total || 0;
+  const totalPages = Math.ceil(total / pageSize);
 
   const formatDateWithLeadingZero = (date: Date) => {
     const day = String(date.getDate()).padStart(2, "0");
@@ -270,8 +276,24 @@ export const Content: FC = (): ReactElement => {
                 {LIST_OF_COLUMNS.map(
                   (col, i) =>
                     enabledCols[col.key] && (
-                      <th className="border p-2" key={i}>
+                      <th
+                        className={col.key === "date" ? "cursor-pointer select-none border p-2" : "border p-2"}
+                        key={i}
+                        onClick={
+                          col.key === "date"
+                            ? () => {
+                                setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+                                refetch();
+                              }
+                            : undefined
+                        }
+                      >
                         {col.label}
+                        {col.key === "date" && (
+                          <span className="ml-1 inline-block align-middle">
+                            {sortOrder === "asc" ? <FaSortNumericUpAlt size={14} /> : <FaSortNumericDownAlt size={14} />}
+                          </span>
+                        )}
                       </th>
                     ),
                 )}
@@ -332,6 +354,79 @@ export const Content: FC = (): ReactElement => {
             </tbody>
           </table>
         </div>
+
+        <section className="mt-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <select
+              className="rounded border px-2 py-1"
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+                setPage(1);
+              }}
+              value={pageSize}
+            >
+              {[10, 25, 50, 100].map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <ExampleA
+              className="rounded p-1"
+              color="rose"
+              disabled={page === 1 || isFetching}
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              size="sm"
+              variant="ghost"
+            >
+              <FaChevronLeft />
+            </ExampleA>
+            {(() => {
+              let start = 1;
+              let end = Math.min(totalPages, 5);
+
+              if (page >= 3) {
+                start = page;
+                end = Math.min(page + 4, totalPages);
+              }
+              if (end - start < 4) {
+                start = Math.max(1, end - 4);
+              }
+
+              const pages = [];
+              for (let i = start; i <= end; i++) {
+                pages.push(
+                  <ExampleA
+                    className="min-h-fit min-w-fit"
+                    color="rose"
+                    disabled={isFetching}
+                    key={i}
+                    onClick={() => setPage(i)}
+                    size="sm"
+                    variant={page === i ? "solid" : "outline"}
+                  >
+                    {i}
+                  </ExampleA>,
+                );
+              }
+              return pages;
+            })()}
+            <ExampleA
+              className="rounded p-1"
+              color="rose"
+              disabled={page === totalPages || isFetching}
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              size="sm"
+              variant="ghost"
+            >
+              <FaChevronRight />
+            </ExampleA>
+            <span>of {totalPages || 1} pages</span>
+          </div>
+        </section>
 
         <ExampleA className="mt-4 flex items-center gap-2 px-4 py-2" color="rose" onClick={handleExportToPDF} size="sm" variant="solid">
           <FaFileExport />
