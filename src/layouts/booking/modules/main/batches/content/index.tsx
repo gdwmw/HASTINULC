@@ -229,7 +229,9 @@ I'm looking forward to your *confirmation*. Thank you!`;
                     label={dt.label ?? ""}
                     {...register(dt.name)}
                   >
-                    <option value="-">-</option>
+                    <option className="hidden" value="">
+                      -
+                    </option>
                     {dt.options?.map((opt, i) => (
                       <option key={i} value={opt}>
                         {opt}

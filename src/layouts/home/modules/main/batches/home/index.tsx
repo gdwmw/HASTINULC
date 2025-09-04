@@ -194,7 +194,7 @@ export const Home: FC<I> = (props): ReactElement => {
                     if (dt.name === "package") {
                       return (
                         <Select
-                          className={{ container: "w-full lg:w-64", select: "h-[26px]" }}
+                          className={{ container: "w-full lg:w-64" }}
                           color="rose"
                           disabled={loading}
                           errorMessage={errors[dt.name]?.message}
@@ -202,7 +202,9 @@ export const Home: FC<I> = (props): ReactElement => {
                           label={dt.label ?? ""}
                           {...register(dt.name)}
                         >
-                          <option value="-">-</option>
+                          <option className="hidden" value="">
+                            -
+                          </option>
                           {dt.options?.map((opt, i) => (
                             <option key={i} value={opt}>
                               {opt}
