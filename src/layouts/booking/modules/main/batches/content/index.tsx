@@ -304,7 +304,6 @@ I'm looking forward to your *confirmation*. Thank you!`;
                       color="rose"
                       disabled={loading}
                       errorMessage={errors[dt.name]?.message}
-                      key={i}
                       label={dt.label ?? ""}
                       maxLength={dt.maxLength}
                       onKeyDown={dt.onKeyDown}
@@ -333,7 +332,6 @@ I'm looking forward to your *confirmation*. Thank you!`;
                     color="rose"
                     disabled={loading}
                     errorMessage={errors[dt.name]?.message}
-                    key={i}
                     label={dt.label ?? ""}
                     maxLength={dt.maxLength}
                     onKeyDown={dt.onKeyDown}
