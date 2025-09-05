@@ -280,7 +280,7 @@ export const SUGGESTIONS_DATA = [
 // ----------------------------
 
 const options = {
-  A: ["SA", "A", "N", "D", "SD"], // Strongly Agree, Agree, Neutral, Disagree, Strongly Disagree
+  A: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"],
   B: ["Always", "Often", "Sometimes", "Rarely", "Never"],
 };
 
