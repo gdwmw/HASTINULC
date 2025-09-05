@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { FC, ReactElement, useState } from "react";
-import { useForm } from "react-hook-form";
 import { FaChevronLeft, FaChevronRight, FaFileExport, FaSortNumericDownAlt, FaSortNumericUpAlt } from "react-icons/fa";
 
 import { DatePickerInput, ExampleA, Input, Select } from "@/src/components";
@@ -40,78 +39,44 @@ export const Content: FC = (): ReactElement => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
+  const [search, setSearch] = useState("");
+  const [by, setBy] = useState("id");
+
+  const queryParams = [`sort[0]=createdAt:${sortOrder}`, `pagination[pageSize]=${pageSize}`, `pagination[page]=${page}`];
+
+  if (search && by) {
+    queryParams.push(`filters[${by}][$contains]=${encodeURIComponent(search)}`);
+  }
+  if (dateA) {
+    queryParams.push(`filters[date][$gte]=${dateA.toISOString().slice(0, 10)}`);
+  }
+  if (dateB) {
+    queryParams.push(`filters[date][$lte]=${dateB.toISOString().slice(0, 10)}`);
+  }
 
   const { data, isFetching, refetch } = useQuery<{ data: IBookingResponse[] } & IMetaResponse>({
-    queryFn: () => GETBooking(`sort[0]=createdAt:${sortOrder}&pagination[pageSize]=${pageSize}&pagination[page]=${page}`),
-    queryKey: ["booking-report", sortOrder, page, pageSize],
+    queryFn: () => GETBooking(queryParams.join("&")),
+    queryKey: ["booking-report", sortOrder, page, pageSize, search, by, dateA, dateB],
   });
 
-  const { register, watch } = useForm();
-  const search = watch("search") || "";
-  const by = watch("by") || "documentId";
-
-  const handleToggleCol = (key: string) => {
-    setEnabledCols((prev) => ({ ...prev, [key]: !prev[key] }));
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setPage(1);
+  };
+  const handleByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setBy(e.target.value);
+    setPage(1);
+  };
+  const handleDateAChange = (value: Date | null) => {
+    setDateA(value);
+    setPage(1);
+  };
+  const handleDateBChange = (value: Date | null) => {
+    setDateB(value);
+    setPage(1);
   };
 
-  const filteredData = (data?.data || []).filter((dt) => {
-    let passDate = true;
-    if (dateA) {
-      const bookingDate = new Date(dt.date);
-      passDate = bookingDate >= dateA;
-    }
-    if (dateB && passDate) {
-      const bookingDate = new Date(dt.date);
-      const dateBEnd = new Date(dateB);
-      dateBEnd.setHours(23, 59, 59, 999);
-      passDate = bookingDate <= dateBEnd;
-    }
-
-    let passSearch = true;
-    if (search && by) {
-      let value = "";
-      switch (by) {
-        case "date":
-          value = dt.date ?? "";
-          break;
-        case "documentId":
-          value = dt.documentId ?? "";
-          break;
-        case "id":
-          value = String(dt.id ?? "");
-          break;
-        case "indicator":
-        case "status":
-          value = dt.indicator ?? "";
-          break;
-        case "name":
-          value = dt.name ?? "";
-          break;
-        case "package":
-          value = dt.package ?? "";
-          break;
-        case "person":
-          value = dt.person.toString() ?? "";
-          break;
-        case "subtotal":
-          value = String(dt.subtotal ?? "");
-          break;
-        case "time":
-          value = dt.time ?? "";
-          break;
-        case "total":
-          value = String(dt.total ?? "");
-          break;
-        case "username":
-          value = dt.username ?? "";
-          break;
-        default:
-      }
-      passSearch = value.toLowerCase().includes(search.toLowerCase());
-    }
-
-    return passDate && passSearch;
-  });
+  const filteredData = data?.data || [];
 
   const total = data?.meta?.pagination?.total || 0;
   const totalPages = Math.ceil(total / pageSize);
@@ -217,28 +182,11 @@ export const Content: FC = (): ReactElement => {
       <section className="rounded-lg border px-2 pb-2 shadow-md">
         <div className="flex items-center gap-4 overflow-x-auto p-4">
           <span className="-mb-1.5">From</span>
-
-          <DatePickerInput
-            className={{ container: "min-w-[200px]" }}
-            color="rose"
-            label="Date"
-            onChange={(value: Date | null) => setDateA(value)}
-            selected={dateA}
-          />
-
+          <DatePickerInput className={{ container: "min-w-[200px]" }} color="rose" label="Date" onChange={handleDateAChange} selected={dateA} />
           <span className="-mb-1.5">To</span>
-
-          <DatePickerInput
-            className={{ container: "min-w-[200px]" }}
-            color="rose"
-            label="Date"
-            onChange={(value: Date | null) => setDateB(value)}
-            selected={dateB}
-          />
-
-          <Input className={{ container: "min-w-[300px] grow" }} color="rose" label="Search" {...register("search")} />
-
-          <Select className={{ container: "min-w-[112px]" }} color="rose" defaultValue={"id"} label="By" {...register("by")}>
+          <DatePickerInput className={{ container: "min-w-[200px]" }} color="rose" label="Date" onChange={handleDateBChange} selected={dateB} />
+          <Input className={{ container: "min-w-[300px] grow" }} color="rose" label="Search" onChange={handleSearchChange} value={search} />
+          <Select className={{ container: "min-w-[112px]" }} color="rose" label="By" onChange={handleByChange} value={by}>
             <option value="id">ID</option>
             <option value="documentId">Document ID</option>
             <option value="username">Username</option>
@@ -255,13 +203,25 @@ export const Content: FC = (): ReactElement => {
       </section>
 
       <section className="space-y-4 rounded-lg border p-4 shadow-md">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <ExampleA
+            className="h-fit min-h-fit min-w-fit rounded-md p-1.5"
+            color="rose"
+            onClick={() => {
+              setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+              refetch();
+            }}
+            size="sm"
+            variant="solid"
+          >
+            {sortOrder === "asc" ? <FaSortNumericUpAlt size={14} /> : <FaSortNumericDownAlt size={14} />}
+          </ExampleA>
           {LIST_OF_COLUMNS.map((col, i) => (
             <label className="flex items-center gap-1" key={i}>
               <input
                 checked={enabledCols[col.key]}
                 className="size-3 cursor-pointer appearance-none rounded-full border border-gray-400 checked:border-[3px] checked:border-rose-400"
-                onChange={() => handleToggleCol(col.key)}
+                onChange={() => setEnabledCols((prev) => ({ ...prev, [col.key]: !prev[col.key] }))}
                 type="checkbox"
               />
               <span className="whitespace-nowrap">{col.label}</span>
@@ -276,24 +236,8 @@ export const Content: FC = (): ReactElement => {
                 {LIST_OF_COLUMNS.map(
                   (col, i) =>
                     enabledCols[col.key] && (
-                      <th
-                        className={col.key === "date" ? "cursor-pointer select-none border p-2" : "border p-2"}
-                        key={i}
-                        onClick={
-                          col.key === "date"
-                            ? () => {
-                                setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
-                                refetch();
-                              }
-                            : undefined
-                        }
-                      >
+                      <th className="border p-2" key={i}>
                         {col.label}
-                        {col.key === "date" && (
-                          <span className="ml-1 inline-block align-middle">
-                            {sortOrder === "asc" ? <FaSortNumericUpAlt size={14} /> : <FaSortNumericDownAlt size={14} />}
-                          </span>
-                        )}
                       </th>
                     ),
                 )}

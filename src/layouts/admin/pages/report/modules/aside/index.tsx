@@ -11,7 +11,7 @@ export const ASide: FC = async (): Promise<ReactElement> => {
 
   await queryClient.prefetchQuery<{ data: IBookingResponse[] } & IMetaResponse>({
     queryFn: () => GETBooking("sort[0]=createdAt:desc"),
-    queryKey: ["booking-report", "desc", 1, 25],
+    queryKey: ["booking-report", "desc", 1, 25, "", "id", null, null],
   });
 
   return (
