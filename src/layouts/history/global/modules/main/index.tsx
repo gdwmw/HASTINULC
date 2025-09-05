@@ -3,7 +3,7 @@ import { FC, PropsWithChildren, ReactElement } from "react";
 
 import { getAllSession } from "@/src/hooks";
 import { DUMMY_REVIEW_DATA } from "@/src/libs";
-import { IBookingResponse, IMetaResponse } from "@/src/types";
+import { IBookingResponse, IMetaResponse, IReviewResponse } from "@/src/types";
 import { GETBooking, GETReview } from "@/src/utils";
 
 import { Content } from "./batches";
@@ -40,7 +40,12 @@ export const Main: FC<T> = async (props): Promise<ReactElement> => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Content reviewResponse={session?.user?.role !== "demo" ? await fetchReview() : DUMMY_REVIEW_DATA} session={session}>
+      <Content
+        reviewResponse={
+          session?.user?.role !== "demo" ? await fetchReview() : ({ data: DUMMY_REVIEW_DATA } as { data: IReviewResponse[] } & IMetaResponse)
+        }
+        session={session}
+      >
         {props.children}
       </Content>
     </HydrationBoundary>

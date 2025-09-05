@@ -19,7 +19,7 @@ export const ASide: FC = async (): Promise<ReactElement> => {
     queryKey: ["booking-dashboard"],
   });
 
-  await queryClient.prefetchQuery<IReviewResponse[]>({
+  await queryClient.prefetchQuery<{ data: IReviewResponse[] } & IMetaResponse>({
     queryFn: () => GETReview("sort[0]=createdAt:desc&pagination[pageSize]=5&pagination[page]=1"),
     queryKey: ["review-dashboard"],
   });

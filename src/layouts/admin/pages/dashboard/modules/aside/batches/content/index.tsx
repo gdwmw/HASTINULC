@@ -104,7 +104,7 @@ export const Content: FC = (): ReactElement => {
 
   // ----------------------------
 
-  const { data: reviewResponse } = useQuery<IReviewResponse[]>({
+  const { data: reviewResponse } = useQuery<{ data: IReviewResponse[] } & IMetaResponse>({
     queryFn: () => GETReview("sort[0]=createdAt:desc&pagination[pageSize]=5&pagination[page]=1"),
     queryKey: ["review-dashboard"],
   });
@@ -134,7 +134,7 @@ export const Content: FC = (): ReactElement => {
           <div className="h-px w-full bg-gray-200" />
 
           <div className="space-y-5 overflow-y-auto pb-2">
-            {reviewResponse?.map((dt, i) => (
+            {reviewResponse?.data?.map((dt, i) => (
               <div className="w-full rounded-lg border border-gray-200 bg-white p-6 shadow-md" key={i}>
                 <dl className="space-y-4 max-[450px]:text-sm max-[380px]:text-xs">
                   <div className="flex flex-col gap-2">

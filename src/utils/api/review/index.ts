@@ -1,17 +1,17 @@
-import type { IReviewPayload, IReviewResponse } from "@/src/types";
+import type { IMetaResponse, IReviewPayload, IReviewResponse } from "@/src/types";
 
 import { getApi, postApi } from "../base";
 
 const label = "Review";
 
-export const GETReview = async (query?: string): Promise<IReviewResponse[]> => {
+export const GETReview = async (query?: string): Promise<{ data: IReviewResponse[] } & IMetaResponse> => {
   const params = query ? Object.fromEntries(new URLSearchParams(query).entries()) : undefined;
-  const response = await getApi<{ data: IReviewResponse[] }>({
+  const response = await getApi<{ data: IReviewResponse[] } & IMetaResponse>({
     endpoint: "/api/reviews",
     label: label,
     params: params,
   });
-  return response.data;
+  return response;
 };
 
 export const POSTReview = async (payload: IReviewPayload): Promise<IReviewResponse> => {

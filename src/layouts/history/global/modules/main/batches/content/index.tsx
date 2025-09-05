@@ -22,7 +22,7 @@ import { GETBooking, GETBookingByDocumentId } from "@/src/utils";
 
 interface I {
   children: ReactNode;
-  reviewResponse: IReviewResponse[] | null | undefined;
+  reviewResponse: ({ data: IReviewResponse[] } & IMetaResponse) | null | undefined;
   session: null | Session;
 }
 
@@ -66,7 +66,7 @@ export const Content: FC<I> = (props): ReactElement => {
         const data = bookingResponse.pages.flatMap((pg) => pg.data);
         const findBooking = data?.find((dt) => dt.documentId === pathKeeper);
 
-        const findReview = props.reviewResponse?.find((dt) => dt.relation_booking.documentId === pathKeeper);
+        const findReview = props.reviewResponse?.data?.find((dt) => dt.relation_booking.documentId === pathKeeper);
 
         if (!findBooking) {
           const fetchedBooking = await GETBookingByDocumentId(pathKeeper);

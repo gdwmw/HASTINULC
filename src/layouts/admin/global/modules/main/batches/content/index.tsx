@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { FC, PropsWithChildren, ReactElement } from "react";
 import { FaClipboardList } from "react-icons/fa";
 import { FaFileLines } from "react-icons/fa6";
+import { IoStar } from "react-icons/io5";
 import { MdSpaceDashboard } from "react-icons/md";
 
 import logo from "@/public/assets/images/logos/Black.svg";
@@ -58,6 +59,21 @@ export const Content: FC<T> = (props): ReactElement => {
                 <FaClipboardList size={18} />
               </div>
               Bookings
+            </Link>
+
+            <Link
+              className={ExampleATWM({
+                className: "justify-start rounded-lg",
+                color: "rose",
+                size: "sm",
+                variant: pathname === "reviews" ? "solid" : "outline",
+              })}
+              href={"/admin/reviews"}
+            >
+              <div className="max-w-[16px]">
+                <IoStar size={18} />
+              </div>
+              Reviews
             </Link>
 
             <Link
