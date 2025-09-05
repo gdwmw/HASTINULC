@@ -385,32 +385,129 @@ export const Content: FC = (): ReactElement => {
               <FaChevronLeft />
             </ExampleA>
             {(() => {
-              let start = 1;
-              let end = Math.min(totalPages, 5);
-
-              if (page >= 3) {
-                start = page;
-                end = Math.min(page + 4, totalPages);
-              }
-              if (end - start < 4) {
-                start = Math.max(1, end - 4);
-              }
-
               const pages = [];
-              for (let i = start; i <= end; i++) {
-                pages.push(
-                  <ExampleA
-                    className="min-h-fit min-w-fit"
-                    color="rose"
-                    disabled={isFetching}
-                    key={i}
-                    onClick={() => setPage(i)}
-                    size="sm"
-                    variant={page === i ? "solid" : "outline"}
-                  >
-                    {i}
-                  </ExampleA>,
-                );
+              if (totalPages < 10) {
+                for (let i = 1; i <= totalPages; i++) {
+                  pages.push(
+                    <ExampleA
+                      className="h-fit min-h-fit min-w-fit rounded-md px-2 py-1"
+                      color="rose"
+                      disabled={isFetching}
+                      key={i}
+                      onClick={() => setPage(i)}
+                      size="sm"
+                      variant={page === i ? "solid" : "ghost"}
+                    >
+                      {i}
+                    </ExampleA>,
+                  );
+                }
+              } else {
+                if (page <= 5) {
+                  for (let i = 1; i <= 5; i++) {
+                    pages.push(
+                      <ExampleA
+                        className="h-fit min-h-fit min-w-fit rounded-md px-2 py-1"
+                        color="rose"
+                        disabled={isFetching}
+                        key={i}
+                        onClick={() => setPage(i)}
+                        size="sm"
+                        variant={page === i ? "solid" : "ghost"}
+                      >
+                        {i}
+                      </ExampleA>,
+                    );
+                  }
+                  pages.push(<span key="start-ellipsis">...</span>);
+                  pages.push(
+                    <ExampleA
+                      className="h-fit min-h-fit min-w-fit rounded-md px-2 py-1"
+                      color="rose"
+                      disabled={isFetching}
+                      key={totalPages}
+                      onClick={() => setPage(totalPages)}
+                      size="sm"
+                      variant={page === totalPages ? "solid" : "ghost"}
+                    >
+                      {totalPages}
+                    </ExampleA>,
+                  );
+                } else if (page >= totalPages - 4) {
+                  pages.push(
+                    <ExampleA
+                      className="h-fit min-h-fit min-w-fit rounded-md px-2 py-1"
+                      color="rose"
+                      disabled={isFetching}
+                      key={1}
+                      onClick={() => setPage(1)}
+                      size="sm"
+                      variant={page === 1 ? "solid" : "ghost"}
+                    >
+                      1
+                    </ExampleA>,
+                  );
+                  pages.push(<span key="end-ellipsis">...</span>);
+                  for (let i = totalPages - 4; i <= totalPages; i++) {
+                    pages.push(
+                      <ExampleA
+                        className="h-fit min-h-fit min-w-fit rounded-md px-2 py-1"
+                        color="rose"
+                        disabled={isFetching}
+                        key={i}
+                        onClick={() => setPage(i)}
+                        size="sm"
+                        variant={page === i ? "solid" : "ghost"}
+                      >
+                        {i}
+                      </ExampleA>,
+                    );
+                  }
+                } else {
+                  pages.push(
+                    <ExampleA
+                      className="h-fit min-h-fit min-w-fit rounded-md px-2 py-1"
+                      color="rose"
+                      disabled={isFetching}
+                      key={1}
+                      onClick={() => setPage(1)}
+                      size="sm"
+                      variant={page === 1 ? "solid" : "ghost"}
+                    >
+                      1
+                    </ExampleA>,
+                  );
+                  pages.push(<span key="mid-ellipsis-1">...</span>);
+                  for (let i = page - 1; i <= page + 1; i++) {
+                    pages.push(
+                      <ExampleA
+                        className="h-fit min-h-fit min-w-fit rounded-md px-2 py-1"
+                        color="rose"
+                        disabled={isFetching}
+                        key={i}
+                        onClick={() => setPage(i)}
+                        size="sm"
+                        variant={page === i ? "solid" : "ghost"}
+                      >
+                        {i}
+                      </ExampleA>,
+                    );
+                  }
+                  pages.push(<span key="mid-ellipsis-2">...</span>);
+                  pages.push(
+                    <ExampleA
+                      className="h-fit min-h-fit min-w-fit rounded-md px-2 py-1"
+                      color="rose"
+                      disabled={isFetching}
+                      key={totalPages}
+                      onClick={() => setPage(totalPages)}
+                      size="sm"
+                      variant={page === totalPages ? "solid" : "ghost"}
+                    >
+                      {totalPages}
+                    </ExampleA>,
+                  );
+                }
               }
               return pages;
             })()}
@@ -424,7 +521,6 @@ export const Content: FC = (): ReactElement => {
             >
               <FaChevronRight />
             </ExampleA>
-            <span>of {totalPages || 1} pages</span>
           </div>
         </section>
 
