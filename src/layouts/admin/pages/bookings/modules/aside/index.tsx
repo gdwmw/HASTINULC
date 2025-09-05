@@ -12,7 +12,7 @@ export const ASide: FC = async (): Promise<ReactElement> => {
   await queryClient.prefetchInfiniteQuery<{ data: IBookingResponse[] } & IMetaResponse>({
     initialPageParam: 1,
     queryFn: () => GETBooking("sort[0]=createdAt:desc&pagination[pageSize]=8&pagination[page]=1"),
-    queryKey: ["booking-bookings"],
+    queryKey: ["booking-bookings", "", "id", null, null, "sort[0]=createdAt:desc", "pagination[pageSize]=8"],
   });
 
   return (
