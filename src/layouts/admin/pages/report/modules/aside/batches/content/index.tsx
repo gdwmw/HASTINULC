@@ -48,12 +48,12 @@ export const Content: FC = (): ReactElement => {
     queryParams.push(`filters[${by}][$contains]=${encodeURIComponent(search)}`);
   }
   if (dateA) {
-    queryParams.push(`filters[date][$gte]=${dateA.toISOString().slice(0, 10)}`);
+    queryParams.push(`filters[date][$gt]=${dateA.toISOString().slice(0, 10)}`);
   }
   if (dateB) {
     const nextDay = new Date(dateB);
     nextDay.setDate(nextDay.getDate() + 1);
-    queryParams.push(`filters[date][$lt]=${nextDay.toISOString().slice(0, 10)}`);
+    queryParams.push(`filters[date][$lte]=${nextDay.toISOString().slice(0, 10)}`);
   }
 
   const { data, isFetching, refetch } = useQuery<{ data: IBookingResponse[] } & IMetaResponse>({
