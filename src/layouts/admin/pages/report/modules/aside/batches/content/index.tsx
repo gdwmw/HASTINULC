@@ -51,7 +51,9 @@ export const Content: FC = (): ReactElement => {
     queryParams.push(`filters[date][$gte]=${dateA.toISOString().slice(0, 10)}`);
   }
   if (dateB) {
-    queryParams.push(`filters[date][$lte]=${dateB.toISOString().slice(0, 10)}`);
+    const nextDay = new Date(dateB);
+    nextDay.setDate(nextDay.getDate() + 1);
+    queryParams.push(`filters[date][$lt]=${nextDay.toISOString().slice(0, 10)}`);
   }
 
   const { data, isFetching, refetch } = useQuery<{ data: IBookingResponse[] } & IMetaResponse>({
@@ -195,7 +197,7 @@ export const Content: FC = (): ReactElement => {
             <option value="date">Date</option>
             <option value="time">Time</option>
             <option value="person">Person</option>
-            <option value="status">Status</option>
+            <option value="indicator">Status</option>
             <option value="subtotal">Subtotal</option>
             <option value="total">Total</option>
           </Select>
