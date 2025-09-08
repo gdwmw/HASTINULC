@@ -106,7 +106,7 @@ export const Content: FC = (): ReactElement => {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 gap-5 md:grid-cols-2">
+      <section className="grid grid-cols-1 gap-5 pb-2 md:grid-cols-2">
         {bookingResponse?.pages.map((pg) =>
           pg.data.map((dt, i) => <AdminBookingCard dt={dt} handleUpdateIndicator={handleUpdateIndicator} key={i} />),
         )}

@@ -127,7 +127,9 @@ export const Content: FC<I> = (props): ReactElement => {
                       className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                       href="/profile"
                     >
-                      <FaUser size={16} />
+                      <div className="w-full max-w-[16px]">
+                        <FaUser size={16} />
+                      </div>
                       Profile
                     </Link>
                   </li>
@@ -138,7 +140,9 @@ export const Content: FC<I> = (props): ReactElement => {
                       href={`/history/${props.session?.user?.username}`}
                       onClick={() => setOpen({ historyAsideSwitch: false, historyDetailSwitch: false })}
                     >
-                      <FaHistory size={16} />
+                      <div className="w-full max-w-[16px]">
+                        <FaHistory size={15} />
+                      </div>
                       History
                     </Link>
                   </li>
@@ -158,7 +162,9 @@ export const Content: FC<I> = (props): ReactElement => {
                       }}
                     >
                       <div className="flex items-center gap-2">
-                        <FaClipboardList size={16} />
+                        <div className="w-full max-w-[16px]">
+                          <FaClipboardList size={16} />
+                        </div>
                         <span>Questionnaire</span>
                       </div>
                       {questionnaireConditions && (
@@ -176,7 +182,9 @@ export const Content: FC<I> = (props): ReactElement => {
                         className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                         href="/admin/dashboard"
                       >
-                        <MdSpaceDashboard className="-mr-px" size={17} />
+                        <div className="w-full max-w-[16px]">
+                          <MdSpaceDashboard size={17} />
+                        </div>
                         Dashboard
                       </Link>
                     </li>
@@ -189,7 +197,9 @@ export const Content: FC<I> = (props): ReactElement => {
                       className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                       onClick={() => signOut()}
                     >
-                      <FaSignOutAlt size={16} />
+                      <div className="w-full max-w-[16px]">
+                        <FaSignOutAlt size={16} />
+                      </div>
                       Logout
                     </button>
                   </li>

@@ -2,12 +2,10 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from "chart.js";
-import Image from "next/image";
 import { FC, ReactElement } from "react";
 import { Line } from "react-chartjs-2";
-import { IoStar } from "react-icons/io5";
 
-import { AdminBookingCard } from "@/src/components";
+import { AdminBookingCard, AdminReviewResult } from "@/src/components";
 import { IBookingPayload, IBookingResponse, IMetaResponse, IReviewResponse, TIndicator } from "@/src/types";
 import { GETBooking, GETReview, PUTBooking } from "@/src/utils";
 
@@ -135,46 +133,7 @@ export const Content: FC = (): ReactElement => {
 
           <div className="space-y-5 overflow-y-auto pb-2">
             {reviewResponse?.data?.map((dt, i) => (
-              <div className="w-full rounded-lg border border-gray-200 bg-white p-6 shadow-md" key={i}>
-                <dl className="space-y-4 max-[450px]:text-sm max-[380px]:text-xs">
-                  <div className="flex flex-col gap-2">
-                    <dt className="font-medium text-gray-600">Rating:</dt>
-                    <dd className="flex items-center gap-1">
-                      {Array.from({ length: 5 }, (_, i) => {
-                        const ratingValue = i + 1;
-                        return (
-                          <IoStar
-                            className={`size-7 max-[450px]:size-6 max-[380px]:size-5 ${ratingValue <= (dt.rating ?? 0) ? "text-yellow-400" : "text-gray-200"}`}
-                            key={i}
-                          />
-                        );
-                      })}
-                    </dd>
-                  </div>
-
-                  <div className="flex flex-col gap-3">
-                    <dt className="font-medium text-gray-600">Description:</dt>
-                    <dd className="rounded-lg border border-gray-200 bg-gray-50 p-3">
-                      <p className="leading-relaxed">{dt.description || "-"}</p>
-                    </dd>
-                  </div>
-
-                  <div className="flex flex-col gap-3">
-                    <dt className="font-medium text-gray-600">Images:</dt>
-                    <dd className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                      {dt.image ? (
-                        dt.image.map((dt, i) => (
-                          <div className="relative aspect-square overflow-hidden rounded-lg border border-gray-200" key={i}>
-                            <Image alt="Review Image" className="object-cover" fill quality={50} src={API_URL + dt.url} />
-                          </div>
-                        ))
-                      ) : (
-                        <p>-</p>
-                      )}
-                    </dd>
-                  </div>
-                </dl>
-              </div>
+              <AdminReviewResult data={dt} key={i} />
             ))}
           </div>
         </section>

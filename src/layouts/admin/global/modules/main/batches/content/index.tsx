@@ -7,7 +7,7 @@ import { FC, PropsWithChildren, ReactElement } from "react";
 import { FaClipboardList } from "react-icons/fa";
 import { FaFileLines } from "react-icons/fa6";
 import { IoStar } from "react-icons/io5";
-import { MdSpaceDashboard } from "react-icons/md";
+import { MdMessage, MdSpaceDashboard } from "react-icons/md";
 
 import logo from "@/public/assets/images/logos/Black.svg";
 import { ExampleATWM, FormContainer } from "@/src/components";
@@ -40,7 +40,7 @@ export const Content: FC<T> = (props): ReactElement => {
               })}
               href={"/admin/dashboard"}
             >
-              <div className="max-w-[16px]">
+              <div className="w-full max-w-[16px]">
                 <MdSpaceDashboard size={18} />
               </div>
               Dashboard
@@ -55,7 +55,7 @@ export const Content: FC<T> = (props): ReactElement => {
               })}
               href={"/admin/bookings"}
             >
-              <div className="max-w-[16px]">
+              <div className="w-full max-w-[16px]">
                 <FaClipboardList size={18} />
               </div>
               Bookings
@@ -70,10 +70,25 @@ export const Content: FC<T> = (props): ReactElement => {
               })}
               href={"/admin/reviews"}
             >
-              <div className="max-w-[16px]">
+              <div className="w-full max-w-[16px]">
                 <IoStar size={18} />
               </div>
               Reviews
+            </Link>
+
+            <Link
+              className={ExampleATWM({
+                className: "justify-start rounded-lg",
+                color: "rose",
+                size: "sm",
+                variant: pathname === "feedbacks" ? "solid" : "outline",
+              })}
+              href={"/admin/feedbacks"}
+            >
+              <div className="w-full max-w-[16px]">
+                <MdMessage size={18} />
+              </div>
+              Feedbacks
             </Link>
 
             <Link
@@ -85,7 +100,7 @@ export const Content: FC<T> = (props): ReactElement => {
               })}
               href={"/admin/report"}
             >
-              <div className="max-w-[16px]">
+              <div className="w-full max-w-[16px]">
                 <FaFileLines size={18} />
               </div>
               Report

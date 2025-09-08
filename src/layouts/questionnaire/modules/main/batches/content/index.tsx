@@ -83,8 +83,8 @@ export const Content: FC<I> = (props): ReactElement => {
                     </h2>
                     <div className="ml-8 flex gap-3 overflow-x-auto max-sm:flex-col">
                       {Array.isArray(dt.options) &&
-                        dt.options.map((opt, i) => (
-                          <label className="flex items-center gap-1" key={i}>
+                        dt.options.map((opt, j) => (
+                          <label className="flex items-center gap-1" key={i + j}>
                             <input
                               className="size-3 cursor-pointer appearance-none rounded-full border border-gray-400 checked:border-[3px] checked:border-rose-400"
                               disabled={loading}
@@ -97,7 +97,7 @@ export const Content: FC<I> = (props): ReactElement => {
                         ))}
                     </div>
 
-                    {errors[`question${i + 1}`]?.message && <ErrorMessage errorMessage={String(errors[`question${i + 1}`]?.message)} />}
+                    {errors[`question${i + 1}`]?.message && <ErrorMessage errorMessage={errors[`question${i + 1}`]?.message as string} />}
                   </div>
                 ) : (
                   <div className="space-y-4">
