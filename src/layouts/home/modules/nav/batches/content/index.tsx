@@ -181,6 +181,7 @@ export const Content: FC<I> = (props): ReactElement => {
                       <Link
                         className="flex items-center gap-2 rounded-lg px-4 py-2 text-black hover:bg-rose-400 hover:text-white active:bg-rose-500"
                         href="/admin/dashboard"
+                        onClick={() => setOpen({ adminAside: false })}
                       >
                         <div className="w-full max-w-[16px]">
                           <MdSpaceDashboard size={17} />

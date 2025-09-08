@@ -180,7 +180,7 @@ export const Content: FC = (): ReactElement => {
   };
 
   return (
-    <aside className="grow space-y-5 overflow-y-auto">
+    <>
       <section className="rounded-lg border px-2 pb-2 shadow-md">
         <div className="flex items-center gap-4 overflow-x-auto p-4">
           <span className="-mb-1.5">From</span>
@@ -475,6 +475,6 @@ export const Content: FC = (): ReactElement => {
           Export to PDF
         </ExampleA>
       </section>
-    </aside>
+    </>
   );
 };

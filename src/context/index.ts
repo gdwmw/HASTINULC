@@ -16,6 +16,7 @@ interface IActions {
 
 export const useGlobalStates = create<IActions & IStates>((set) => ({
   open: {
+    adminAside: false,
     historyAsideSwitch: false,
     historyDetailSwitch: false,
     homeAside: false,

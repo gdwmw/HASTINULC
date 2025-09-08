@@ -37,12 +37,12 @@ export const Content: FC = (): ReactElement => {
   }, [inView]);
 
   return (
-    <aside className="grow space-y-5 overflow-y-auto">
-      <section className="grid grid-cols-1 gap-5 pb-2 md:grid-cols-2">
+    <>
+      <section className="grid grid-cols-1 gap-5 pb-2 xl:grid-cols-2">
         {data?.pages.map((pg) => pg.data.map((dt, i) => <AdminReviewResult data={dt} key={i} />))}
       </section>
 
       {hasNextPage && <Image alt="Loading..." className="mx-auto" ref={ref} src={loadingAnimation} width={20} />}
-    </aside>
+    </>
   );
 };

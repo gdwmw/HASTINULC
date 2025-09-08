@@ -108,13 +108,13 @@ export const Content: FC = (): ReactElement => {
   });
 
   return (
-    <aside className="grow space-y-5 overflow-y-auto">
+    <>
       <section className="rounded-lg border px-2 pb-2 shadow-md">
         <Line data={chartData} options={options} />
       </section>
 
-      <div className="flex w-full gap-5">
-        <section className="mb-2 flex h-96 basis-1/2 flex-col gap-2 rounded-lg border p-3 shadow-md">
+      <div className="grid w-full grid-cols-1 gap-5 xl:grid-cols-2">
+        <section className="mb-2 flex h-[600px] flex-col gap-2 rounded-lg border p-3 shadow-md">
           <h3 className="text-lg font-semibold">Last Bookings</h3>
 
           <div className="h-px w-full bg-gray-200" />
@@ -126,7 +126,7 @@ export const Content: FC = (): ReactElement => {
           </div>
         </section>
 
-        <section className="mb-2 flex h-96 basis-1/2 flex-col gap-2 rounded-lg border p-3 shadow-md">
+        <section className="mb-2 flex h-[600px] flex-col gap-2 rounded-lg border p-3 shadow-md">
           <h3 className="text-lg font-semibold">Last Reviews</h3>
 
           <div className="h-px w-full bg-gray-200" />
@@ -138,6 +138,6 @@ export const Content: FC = (): ReactElement => {
           </div>
         </section>
       </div>
-    </aside>
+    </>
   );
 };

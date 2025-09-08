@@ -121,11 +121,11 @@ export const Content: FC<I> = (props): ReactElement => {
           innerContainer: "size-full max-h-[821px] max-w-[460px] gap-5 lg:max-w-[1000px]",
         }}
         href="/"
-        isHistory
+        isSwitcher
         label="Home"
       >
         <div
-          className={`size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5 max-lg:mx-auto lg:block ${open?.historyAsideSwitch ? "hidden" : "block"}`}
+          className={`size-full space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5 lg:max-w-[400px] ${open?.historyAsideSwitch ? "max-lg:hidden" : ""}`}
         >
           {searchedData && (
             <>
@@ -148,7 +148,7 @@ export const Content: FC<I> = (props): ReactElement => {
           {hasNextPage && <Image alt="Loading..." className="mx-auto" ref={ref} src={loadingAnimation} width={20} />}
         </div>
 
-        <aside className={`min-w-fit grow items-start overflow-y-auto ${open?.historyAsideSwitch ? "flex" : "max-lg:hidden lg:flex"}`}>
+        <aside className={`flex min-w-fit grow items-start overflow-y-auto ${open?.historyAsideSwitch ? "" : "max-lg:hidden"}`}>
           <div className="my-auto flex w-full justify-center p-2">{props.children}</div>
         </aside>
       </FormContainer>

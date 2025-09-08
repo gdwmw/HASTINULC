@@ -13,6 +13,7 @@ export interface IBookingContext {
 export interface IOpenContext {
   historyDetailSwitch?: boolean;
   historyAsideSwitch?: boolean;
+  adminAside?: boolean;
   homeAside?: boolean;
 }
 

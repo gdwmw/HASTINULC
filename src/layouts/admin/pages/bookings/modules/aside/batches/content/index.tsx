@@ -83,7 +83,7 @@ export const Content: FC = (): ReactElement => {
   };
 
   return (
-    <aside className="grow space-y-5 overflow-y-auto">
+    <>
       <section className="rounded-lg border px-2 pb-2 shadow-md">
         <div className="flex items-center gap-4 overflow-x-auto p-4">
           <span className="-mb-1.5">From</span>
@@ -106,13 +106,13 @@ export const Content: FC = (): ReactElement => {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 gap-5 pb-2 md:grid-cols-2">
+      <section className="grid grid-cols-1 gap-5 pb-2 xl:grid-cols-2">
         {bookingResponse?.pages.map((pg) =>
           pg.data.map((dt, i) => <AdminBookingCard dt={dt} handleUpdateIndicator={handleUpdateIndicator} key={i} />),
         )}
       </section>
 
       {hasNextPage && <Image alt="Loading..." className="mx-auto" ref={ref} src={loadingAnimation} width={20} />}
-    </aside>
+    </>
   );
 };

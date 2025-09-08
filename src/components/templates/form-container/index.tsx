@@ -18,11 +18,11 @@ interface I extends Omit<LinkProps, "href"> {
     link?: string;
   };
   href: string;
-  isHistory?: boolean;
+  isSwitcher?: boolean;
   label: string;
 }
 
-export const FormContainer: FC<I> = ({ children, className, href, isHistory, label, ...props }): ReactElement => {
+export const FormContainer: FC<I> = ({ children, className, href, isSwitcher, label, ...props }): ReactElement => {
   const { open, setOpen } = useGlobalStates();
 
   return (
@@ -49,14 +49,14 @@ export const FormContainer: FC<I> = ({ children, className, href, isHistory, lab
             </Link>
           )}
 
-          {isHistory && (
+          {isSwitcher && (
             <>
               <span className="block text-rose-400 lg:hidden">|</span>
 
               <ExampleA
                 className="flex items-center gap-1 lg:hidden"
                 color="rose"
-                onClick={() => setOpen({ historyAsideSwitch: !open?.historyAsideSwitch })}
+                onClick={() => setOpen({ adminAside: !open?.adminAside, historyAsideSwitch: !open?.historyAsideSwitch })}
                 size="sm"
                 variant="ghost"
               >

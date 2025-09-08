@@ -11,19 +11,18 @@ import { MdMessage, MdSpaceDashboard } from "react-icons/md";
 
 import logo from "@/public/assets/images/logos/Black.svg";
 import { ExampleATWM, FormContainer } from "@/src/components";
+import { useGlobalStates } from "@/src/context";
 
 type T = Readonly<PropsWithChildren>;
 
 export const Content: FC<T> = (props): ReactElement => {
   const pathname = usePathname().slice(7);
+  const { open, setOpen } = useGlobalStates();
 
   return (
     <main className="bg-slate-100">
-      <FormContainer className={{ innerContainer: "size-full gap-5" }} href="/" label="Home">
-        <div
-          // className={`size-full max-w-[400px] space-y-4 overflow-y-auto rounded-lg bg-rose-50 p-5 max-lg:mx-auto lg:block ${open?.historyAsideSwitch ? "hidden" : "block"}`}
-          className="size-full max-w-[350px] rounded-lg bg-rose-50 p-5"
-        >
+      <FormContainer className={{ innerContainer: "size-full max-h-[821px] gap-5" }} href="/" isSwitcher label="Home">
+        <div className={`size-full rounded-lg bg-rose-50 p-5 lg:min-w-[350px] lg:max-w-[350px] ${open?.adminAside ? "max-lg:hidden" : ""}`}>
           <div className="h-full space-y-3 rounded-md bg-white p-5">
             <div className="space-y-2 pb-1">
               <Image alt="Hastinulc Makeup Art" className="mx-auto" priority src={logo} width={200} />
@@ -39,6 +38,7 @@ export const Content: FC<T> = (props): ReactElement => {
                 variant: pathname === "dashboard" ? "solid" : "outline",
               })}
               href={"/admin/dashboard"}
+              onClick={() => setOpen({ adminAside: true })}
             >
               <div className="w-full max-w-[16px]">
                 <MdSpaceDashboard size={18} />
@@ -54,6 +54,7 @@ export const Content: FC<T> = (props): ReactElement => {
                 variant: pathname === "bookings" ? "solid" : "outline",
               })}
               href={"/admin/bookings"}
+              onClick={() => setOpen({ adminAside: true })}
             >
               <div className="w-full max-w-[16px]">
                 <FaClipboardList size={18} />
@@ -69,6 +70,7 @@ export const Content: FC<T> = (props): ReactElement => {
                 variant: pathname === "reviews" ? "solid" : "outline",
               })}
               href={"/admin/reviews"}
+              onClick={() => setOpen({ adminAside: true })}
             >
               <div className="w-full max-w-[16px]">
                 <IoStar size={18} />
@@ -84,6 +86,7 @@ export const Content: FC<T> = (props): ReactElement => {
                 variant: pathname === "feedbacks" ? "solid" : "outline",
               })}
               href={"/admin/feedbacks"}
+              onClick={() => setOpen({ adminAside: true })}
             >
               <div className="w-full max-w-[16px]">
                 <MdMessage size={18} />
@@ -99,6 +102,7 @@ export const Content: FC<T> = (props): ReactElement => {
                 variant: pathname === "report" ? "solid" : "outline",
               })}
               href={"/admin/report"}
+              onClick={() => setOpen({ adminAside: true })}
             >
               <div className="w-full max-w-[16px]">
                 <FaFileLines size={18} />
@@ -107,7 +111,8 @@ export const Content: FC<T> = (props): ReactElement => {
             </Link>
           </div>
         </div>
-        {props.children}
+
+        <aside className={`grow space-y-5 overflow-y-auto ${open?.adminAside ? "" : "max-lg:hidden"}`}>{props.children}</aside>
       </FormContainer>
     </main>
   );
