@@ -1,3 +1,11 @@
+![Home](public/assets/images/project/1.png)
+![Booking](public/assets/images/project/2.png)
+![History - Summary](public/assets/images/project/3.png)
+![History - Review](public/assets/images/project/4.png)
+![Review](public/assets/images/project/5.png)
+![Questionnaire](public/assets/images/project/6.png)
+![Profile](public/assets/images/project/7.png)
+
 # Next.js Boilerplate Documentation
 
 Boilerplate By [Gede Dewo Wahyu M.W](https://github.com/gdwmw) ❤️
