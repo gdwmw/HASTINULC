@@ -1,10 +1,17 @@
 ![Home](public/assets/images/project/1.png)
 ![Booking](public/assets/images/project/2.png)
+![WhatsApp](public/assets/images/project/14.png)
+![Email](public/assets/images/project/13.png)
 ![History - Summary](public/assets/images/project/3.png)
 ![History - Review](public/assets/images/project/4.png)
 ![Review](public/assets/images/project/5.png)
 ![Questionnaire](public/assets/images/project/6.png)
 ![Profile](public/assets/images/project/7.png)
+![Admin - Dashboard](public/assets/images/project/8.png)
+![Admin - Bookings](public/assets/images/project/9.png)
+![Admin - Reviews](public/assets/images/project/10.png)
+![Admin - Feedbacks](public/assets/images/project/11.png)
+![Admin - Report](public/assets/images/project/12.png)
 
 # Next.js Boilerplate Documentation
 
