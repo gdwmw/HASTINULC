@@ -12,6 +12,7 @@
 ![Admin - Reviews](public/assets/images/project/10.png)
 ![Admin - Feedbacks](public/assets/images/project/11.png)
 ![Admin - Report](public/assets/images/project/12.png)
+![Export To PDF](public/assets/images/project/15.png)
 
 # Next.js Boilerplate Documentation
 
