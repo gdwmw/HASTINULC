@@ -27,7 +27,7 @@ export const FormContainer: FC<I> = ({ children, className, container = true, hr
   const { open, setOpen } = useGlobalStates();
 
   return (
-    <section className={twm(`flex h-svh items-center justify-center p-5 ${container && "container mx-auto"}`, className?.container)}>
+    <section className={twm(`flex h-dvh items-center justify-center p-5 ${container && "container mx-auto"}`, className?.container)}>
       <div
         className={twm(
           "relative flex rounded-xl bg-white px-5 pb-5 pt-[60px] shadow-lg dark:bg-black dark:text-white dark:shadow-white/10",
