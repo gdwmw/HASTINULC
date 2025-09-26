@@ -21,7 +21,13 @@ export const Content: FC<T> = (props): ReactElement => {
 
   return (
     <main className="bg-slate-100">
-      <FormContainer className={{ innerContainer: "size-full max-h-[821px] gap-5" }} href="/" isSwitcher label="Home">
+      <FormContainer
+        className={{ innerContainer: "size-full gap-5 md:container md:mx-auto md:max-h-[821px]" }}
+        container={false}
+        href="/"
+        isSwitcher
+        label="Home"
+      >
         <div className={`size-full rounded-lg bg-rose-50 p-5 lg:min-w-[350px] lg:max-w-[350px] ${open?.adminAside ? "max-lg:hidden" : ""}`}>
           <div className="h-full space-y-3 rounded-md bg-white p-5">
             <div className="space-y-2 pb-1">
