@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FC, PropsWithChildren, ReactElement } from "react";
 
 import { APIConnectionChecker } from "@/src/components";
@@ -32,8 +30,6 @@ const RootLayout: FC<T> = (props): ReactElement => (
           <NextAuthProvider>
             {props.children}
             <APIConnectionChecker />
-            <Analytics />
-            <SpeedInsights />
           </NextAuthProvider>
         </ReactQueryProvider>
       </NextThemesProvider>
