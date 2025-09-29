@@ -5,13 +5,11 @@ import { IDataResponse } from "@/src/types";
 
 // ----------------------------
 
-export const getErrorMessage = (error: unknown): string | undefined => {
+export const capitalizeErrorMessage = (error: unknown): string | undefined => {
   const errorMessage =
     error instanceof Error
       ? error.message
-          .split("Message: ")
-          .pop()
-          ?.split(" ")
+          .split(" ")
           .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")
       : "An Unknown Error Occurred";

@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { FormContainer, Input, SubmitButton } from "@/src/components";
-import { getErrorMessage } from "@/src/hooks";
+import { capitalizeErrorMessage } from "@/src/hooks";
 import { ChangePasswordSchema, TChangePasswordSchema } from "@/src/schemas";
 import { POSTChangePassword } from "@/src/utils";
 
@@ -63,7 +63,7 @@ export const Content: FC = (): ReactElement => {
           signOut();
           reset();
         } catch (error) {
-          setErrorMessage(getErrorMessage(error));
+          setErrorMessage(capitalizeErrorMessage(error));
           console.warn("Change Password Failed!");
         }
       } else {
