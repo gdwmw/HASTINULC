@@ -9,7 +9,7 @@ import { geistMono, geistSans, montaguSlab } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  authors: [{ name: "Hastinulc Makeup Art", url: "https://github.com/hastinulchotimah" }],
+  authors: [{ name: "Hastinulc Makeup Art", url: "https://github.com/gdwmw" }],
   category: "Boilerplate",
   creator: "Hastinulc Makeup Art",
   publisher: "Hastinulc Makeup Art",

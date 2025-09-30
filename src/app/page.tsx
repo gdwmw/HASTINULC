@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       {
         alt: "Hastinulc Makeup Art",
         height: 800,
-        url: "https://hastinulc-makeup-art.zettara.com/assets/images/logos/Hastinulc.png", // Must be an absolute URL and PNG format
+        url: "https://hastinulc.zettara.com/assets/images/logos/Hastinulc.png", // Must be an absolute URL and PNG format
         width: 800,
       },
     ],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Hastinulc Makeup Art",
     title: "Hastinulc | Home",
     type: "website",
-    url: "https://hastinulc-makeup-art.zettara.com/",
+    url: "https://hastinulc.zettara.com/",
   },
   robots: {
     follow: true,
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    creator: "@hastinulchotimah",
+    creator: "@gdwmw",
     description: "Hastinulc Makeup Art - Professional Makeup Services in Padang - Get the perfect look for your special day at an affordable price",
-    images: ["https://hastinulc-makeup-art.zettara.com/assets/images/logos/Hastinulc.png"], // Must be an absolute URL and PNG format
+    images: ["https://hastinulc.zettara.com/assets/images/logos/Hastinulc.png"], // Must be an absolute URL and PNG format
     title: "Hastinulc | Home",
   },
 };
